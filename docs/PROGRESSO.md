@@ -306,9 +306,16 @@ Fonte da verdade do design:
 
 ## Próximos passos
 
-1. **#21 · Deploy no GitHub Pages** — artefatos prontos e verificados (#39). Falta
-   só o que é **clique do Rafael**: push, habilitar Pages e (se domínio próprio) o
-   DNS. Passo a passo em `docs/DEPLOY.md`.
+1. **#21 · Deploy no GitHub Pages** — **prep local 100% pronta.** O repositório git
+   já está iniciado, com o **commit inicial** (autor único **Rafael Moreira Ramos**,
+   sem co-autor), na branch **`main`** (que é o gatilho do `deploy.yml`), com a
+   árvore limpa e `npm test` (57/57) + `npm run build` verdes no snapshot commitado.
+   O `.gitignore` cobre `node_modules/`, `dist/` e `*.local`; nenhum segredo entrou
+   (só `.env.example`). Falta **só o que é clique/credencial do Rafael**, nesta ordem:
+   1. `git remote add origin https://github.com/UPraggy/LEDCHAOS.git`
+   2. `git push -u origin main`
+   3. GitHub → **Settings ▸ Pages ▸ Source = GitHub Actions** (o workflow builda e publica sozinho)
+   4. (opcional, domínio próprio) definir a var `CUSTOM_DOMAIN` e os registros DNS — passo a passo em `docs/DEPLOY.md`.
 2. **F7-C — runner do lado convidado (precisa de 2 aparelhos).** A fusão de placares
    já está pronta e provada; falta a UX do convidado rodando o microjogo por conta
    própria e reportando `sendScore` no fim. Só valida com 2 telas físicas.
