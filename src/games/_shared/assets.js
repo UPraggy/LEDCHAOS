@@ -16,6 +16,7 @@
    =========================================================================== */
 
 import { useRef } from 'react';
+import { asset } from '../../lib/basePath.js';
 
 /** url absoluta/relativa → HTMLImageElement (com .ready quando carregou) */
 const cache = new Map();
@@ -36,7 +37,9 @@ export function loadImage(url) {
   img.decoding = 'async';
   img.onload = () => { img.ready = true; };
   img.onerror = () => { img.broken = true; };
-  img.src = url;
+  // asset() prefixa o base do Vite: na subpágina /LEDCHAOS/ o '/assets/x.png' do
+  // mapa do jogo vira '/LEDCHAOS/assets/x.png' em vez de bater na raiz do host.
+  img.src = asset(url);
 
   cache.set(url, img);
   return img;

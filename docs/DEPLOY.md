@@ -1,48 +1,45 @@
 # Deploy do CHAOS no GitHub Pages
 
-Os **artefatos** já estão no repo. O que sobra são cliques na conta do Rafael
-(GitHub e, se for usar domínio próprio, DNS) — nada disso precisa de senha aqui.
+O jogo é publicado como **subpágina de projeto**, igual ao SaiBH: a raiz do
+domínio hospeda o portfólio, e o CHAOS vive em
+**`https://upraggy.github.io/LEDCHAOS/`**.
+
+Os **artefatos já estão prontos e configurados para esse endereço** — o build
+assume `base '/LEDCHAOS/'` sozinho. O que sobra são cliques na conta do Rafael
+(login no GitHub e habilitar o Pages); nenhuma credencial é usada aqui.
 
 ## O que já está pronto no código
 
 | Artefato | Papel |
 |---|---|
-| `.github/workflows/deploy.yml` | Build + publish automáticos a cada push na `main` |
-| `public/404.html` | Redirect SPA — faz `/join/7KX9Q` (QR) abrir direto sem 404 |
-| snippet no `index.html` | Desempacota a rota que o 404.html mandou e entrega ao BrowserRouter |
-| `vite.config.js` → `base: VITE_BASE \|\| '/'` | Caminho base configurável pelo build |
+| `.github/workflows/deploy.yml` | Build + publish automáticos a cada push na `main`. `VITE_BASE` já cai em `/LEDCHAOS/` por padrão. |
+| `vite.config.js` | Build assume `base '/LEDCHAOS/'`; **dev fica em `/`** (o QR aponta pro IP da LAN na raiz). |
+| `public/404.html` | Redirect SPA com `pathSegmentsToKeep = 1` — faz `/LEDCHAOS/join/7KX9Q` (QR) abrir direto, sem 404. |
+| snippet no `index.html` | Desempacota a rota que o 404.html mandou e entrega ao BrowserRouter. |
+| `src/lib/basePath.js` | Fonte única do prefixo de base: `asset()` e `BASE` para sprites, `<img>`, avatares e a URL do QR. |
+| `<BrowserRouter basename>` | `import.meta.env.BASE_URL` → toda navegação interna já sai com `/LEDCHAOS/`. |
 
 > **Por que o 404.html?** O Pages é estático e só tem `index.html`. Abrir uma
-> rota profunda direto (o QR aponta para `/join/:id`) buscaria um arquivo que
-> não existe. A técnica [rafgraph/spa-github-pages](https://github.com/rafgraph/spa-github-pages)
+> rota profunda direto (o QR aponta para `/LEDCHAOS/join/:id`) buscaria um
+> arquivo que não existe. A técnica [rafgraph/spa-github-pages](https://github.com/rafgraph/spa-github-pages)
 > (MIT) empacota a rota na query, devolve pro index e ele restaura. O usuário
-> nunca vê o 404.
+> nunca vê o 404. Com `pathSegmentsToKeep = 1` o primeiro segmento (`LEDCHAOS`)
+> é preservado como base e não é confundido com a rota.
 
-## Caminho A — endereço `*.github.io` (mais rápido, zero DNS)
+## Passo a passo (subpágina — configuração atual)
 
-Site em `https://<usuario>.github.io/<repo>/`.
+Tudo no **navegador externo do Rafael**, logado na conta dele:
 
-1. **Push** do projeto para o GitHub (o Rafael faz — ver aviso no fim).
+1. **Push** do projeto para `UPraggy/LEDCHAOS`, branch `main`.
 2. GitHub ▸ **Settings ▸ Pages ▸ Source = "GitHub Actions"**.
-3. GitHub ▸ **Settings ▸ Secrets and variables ▸ Actions ▸ Variables** ▸ New:
-   - `VITE_BASE` = `/<repo>/` (ex.: `/LEDCHAOS/`) — com as barras.
-4. Em `public/404.html`, trocar `pathSegmentsToKeep = 0` → **`1`** e commitar.
-5. Push na `main` → a Action builda e publica. O link sai no resumo do workflow.
-
-## Caminho B — domínio próprio na raiz (ex.: `ledchaos.exemplo.com.br`)
-
-Este é o alvo primário do `vite.config.js` (`base '/'`), então quase nada muda.
-
-1. Passos 1 e 2 do Caminho A.
-2. Em **Variables**, criar `CUSTOM_DOMAIN` = o domínio (sem `https://`).
-   O workflow escreve o `CNAME` no build sozinho. **Não** mexer em `VITE_BASE`
-   (fica `/`) nem no `pathSegmentsToKeep` (fica `0`).
-3. **DNS** (no provedor do domínio — clique do Rafael):
-   - subdomínio (`ledchaos.…`): registro **CNAME** → `<usuario>.github.io`.
-   - raiz (`exemplo.com.br`): registros **A** para os IPs do Pages
-     (`185.199.108.153`, `.109.153`, `.110.153`, `.111.153`).
-4. GitHub ▸ Settings ▸ Pages ▸ **Custom domain** = o domínio ▸ salvar ▸ marcar
-   **Enforce HTTPS** quando o certificado sair (alguns minutos).
+3. GitHub ▸ **Settings ▸ Pages ▸ Custom domain**: deixar **vazio**. Se houver um
+   domínio salvo aí, **remover** — um domínio próprio serve a *raiz* e entra em
+   conflito com o caminho `/LEDCHAOS/`.
+4. (Opcional) **Variables** não precisa de nada: o `VITE_BASE` já cai em
+   `/LEDCHAOS/` pelo default do workflow. Só crie a variável se um dia o caminho
+   mudar.
+5. Cada push na `main` builda e publica. O link sai no resumo do workflow:
+   **`https://upraggy.github.io/LEDCHAOS/`**.
 
 ## Checar antes de publicar
 
@@ -50,9 +47,24 @@ Este é o alvo primário do `vite.config.js` (`base '/'`), então quase nada mud
 npm run build && npm run preview
 ```
 
-Abrir o endereço do `preview`, navegar até uma sala e **dar F5 numa rota profunda**
-(`/join/XXXX`): tem que recarregar a tela certa, não um 404. É o teste que prova
-que o par 404.html + snippet está funcionando.
+O `preview` serve exatamente o `dist/` de produção, já sob `/LEDCHAOS/`. Abrir o
+endereço que ele imprime (termina em `/LEDCHAOS/`), navegar até uma sala e **dar
+F5 numa rota profunda** (`/LEDCHAOS/join/XXXX`): tem que recarregar a tela certa,
+não um 404. É o teste que prova que o par 404.html + snippet está funcionando.
+Confira também que os sprites carregam (barra de rede sem 404 em `/assets/...`).
+
+## Alternativa futura — domínio próprio na raiz
+
+Se um dia o CHAOS ganhar domínio próprio na raiz (ex.: `ledchaos.exemplo.com.br`),
+o caminho base volta a ser `/`:
+
+1. **Variables**: `VITE_BASE` = `/` e `CUSTOM_DOMAIN` = o domínio (sem `https://`).
+   O workflow escreve o `CNAME` no build sozinho.
+2. `public/404.html`: `pathSegmentsToKeep` = **0**.
+3. **DNS** (no provedor do domínio): subdomínio → **CNAME** `upraggy.github.io`;
+   raiz → registros **A** para os IPs do Pages (`185.199.108.153`, `.109.153`,
+   `.110.153`, `.111.153`).
+4. GitHub ▸ Settings ▸ Pages ▸ **Custom domain** = o domínio ▸ **Enforce HTTPS**.
 
 ## Aviso (guardrail)
 

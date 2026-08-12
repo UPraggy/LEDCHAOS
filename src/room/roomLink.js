@@ -3,12 +3,18 @@
  * A origem vem SEMPRE de window.location.origin — nunca domínio fixo.
  * Assim o mesmo build funciona em localhost, no IP da LAN (é o que o celular
  * lê no QR) e em produção, sem trocar uma linha.
+ *
+ * O BASE entra porque o QR é uma URL EXTERNA, montada à mão — o react-router não
+ * a prefixa. Na subpágina /LEDCHAOS/ o convite precisa ser .../LEDCHAOS/join/ID,
+ * senão o celular cairia na raiz do host (o portfólio) e não na sala.
  */
 
-/** URL de convite: http://192.168.0.10:5173/join/7KX9Q */
+import { BASE } from '../lib/basePath.js';
+
+/** URL de convite: http://192.168.0.10:5173/join/7KX9Q (ou .../LEDCHAOS/join/… em produção) */
 export function roomUrl(roomId) {
   const origin = typeof window !== 'undefined' ? window.location.origin : '';
-  return `${origin}/join/${roomId}`;
+  return `${origin}${BASE}join/${roomId}`;
 }
 
 /** Versão curta para exibir na tela sem estourar a largura do celular. */

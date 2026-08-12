@@ -5,6 +5,8 @@
  * já entrou). O SVG procedural antigo fica como fallback se a imagem não carregar.
  */
 
+import { asset } from '../lib/basePath.js';
+
 export const AVATAR_IDS = [
   'avatar-01',
   'avatar-02',
@@ -42,7 +44,7 @@ export function getAvatarImage(avatarId) {
     typeof avatarId === 'number'
       ? ((avatarId % AVATAR_CHARS.length) + AVATAR_CHARS.length) % AVATAR_CHARS.length
       : Math.max(0, AVATAR_IDS.indexOf(avatarId));
-  return `/assets/personagens/${AVATAR_CHARS[index] || AVATAR_CHARS[0]}.png`;
+  return asset(`assets/personagens/${AVATAR_CHARS[index] || AVATAR_CHARS[0]}.png`);
 }
 
 /** Nome legível do personagem (para alt/aria). */

@@ -235,6 +235,35 @@ Fonte da verdade do design:
   (reaproveitável no CHAOS). `convert.sh` (FFmpeg, OGG/MP3/loudnorm) é opcional.
   Descoberta: o Python **não** estava quebrado para isso — o travamento do Avast
   é só em pip/TLS de rede, não em script stdlib local; a doc foi corrigida.
+- **#42 · Deploy reconfigurado para SUBPÁGINA `/LEDCHAOS/` (padrão SaiBH) —
+  construído e verificado no `dist/`.** A raiz do domínio do Rafael é o portfólio,
+  então o CHAOS tem de viver num subcaminho, igual ao SaiBH:
+  **`upraggy.github.io/LEDCHAOS/`**. Num subcaminho, três coisas quebram se o base
+  não for propagado — assets 404, rota interna erra o prefixo e o QR cai na raiz
+  (portfólio). Resolvido com uma **fonte única de base** e um choke-point:
+  1. **`src/lib/basePath.js`** — `BASE` (= `import.meta.env.BASE_URL`, sempre com
+     `/` no fim) e `asset(path)` que prefixa o base sem duplicar barra. Guarda
+     `|| '/'` pra nunca quebrar num import fora do browser.
+  2. **Sprites de canvas (6 jogos) num só ponto.** `games/_shared/assets.js` →
+     `loadImage` passou a fazer `img.src = asset(url)`. Como climb/trace/piano/
+     aim/race/slice **todos** carregam via `preloadImages(IMG_SRC)`, uma linha
+     base-prefixou todo sprite de canvas. Cache continua chaveado pela `url` crua.
+  3. **`<img>` inline e avatares.** Envolvidos em `asset(...)`: mash (raio),
+     memory (level-up + pads), slice (legenda melancia/bomba); `getAvatarImage`
+     em `data/avatars.js` agora devolve `asset(...)`.
+  4. **Rota interna.** `<BrowserRouter basename={import.meta.env.BASE_URL}>` —
+     react-router prefixa Route/Link/navigate sozinho.
+  5. **QR externo.** `room/roomLink.js` monta `${origin}${BASE}join/${id}` — o
+     convite abre `/LEDCHAOS/join/…`, não a raiz.
+  6. **Config.** `vite.config.js` → build assume `base '/LEDCHAOS/'` (dev fica em
+     `/` pro QR da LAN); `public/404.html` → `pathSegmentsToKeep = 1`;
+     `manifest.webmanifest` → caminhos relativos (`./`, `./icon.svg`);
+     `deploy.yml` → `VITE_BASE` default `/LEDCHAOS/`, CNAME segue condicional (não
+     escrito no github.io). **Verificado no build:** `dist/index.html` com
+     `/LEDCHAOS/icon.svg`, `/LEDCHAOS/manifest.webmanifest` e os chunks
+     `/LEDCHAOS/a/*.js|css`; o literal `/LEDCHAOS/` inlinado no bundle JS
+     (BASE_URL resolvido); `dist/404.html` com `pathSegmentsToKeep = 1`; manifest
+     relativo. `npm test` **57/57**, `npm run build` OK (255 módulos).
 
 ## Pronto (fase F7 · transporte P2P)
 
@@ -306,16 +335,19 @@ Fonte da verdade do design:
 
 ## Próximos passos
 
-1. **#21 · Deploy no GitHub Pages** — **prep local 100% pronta.** O repositório git
-   já está iniciado, com o **commit inicial** (autor único **Rafael Moreira Ramos**,
-   sem co-autor), na branch **`main`** (que é o gatilho do `deploy.yml`), com a
-   árvore limpa e `npm test` (57/57) + `npm run build` verdes no snapshot commitado.
-   O `.gitignore` cobre `node_modules/`, `dist/` e `*.local`; nenhum segredo entrou
-   (só `.env.example`). Falta **só o que é clique/credencial do Rafael**, nesta ordem:
-   1. `git remote add origin https://github.com/UPraggy/LEDCHAOS.git`
+1. **#21 · Deploy no GitHub Pages (SUBPÁGINA `/LEDCHAOS/`)** — **prep local 100%
+   pronta e já configurada para o subcaminho** (ver #42). O build assume
+   `base '/LEDCHAOS/'` sozinho, `npm test` 57/57 e `npm run build` verdes, e o
+   `dist/` foi conferido carregando assets e chunks sob `/LEDCHAOS/`. Falta **só o
+   que é clique/credencial do Rafael**, no navegador externo dele, nesta ordem:
+   1. `git remote add origin https://github.com/UPraggy/LEDCHAOS.git` (se ainda não)
    2. `git push -u origin main`
    3. GitHub → **Settings ▸ Pages ▸ Source = GitHub Actions** (o workflow builda e publica sozinho)
-   4. (opcional, domínio próprio) definir a var `CUSTOM_DOMAIN` e os registros DNS — passo a passo em `docs/DEPLOY.md`.
+   4. GitHub → **Settings ▸ Pages ▸ Custom domain**: deixar **vazio**. Se houver
+      um domínio salvo, **remover** — domínio próprio serve a raiz e conflita com o
+      caminho `/LEDCHAOS/`.
+   5. Conferir o site em **`https://upraggy.github.io/LEDCHAOS/`** (o link também
+      sai no resumo do workflow). Passo a passo completo em `docs/DEPLOY.md`.
 2. **F7-C — runner do lado convidado (precisa de 2 aparelhos).** A fusão de placares
    já está pronta e provada; falta a UX do convidado rodando o microjogo por conta
    própria e reportando `sendScore` no fim. Só valida com 2 telas físicas.

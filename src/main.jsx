@@ -18,8 +18,12 @@ import './styles/global.css';
  * dos microjogos (games/_shared/hooks.js) e revisado a cada microjogo.
  */
 
+// basename = o base do Vite (import.meta.env.BASE_URL): '/' em dev, '/LEDCHAOS/'
+// no build de subpágina. Com ele o react-router prefixa TODA navegação interna
+// (Route/Link/navigate) sozinho — só o QR externo e os assets do public/ ainda
+// precisam do prefixo manual (ver src/lib/basePath.js).
 createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
+  <BrowserRouter basename={import.meta.env.BASE_URL}>
     <GameProvider>
       <App />
     </GameProvider>

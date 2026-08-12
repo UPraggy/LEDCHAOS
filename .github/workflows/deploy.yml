@@ -5,11 +5,13 @@
 # vez, em Settings ▸ Pages ▸ Source = "GitHub Actions" (ver docs/DEPLOY.md).
 #
 # Variáveis de repositório (Settings ▸ Secrets and variables ▸ Actions ▸ Variables):
-#   VITE_BASE       caminho base do site. Padrão "/" (domínio próprio na raiz).
-#                   Para caminho de projeto use "/LEDCHAOS/" — e troque o
-#                   pathSegmentsToKeep p/ 1 no public/404.html.
-#   CUSTOM_DOMAIN   domínio próprio (ex.: ledchaos.exemplo.com.br). Se vazio, o
-#                   site fica no endereço *.github.io e nenhum CNAME é escrito.
+#   VITE_BASE       caminho base do site. Padrão "/LEDCHAOS/" (subpágina de
+#                   projeto, igual ao SaiBH: a raiz do domínio é o portfólio).
+#                   O public/404.html já usa pathSegmentsToKeep = 1 pra casar.
+#   CUSTOM_DOMAIN   domínio próprio (ex.: ledchaos.exemplo.com.br). Deixe VAZIO
+#                   nesta configuração de subpágina — o site fica em *.github.io
+#                   e nenhum CNAME é escrito. (Um CNAME serviria a raiz do
+#                   domínio, o que conflitaria com o base /LEDCHAOS/.)
 name: Deploy CHAOS to GitHub Pages
 
 on:
@@ -43,7 +45,7 @@ jobs:
 
       - name: Build (Vite)
         env:
-          VITE_BASE: ${{ vars.VITE_BASE || '/' }}
+          VITE_BASE: ${{ vars.VITE_BASE || '/LEDCHAOS/' }}
         run: npm run build
 
       - name: Domínio próprio (CNAME)

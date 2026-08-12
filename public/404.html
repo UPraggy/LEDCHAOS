@@ -14,10 +14,12 @@
       // caminho original na query e devolve pro index.html — que, no <head>,
       // desempacota e entrega pro BrowserRouter. O usuário nem vê o 404.
       //
-      // pathSegmentsToKeep = 0  → domínio próprio na RAIZ (ledchaos...) [padrão]
-      // pathSegmentsToKeep = 1  → caminho de projeto (upraggy.github.io/LEDCHAOS/)
+      // pathSegmentsToKeep = 0  → domínio próprio na RAIZ (ledchaos...)
+      // pathSegmentsToKeep = 1  → caminho de projeto (upraggy.github.io/LEDCHAOS/) [padrão]
       // Troque este número junto com o VITE_BASE do build (ver docs/DEPLOY.md).
-      var pathSegmentsToKeep = 0;
+      // Aqui 1: o site vive em /LEDCHAOS/, então o primeiro segmento é o base e
+      // NÃO faz parte da rota — preservá-lo evita que /LEDCHAOS/join/ID vire /join/ID.
+      var pathSegmentsToKeep = 1;
 
       var l = window.location;
       l.replace(

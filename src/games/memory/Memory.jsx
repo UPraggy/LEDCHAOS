@@ -6,6 +6,7 @@ import RivalBars from '../_shared/RivalBars.jsx';
 import { mapPerformance } from '../../engine/botProfile.js';
 import { paceValue, simulateBots } from '../_shared/bots.js';
 import { useGameClock, useOutcome } from '../_shared/hooks.js';
+import { asset } from '../../lib/basePath.js';
 import '../_shared/game.css';
 import './Memory.css';
 
@@ -222,7 +223,7 @@ export default function Memory({
       <div className="gscene__stage mm__stage">
         <div className={`mm__status mm__status--${phase}`} key={status}>
           {phase === 'pause' && cleared > 0 ? (
-            <img className="mm__levelup" src="/assets/selos/level-up.png" alt="" draggable="false" />
+            <img className="mm__levelup" src={asset('/assets/selos/level-up.png')} alt="" draggable="false" />
           ) : null}
           {status}
         </div>
@@ -251,7 +252,7 @@ export default function Memory({
               disabled={phase !== 'input' || !!outcome}
               onPointerDown={() => press(pad.id)}
             >
-              <img className="mm__img" src={pad.img} alt="" draggable="false" />
+              <img className="mm__img" src={asset(pad.img)} alt="" draggable="false" />
             </button>
           ))}
         </div>

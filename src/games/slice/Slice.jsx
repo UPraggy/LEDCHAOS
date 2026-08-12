@@ -7,6 +7,7 @@ import { attachPointer } from '../../engine/inputManager.js';
 import { mapPerformance } from '../../engine/botProfile.js';
 import { paceValue, simulateBots } from '../_shared/bots.js';
 import { drawImageCentered, preloadImages } from '../_shared/assets.js';
+import { asset } from '../../lib/basePath.js';
 import {
   prefersReducedMotion,
   readCssColors,
@@ -392,11 +393,11 @@ export default function Slice({
 
         <ul className="sl__key" aria-hidden="true">
           <li className="sl__key-item">
-            <img className="sl__ico" src="/assets/jogo/melancia.png" alt="" />
+            <img className="sl__ico" src={asset('/assets/jogo/melancia.png')} alt="" />
             <span className="sl__val sl__val--good">+10</span>
           </li>
           <li className="sl__key-item">
-            <img className="sl__ico" src="/assets/jogo/bomba.png" alt="" />
+            <img className="sl__ico" src={asset('/assets/jogo/bomba.png')} alt="" />
             <span className="sl__val sl__val--bad">−30</span>
           </li>
         </ul>

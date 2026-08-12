@@ -17,15 +17,20 @@ import react from '@vitejs/plugin-react';
  * Em dev nada disso se aplica: console e nomes de arquivo continuam úteis.
  *
  * ── base ─────────────────────────────────────────────────────────────────────
- * No domínio próprio (ledchaos.rafaelmr.com.br) o site fica na RAIZ → base '/'.
- * Se um dia publicar no caminho de projeto (upraggy.github.io/LEDCHAOS/), rode
- * o build com VITE_BASE=/LEDCHAOS/ que os caminhos se ajustam sozinhos.
+ * O jogo é publicado como SUBPÁGINA de projeto: upraggy.github.io/LEDCHAOS/
+ * (a raiz do domínio hospeda o portfólio, igual ao SaiBH). Então o build assume
+ * base '/LEDCHAOS/' por padrão — sobrescrevível por VITE_BASE se um dia mudar.
+ *
+ * DEV continua em '/' de propósito: o QR aponta pro IP da LAN na raiz
+ * (http://192.168.x.x:5173/join/…) e o celular precisa abrir sem o prefixo.
+ * Só o build carrega o /LEDCHAOS/. Trocar aqui exige trocar também o
+ * pathSegmentsToKeep do public/404.html (ver docs/DEPLOY.md).
  */
 export default defineConfig(({ command }) => {
   const isBuild = command === 'build';
 
   return {
-    base: process.env.VITE_BASE || '/',
+    base: isBuild ? (process.env.VITE_BASE || '/LEDCHAOS/') : '/',
     plugins: [react()],
 
     esbuild: {

@@ -7,6 +7,7 @@ import { mapPerformance } from '../../engine/botProfile.js';
 import { simulateBots } from '../_shared/bots.js';
 import { useGameClock, useOutcome, useRaf } from '../_shared/hooks.js';
 import { useSelos } from '../_shared/Selos.jsx';
+import { asset } from '../../lib/basePath.js';
 import '../_shared/game.css';
 import './Mash.css';
 
@@ -205,9 +206,9 @@ export default function Mash({
           // dois é estratégia legítima num jogo chamado MARTELO.
           onPointerDown={hit}
         >
-          <img className="ms__bolt" src="/assets/jogo/raio.png" alt="" draggable="false" />
+          <img className="ms__bolt" src={asset('/assets/jogo/raio.png')} alt="" draggable="false" />
           <span className="ms__tap-text">TOQUE!</span>
-          <img className="ms__bolt ms__bolt--flip" src="/assets/jogo/raio.png" alt="" draggable="false" />
+          <img className="ms__bolt ms__bolt--flip" src={asset('/assets/jogo/raio.png')} alt="" draggable="false" />
         </button>
       </div>
     </div>
