@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>CHAOS</title>
+    <script>
+      // spa-github-pages (técnica rafgraph, MIT).
+      //
+      // O GitHub Pages é hospedagem estática: só existe o index.html. Ao abrir
+      // uma rota profunda direto (ex.: /join/7KX9Q vindo do QR no celular), o
+      // Pages não acha o arquivo e serve ESTE 404.html. Aqui a gente empacota o
+      // caminho original na query e devolve pro index.html — que, no <head>,
+      // desempacota e entrega pro BrowserRouter. O usuário nem vê o 404.
+      //
+      // pathSegmentsToKeep = 0  → domínio próprio na RAIZ (ledchaos...) [padrão]
+      // pathSegmentsToKeep = 1  → caminho de projeto (upraggy.github.io/LEDCHAOS/)
+      // Troque este número junto com o VITE_BASE do build (ver docs/DEPLOY.md).
+      var pathSegmentsToKeep = 0;
+
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>

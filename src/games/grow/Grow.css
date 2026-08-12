@@ -1,0 +1,55 @@
+/* CRESCER — a arena ocupa o canvas inteiro. Não há pad: o analógico nasce sob o
+   dedo, em qualquer ponto, e roubar altura da arena para pôr um botão seria
+   pagar duas vezes pelo mesmo controle. */
+
+.gr .gscene__stage {
+  /* Só aparece no primeiro quadro, antes de o canvas ter tamanho. Sem isto a
+     contagem regressiva mostra um retângulo claro no meio da tela escura. */
+  background: var(--color-bg-deep);
+}
+
+/* -------------------------------------------------------------------- dica */
+
+/* A dica fica no terço de baixo: é onde o polegar já está e é onde o analógico
+   deve nascer. Colocada no centro, ela ensinaria o gesto no lugar errado — o
+   dedo taparia a arena justamente na primeira tentativa. */
+.gr__hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 16%;
+  z-index: var(--z-hud);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  pointer-events: none;
+  animation: grHint 1.6s var(--ease-out) infinite;
+}
+
+.gr__hint-ring {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px dashed color-mix(in srgb, var(--game-accent) 70%, transparent);
+}
+
+.gr__hint-text {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--track-wide);
+  color: var(--color-text-muted);
+}
+
+/* Só opacidade: é a única propriedade que pulsa sem custar layout. */
+@keyframes grHint {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gr__hint {
+    animation: none;
+    opacity: 0.85;
+  }
+}

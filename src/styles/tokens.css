@@ -1,0 +1,301 @@
+/* ============================================================
+   CHAOS — DESIGN TOKENS (fonte única de verdade)
+   Identidade "ADESIVO ARCADE": palco roxo, cartões creme com
+   contorno de tinta (#170F3E) e sombra sólida deslocada ("pop"),
+   títulos Baloo 2 com traço, CTAs em gradiente vivo.
+   Recriação fiel do protótipo (Design Híbrido 1 e 2).
+   Camadas: PRIMITIVO → SEMÂNTICO → COMPONENTE.
+   Regra de ouro: componente NUNCA usa hex literal. Só var(--token).
+   ============================================================ */
+
+:root {
+  /* ─────────── PRIMITIVOS · COR ─────────── */
+
+  /* Tinta — o contorno/traço/texto de TUDO. A cor da marca do jogo. */
+  --ink: #170F3E;
+  --ink-soft: #2A1E63; /* traço secundário / divisórias sobre creme */
+
+  /* Palco roxo (fundo). Do topo claro ao poço escuro. */
+  --void-900: #150F3C; /* poço / trás de tudo        */
+  --void-800: #1C1550; /* fundo base do app          */
+  --void-700: #241B5E; /* meio do palco              */
+  --void-600: #2E2080; /* superfície de tela (screen)*/
+  --void-500: #3A2790; /* topo do palco / brilho     */
+  --void-400: #4A34A8; /* roxo elevado               */
+  --void-300: #6A55C8; /* borda sobre roxo           */
+  --void-200: #8E7BE0;
+
+  /* Creme (o cartão-adesivo). É a "superfície" agora, não o texto. */
+  --bone-50: #FFFFFF;
+  --bone-100: #FFFDF7; /* CREME — o cartão da marca */
+  --bone-300: #F4ECD8; /* creme secundário / trilho */
+  --bone-500: #6E5FA8; /* texto atenuado sobre creme (roxo-acinzentado) */
+  --bone-700: #9C8FD0; /* texto apagado / dim        */
+
+  /* Periwinkle — estrutura fria, informação, faixa de ritmo */
+  --peri-200: #D6E0FA;
+  --peri-300: #B4C4F1;
+  --peri-400: #9DB1EA;
+  --peri-500: #6C8BE8;
+  --peri-600: #4A66CC;
+  --peri-700: #2F4494;
+
+  /* Âmbar — CTA "COMEÇAR/JOGAR". Calor, execução. */
+  --amber-200: #FFE6B0;
+  --amber-300: #FFC864; /* topo do gradiente âmbar */
+  --amber-400: #FFB43C; /* ÂMBAR base de CTA       */
+  --amber-500: #FF9F1C; /* fundo do gradiente âmbar */
+  --amber-600: #E5871A;
+  --amber-honey: #FFDF9E; /* mel claro — highlight no topo da CTA */
+  --amber-burnt: #EF8A1E; /* âmbar queimado — corpo baixo da CTA */
+
+  /* Espresso — a base "café" da identidade V5 (portfólio do Rafael). Entra como
+     PROFUNDIDADE quente: o pé do gradiente âmbar e o toque de sombra do CTA. É o
+     que troca o laranja chapado por um caramelo com fundo, sem escurecer o corpo
+     do botão a ponto de comer o texto de tinta. */
+  --espresso-900: #2A1607;
+  --espresso-700: #43230C;
+  --espresso-500: #6B3A15;
+  --espresso-300: #9A5C2A;
+
+  /* Violeta neon — ENTRAR / energia do CHAOS */
+  --violet-050: #F0ECFF; /* campo de entrada / avatar não-selecionado (bem claro) */
+  --violet-100: #D9D2F5; /* contorno suave (avatar não-selecionado)               */
+  --violet-200: #CFC4FF; /* rótulo maiúsculo pequeno SOBRE o palco roxo           */
+  --violet-300: #C3AEFF;
+  --violet-400: #A78BFA; /* topo do gradiente violeta */
+  --violet-500: #7C5CFF; /* VIOLETA base              */
+  --violet-700: #5B3FD6;
+
+  /* Semânticas de jogo (vivas, para feedback instantâneo) */
+  --lime-400: #7BE86A; /* topo do verde CTA "CRIAR SALA" */
+  --lime-500: #3FBF52; /* fundo do verde CTA             */
+  --rose-400: #FF6B8B;
+  --rose-500: #E7476B;
+  --cyan-400: #4DE3E3;
+  --gold-400: #FFCE31;
+
+  /* Cores de jogador (8 slots, matizes separadas, legíveis sobre creme e roxo) */
+  --p1: #FFB43C;
+  --p2: #9DB1EA;
+  --p3: #7BE86A;
+  --p4: #FF6B8B;
+  --p5: #4DE3E3;
+  --p6: #A78BFA;
+  --p7: #FFCE31;
+  --p8: #FF8A3D;
+
+  /* ─────────── PRIMITIVOS · MEDIDA ─────────── */
+
+  /* Espaçamento base-8 (4 só p/ ajuste fino) */
+  --space-1: 0.25rem; /*  4px */
+  --space-2: 0.5rem; /*  8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.5rem; /* 24px */
+  --space-6: 2rem; /* 32px */
+  --space-7: 2.5rem; /* 40px */
+  --space-8: 3rem; /* 48px */
+  --space-10: 4rem; /* 64px */
+
+  /* Tipografia — escala modular base 16 × 1.25 */
+  --fs-xs: 0.8rem; /* 12.8 — legenda, nunca corpo */
+  --fs-sm: 0.875rem; /* 14   — meta/label */
+  --fs-base: 1rem; /* 16   — piso do corpo em mobile */
+  --fs-lg: 1.25rem; /* 20   */
+  --fs-xl: 1.5625rem; /* 25   */
+  --fs-2xl: 1.9375rem; /* 31   */
+  --fs-3xl: 2.4375rem; /* 39   */
+  --fs-4xl: 3.0625rem; /* 49   */
+  --fs-5xl: 3.8125rem; /* 61   */
+  --fs-6xl: 4.75rem; /* 76   */
+
+  --lh-tight: 1.1;
+  --lh-title: 1.2;
+  --lh-body: 1.5;
+
+  --fw-regular: 400;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-black: 800;
+
+  /* Baloo 2 = títulos, botões, corpo. Space Grotesk = rótulos maiúsculos
+     pequenos. JetBrains Mono = códigos, cronômetro, números. */
+  --font-display: 'Baloo 2', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', system-ui, sans-serif;
+  --font-sans: 'Baloo 2', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Tracking para caixa-alta de arcade */
+  --track-wide: 0.06em;
+  --track-wider: 0.16em;
+
+  /* Raios — cantos gordos de adesivo */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 30px;
+  --radius-pill: 999px;
+
+  /* Contorno de tinta — a assinatura do visual */
+  --border-ink: 3px solid var(--ink);
+  --border-ink-thick: 4px solid var(--ink);
+  --stroke-ink: 3px; /* p/ -webkit-text-stroke em títulos */
+
+  /* Elevação — sombra sólida deslocada ("pop"), na cor da tinta.
+     Sem blur: é adesivo, não vidro. */
+  --shadow-pop-sm: 0 2px 0 var(--ink);
+  --shadow-pop-md: 0 4px 0 var(--ink);
+  --shadow-pop-lg: 0 6px 0 var(--ink);
+  --shadow-pop-xl: 0 8px 0 var(--ink);
+
+  /* Elevação clássica — só para o quadro central no desktop e camadas flutuantes */
+  --elevation-0: none;
+  --elevation-1: 0 2px 0 var(--ink);
+  --elevation-2: 0 4px 0 var(--ink);
+  --elevation-3: 0 6px 0 var(--ink);
+  --elevation-4: 0 8px 0 var(--ink), 0 18px 40px rgba(11, 6, 40, 0.5);
+  --elevation-5: 0 10px 0 var(--ink), 0 30px 60px rgba(11, 6, 40, 0.6);
+
+  /* Glow — sotaque arcade. Sempre derivado de uma cor semântica. */
+  --glow-sm: 0 0 12px;
+  --glow-md: 0 0 24px;
+  --glow-lg: 0 0 48px;
+
+  /* Movimento — só transform/opacity */
+  --duration-instant: 90ms;
+  --duration-fast: 140ms;
+  --duration-base: 220ms;
+  --duration-slow: 340ms;
+  --duration-slower: 520ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-in: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --ease-out: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1); /* overshoot arcade */
+
+  /* Camadas */
+  --z-base: 0;
+  --z-hud: 100;
+  --z-overlay: 1200;
+  --z-modal: 1300;
+  --z-toast: 1400;
+
+  /* Alvo de toque — mobile-first (WCAG 2.2 pede ≥24, jogo usa ≥44) */
+  --tap-min: 44px;
+  --tap-big: 64px;
+
+  /* Safe area iOS */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  /* ─────────── SEMÂNTICOS ─────────── */
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+
+  --color-bg: var(--void-600); /* tela = roxo médio */
+  --color-bg-deep: var(--void-900);
+  --color-surface: var(--bone-100); /* cartão creme */
+  --color-surface-2: var(--bone-50); /* cartão creme mais claro/elevado */
+  --color-surface-3: var(--bone-300); /* trilho / creme fundo */
+  --color-surface-purple: var(--void-500); /* painel roxo sobre o palco */
+  --color-border: var(--ink);
+  --color-border-strong: var(--ink);
+
+  --color-text: var(--ink); /* texto padrão = tinta sobre creme */
+  --color-text-muted: var(--bone-500);
+  --color-text-dim: var(--bone-700);
+  --color-text-on-stage: var(--bone-100); /* texto direto sobre o palco roxo */
+  --color-label-on-stage: var(--violet-200); /* rótulo maiúsculo pequeno sobre o palco */
+
+  /* Campo de entrada (nome, código): fundo violeta claro, contorno de tinta */
+  --color-field: var(--violet-050);
+  --color-field-border: var(--ink);
+  --color-border-soft: var(--violet-100);
+
+  --color-action: var(--amber-400); /* CTA primária */
+  --color-action-hover: var(--amber-300);
+  --color-on-action: var(--ink); /* rótulo do botão = tinta */
+  --color-info: var(--violet-500); /* CTA "ENTRAR" / informação */
+  --color-energy: var(--violet-500); /* o "chaos" */
+  --color-success: var(--lime-400);
+  --color-danger: var(--rose-400);
+  --color-warning: var(--gold-400);
+  --color-focus: var(--cyan-400);
+
+  /* Faces de CTA — CHAPADAS. A identidade é adesivo: cor sólida, contorno de
+     tinta e a profundidade vem da SOMBRA "pop" sólida embaixo (a quina escura do
+     botão), não de um degradê na face. O Rafael pediu pra tirar os gradientes;
+     estas viraram cores planas. (Ainda são vars "--grad-*" só pra não mexer em
+     todo mundo que referencia — o valor é que ficou chapado.) */
+  --grad-green: var(--lime-400); /* CRIAR SALA */
+  --grad-violet: var(--violet-500); /* ENTRAR */
+  --grad-amber: var(--amber-400); /* COMEÇAR — âmbar chapado; a profundidade V5
+    agora mora na sombra de tinta embaixo, não num pé de espresso na face */
+  --grad-cyan: var(--cyan-400); /* copiar */
+  --grad-pink: var(--rose-400); /* compartilhar */
+  --grad-cream: var(--color-surface); /* neutro — creme da marca */
+
+  /* Estados */
+  --state-hover: 0.1;
+  --state-pressed: 0.16;
+  --opacity-disabled: 0.4;
+
+  /* ─────────── COMPONENTE ─────────── */
+  --btn-height: var(--tap-big);
+  --btn-radius: var(--radius-md);
+  --btn-font: var(--font-display);
+  --btn-tracking: var(--track-wide);
+  --btn-border: var(--border-ink);
+  --btn-shadow: var(--shadow-pop-md);
+  --btn-shadow-press: var(--shadow-pop-sm);
+
+  --card-bg: var(--color-surface);
+  --card-border: var(--border-ink-thick);
+  --card-radius: var(--radius-lg);
+  --card-shadow: var(--shadow-pop-lg);
+
+  --hud-height: 56px;
+  --screen-max: 520px; /* o jogo é retrato: nunca esticar além disso */
+
+  /* ─────────── RODADA (setado em runtime) ───────────
+     Cada microjogo tem um matiz. screens/Game injeta --game-hue e
+     todo o cenário/HUD deriva daqui. Fallback = âmbar. */
+  --game-hue: 36;
+  --game-accent: hsl(var(--game-hue) 90% 60%);
+  --game-accent-soft: hsl(var(--game-hue) 90% 74%);
+  --game-accent-deep: hsl(var(--game-hue) 62% 40%);
+  --game-wash: hsl(var(--game-hue) 55% 22%);
+  --game-glow: hsl(var(--game-hue) 90% 60% / 0.45);
+}
+
+/* ─────────── DERIVAÇÃO POR JOGO (crítico) ───────────
+   Os tokens acima moram no :root, então o var(--game-hue) deles é resolvido
+   UMA ÚNICA VEZ, com o matiz padrão (36 = âmbar), e herdado já pronto. Trocar
+   --game-hue num palco mais fundo NÃO os recalcula — o tema por jogo ficaria
+   sempre âmbar (foi o que o anel do cronômetro denunciou). A correção é
+   redeclarar os derivados nos MESMOS elementos que recebem --game-hue inline
+   (o wrapper .screen em produção e o .dev__stage/.dev__card/.dev__badge no
+   sandbox): aí o var(--game-hue) resolve no matiz daquele palco e desce certo
+   para HUD, contagem, cenário e desfecho. */
+.screen,
+.dev__stage,
+.dev__card,
+.dev__badge {
+  --game-accent: hsl(var(--game-hue) 90% 60%);
+  --game-accent-soft: hsl(var(--game-hue) 90% 74%);
+  --game-accent-deep: hsl(var(--game-hue) 62% 40%);
+  --game-wash: hsl(var(--game-hue) 55% 22%);
+  --game-glow: hsl(var(--game-hue) 90% 60% / 0.45);
+}
+
+/* Movimento reduzido — obrigatório (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

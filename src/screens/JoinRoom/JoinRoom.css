@@ -1,0 +1,95 @@
+/* ============================================================
+   ENTRAR NA SALA — destino do QR Code / link (recriação fiel)
+   Cabeçalho adesivo creme sobre o palco, cartão-código dourado,
+   identidade compartilhada, CTA roxo "ENTRAR NA SALA".
+   ============================================================ */
+
+.join__top {
+  display: grid;
+  grid-template-columns: var(--tap-min) 1fr var(--tap-min);
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+/* Título sobre o palco roxo = letra creme com contorno de tinta. */
+.join__title {
+  text-align: center;
+  font-size: var(--fs-2xl);
+  color: var(--color-text-on-stage);
+  -webkit-text-stroke: 5px var(--color-ink);
+  paint-order: stroke fill;
+}
+
+/* -------------------------------------------------- cartão-código dourado */
+
+/* O código chega pronto (veio do link). Aqui ele é só exibido, num adesivo
+   dourado de destaque — nada de digitar. */
+.join__code {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-5) var(--space-4);
+  margin-bottom: var(--space-6);
+  border: 5px solid var(--color-ink);
+  border-radius: var(--radius-xl);
+  background: var(--gold-400);
+  box-shadow: 0 7px 0 var(--color-ink);
+}
+
+.join__codeLabel {
+  color: color-mix(in srgb, var(--color-ink) 62%, var(--gold-400));
+}
+
+.join__codeValue {
+  font-size: var(--fs-4xl);
+  line-height: 1;
+  letter-spacing: var(--track-wider);
+  color: var(--color-ink);
+}
+
+.join__codeHint {
+  margin-top: var(--space-1);
+  color: color-mix(in srgb, var(--color-ink) 70%, var(--gold-400));
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  text-align: center;
+}
+
+/* --------------------------------------------------------- código inválido */
+
+.join__bad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: center;
+}
+
+.join__badIcon {
+  font-size: 64px;
+  line-height: 1;
+  animation: wob 5s var(--ease-standard) infinite;
+}
+
+.join__badTitle {
+  font-size: var(--fs-2xl);
+  color: var(--rose-400);
+  -webkit-text-stroke: var(--stroke-ink) var(--color-ink);
+  paint-order: stroke fill;
+}
+
+.join__badText {
+  max-width: 34ch;
+  color: var(--color-text-on-stage);
+  opacity: 0.9;
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+}
+
+.join__badText b {
+  color: var(--gold-400);
+  font-weight: var(--fw-black);
+  font-family: var(--font-mono);
+}

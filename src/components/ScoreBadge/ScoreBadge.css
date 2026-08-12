@@ -1,0 +1,55 @@
+.sbadge {
+  --sbadge-color: var(--color-ink);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  min-width: 56px;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: var(--border-ink);
+  box-shadow: var(--shadow-pop-sm);
+  animation: pop var(--duration-fast) var(--ease-pop) both;
+}
+
+.sbadge__label {
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--track-wider);
+  text-transform: uppercase;
+  color: var(--bone-500);
+  line-height: 1;
+}
+
+.sbadge__value {
+  font-family: var(--font-mono);
+  font-weight: var(--fw-black);
+  font-size: var(--fs-lg);
+  line-height: 1;
+  color: var(--sbadge-color);
+}
+
+.sbadge--lg .sbadge__value {
+  font-size: var(--fs-2xl);
+}
+
+.sbadge--sm {
+  min-width: 44px;
+}
+.sbadge--sm .sbadge__value {
+  font-size: var(--fs-base);
+}
+
+.sbadge--good {
+  --sbadge-color: var(--lime-500);
+}
+
+.sbadge--bad {
+  --sbadge-color: var(--rose-500);
+}
+
+.sbadge--accent {
+  --sbadge-color: var(--game-accent-deep);
+}

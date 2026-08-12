@@ -1,0 +1,61 @@
+/* PIANO TILE — quatro colunas creme e peças caindo. O tabuleiro inteiro é o
+   canvas: fundo claro, divisórias e peças desenhadas nele. Sem degradê; a
+   profundidade das peças vem da borda de tinta grossa. */
+
+.pn .gscene__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-3) var(--space-4);
+  background: var(--color-bg-deep);
+}
+
+/* Placar dos rivais como faixa própria acima do tabuleiro — o quadro é um card
+   emoldurado, então a fita não flutua por cima da moldura; ganha lugar no topo,
+   alinhada à largura do tabuleiro. */
+.pn .grivals {
+  position: static;
+  width: min(92vw, 460px);
+}
+
+/* Caixa creme onde as peças caem. Quadro alto (retrato), largura travada para
+   caber quatro colunas confortáveis no polegar. */
+.pn__box {
+  position: relative;
+  flex: 1 1 auto;
+  width: min(92vw, 460px);
+  min-height: 0;
+  background: #fffdf7;
+  border: 5px solid var(--color-ink);
+  border-radius: 22px;
+  box-shadow: 0 8px 0 var(--color-ink);
+  overflow: hidden;
+  touch-action: none;
+}
+
+/* Tremor curto quando encosta numa bomba: três canais de erro (som, número
+   vermelho, sacudida) para ninguém perder sem entender. */
+.pn__box.is-shake {
+  animation: pn-shake 320ms var(--ease-out);
+}
+
+.pn__canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+@keyframes pn-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  50% { transform: translateX(7px); }
+  80% { transform: translateX(-4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pn__box.is-shake { animation: none; }
+}

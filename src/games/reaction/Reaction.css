@@ -1,0 +1,107 @@
+/* REFLEXO — a tela inteira é o alvo. */
+
+.rx__field {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: var(--color-bg-deep);
+  /* Só a cor muda entre um estado e outro: nenhuma transição de layout, nada
+     que atrase a percepção do sinal. */
+  transition: background-color var(--duration-instant) linear;
+  touch-action: none;
+}
+
+/* O sinal. Cor cheia + brilho: é para ser impossível não ver. */
+.rx__field.is-lit {
+  background: var(--game-accent);
+}
+
+.rx__field.is-early {
+  background: color-mix(in srgb, var(--color-danger) 34%, var(--color-bg-deep));
+}
+
+.rx__field.is-hit {
+  background: color-mix(in srgb, var(--color-success) 22%, var(--color-bg-deep));
+}
+
+/* ------------------------------------------------------------------- texto */
+
+.rx__cue {
+  color: var(--color-text);
+  text-shadow: var(--glow-md) color-mix(in srgb, var(--color-bg-deep) 70%, transparent);
+}
+
+/* Sobre o fundo aceso o texto precisa ser escuro para manter contraste. */
+.rx__field.is-lit .rx__cue {
+  color: var(--color-bg-deep);
+  text-shadow: none;
+}
+
+.rx__field.is-lit .gcue__small {
+  color: color-mix(in srgb, var(--color-bg-deep) 72%, transparent);
+}
+
+.rx__cue--go {
+  font-size: var(--fs-5xl);
+  animation: rxPunch var(--duration-fast) var(--ease-pop);
+}
+
+.rx__cue--time {
+  font-family: var(--font-mono);
+  color: var(--color-success);
+  letter-spacing: 0;
+}
+
+.rx__cue--bad {
+  font-size: var(--fs-3xl);
+  color: var(--color-danger);
+}
+
+@keyframes rxPunch {
+  from { transform: scale(0.7); }
+  to { transform: scale(1); }
+}
+
+/* ---------------------------------------------------------------- marcador */
+
+/* Três marcas no rodapé do stage: o jogador vê quantas chances sobraram sem
+   precisar contar. Fica embaixo porque em cima já tem HUD. */
+.rx__dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--space-5);
+  z-index: var(--z-hud);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  list-style: none;
+  pointer-events: none;
+}
+
+.rx__dot {
+  min-width: 64px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-bg-deep) 78%, transparent);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  text-align: center;
+  color: var(--color-text-dim);
+}
+
+.rx__dot--ok {
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+.rx__dot--bad {
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rx__cue--go { animation: none; }
+  .rx__field { transition: none; }
+}

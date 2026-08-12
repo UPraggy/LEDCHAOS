@@ -1,0 +1,48 @@
+/* FATIAR — o jogo inteiro vive no canvas. Aqui só a legenda. */
+
+.sl .gscene__stage {
+  /* Campo escuro e CHAPADO: as frutas e bombas são adesivos saturados com
+     contorno de tinta — quanto mais liso e escuro o fundo, mais elas saltam.
+     Sem vinheta radial; a cor do jogo vive no HUD, não num brilho de fundo. */
+  background: var(--color-bg-deep);
+}
+
+/* --------------------------------------------------------------- legenda */
+
+/* Duas marcas no rodapé: quanto vale a fruta, quanto tira a bomba. O jogador
+   olha uma vez, na primeira rodada, e nunca mais precisa. Fica embaixo e
+   translúcida para não competir com os objetos subindo. Os ícones são os
+   próprios PNGs do jogo — a legenda fala a mesma língua do que sobe na tela. */
+.sl__key {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--space-3);
+  z-index: var(--z-hud);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  list-style: none;
+  pointer-events: none;
+  opacity: 0.82;
+}
+
+.sl__key-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+}
+
+.sl__ico {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.35));
+}
+
+.sl__val--good { color: var(--color-success); }
+.sl__val--bad { color: var(--color-danger); }

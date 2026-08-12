@@ -1,0 +1,188 @@
+/* MEMÓRIA — sem canvas. Quatro botões enormes e três pistas em cada um. */
+
+.mm .gscene__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-3) var(--space-5);
+  /* Campo chapado: sem vinheta radial. A cor do jogo vem do HUD e dos botões. */
+  background: var(--color-bg-deep);
+}
+
+/* ----------------------------------------------------------------- estado */
+
+.mm__status {
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  animation: mm-status var(--duration-base) var(--ease-out);
+}
+
+/* OBSERVE e REPITA precisam ser distinguíveis de relance, no meio do jogo.
+   Cor sozinha não basta: a palavra já é diferente e o brilho reforça. */
+.mm__status--input {
+  color: var(--game-accent);
+  text-shadow: var(--glow-sm) color-mix(in srgb, var(--game-accent) 60%, transparent);
+}
+
+/* NÍVEL N ✓ vira uma faixa: o selo level-up.png entra à esquerda do texto e
+   o conjunto ganha um respiro. O selo carrega a comemoração; a palavra confirma. */
+.mm__status--pause {
+  color: var(--color-success);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.mm__levelup {
+  width: clamp(28px, 8vw, 44px);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 3px 0 var(--color-ink));
+  animation: mm-levelup var(--duration-slow, 480ms) var(--ease-out-back, var(--ease-out));
+}
+
+@keyframes mm-levelup {
+  from { opacity: 0; transform: scale(0.4) rotate(-12deg); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes mm-status {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------------------------------------------------------------- progresso */
+
+/* Um ponto por passo da sequência. É o que responde "quantos faltam?" sem o
+   jogador ter que contar de cabeça enquanto lembra da ordem. */
+.mm__dots {
+  display: flex;
+  gap: var(--space-2);
+  min-height: 12px;
+}
+
+.mm__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-3);
+  transition: background-color 120ms var(--ease-out), transform 120ms var(--ease-out);
+}
+
+.mm__dot.is-done {
+  background: var(--game-accent);
+  transform: scale(1.25);
+}
+
+/* -------------------------------------------------------------------- pads */
+
+.mm__grid {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 520px;
+  min-height: 0;
+  /* MINÚSCULO e GIGANTE mexem no tamanho do alvo — que é exatamente a
+     dificuldade deste jogo em celular. */
+  transform: scale(var(--mm-scale, 1));
+  transform-origin: center;
+}
+
+/* Apagado é o estado de repouso: face na cor FUNDA do pad, meio transparente
+   e afundado numa pop-shadow de tinta longa (0 8px 0). Aceso encurta a sombra
+   (0 3px 0) e cresce — o pad "sobe" e ilumina. Adesivo, nunca degradê. */
+.mm__pad {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--border-ink-thick);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--pad-off) 82%, var(--color-ink));
+  box-shadow: 0 8px 0 var(--color-ink);
+  opacity: 0.55;
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color 90ms var(--ease-out),
+    box-shadow 90ms var(--ease-out),
+    opacity 90ms var(--ease-out),
+    transform 90ms var(--ease-out);
+}
+
+/* Desabilitado durante a exibição, mas SEM apagar por conta própria: o brilho
+   da sequência vem do .is-lit, não do estado disabled. Só o cursor muda. */
+.mm__pad:disabled {
+  cursor: default;
+}
+
+.mm__img {
+  width: min(38%, 92px);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  pointer-events: none;
+  /* Contorno de tinta sólido no ícone: ele precisa se destacar tanto na face
+     funda (apagado) quanto na clara (aceso). */
+  filter: drop-shadow(0 3px 0 var(--color-ink));
+}
+
+.mm__pad.is-lit,
+.mm__pad:active {
+  background: var(--pad-lit);
+  opacity: 1;
+  box-shadow: 0 3px 0 var(--color-ink);
+  transform: translateY(4px) scale(1.05);
+}
+
+/* O erro é marcado por cor, por um ✕ por cima e por um tranco. Três canais,
+   porque perder sem entender por quê é a pior sensação possível. */
+.mm__pad.is-wrong {
+  background: var(--color-danger);
+  opacity: 1;
+  box-shadow: 0 3px 0 var(--color-ink);
+  animation: mm-shake 260ms var(--ease-out);
+}
+
+.mm__pad.is-wrong::after {
+  content: '✕';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: min(20vw, var(--fs-6xl));
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+@keyframes mm-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-7px); }
+  75% { transform: translateX(7px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mm__status,
+  .mm__levelup,
+  .mm__pad.is-wrong { animation: none; }
+
+  .mm__dot,
+  .mm__pad { transition: none; }
+
+  .mm__pad.is-lit,
+  .mm__pad:active { transform: none; }
+
+  .mm__dot.is-done { transform: none; }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "CHAOS — Microgame Party",
+  "short_name": "CHAOS",
+  "description": "Jogo de festa mobile: a partida troca de microjogo a cada 15–30 segundos. 2 a 8 jogadores.",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#07080E",
+  "theme_color": "#0B0D14",
+  "categories": ["games", "entertainment"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

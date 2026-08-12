@@ -1,0 +1,69 @@
+# Publica o CHAOS no GitHub Pages a cada push na main.
+#
+# Fluxo moderno de Pages via Actions (sem branch gh-pages): o job de build gera
+# o dist/ e o de deploy publica o artefato. O Rafael só precisa habilitar, uma
+# vez, em Settings ▸ Pages ▸ Source = "GitHub Actions" (ver docs/DEPLOY.md).
+#
+# Variáveis de repositório (Settings ▸ Secrets and variables ▸ Actions ▸ Variables):
+#   VITE_BASE       caminho base do site. Padrão "/" (domínio próprio na raiz).
+#                   Para caminho de projeto use "/LEDCHAOS/" — e troque o
+#                   pathSegmentsToKeep p/ 1 no public/404.html.
+#   CUSTOM_DOMAIN   domínio próprio (ex.: ledchaos.exemplo.com.br). Se vazio, o
+#                   site fica no endereço *.github.io e nenhum CNAME é escrito.
+name: Deploy CHAOS to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Permissões mínimas que o deploy-pages exige.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Uma publicação por vez; um push novo cancela a anterior em andamento.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build (Vite)
+        env:
+          VITE_BASE: ${{ vars.VITE_BASE || '/' }}
+        run: npm run build
+
+      - name: Domínio próprio (CNAME)
+        if: ${{ vars.CUSTOM_DOMAIN != '' }}
+        run: echo "${{ vars.CUSTOM_DOMAIN }}" > dist/CNAME
+
+      - name: Desliga o Jekyll
+        # Sem isto o Pages roda Jekyll e some com arquivos/pastas iniciados por "_".
+        run: touch dist/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

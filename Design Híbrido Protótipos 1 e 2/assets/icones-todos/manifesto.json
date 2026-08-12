@@ -1,0 +1,4901 @@
+{
+  "total": 544,
+  "objetos": [
+    {
+      "arquivo": "icone-001.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_02 PM.png",
+      "x": 9,
+      "y": 11,
+      "largura": 387,
+      "altura": 345,
+      "area": 79422
+    },
+    {
+      "arquivo": "icone-002.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_02 PM.png",
+      "x": 409,
+      "y": 47,
+      "largura": 363,
+      "altura": 271,
+      "area": 54849
+    },
+    {
+      "arquivo": "icone-003.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_02 PM.png",
+      "x": 806,
+      "y": 54,
+      "largura": 338,
+      "altura": 261,
+      "area": 51803
+    },
+    {
+      "arquivo": "icone-004.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_02 PM.png",
+      "x": 1177,
+      "y": 49,
+      "largura": 359,
+      "altura": 272,
+      "area": 53858
+    },
+    {
+      "arquivo": "icone-005.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_02 PM.png",
+      "x": 19,
+      "y": 356,
+      "largura": 379,
+      "altura": 289,
+      "area": 68619
+    },
+    {
+      "arquivo": "icone-006.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_02 PM.png",
+      "x": 420,
+      "y": 403,
+      "largura": 342,
+      "altura": 175,
+      "area": 34453
+    },
+    {
+      "arquivo": "icone-007.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_02 PM.png",
+      "x": 797,
+      "y": 403,
+      "largura": 333,
+      "altura": 170,
+      "area": 33400
+    },
+    {
+      "arquivo": "icone-008.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_02 PM.png",
+      "x": 1162,
+      "y": 395,
+      "largura": 357,
+      "altura": 178,
+      "area": 39345
+    },
+    {
+      "arquivo": "icone-009.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_02 PM.png",
+      "x": 19,
+      "y": 644,
+      "largura": 368,
+      "altura": 335,
+      "area": 77513
+    },
+    {
+      "arquivo": "icone-010.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_02 PM.png",
+      "x": 425,
+      "y": 630,
+      "largura": 333,
+      "altura": 363,
+      "area": 71933
+    },
+    {
+      "arquivo": "icone-011.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_02 PM.png",
+      "x": 783,
+      "y": 651,
+      "largura": 369,
+      "altura": 323,
+      "area": 72921
+    },
+    {
+      "arquivo": "icone-012.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_02 PM.png",
+      "x": 1170,
+      "y": 622,
+      "largura": 363,
+      "altura": 374,
+      "area": 85382
+    },
+    {
+      "arquivo": "icone-013.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_22 PM.png",
+      "x": 65,
+      "y": 12,
+      "largura": 317,
+      "altura": 343,
+      "area": 66183
+    },
+    {
+      "arquivo": "icone-014.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_22 PM.png",
+      "x": 450,
+      "y": 25,
+      "largura": 304,
+      "altura": 323,
+      "area": 60128
+    },
+    {
+      "arquivo": "icone-015.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_22 PM.png",
+      "x": 806,
+      "y": 29,
+      "largura": 324,
+      "altura": 318,
+      "area": 59890
+    },
+    {
+      "arquivo": "icone-016.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_22 PM.png",
+      "x": 1195,
+      "y": 15,
+      "largura": 332,
+      "altura": 335,
+      "area": 69818
+    },
+    {
+      "arquivo": "icone-017.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_22 PM.png",
+      "x": 48,
+      "y": 366,
+      "largura": 327,
+      "altura": 272,
+      "area": 46873
+    },
+    {
+      "arquivo": "icone-018.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_22 PM.png",
+      "x": 436,
+      "y": 368,
+      "largura": 300,
+      "altura": 266,
+      "area": 46455
+    },
+    {
+      "arquivo": "icone-019.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_22 PM.png",
+      "x": 793,
+      "y": 350,
+      "largura": 338,
+      "altura": 302,
+      "area": 63555
+    },
+    {
+      "arquivo": "icone-020.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_22 PM.png",
+      "x": 1189,
+      "y": 337,
+      "largura": 325,
+      "altura": 326,
+      "area": 54510
+    },
+    {
+      "arquivo": "icone-021.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_22 PM.png",
+      "x": 50,
+      "y": 630,
+      "largura": 327,
+      "altura": 369,
+      "area": 62880
+    },
+    {
+      "arquivo": "icone-022.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_22 PM.png",
+      "x": 442,
+      "y": 639,
+      "largura": 301,
+      "altura": 337,
+      "area": 63684
+    },
+    {
+      "arquivo": "icone-023.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_22 PM.png",
+      "x": 791,
+      "y": 647,
+      "largura": 299,
+      "altura": 353,
+      "area": 59820
+    },
+    {
+      "arquivo": "icone-024.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_14_22 PM.png",
+      "x": 1154,
+      "y": 651,
+      "largura": 335,
+      "altura": 341,
+      "area": 66707
+    },
+    {
+      "arquivo": "icone-025.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_16_22 PM.png",
+      "x": 38,
+      "y": 51,
+      "largura": 315,
+      "altura": 272,
+      "area": 52133
+    },
+    {
+      "arquivo": "icone-026.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_16_22 PM.png",
+      "x": 448,
+      "y": 40,
+      "largura": 299,
+      "altura": 285,
+      "area": 42386
+    },
+    {
+      "arquivo": "icone-027.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_16_22 PM.png",
+      "x": 803,
+      "y": 35,
+      "largura": 339,
+      "altura": 294,
+      "area": 56492
+    },
+    {
+      "arquivo": "icone-028.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_16_22 PM.png",
+      "x": 1211,
+      "y": 45,
+      "largura": 313,
+      "altura": 274,
+      "area": 50678
+    },
+    {
+      "arquivo": "icone-029.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_16_22 PM.png",
+      "x": 30,
+      "y": 365,
+      "largura": 328,
+      "altura": 283,
+      "area": 47966
+    },
+    {
+      "arquivo": "icone-030.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_16_22 PM.png",
+      "x": 442,
+      "y": 370,
+      "largura": 317,
+      "altura": 265,
+      "area": 44208
+    },
+    {
+      "arquivo": "icone-031.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_16_22 PM.png",
+      "x": 834,
+      "y": 364,
+      "largura": 308,
+      "altura": 299,
+      "area": 46871
+    },
+    {
+      "arquivo": "icone-032.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_16_22 PM.png",
+      "x": 1231,
+      "y": 354,
+      "largura": 293,
+      "altura": 268,
+      "area": 30924
+    },
+    {
+      "arquivo": "icone-033.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_16_22 PM.png",
+      "x": 29,
+      "y": 688,
+      "largura": 326,
+      "altura": 289,
+      "area": 45597
+    },
+    {
+      "arquivo": "icone-034.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_16_22 PM.png",
+      "x": 429,
+      "y": 673,
+      "largura": 313,
+      "altura": 310,
+      "area": 42600
+    },
+    {
+      "arquivo": "icone-035.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_16_22 PM.png",
+      "x": 821,
+      "y": 690,
+      "largura": 333,
+      "altura": 299,
+      "area": 45951
+    },
+    {
+      "arquivo": "icone-036.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_16_22 PM.png",
+      "x": 1192,
+      "y": 662,
+      "largura": 331,
+      "altura": 323,
+      "area": 50706
+    },
+    {
+      "arquivo": "icone-037.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_45 PM (1).png",
+      "x": 111,
+      "y": 75,
+      "largura": 270,
+      "altura": 238,
+      "area": 31290
+    },
+    {
+      "arquivo": "icone-038.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_45 PM (1).png",
+      "x": 447,
+      "y": 89,
+      "largura": 258,
+      "altura": 204,
+      "area": 28599
+    },
+    {
+      "arquivo": "icone-039.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_45 PM (1).png",
+      "x": 843,
+      "y": 85,
+      "largura": 279,
+      "altura": 205,
+      "area": 37600
+    },
+    {
+      "arquivo": "icone-040.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_45 PM (1).png",
+      "x": 1203,
+      "y": 69,
+      "largura": 244,
+      "altura": 210,
+      "area": 21720
+    },
+    {
+      "arquivo": "icone-041.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_45 PM (1).png",
+      "x": 147,
+      "y": 401,
+      "largura": 203,
+      "altura": 194,
+      "area": 26543
+    },
+    {
+      "arquivo": "icone-042.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_45 PM (1).png",
+      "x": 483,
+      "y": 397,
+      "largura": 210,
+      "altura": 198,
+      "area": 28393
+    },
+    {
+      "arquivo": "icone-043.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_45 PM (1).png",
+      "x": 838,
+      "y": 396,
+      "largura": 258,
+      "altura": 183,
+      "area": 26898
+    },
+    {
+      "arquivo": "icone-044.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_45 PM (1).png",
+      "x": 1199,
+      "y": 392,
+      "largura": 249,
+      "altura": 205,
+      "area": 25537
+    },
+    {
+      "arquivo": "icone-045.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_45 PM (1).png",
+      "x": 142,
+      "y": 690,
+      "largura": 237,
+      "altura": 197,
+      "area": 28034
+    },
+    {
+      "arquivo": "icone-046.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_45 PM (1).png",
+      "x": 494,
+      "y": 689,
+      "largura": 192,
+      "altura": 188,
+      "area": 19190
+    },
+    {
+      "arquivo": "icone-047.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_45 PM (1).png",
+      "x": 887,
+      "y": 689,
+      "largura": 168,
+      "altura": 187,
+      "area": 16186
+    },
+    {
+      "arquivo": "icone-048.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_45 PM (1).png",
+      "x": 1200,
+      "y": 692,
+      "largura": 197,
+      "altura": 202,
+      "area": 20402
+    },
+    {
+      "arquivo": "icone-049.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_48 PM (2).png",
+      "x": 79,
+      "y": 29,
+      "largura": 248,
+      "altura": 313,
+      "area": 39219
+    },
+    {
+      "arquivo": "icone-050.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_48 PM (2).png",
+      "x": 410,
+      "y": 31,
+      "largura": 308,
+      "altura": 311,
+      "area": 45520
+    },
+    {
+      "arquivo": "icone-051.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_48 PM (2).png",
+      "x": 775,
+      "y": 38,
+      "largura": 317,
+      "altura": 293,
+      "area": 55134
+    },
+    {
+      "arquivo": "icone-052.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_48 PM (2).png",
+      "x": 1159,
+      "y": 45,
+      "largura": 335,
+      "altura": 286,
+      "area": 65387
+    },
+    {
+      "arquivo": "icone-053.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_48 PM (2).png",
+      "x": 48,
+      "y": 365,
+      "largura": 284,
+      "altura": 288,
+      "area": 44921
+    },
+    {
+      "arquivo": "icone-054.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_48 PM (2).png",
+      "x": 430,
+      "y": 349,
+      "largura": 302,
+      "altura": 308,
+      "area": 57494
+    },
+    {
+      "arquivo": "icone-055.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_48 PM (2).png",
+      "x": 808,
+      "y": 362,
+      "largura": 309,
+      "altura": 295,
+      "area": 52274
+    },
+    {
+      "arquivo": "icone-056.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_48 PM (2).png",
+      "x": 1196,
+      "y": 352,
+      "largura": 283,
+      "altura": 310,
+      "area": 53522
+    },
+    {
+      "arquivo": "icone-057.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_48 PM (2).png",
+      "x": 47,
+      "y": 640,
+      "largura": 320,
+      "altura": 341,
+      "area": 59949
+    },
+    {
+      "arquivo": "icone-058.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_48 PM (2).png",
+      "x": 426,
+      "y": 691,
+      "largura": 312,
+      "altura": 275,
+      "area": 48455
+    },
+    {
+      "arquivo": "icone-059.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_48 PM (2).png",
+      "x": 803,
+      "y": 677,
+      "largura": 294,
+      "altura": 297,
+      "area": 61215
+    },
+    {
+      "arquivo": "icone-060.png",
+      "origem": "ChatGPT Image Aug 9, 2026, 07_21_48 PM (2).png",
+      "x": 1180,
+      "y": 689,
+      "largura": 312,
+      "altura": 276,
+      "area": 54834
+    },
+    {
+      "arquivo": "peca-001.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 420,
+      "y": 13,
+      "largura": 235,
+      "altura": 103,
+      "area": 17369
+    },
+    {
+      "arquivo": "peca-002.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 841,
+      "y": 17,
+      "largura": 144,
+      "altura": 64,
+      "area": 5708
+    },
+    {
+      "arquivo": "peca-003.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1354,
+      "y": 18,
+      "largura": 69,
+      "altura": 69,
+      "area": 2091
+    },
+    {
+      "arquivo": "peca-004.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1410,
+      "y": 18,
+      "largura": 70,
+      "altura": 69,
+      "area": 2119
+    },
+    {
+      "arquivo": "peca-005.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1467,
+      "y": 18,
+      "largura": 69,
+      "altura": 69,
+      "area": 2123
+    },
+    {
+      "arquivo": "peca-006.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 9,
+      "y": 10,
+      "largura": 417,
+      "altura": 306,
+      "area": 84331
+    },
+    {
+      "arquivo": "peca-007.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 425,
+      "y": 107,
+      "largura": 226,
+      "altura": 84,
+      "area": 13333
+    },
+    {
+      "arquivo": "peca-008.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 660,
+      "y": 19,
+      "largura": 178,
+      "altura": 274,
+      "area": 41156
+    },
+    {
+      "arquivo": "peca-009.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 840,
+      "y": 74,
+      "largura": 145,
+      "altura": 76,
+      "area": 7115
+    },
+    {
+      "arquivo": "peca-010.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 840,
+      "y": 143,
+      "largura": 145,
+      "altura": 76,
+      "area": 7035
+    },
+    {
+      "arquivo": "peca-011.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 985,
+      "y": 16,
+      "largura": 264,
+      "altura": 277,
+      "area": 59101
+    },
+    {
+      "arquivo": "peca-012.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1225,
+      "y": 16,
+      "largura": 151,
+      "altura": 183,
+      "area": 15868
+    },
+    {
+      "arquivo": "peca-013.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1365,
+      "y": 138,
+      "largura": 171,
+      "altura": 62,
+      "area": 6248
+    },
+    {
+      "arquivo": "peca-014.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1366,
+      "y": 81,
+      "largura": 171,
+      "altura": 65,
+      "area": 7094
+    },
+    {
+      "arquivo": "peca-015.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 426,
+      "y": 183,
+      "largura": 225,
+      "altura": 87,
+      "area": 13658
+    },
+    {
+      "arquivo": "peca-016.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 840,
+      "y": 210,
+      "largura": 145,
+      "altura": 80,
+      "area": 7600
+    },
+    {
+      "arquivo": "peca-017.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1228,
+      "y": 189,
+      "largura": 150,
+      "altura": 66,
+      "area": 5643
+    },
+    {
+      "arquivo": "peca-018.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1229,
+      "y": 241,
+      "largura": 149,
+      "altura": 70,
+      "area": 5975
+    },
+    {
+      "arquivo": "peca-019.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1375,
+      "y": 192,
+      "largura": 159,
+      "altura": 125,
+      "area": 10487
+    },
+    {
+      "arquivo": "peca-020.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 17,
+      "y": 298,
+      "largura": 219,
+      "altura": 117,
+      "area": 16270
+    },
+    {
+      "arquivo": "peca-021.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 226,
+      "y": 306,
+      "largura": 198,
+      "altura": 101,
+      "area": 13628
+    },
+    {
+      "arquivo": "peca-022.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 422,
+      "y": 260,
+      "largura": 234,
+      "altura": 92,
+      "area": 15240
+    },
+    {
+      "arquivo": "peca-023.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 425,
+      "y": 343,
+      "largura": 228,
+      "altura": 86,
+      "area": 13736
+    },
+    {
+      "arquivo": "peca-024.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 649,
+      "y": 291,
+      "largura": 266,
+      "altura": 211,
+      "area": 47899
+    },
+    {
+      "arquivo": "peca-025.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 909,
+      "y": 291,
+      "largura": 329,
+      "altura": 221,
+      "area": 56880
+    },
+    {
+      "arquivo": "peca-026.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1230,
+      "y": 306,
+      "largura": 306,
+      "altura": 88,
+      "area": 17209
+    },
+    {
+      "arquivo": "peca-027.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 19,
+      "y": 401,
+      "largura": 208,
+      "altura": 90,
+      "area": 11691
+    },
+    {
+      "arquivo": "peca-028.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 226,
+      "y": 396,
+      "largura": 194,
+      "altura": 92,
+      "area": 11387
+    },
+    {
+      "arquivo": "peca-029.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 426,
+      "y": 419,
+      "largura": 227,
+      "altura": 83,
+      "area": 12971
+    },
+    {
+      "arquivo": "peca-030.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1232,
+      "y": 388,
+      "largura": 306,
+      "altura": 77,
+      "area": 16512
+    },
+    {
+      "arquivo": "peca-031.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 16,
+      "y": 475,
+      "largura": 203,
+      "altura": 92,
+      "area": 11360
+    },
+    {
+      "arquivo": "peca-032.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 218,
+      "y": 473,
+      "largura": 209,
+      "altura": 93,
+      "area": 11901
+    },
+    {
+      "arquivo": "peca-033.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 440,
+      "y": 494,
+      "largura": 250,
+      "altura": 107,
+      "area": 16021
+    },
+    {
+      "arquivo": "peca-034.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 684,
+      "y": 514,
+      "largura": 195,
+      "altura": 86,
+      "area": 10389
+    },
+    {
+      "arquivo": "peca-035.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 877,
+      "y": 499,
+      "largura": 166,
+      "altura": 103,
+      "area": 9706
+    },
+    {
+      "arquivo": "peca-036.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1040,
+      "y": 513,
+      "largura": 197,
+      "altura": 84,
+      "area": 10206
+    },
+    {
+      "arquivo": "peca-037.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1223,
+      "y": 458,
+      "largura": 316,
+      "altura": 121,
+      "area": 23251
+    },
+    {
+      "arquivo": "peca-038.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 13,
+      "y": 568,
+      "largura": 218,
+      "altura": 153,
+      "area": 27462
+    },
+    {
+      "arquivo": "peca-039.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 225,
+      "y": 569,
+      "largura": 214,
+      "altura": 152,
+      "area": 26769
+    },
+    {
+      "arquivo": "peca-040.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 439,
+      "y": 597,
+      "largura": 125,
+      "altura": 172,
+      "area": 16760
+    },
+    {
+      "arquivo": "peca-041.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 559,
+      "y": 597,
+      "largura": 126,
+      "altura": 172,
+      "area": 16910
+    },
+    {
+      "arquivo": "peca-042.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 679,
+      "y": 597,
+      "largura": 126,
+      "altura": 172,
+      "area": 16825
+    },
+    {
+      "arquivo": "peca-043.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 799,
+      "y": 596,
+      "largura": 127,
+      "altura": 172,
+      "area": 16982
+    },
+    {
+      "arquivo": "peca-044.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 923,
+      "y": 596,
+      "largura": 137,
+      "altura": 171,
+      "area": 18572
+    },
+    {
+      "arquivo": "peca-045.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1055,
+      "y": 592,
+      "largura": 92,
+      "altura": 93,
+      "area": 4681
+    },
+    {
+      "arquivo": "peca-046.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1141,
+      "y": 592,
+      "largura": 90,
+      "altura": 93,
+      "area": 4525
+    },
+    {
+      "arquivo": "peca-047.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1223,
+      "y": 586,
+      "largura": 99,
+      "altura": 95,
+      "area": 4926
+    },
+    {
+      "arquivo": "peca-048.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1323,
+      "y": 564,
+      "largura": 213,
+      "altura": 68,
+      "area": 7399
+    },
+    {
+      "arquivo": "peca-049.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1325,
+      "y": 622,
+      "largura": 66,
+      "altura": 66,
+      "area": 1999
+    },
+    {
+      "arquivo": "peca-050.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1416,
+      "y": 621,
+      "largura": 121,
+      "altura": 64,
+      "area": 4424
+    },
+    {
+      "arquivo": "peca-051.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1057,
+      "y": 674,
+      "largura": 90,
+      "altura": 92,
+      "area": 4602
+    },
+    {
+      "arquivo": "peca-052.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1142,
+      "y": 673,
+      "largura": 90,
+      "altura": 93,
+      "area": 4793
+    },
+    {
+      "arquivo": "peca-053.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1228,
+      "y": 671,
+      "largura": 91,
+      "altura": 92,
+      "area": 4709
+    },
+    {
+      "arquivo": "peca-054.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1326,
+      "y": 678,
+      "largura": 65,
+      "altura": 65,
+      "area": 1896
+    },
+    {
+      "arquivo": "peca-055.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1417,
+      "y": 677,
+      "largura": 120,
+      "altura": 64,
+      "area": 4326
+    },
+    {
+      "arquivo": "peca-056.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 13,
+      "y": 712,
+      "largura": 218,
+      "altura": 155,
+      "area": 27826
+    },
+    {
+      "arquivo": "peca-057.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 225,
+      "y": 711,
+      "largura": 214,
+      "altura": 155,
+      "area": 27386
+    },
+    {
+      "arquivo": "peca-058.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 443,
+      "y": 763,
+      "largura": 176,
+      "altura": 85,
+      "area": 9165
+    },
+    {
+      "arquivo": "peca-059.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 615,
+      "y": 763,
+      "largura": 149,
+      "altura": 86,
+      "area": 7235
+    },
+    {
+      "arquivo": "peca-060.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 761,
+      "y": 762,
+      "largura": 141,
+      "altura": 77,
+      "area": 5697
+    },
+    {
+      "arquivo": "peca-061.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 901,
+      "y": 762,
+      "largura": 138,
+      "altura": 80,
+      "area": 6267
+    },
+    {
+      "arquivo": "peca-062.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1035,
+      "y": 758,
+      "largura": 144,
+      "altura": 85,
+      "area": 6980
+    },
+    {
+      "arquivo": "peca-063.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1175,
+      "y": 759,
+      "largura": 142,
+      "altura": 75,
+      "area": 5691
+    },
+    {
+      "arquivo": "peca-064.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1217,
+      "y": 820,
+      "largura": 47,
+      "altura": 46,
+      "area": 629
+    },
+    {
+      "arquivo": "peca-065.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1310,
+      "y": 792,
+      "largura": 45,
+      "altura": 53,
+      "area": 734
+    },
+    {
+      "arquivo": "peca-066.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1327,
+      "y": 733,
+      "largura": 64,
+      "altura": 64,
+      "area": 1848
+    },
+    {
+      "arquivo": "peca-067.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1360,
+      "y": 791,
+      "largura": 61,
+      "altura": 64,
+      "area": 1534
+    },
+    {
+      "arquivo": "peca-068.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1416,
+      "y": 795,
+      "largura": 54,
+      "altura": 59,
+      "area": 944
+    },
+    {
+      "arquivo": "peca-069.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1417,
+      "y": 733,
+      "largura": 120,
+      "altura": 65,
+      "area": 4418
+    },
+    {
+      "arquivo": "peca-070.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1471,
+      "y": 794,
+      "largura": 59,
+      "altura": 57,
+      "area": 1160
+    },
+    {
+      "arquivo": "peca-071.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 234,
+      "y": 877,
+      "largura": 59,
+      "altura": 78,
+      "area": 1048
+    },
+    {
+      "arquivo": "peca-072.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 297,
+      "y": 864,
+      "largura": 125,
+      "altura": 55,
+      "area": 1627
+    },
+    {
+      "arquivo": "peca-073.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 444,
+      "y": 837,
+      "largura": 123,
+      "altura": 75,
+      "area": 5325
+    },
+    {
+      "arquivo": "peca-074.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 564,
+      "y": 828,
+      "largura": 129,
+      "altura": 93,
+      "area": 5972
+    },
+    {
+      "arquivo": "peca-075.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 691,
+      "y": 836,
+      "largura": 71,
+      "altura": 80,
+      "area": 2242
+    },
+    {
+      "arquivo": "peca-076.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 758,
+      "y": 834,
+      "largura": 82,
+      "altura": 65,
+      "area": 2571
+    },
+    {
+      "arquivo": "peca-077.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 830,
+      "y": 823,
+      "largura": 97,
+      "altura": 96,
+      "area": 3816
+    },
+    {
+      "arquivo": "peca-078.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 923,
+      "y": 825,
+      "largura": 116,
+      "altura": 96,
+      "area": 4824
+    },
+    {
+      "arquivo": "peca-079.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1033,
+      "y": 834,
+      "largura": 70,
+      "altura": 76,
+      "area": 2170
+    },
+    {
+      "arquivo": "peca-080.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1092,
+      "y": 885,
+      "largura": 44,
+      "altura": 45,
+      "area": 605
+    },
+    {
+      "arquivo": "peca-081.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1108,
+      "y": 831,
+      "largura": 61,
+      "altura": 84,
+      "area": 1989
+    },
+    {
+      "arquivo": "peca-082.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1157,
+      "y": 873,
+      "largura": 58,
+      "altura": 73,
+      "area": 1436
+    },
+    {
+      "arquivo": "peca-083.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1166,
+      "y": 820,
+      "largura": 57,
+      "altura": 66,
+      "area": 1055
+    },
+    {
+      "arquivo": "peca-084.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1209,
+      "y": 865,
+      "largura": 57,
+      "altura": 78,
+      "area": 1606
+    },
+    {
+      "arquivo": "peca-085.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1254,
+      "y": 819,
+      "largura": 64,
+      "altura": 63,
+      "area": 1281
+    },
+    {
+      "arquivo": "peca-086.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1267,
+      "y": 867,
+      "largura": 68,
+      "altura": 65,
+      "area": 1756
+    },
+    {
+      "arquivo": "peca-087.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1330,
+      "y": 881,
+      "largura": 43,
+      "altura": 52,
+      "area": 677
+    },
+    {
+      "arquivo": "peca-088.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1361,
+      "y": 859,
+      "largura": 46,
+      "altura": 44,
+      "area": 611
+    },
+    {
+      "arquivo": "peca-089.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1377,
+      "y": 895,
+      "largura": 48,
+      "altura": 49,
+      "area": 716
+    },
+    {
+      "arquivo": "peca-090.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1411,
+      "y": 871,
+      "largura": 47,
+      "altura": 49,
+      "area": 702
+    },
+    {
+      "arquivo": "peca-091.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1434,
+      "y": 834,
+      "largura": 53,
+      "altura": 51,
+      "area": 910
+    },
+    {
+      "arquivo": "peca-092.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1483,
+      "y": 839,
+      "largura": 57,
+      "altura": 58,
+      "area": 1093
+    },
+    {
+      "arquivo": "peca-093.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 13,
+      "y": 870,
+      "largura": 141,
+      "altura": 155,
+      "area": 9800
+    },
+    {
+      "arquivo": "peca-094.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 140,
+      "y": 862,
+      "largura": 120,
+      "altura": 137,
+      "area": 4244
+    },
+    {
+      "arquivo": "peca-095.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 152,
+      "y": 948,
+      "largura": 144,
+      "altura": 73,
+      "area": 3799
+    },
+    {
+      "arquivo": "peca-096.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 300,
+      "y": 899,
+      "largura": 99,
+      "altura": 114,
+      "area": 2306
+    },
+    {
+      "arquivo": "peca-097.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 350,
+      "y": 908,
+      "largura": 122,
+      "altura": 114,
+      "area": 4550
+    },
+    {
+      "arquivo": "peca-098.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 425,
+      "y": 904,
+      "largura": 167,
+      "altura": 126,
+      "area": 7401
+    },
+    {
+      "arquivo": "peca-099.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 526,
+      "y": 974,
+      "largura": 80,
+      "altura": 50,
+      "area": 1634
+    },
+    {
+      "arquivo": "peca-100.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 598,
+      "y": 913,
+      "largura": 128,
+      "altura": 114,
+      "area": 8279
+    },
+    {
+      "arquivo": "peca-101.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 722,
+      "y": 899,
+      "largura": 128,
+      "altura": 129,
+      "area": 9458
+    },
+    {
+      "arquivo": "peca-102.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 849,
+      "y": 973,
+      "largura": 50,
+      "altura": 51,
+      "area": 982
+    },
+    {
+      "arquivo": "peca-103.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 852,
+      "y": 915,
+      "largura": 59,
+      "altura": 61,
+      "area": 1494
+    },
+    {
+      "arquivo": "peca-104.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 905,
+      "y": 913,
+      "largura": 102,
+      "altura": 115,
+      "area": 6448
+    },
+    {
+      "arquivo": "peca-105.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1004,
+      "y": 953,
+      "largura": 67,
+      "altura": 68,
+      "area": 1785
+    },
+    {
+      "arquivo": "peca-106.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1036,
+      "y": 901,
+      "largura": 67,
+      "altura": 68,
+      "area": 2103
+    },
+    {
+      "arquivo": "peca-107.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1068,
+      "y": 954,
+      "largura": 69,
+      "altura": 68,
+      "area": 2067
+    },
+    {
+      "arquivo": "peca-108.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1111,
+      "y": 916,
+      "largura": 48,
+      "altura": 60,
+      "area": 948
+    },
+    {
+      "arquivo": "peca-109.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1147,
+      "y": 939,
+      "largura": 58,
+      "altura": 85,
+      "area": 1885
+    },
+    {
+      "arquivo": "peca-110.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1200,
+      "y": 951,
+      "largura": 67,
+      "altura": 75,
+      "area": 2268
+    },
+    {
+      "arquivo": "peca-111.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1248,
+      "y": 913,
+      "largura": 42,
+      "altura": 48,
+      "area": 610
+    },
+    {
+      "arquivo": "peca-112.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1262,
+      "y": 959,
+      "largura": 69,
+      "altura": 65,
+      "area": 1789
+    },
+    {
+      "arquivo": "peca-113.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1289,
+      "y": 922,
+      "largura": 52,
+      "altura": 49,
+      "area": 831
+    },
+    {
+      "arquivo": "peca-114.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1337,
+      "y": 933,
+      "largura": 52,
+      "altura": 91,
+      "area": 2065
+    },
+    {
+      "arquivo": "peca-115.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1386,
+      "y": 938,
+      "largura": 50,
+      "altura": 47,
+      "area": 787
+    },
+    {
+      "arquivo": "peca-116.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1393,
+      "y": 960,
+      "largura": 85,
+      "altura": 66,
+      "area": 2107
+    },
+    {
+      "arquivo": "peca-117.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1434,
+      "y": 912,
+      "largura": 42,
+      "altura": 52,
+      "area": 692
+    },
+    {
+      "arquivo": "peca-118.png",
+      "origem": "file_000000002568820ead0c10b186f20474.png",
+      "x": 1468,
+      "y": 932,
+      "largura": 69,
+      "altura": 80,
+      "area": 2090
+    },
+    {
+      "arquivo": "peca-119.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 14,
+      "y": 24,
+      "largura": 248,
+      "altura": 296,
+      "area": 43032
+    },
+    {
+      "arquivo": "peca-120.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 249,
+      "y": 24,
+      "largura": 219,
+      "altura": 305,
+      "area": 42306
+    },
+    {
+      "arquivo": "peca-121.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 457,
+      "y": 11,
+      "largura": 185,
+      "altura": 312,
+      "area": 35570
+    },
+    {
+      "arquivo": "peca-122.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 647,
+      "y": 26,
+      "largura": 226,
+      "altura": 300,
+      "area": 41967
+    },
+    {
+      "arquivo": "peca-123.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 868,
+      "y": 19,
+      "largura": 194,
+      "altura": 312,
+      "area": 36491
+    },
+    {
+      "arquivo": "peca-124.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 1051,
+      "y": 11,
+      "largura": 206,
+      "altura": 284,
+      "area": 34743
+    },
+    {
+      "arquivo": "peca-125.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 1113,
+      "y": 289,
+      "largura": 98,
+      "altura": 32,
+      "area": 970
+    },
+    {
+      "arquivo": "peca-126.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 10,
+      "y": 336,
+      "largura": 220,
+      "altura": 292,
+      "area": 39074
+    },
+    {
+      "arquivo": "peca-127.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 220,
+      "y": 322,
+      "largura": 214,
+      "altura": 307,
+      "area": 37981
+    },
+    {
+      "arquivo": "peca-128.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 434,
+      "y": 318,
+      "largura": 210,
+      "altura": 318,
+      "area": 40804
+    },
+    {
+      "arquivo": "peca-129.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 639,
+      "y": 338,
+      "largura": 222,
+      "altura": 296,
+      "area": 38887
+    },
+    {
+      "arquivo": "peca-130.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 866,
+      "y": 330,
+      "largura": 204,
+      "altura": 315,
+      "area": 34515
+    },
+    {
+      "arquivo": "peca-131.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 1055,
+      "y": 324,
+      "largura": 204,
+      "altura": 315,
+      "area": 37259
+    },
+    {
+      "arquivo": "peca-132.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 20,
+      "y": 648,
+      "largura": 145,
+      "altura": 126,
+      "area": 11510
+    },
+    {
+      "arquivo": "peca-133.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 168,
+      "y": 647,
+      "largura": 142,
+      "altura": 125,
+      "area": 11105
+    },
+    {
+      "arquivo": "peca-134.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 318,
+      "y": 649,
+      "largura": 144,
+      "altura": 126,
+      "area": 11422
+    },
+    {
+      "arquivo": "peca-135.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 469,
+      "y": 633,
+      "largura": 142,
+      "altura": 142,
+      "area": 11788
+    },
+    {
+      "arquivo": "peca-136.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 621,
+      "y": 642,
+      "largura": 161,
+      "altura": 137,
+      "area": 13148
+    },
+    {
+      "arquivo": "peca-137.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 788,
+      "y": 644,
+      "largura": 147,
+      "altura": 131,
+      "area": 12261
+    },
+    {
+      "arquivo": "peca-138.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 952,
+      "y": 642,
+      "largura": 295,
+      "altura": 271,
+      "area": 44356
+    },
+    {
+      "arquivo": "peca-139.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 19,
+      "y": 773,
+      "largura": 146,
+      "altura": 127,
+      "area": 11787
+    },
+    {
+      "arquivo": "peca-140.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 167,
+      "y": 775,
+      "largura": 155,
+      "altura": 125,
+      "area": 11466
+    },
+    {
+      "arquivo": "peca-141.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 328,
+      "y": 775,
+      "largura": 143,
+      "altura": 126,
+      "area": 11258
+    },
+    {
+      "arquivo": "peca-142.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 477,
+      "y": 771,
+      "largura": 143,
+      "altura": 129,
+      "area": 11562
+    },
+    {
+      "arquivo": "peca-143.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 627,
+      "y": 772,
+      "largura": 165,
+      "altura": 133,
+      "area": 12617
+    },
+    {
+      "arquivo": "peca-144.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 796,
+      "y": 768,
+      "largura": 144,
+      "altura": 134,
+      "area": 12625
+    },
+    {
+      "arquivo": "peca-145.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 24,
+      "y": 907,
+      "largura": 101,
+      "altura": 128,
+      "area": 6132
+    },
+    {
+      "arquivo": "peca-146.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 129,
+      "y": 907,
+      "largura": 131,
+      "altura": 128,
+      "area": 6812
+    },
+    {
+      "arquivo": "peca-147.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 255,
+      "y": 917,
+      "largura": 115,
+      "altura": 106,
+      "area": 5994
+    },
+    {
+      "arquivo": "peca-148.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 377,
+      "y": 915,
+      "largura": 120,
+      "altura": 107,
+      "area": 7427
+    },
+    {
+      "arquivo": "peca-149.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 506,
+      "y": 911,
+      "largura": 114,
+      "altura": 111,
+      "area": 6345
+    },
+    {
+      "arquivo": "peca-150.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 631,
+      "y": 909,
+      "largura": 116,
+      "altura": 126,
+      "area": 8349
+    },
+    {
+      "arquivo": "peca-151.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 768,
+      "y": 913,
+      "largura": 119,
+      "altura": 114,
+      "area": 6809
+    },
+    {
+      "arquivo": "peca-152.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 893,
+      "y": 910,
+      "largura": 101,
+      "altura": 123,
+      "area": 6237
+    },
+    {
+      "arquivo": "peca-153.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 1006,
+      "y": 905,
+      "largura": 119,
+      "altura": 129,
+      "area": 7509
+    },
+    {
+      "arquivo": "peca-154.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 1131,
+      "y": 920,
+      "largura": 114,
+      "altura": 103,
+      "area": 5596
+    },
+    {
+      "arquivo": "peca-155.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 20,
+      "y": 1025,
+      "largura": 107,
+      "altura": 108,
+      "area": 5582
+    },
+    {
+      "arquivo": "peca-156.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 134,
+      "y": 1020,
+      "largura": 100,
+      "altura": 120,
+      "area": 6407
+    },
+    {
+      "arquivo": "peca-157.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 244,
+      "y": 1022,
+      "largura": 119,
+      "altura": 106,
+      "area": 7013
+    },
+    {
+      "arquivo": "peca-158.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 368,
+      "y": 1019,
+      "largura": 112,
+      "altura": 114,
+      "area": 7481
+    },
+    {
+      "arquivo": "peca-159.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 486,
+      "y": 1019,
+      "largura": 114,
+      "altura": 115,
+      "area": 7687
+    },
+    {
+      "arquivo": "peca-160.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 603,
+      "y": 1028,
+      "largura": 114,
+      "altura": 101,
+      "area": 5381
+    },
+    {
+      "arquivo": "peca-161.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 738,
+      "y": 1018,
+      "largura": 89,
+      "altura": 115,
+      "area": 5127
+    },
+    {
+      "arquivo": "peca-162.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 838,
+      "y": 1030,
+      "largura": 106,
+      "altura": 102,
+      "area": 5002
+    },
+    {
+      "arquivo": "peca-163.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 940,
+      "y": 1032,
+      "largura": 106,
+      "altura": 100,
+      "area": 4909
+    },
+    {
+      "arquivo": "peca-164.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 1045,
+      "y": 1019,
+      "largura": 101,
+      "altura": 113,
+      "area": 5279
+    },
+    {
+      "arquivo": "peca-165.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 1145,
+      "y": 1020,
+      "largura": 102,
+      "altura": 115,
+      "area": 5380
+    },
+    {
+      "arquivo": "peca-166.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 22,
+      "y": 1133,
+      "largura": 101,
+      "altura": 110,
+      "area": 6243
+    },
+    {
+      "arquivo": "peca-167.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 123,
+      "y": 1140,
+      "largura": 105,
+      "altura": 99,
+      "area": 5622
+    },
+    {
+      "arquivo": "peca-168.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 220,
+      "y": 1132,
+      "largura": 87,
+      "altura": 113,
+      "area": 4745
+    },
+    {
+      "arquivo": "peca-169.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 303,
+      "y": 1124,
+      "largura": 123,
+      "altura": 124,
+      "area": 6830
+    },
+    {
+      "arquivo": "peca-170.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 429,
+      "y": 1141,
+      "largura": 141,
+      "altura": 95,
+      "area": 6724
+    },
+    {
+      "arquivo": "peca-171.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 569,
+      "y": 1126,
+      "largura": 110,
+      "altura": 124,
+      "area": 4900
+    },
+    {
+      "arquivo": "peca-172.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 686,
+      "y": 1127,
+      "largura": 133,
+      "altura": 122,
+      "area": 9065
+    },
+    {
+      "arquivo": "peca-173.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 824,
+      "y": 1133,
+      "largura": 124,
+      "altura": 118,
+      "area": 6222
+    },
+    {
+      "arquivo": "peca-174.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 959,
+      "y": 1134,
+      "largura": 129,
+      "altura": 125,
+      "area": 7061
+    },
+    {
+      "arquivo": "peca-175.png",
+      "origem": "file_0000000052e8820eb5d30680cbaab565.png",
+      "x": 1096,
+      "y": 1140,
+      "largura": 147,
+      "altura": 95,
+      "area": 7902
+    },
+    {
+      "arquivo": "peca-176.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 10,
+      "y": 9,
+      "largura": 156,
+      "altura": 140,
+      "area": 12944
+    },
+    {
+      "arquivo": "peca-177.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 165,
+      "y": 10,
+      "largura": 157,
+      "altura": 140,
+      "area": 12927
+    },
+    {
+      "arquivo": "peca-178.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 321,
+      "y": 10,
+      "largura": 166,
+      "altura": 140,
+      "area": 13245
+    },
+    {
+      "arquivo": "peca-179.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 476,
+      "y": 10,
+      "largura": 170,
+      "altura": 140,
+      "area": 13578
+    },
+    {
+      "arquivo": "peca-180.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 634,
+      "y": 10,
+      "largura": 163,
+      "altura": 141,
+      "area": 13351
+    },
+    {
+      "arquivo": "peca-181.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 792,
+      "y": 11,
+      "largura": 151,
+      "altura": 139,
+      "area": 12218
+    },
+    {
+      "arquivo": "peca-182.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 943,
+      "y": 9,
+      "largura": 158,
+      "altura": 142,
+      "area": 13139
+    },
+    {
+      "arquivo": "peca-183.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 1098,
+      "y": 12,
+      "largura": 153,
+      "altura": 140,
+      "area": 12739
+    },
+    {
+      "arquivo": "peca-184.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 14,
+      "y": 138,
+      "largura": 163,
+      "altura": 135,
+      "area": 13061
+    },
+    {
+      "arquivo": "peca-185.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 175,
+      "y": 139,
+      "largura": 161,
+      "altura": 135,
+      "area": 12848
+    },
+    {
+      "arquivo": "peca-186.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 332,
+      "y": 139,
+      "largura": 160,
+      "altura": 134,
+      "area": 12694
+    },
+    {
+      "arquivo": "peca-187.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 488,
+      "y": 141,
+      "largura": 160,
+      "altura": 134,
+      "area": 12687
+    },
+    {
+      "arquivo": "peca-188.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 645,
+      "y": 141,
+      "largura": 160,
+      "altura": 133,
+      "area": 12405
+    },
+    {
+      "arquivo": "peca-189.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 799,
+      "y": 141,
+      "largura": 161,
+      "altura": 133,
+      "area": 12700
+    },
+    {
+      "arquivo": "peca-190.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 953,
+      "y": 145,
+      "largura": 160,
+      "altura": 129,
+      "area": 12024
+    },
+    {
+      "arquivo": "peca-191.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 1108,
+      "y": 150,
+      "largura": 154,
+      "altura": 125,
+      "area": 11542
+    },
+    {
+      "arquivo": "peca-192.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 21,
+      "y": 261,
+      "largura": 142,
+      "altura": 154,
+      "area": 12513
+    },
+    {
+      "arquivo": "peca-193.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 183,
+      "y": 261,
+      "largura": 139,
+      "altura": 157,
+      "area": 12114
+    },
+    {
+      "arquivo": "peca-194.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 343,
+      "y": 260,
+      "largura": 139,
+      "altura": 159,
+      "area": 12219
+    },
+    {
+      "arquivo": "peca-195.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 497,
+      "y": 263,
+      "largura": 137,
+      "altura": 155,
+      "area": 11594
+    },
+    {
+      "arquivo": "peca-196.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 648,
+      "y": 265,
+      "largura": 138,
+      "altura": 156,
+      "area": 11832
+    },
+    {
+      "arquivo": "peca-197.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 803,
+      "y": 262,
+      "largura": 150,
+      "altura": 159,
+      "area": 12366
+    },
+    {
+      "arquivo": "peca-198.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 961,
+      "y": 263,
+      "largura": 139,
+      "altura": 158,
+      "area": 12366
+    },
+    {
+      "arquivo": "peca-199.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 1115,
+      "y": 265,
+      "largura": 134,
+      "altura": 158,
+      "area": 11742
+    },
+    {
+      "arquivo": "peca-200.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 10,
+      "y": 399,
+      "largura": 162,
+      "altura": 128,
+      "area": 12333
+    },
+    {
+      "arquivo": "peca-201.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 14,
+      "y": 512,
+      "largura": 147,
+      "altura": 153,
+      "area": 12730
+    },
+    {
+      "arquivo": "peca-202.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 175,
+      "y": 404,
+      "largura": 160,
+      "altura": 262,
+      "area": 24792
+    },
+    {
+      "arquivo": "peca-203.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 334,
+      "y": 403,
+      "largura": 156,
+      "altura": 263,
+      "area": 24316
+    },
+    {
+      "arquivo": "peca-204.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 492,
+      "y": 404,
+      "largura": 155,
+      "altura": 259,
+      "area": 24126
+    },
+    {
+      "arquivo": "peca-205.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 645,
+      "y": 406,
+      "largura": 159,
+      "altura": 260,
+      "area": 24587
+    },
+    {
+      "arquivo": "peca-206.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 807,
+      "y": 405,
+      "largura": 155,
+      "altura": 257,
+      "area": 23514
+    },
+    {
+      "arquivo": "peca-207.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 957,
+      "y": 406,
+      "largura": 158,
+      "altura": 259,
+      "area": 24258
+    },
+    {
+      "arquivo": "peca-208.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 1111,
+      "y": 409,
+      "largura": 151,
+      "altura": 258,
+      "area": 24043
+    },
+    {
+      "arquivo": "peca-209.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 4,
+      "y": 651,
+      "largura": 159,
+      "altura": 152,
+      "area": 14467
+    },
+    {
+      "arquivo": "peca-210.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 171,
+      "y": 653,
+      "largura": 163,
+      "altura": 153,
+      "area": 14348
+    },
+    {
+      "arquivo": "peca-211.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 331,
+      "y": 656,
+      "largura": 158,
+      "altura": 151,
+      "area": 13814
+    },
+    {
+      "arquivo": "peca-212.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 488,
+      "y": 652,
+      "largura": 154,
+      "altura": 154,
+      "area": 13589
+    },
+    {
+      "arquivo": "peca-213.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 642,
+      "y": 653,
+      "largura": 158,
+      "altura": 154,
+      "area": 13829
+    },
+    {
+      "arquivo": "peca-214.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 801,
+      "y": 652,
+      "largura": 159,
+      "altura": 156,
+      "area": 14033
+    },
+    {
+      "arquivo": "peca-215.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 955,
+      "y": 653,
+      "largura": 157,
+      "altura": 155,
+      "area": 13988
+    },
+    {
+      "arquivo": "peca-216.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 1105,
+      "y": 653,
+      "largura": 157,
+      "altura": 155,
+      "area": 14108
+    },
+    {
+      "arquivo": "peca-217.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 9,
+      "y": 800,
+      "largura": 142,
+      "altura": 110,
+      "area": 8617
+    },
+    {
+      "arquivo": "peca-218.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 150,
+      "y": 797,
+      "largura": 142,
+      "altura": 118,
+      "area": 8305
+    },
+    {
+      "arquivo": "peca-219.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 290,
+      "y": 800,
+      "largura": 152,
+      "altura": 112,
+      "area": 10003
+    },
+    {
+      "arquivo": "peca-220.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 452,
+      "y": 796,
+      "largura": 138,
+      "altura": 120,
+      "area": 8911
+    },
+    {
+      "arquivo": "peca-221.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 600,
+      "y": 801,
+      "largura": 126,
+      "altura": 115,
+      "area": 7820
+    },
+    {
+      "arquivo": "peca-222.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 748,
+      "y": 801,
+      "largura": 151,
+      "altura": 113,
+      "area": 9815
+    },
+    {
+      "arquivo": "peca-223.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 919,
+      "y": 801,
+      "largura": 150,
+      "altura": 113,
+      "area": 9699
+    },
+    {
+      "arquivo": "peca-224.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 1088,
+      "y": 797,
+      "largura": 152,
+      "altura": 116,
+      "area": 8575
+    },
+    {
+      "arquivo": "peca-225.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 17,
+      "y": 899,
+      "largura": 98,
+      "altura": 97,
+      "area": 4652
+    },
+    {
+      "arquivo": "peca-226.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 117,
+      "y": 907,
+      "largura": 97,
+      "altura": 89,
+      "area": 4219
+    },
+    {
+      "arquivo": "peca-227.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 212,
+      "y": 907,
+      "largura": 97,
+      "altura": 89,
+      "area": 4134
+    },
+    {
+      "arquivo": "peca-228.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 310,
+      "y": 901,
+      "largura": 81,
+      "altura": 101,
+      "area": 4285
+    },
+    {
+      "arquivo": "peca-229.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 396,
+      "y": 902,
+      "largura": 81,
+      "altura": 100,
+      "area": 4271
+    },
+    {
+      "arquivo": "peca-230.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 483,
+      "y": 902,
+      "largura": 81,
+      "altura": 100,
+      "area": 4260
+    },
+    {
+      "arquivo": "peca-231.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 592,
+      "y": 907,
+      "largura": 93,
+      "altura": 94,
+      "area": 3825
+    },
+    {
+      "arquivo": "peca-232.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 689,
+      "y": 901,
+      "largura": 89,
+      "altura": 104,
+      "area": 4437
+    },
+    {
+      "arquivo": "peca-233.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 783,
+      "y": 902,
+      "largura": 80,
+      "altura": 103,
+      "area": 3639
+    },
+    {
+      "arquivo": "peca-234.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 875,
+      "y": 902,
+      "largura": 101,
+      "altura": 100,
+      "area": 5464
+    },
+    {
+      "arquivo": "peca-235.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 986,
+      "y": 909,
+      "largura": 99,
+      "altura": 89,
+      "area": 4532
+    },
+    {
+      "arquivo": "peca-236.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 1087,
+      "y": 907,
+      "largura": 104,
+      "altura": 95,
+      "area": 4513
+    },
+    {
+      "arquivo": "peca-237.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 17,
+      "y": 1005,
+      "largura": 66,
+      "altura": 71,
+      "area": 1163
+    },
+    {
+      "arquivo": "peca-238.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 97,
+      "y": 1011,
+      "largura": 53,
+      "altura": 56,
+      "area": 611
+    },
+    {
+      "arquivo": "peca-239.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 164,
+      "y": 1018,
+      "largura": 106,
+      "altura": 61,
+      "area": 2833
+    },
+    {
+      "arquivo": "peca-240.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 272,
+      "y": 1004,
+      "largura": 103,
+      "altura": 81,
+      "area": 2978
+    },
+    {
+      "arquivo": "peca-241.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 496,
+      "y": 997,
+      "largura": 111,
+      "altura": 99,
+      "area": 4700
+    },
+    {
+      "arquivo": "peca-242.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 605,
+      "y": 999,
+      "largura": 101,
+      "altura": 91,
+      "area": 4481
+    },
+    {
+      "arquivo": "peca-243.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 705,
+      "y": 999,
+      "largura": 101,
+      "altura": 90,
+      "area": 4638
+    },
+    {
+      "arquivo": "peca-244.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 804,
+      "y": 1000,
+      "largura": 97,
+      "altura": 86,
+      "area": 3555
+    },
+    {
+      "arquivo": "peca-245.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 906,
+      "y": 1013,
+      "largura": 53,
+      "altura": 63,
+      "area": 873
+    },
+    {
+      "arquivo": "peca-246.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 939,
+      "y": 999,
+      "largura": 43,
+      "altura": 76,
+      "area": 1101
+    },
+    {
+      "arquivo": "peca-247.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 968,
+      "y": 997,
+      "largura": 68,
+      "altura": 80,
+      "area": 1719
+    },
+    {
+      "arquivo": "peca-248.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 1040,
+      "y": 995,
+      "largura": 82,
+      "altura": 87,
+      "area": 3088
+    },
+    {
+      "arquivo": "peca-249.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 1132,
+      "y": 983,
+      "largura": 120,
+      "altura": 97,
+      "area": 6015
+    },
+    {
+      "arquivo": "peca-250.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 13,
+      "y": 1092,
+      "largura": 151,
+      "altura": 54,
+      "area": 4783
+    },
+    {
+      "arquivo": "peca-251.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 157,
+      "y": 1092,
+      "largura": 153,
+      "altura": 55,
+      "area": 4998
+    },
+    {
+      "arquivo": "peca-252.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 303,
+      "y": 1093,
+      "largura": 151,
+      "altura": 53,
+      "area": 4705
+    },
+    {
+      "arquivo": "peca-253.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 446,
+      "y": 1092,
+      "largura": 150,
+      "altura": 53,
+      "area": 4700
+    },
+    {
+      "arquivo": "peca-254.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 588,
+      "y": 1078,
+      "largura": 196,
+      "altura": 68,
+      "area": 6664
+    },
+    {
+      "arquivo": "peca-255.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 786,
+      "y": 1073,
+      "largura": 102,
+      "altura": 101,
+      "area": 5772
+    },
+    {
+      "arquivo": "peca-256.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 899,
+      "y": 1073,
+      "largura": 77,
+      "altura": 97,
+      "area": 3782
+    },
+    {
+      "arquivo": "peca-257.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 975,
+      "y": 1073,
+      "largura": 82,
+      "altura": 98,
+      "area": 4354
+    },
+    {
+      "arquivo": "peca-258.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 1060,
+      "y": 1076,
+      "largura": 67,
+      "altura": 96,
+      "area": 3108
+    },
+    {
+      "arquivo": "peca-259.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 5,
+      "y": 1141,
+      "largura": 179,
+      "altura": 117,
+      "area": 11604
+    },
+    {
+      "arquivo": "peca-260.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 180,
+      "y": 1150,
+      "largura": 147,
+      "altura": 107,
+      "area": 8536
+    },
+    {
+      "arquivo": "peca-261.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 321,
+      "y": 1148,
+      "largura": 142,
+      "altura": 107,
+      "area": 8274
+    },
+    {
+      "arquivo": "peca-262.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 456,
+      "y": 1147,
+      "largura": 145,
+      "altura": 108,
+      "area": 8578
+    },
+    {
+      "arquivo": "peca-263.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 592,
+      "y": 1169,
+      "largura": 101,
+      "altura": 58,
+      "area": 3041
+    },
+    {
+      "arquivo": "peca-264.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 692,
+      "y": 1168,
+      "largura": 86,
+      "altura": 58,
+      "area": 2449
+    },
+    {
+      "arquivo": "peca-265.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 778,
+      "y": 1167,
+      "largura": 83,
+      "altura": 60,
+      "area": 2353
+    },
+    {
+      "arquivo": "peca-266.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 866,
+      "y": 1158,
+      "largura": 97,
+      "altura": 98,
+      "area": 5322
+    },
+    {
+      "arquivo": "peca-267.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 984,
+      "y": 1155,
+      "largura": 93,
+      "altura": 102,
+      "area": 4895
+    },
+    {
+      "arquivo": "peca-268.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 1072,
+      "y": 1149,
+      "largura": 104,
+      "altura": 108,
+      "area": 5100
+    },
+    {
+      "arquivo": "peca-269.png",
+      "origem": "file_00000000636c820e858a665caafdf4d6.png",
+      "x": 1167,
+      "y": 1155,
+      "largura": 95,
+      "altura": 102,
+      "area": 5529
+    },
+    {
+      "arquivo": "peca-270.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1054,
+      "y": 12,
+      "largura": 225,
+      "altura": 289,
+      "area": 56181
+    },
+    {
+      "arquivo": "peca-271.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1269,
+      "y": 9,
+      "largura": 270,
+      "altura": 180,
+      "area": 24545
+    },
+    {
+      "arquivo": "peca-272.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 9,
+      "y": 3,
+      "largura": 299,
+      "altura": 424,
+      "area": 109513
+    },
+    {
+      "arquivo": "peca-273.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 304,
+      "y": 13,
+      "largura": 238,
+      "altura": 418,
+      "area": 88303
+    },
+    {
+      "arquivo": "peca-274.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 540,
+      "y": 9,
+      "largura": 517,
+      "altura": 360,
+      "area": 168092
+    },
+    {
+      "arquivo": "peca-275.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1266,
+      "y": 176,
+      "largura": 272,
+      "altura": 219,
+      "area": 51058
+    },
+    {
+      "arquivo": "peca-276.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1281,
+      "y": 385,
+      "largura": 256,
+      "altura": 88,
+      "area": 13187
+    },
+    {
+      "arquivo": "peca-277.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 14,
+      "y": 427,
+      "largura": 289,
+      "altura": 220,
+      "area": 51582
+    },
+    {
+      "arquivo": "peca-278.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 306,
+      "y": 432,
+      "largura": 286,
+      "altura": 211,
+      "area": 44662
+    },
+    {
+      "arquivo": "peca-279.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 583,
+      "y": 366,
+      "largura": 347,
+      "altura": 282,
+      "area": 73207
+    },
+    {
+      "arquivo": "peca-280.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 929,
+      "y": 300,
+      "largura": 347,
+      "altura": 402,
+      "area": 96097
+    },
+    {
+      "arquivo": "peca-281.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1282,
+      "y": 457,
+      "largura": 252,
+      "altura": 85,
+      "area": 12037
+    },
+    {
+      "arquivo": "peca-282.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1278,
+      "y": 518,
+      "largura": 257,
+      "altura": 148,
+      "area": 23303
+    },
+    {
+      "arquivo": "peca-283.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 15,
+      "y": 634,
+      "largura": 263,
+      "altura": 72,
+      "area": 11550
+    },
+    {
+      "arquivo": "peca-284.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 285,
+      "y": 636,
+      "largura": 299,
+      "altura": 72,
+      "area": 15024
+    },
+    {
+      "arquivo": "peca-285.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 714,
+      "y": 635,
+      "largura": 303,
+      "altura": 89,
+      "area": 13794
+    },
+    {
+      "arquivo": "peca-286.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1019,
+      "y": 636,
+      "largura": 141,
+      "altura": 66,
+      "area": 5647
+    },
+    {
+      "arquivo": "peca-287.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1283,
+      "y": 659,
+      "largura": 253,
+      "altura": 82,
+      "area": 14526
+    },
+    {
+      "arquivo": "peca-288.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 476,
+      "y": 586,
+      "largura": 239,
+      "altura": 321,
+      "area": 52099
+    },
+    {
+      "arquivo": "peca-289.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 720,
+      "y": 709,
+      "largura": 303,
+      "altura": 61,
+      "area": 12225
+    },
+    {
+      "arquivo": "peca-290.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1020,
+      "y": 700,
+      "largura": 253,
+      "altura": 80,
+      "area": 14658
+    },
+    {
+      "arquivo": "peca-291.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 15,
+      "y": 699,
+      "largura": 247,
+      "altura": 209,
+      "area": 43982
+    },
+    {
+      "arquivo": "peca-292.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 253,
+      "y": 699,
+      "largura": 232,
+      "altura": 208,
+      "area": 41141
+    },
+    {
+      "arquivo": "peca-293.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 717,
+      "y": 768,
+      "largura": 69,
+      "altura": 71,
+      "area": 2195
+    },
+    {
+      "arquivo": "peca-294.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 788,
+      "y": 761,
+      "largura": 65,
+      "altura": 91,
+      "area": 2776
+    },
+    {
+      "arquivo": "peca-295.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 861,
+      "y": 761,
+      "largura": 64,
+      "altura": 92,
+      "area": 2787
+    },
+    {
+      "arquivo": "peca-296.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 929,
+      "y": 761,
+      "largura": 65,
+      "altura": 92,
+      "area": 2823
+    },
+    {
+      "arquivo": "peca-297.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 999,
+      "y": 775,
+      "largura": 104,
+      "altura": 65,
+      "area": 3183
+    },
+    {
+      "arquivo": "peca-298.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1092,
+      "y": 776,
+      "largura": 104,
+      "altura": 65,
+      "area": 3187
+    },
+    {
+      "arquivo": "peca-299.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1184,
+      "y": 776,
+      "largura": 104,
+      "altura": 64,
+      "area": 3165
+    },
+    {
+      "arquivo": "peca-300.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1283,
+      "y": 730,
+      "largura": 253,
+      "altura": 150,
+      "area": 29750
+    },
+    {
+      "arquivo": "peca-301.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 16,
+      "y": 900,
+      "largura": 114,
+      "altura": 77,
+      "area": 4380
+    },
+    {
+      "arquivo": "peca-302.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 129,
+      "y": 898,
+      "largura": 106,
+      "altura": 79,
+      "area": 4261
+    },
+    {
+      "arquivo": "peca-303.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 236,
+      "y": 905,
+      "largura": 91,
+      "altura": 66,
+      "area": 2846
+    },
+    {
+      "arquivo": "peca-304.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 330,
+      "y": 904,
+      "largura": 90,
+      "altura": 68,
+      "area": 2979
+    },
+    {
+      "arquivo": "peca-305.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 422,
+      "y": 904,
+      "largura": 84,
+      "altura": 72,
+      "area": 1231
+    },
+    {
+      "arquivo": "peca-306.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 508,
+      "y": 902,
+      "largura": 50,
+      "altura": 73,
+      "area": 826
+    },
+    {
+      "arquivo": "peca-307.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 542,
+      "y": 915,
+      "largura": 81,
+      "altura": 101,
+      "area": 3517
+    },
+    {
+      "arquivo": "peca-308.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 630,
+      "y": 910,
+      "largura": 82,
+      "altura": 74,
+      "area": 2603
+    },
+    {
+      "arquivo": "peca-309.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 719,
+      "y": 840,
+      "largura": 62,
+      "altura": 62,
+      "area": 1383
+    },
+    {
+      "arquivo": "peca-310.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 721,
+      "y": 903,
+      "largura": 59,
+      "altura": 66,
+      "area": 1456
+    },
+    {
+      "arquivo": "peca-311.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 773,
+      "y": 845,
+      "largura": 59,
+      "altura": 58,
+      "area": 1245
+    },
+    {
+      "arquivo": "peca-312.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 774,
+      "y": 901,
+      "largura": 44,
+      "altura": 45,
+      "area": 662
+    },
+    {
+      "arquivo": "peca-313.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 809,
+      "y": 903,
+      "largura": 69,
+      "altura": 72,
+      "area": 1636
+    },
+    {
+      "arquivo": "peca-314.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 827,
+      "y": 837,
+      "largura": 56,
+      "altura": 66,
+      "area": 1438
+    },
+    {
+      "arquivo": "peca-315.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 878,
+      "y": 843,
+      "largura": 57,
+      "altura": 60,
+      "area": 1453
+    },
+    {
+      "arquivo": "peca-316.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 881,
+      "y": 907,
+      "largura": 82,
+      "altura": 68,
+      "area": 2814
+    },
+    {
+      "arquivo": "peca-317.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 930,
+      "y": 844,
+      "largura": 63,
+      "altura": 60,
+      "area": 1530
+    },
+    {
+      "arquivo": "peca-318.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 965,
+      "y": 902,
+      "largura": 80,
+      "altura": 73,
+      "area": 2853
+    },
+    {
+      "arquivo": "peca-319.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 990,
+      "y": 835,
+      "largura": 52,
+      "altura": 74,
+      "area": 1277
+    },
+    {
+      "arquivo": "peca-320.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1039,
+      "y": 838,
+      "largura": 66,
+      "altura": 70,
+      "area": 1830
+    },
+    {
+      "arquivo": "peca-321.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1049,
+      "y": 906,
+      "largura": 85,
+      "altura": 69,
+      "area": 2790
+    },
+    {
+      "arquivo": "peca-322.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1105,
+      "y": 839,
+      "largura": 55,
+      "altura": 74,
+      "area": 1547
+    },
+    {
+      "arquivo": "peca-323.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1132,
+      "y": 907,
+      "largura": 96,
+      "altura": 118,
+      "area": 6764
+    },
+    {
+      "arquivo": "peca-324.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1155,
+      "y": 838,
+      "largura": 67,
+      "altura": 71,
+      "area": 1945
+    },
+    {
+      "arquivo": "peca-325.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1215,
+      "y": 916,
+      "largura": 102,
+      "altura": 108,
+      "area": 5260
+    },
+    {
+      "arquivo": "peca-326.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1218,
+      "y": 835,
+      "largura": 45,
+      "altura": 69,
+      "area": 1060
+    },
+    {
+      "arquivo": "peca-327.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1249,
+      "y": 865,
+      "largura": 54,
+      "altura": 55,
+      "area": 1107
+    },
+    {
+      "arquivo": "peca-328.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1305,
+      "y": 871,
+      "largura": 122,
+      "altura": 157,
+      "area": 12905
+    },
+    {
+      "arquivo": "peca-329.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1416,
+      "y": 870,
+      "largura": 119,
+      "altura": 157,
+      "area": 13126
+    },
+    {
+      "arquivo": "peca-330.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 19,
+      "y": 971,
+      "largura": 138,
+      "altura": 53,
+      "area": 2264
+    },
+    {
+      "arquivo": "peca-331.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 160,
+      "y": 968,
+      "largura": 62,
+      "altura": 61,
+      "area": 894
+    },
+    {
+      "arquivo": "peca-332.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 225,
+      "y": 965,
+      "largura": 64,
+      "altura": 63,
+      "area": 1852
+    },
+    {
+      "arquivo": "peca-333.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 288,
+      "y": 959,
+      "largura": 69,
+      "altura": 69,
+      "area": 1707
+    },
+    {
+      "arquivo": "peca-334.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 357,
+      "y": 959,
+      "largura": 71,
+      "altura": 72,
+      "area": 2272
+    },
+    {
+      "arquivo": "peca-335.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 435,
+      "y": 970,
+      "largura": 96,
+      "altura": 60,
+      "area": 2001
+    },
+    {
+      "arquivo": "peca-336.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 598,
+      "y": 977,
+      "largura": 77,
+      "altura": 50,
+      "area": 1018
+    },
+    {
+      "arquivo": "peca-337.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 682,
+      "y": 969,
+      "largura": 111,
+      "altura": 56,
+      "area": 1992
+    },
+    {
+      "arquivo": "peca-338.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 781,
+      "y": 974,
+      "largura": 83,
+      "altura": 51,
+      "area": 987
+    },
+    {
+      "arquivo": "peca-339.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 858,
+      "y": 973,
+      "largura": 86,
+      "altura": 58,
+      "area": 1306
+    },
+    {
+      "arquivo": "peca-340.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 934,
+      "y": 971,
+      "largura": 86,
+      "altura": 58,
+      "area": 1389
+    },
+    {
+      "arquivo": "peca-341.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1021,
+      "y": 977,
+      "largura": 53,
+      "altura": 48,
+      "area": 840
+    },
+    {
+      "arquivo": "peca-342.png",
+      "origem": "file_000000007254820ea3f89d0dcc85fb88.png",
+      "x": 1082,
+      "y": 973,
+      "largura": 52,
+      "altura": 51,
+      "area": 934
+    },
+    {
+      "arquivo": "peca-343.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 22,
+      "y": 15,
+      "largura": 113,
+      "altura": 130,
+      "area": 8099
+    },
+    {
+      "arquivo": "peca-344.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 129,
+      "y": 24,
+      "largura": 111,
+      "altura": 120,
+      "area": 7127
+    },
+    {
+      "arquivo": "peca-345.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 233,
+      "y": 17,
+      "largura": 156,
+      "altura": 138,
+      "area": 11390
+    },
+    {
+      "arquivo": "peca-346.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 379,
+      "y": 32,
+      "largura": 98,
+      "altura": 108,
+      "area": 5632
+    },
+    {
+      "arquivo": "peca-347.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 438,
+      "y": 15,
+      "largura": 125,
+      "altura": 133,
+      "area": 7172
+    },
+    {
+      "arquivo": "peca-348.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 576,
+      "y": 15,
+      "largura": 92,
+      "altura": 154,
+      "area": 5066
+    },
+    {
+      "arquivo": "peca-349.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 670,
+      "y": 18,
+      "largura": 161,
+      "altura": 143,
+      "area": 6260
+    },
+    {
+      "arquivo": "peca-350.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 745,
+      "y": 61,
+      "largura": 120,
+      "altura": 106,
+      "area": 6087
+    },
+    {
+      "arquivo": "peca-351.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 864,
+      "y": 20,
+      "largura": 82,
+      "altura": 90,
+      "area": 2958
+    },
+    {
+      "arquivo": "peca-352.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 961,
+      "y": 9,
+      "largura": 189,
+      "altura": 101,
+      "area": 12263
+    },
+    {
+      "arquivo": "peca-353.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1128,
+      "y": 96,
+      "largura": 150,
+      "altura": 67,
+      "area": 6172
+    },
+    {
+      "arquivo": "peca-354.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1144,
+      "y": 22,
+      "largura": 138,
+      "altura": 79,
+      "area": 6897
+    },
+    {
+      "arquivo": "peca-355.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1272,
+      "y": 90,
+      "largura": 166,
+      "altura": 81,
+      "area": 7776
+    },
+    {
+      "arquivo": "peca-356.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1278,
+      "y": 16,
+      "largura": 162,
+      "altura": 82,
+      "area": 8714
+    },
+    {
+      "arquivo": "peca-357.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1442,
+      "y": 12,
+      "largura": 91,
+      "altura": 161,
+      "area": 7524
+    },
+    {
+      "arquivo": "peca-358.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 19,
+      "y": 136,
+      "largura": 122,
+      "altura": 121,
+      "area": 7050
+    },
+    {
+      "arquivo": "peca-359.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 132,
+      "y": 130,
+      "largura": 117,
+      "altura": 129,
+      "area": 7095
+    },
+    {
+      "arquivo": "peca-360.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 249,
+      "y": 133,
+      "largura": 156,
+      "altura": 131,
+      "area": 10647
+    },
+    {
+      "arquivo": "peca-361.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 397,
+      "y": 132,
+      "largura": 171,
+      "altura": 122,
+      "area": 11011
+    },
+    {
+      "arquivo": "peca-362.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 583,
+      "y": 152,
+      "largura": 108,
+      "altura": 104,
+      "area": 4939
+    },
+    {
+      "arquivo": "peca-363.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 698,
+      "y": 164,
+      "largura": 50,
+      "altura": 44,
+      "area": 613
+    },
+    {
+      "arquivo": "peca-364.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 739,
+      "y": 154,
+      "largura": 50,
+      "altura": 43,
+      "area": 679
+    },
+    {
+      "arquivo": "peca-365.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 853,
+      "y": 121,
+      "largura": 65,
+      "altura": 72,
+      "area": 1494
+    },
+    {
+      "arquivo": "peca-366.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 962,
+      "y": 167,
+      "largura": 173,
+      "altura": 77,
+      "area": 9094
+    },
+    {
+      "arquivo": "peca-367.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 965,
+      "y": 102,
+      "largura": 170,
+      "altura": 75,
+      "area": 8272
+    },
+    {
+      "arquivo": "peca-368.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1129,
+      "y": 157,
+      "largura": 111,
+      "altura": 68,
+      "area": 4402
+    },
+    {
+      "arquivo": "peca-369.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1197,
+      "y": 153,
+      "largura": 162,
+      "altura": 149,
+      "area": 9907
+    },
+    {
+      "arquivo": "peca-370.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1374,
+      "y": 151,
+      "largura": 70,
+      "altura": 154,
+      "area": 4342
+    },
+    {
+      "arquivo": "peca-371.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1441,
+      "y": 166,
+      "largura": 87,
+      "altura": 128,
+      "area": 5657
+    },
+    {
+      "arquivo": "peca-372.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 21,
+      "y": 246,
+      "largura": 120,
+      "altura": 123,
+      "area": 8576
+    },
+    {
+      "arquivo": "peca-373.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 144,
+      "y": 247,
+      "largura": 110,
+      "altura": 110,
+      "area": 5882
+    },
+    {
+      "arquivo": "peca-374.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 255,
+      "y": 252,
+      "largura": 122,
+      "altura": 104,
+      "area": 6401
+    },
+    {
+      "arquivo": "peca-375.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 384,
+      "y": 244,
+      "largura": 180,
+      "altura": 101,
+      "area": 10533
+    },
+    {
+      "arquivo": "peca-376.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 608,
+      "y": 245,
+      "largura": 91,
+      "altura": 85,
+      "area": 3668
+    },
+    {
+      "arquivo": "peca-377.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 690,
+      "y": 188,
+      "largura": 146,
+      "altura": 137,
+      "area": 9285
+    },
+    {
+      "arquivo": "peca-378.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 829,
+      "y": 189,
+      "largura": 128,
+      "altura": 113,
+      "area": 5244
+    },
+    {
+      "arquivo": "peca-379.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 963,
+      "y": 236,
+      "largura": 158,
+      "altura": 67,
+      "area": 6832
+    },
+    {
+      "arquivo": "peca-380.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1118,
+      "y": 221,
+      "largura": 91,
+      "altura": 100,
+      "area": 5232
+    },
+    {
+      "arquivo": "peca-381.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1314,
+      "y": 226,
+      "largura": 76,
+      "altura": 76,
+      "area": 2404
+    },
+    {
+      "arquivo": "peca-382.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 44,
+      "y": 348,
+      "largura": 121,
+      "altura": 125,
+      "area": 7203
+    },
+    {
+      "arquivo": "peca-383.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 161,
+      "y": 331,
+      "largura": 116,
+      "altura": 142,
+      "area": 7657
+    },
+    {
+      "arquivo": "peca-384.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 264,
+      "y": 332,
+      "largura": 146,
+      "altura": 141,
+      "area": 9503
+    },
+    {
+      "arquivo": "peca-385.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 407,
+      "y": 329,
+      "largura": 146,
+      "altura": 132,
+      "area": 9540
+    },
+    {
+      "arquivo": "peca-386.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 581,
+      "y": 319,
+      "largura": 122,
+      "altura": 123,
+      "area": 8078
+    },
+    {
+      "arquivo": "peca-387.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 699,
+      "y": 305,
+      "largura": 134,
+      "altura": 147,
+      "area": 10149
+    },
+    {
+      "arquivo": "peca-388.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 825,
+      "y": 302,
+      "largura": 121,
+      "altura": 108,
+      "area": 5596
+    },
+    {
+      "arquivo": "peca-389.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 830,
+      "y": 384,
+      "largura": 113,
+      "altura": 68,
+      "area": 2872
+    },
+    {
+      "arquivo": "peca-390.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 954,
+      "y": 358,
+      "largura": 155,
+      "altura": 89,
+      "area": 7817
+    },
+    {
+      "arquivo": "peca-391.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 961,
+      "y": 295,
+      "largura": 75,
+      "altura": 73,
+      "area": 2656
+    },
+    {
+      "arquivo": "peca-392.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1028,
+      "y": 295,
+      "largura": 76,
+      "altura": 73,
+      "area": 2325
+    },
+    {
+      "arquivo": "peca-393.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1103,
+      "y": 316,
+      "largura": 101,
+      "altura": 90,
+      "area": 5786
+    },
+    {
+      "arquivo": "peca-394.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1208,
+      "y": 307,
+      "largura": 76,
+      "altura": 141,
+      "area": 5601
+    },
+    {
+      "arquivo": "peca-395.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1274,
+      "y": 287,
+      "largura": 131,
+      "altura": 154,
+      "area": 7210
+    },
+    {
+      "arquivo": "peca-396.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1386,
+      "y": 288,
+      "largura": 152,
+      "altura": 166,
+      "area": 14961
+    },
+    {
+      "arquivo": "peca-397.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1121,
+      "y": 393,
+      "largura": 96,
+      "altura": 86,
+      "area": 4612
+    },
+    {
+      "arquivo": "peca-398.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 17,
+      "y": 471,
+      "largura": 95,
+      "altura": 107,
+      "area": 3568
+    },
+    {
+      "arquivo": "peca-399.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 89,
+      "y": 470,
+      "largura": 95,
+      "altura": 113,
+      "area": 3509
+    },
+    {
+      "arquivo": "peca-400.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 160,
+      "y": 474,
+      "largura": 94,
+      "altura": 110,
+      "area": 4212
+    },
+    {
+      "arquivo": "peca-401.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 242,
+      "y": 474,
+      "largura": 94,
+      "altura": 99,
+      "area": 4139
+    },
+    {
+      "arquivo": "peca-402.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 327,
+      "y": 467,
+      "largura": 97,
+      "altura": 103,
+      "area": 5769
+    },
+    {
+      "arquivo": "peca-403.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 427,
+      "y": 466,
+      "largura": 127,
+      "altura": 107,
+      "area": 7232
+    },
+    {
+      "arquivo": "peca-404.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 578,
+      "y": 455,
+      "largura": 104,
+      "altura": 103,
+      "area": 7383
+    },
+    {
+      "arquivo": "peca-405.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 673,
+      "y": 455,
+      "largura": 104,
+      "altura": 103,
+      "area": 7407
+    },
+    {
+      "arquivo": "peca-406.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 768,
+      "y": 455,
+      "largura": 104,
+      "altura": 103,
+      "area": 7400
+    },
+    {
+      "arquivo": "peca-407.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 863,
+      "y": 455,
+      "largura": 104,
+      "altura": 103,
+      "area": 7420
+    },
+    {
+      "arquivo": "peca-408.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 979,
+      "y": 453,
+      "largura": 94,
+      "altura": 103,
+      "area": 4326
+    },
+    {
+      "arquivo": "peca-409.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1064,
+      "y": 471,
+      "largura": 147,
+      "altura": 92,
+      "area": 6856
+    },
+    {
+      "arquivo": "peca-410.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1205,
+      "y": 456,
+      "largura": 113,
+      "altura": 111,
+      "area": 5900
+    },
+    {
+      "arquivo": "peca-411.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1297,
+      "y": 451,
+      "largura": 224,
+      "altura": 215,
+      "area": 20177
+    },
+    {
+      "arquivo": "peca-412.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1308,
+      "y": 461,
+      "largura": 105,
+      "altura": 102,
+      "area": 4701
+    },
+    {
+      "arquivo": "peca-413.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 31,
+      "y": 566,
+      "largura": 84,
+      "altura": 78,
+      "area": 2604
+    },
+    {
+      "arquivo": "peca-414.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 121,
+      "y": 563,
+      "largura": 73,
+      "altura": 82,
+      "area": 3045
+    },
+    {
+      "arquivo": "peca-415.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 214,
+      "y": 550,
+      "largura": 64,
+      "altura": 95,
+      "area": 2263
+    },
+    {
+      "arquivo": "peca-416.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 283,
+      "y": 562,
+      "largura": 97,
+      "altura": 79,
+      "area": 3971
+    },
+    {
+      "arquivo": "peca-417.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 578,
+      "y": 546,
+      "largura": 104,
+      "altura": 103,
+      "area": 7321
+    },
+    {
+      "arquivo": "peca-418.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 673,
+      "y": 546,
+      "largura": 104,
+      "altura": 103,
+      "area": 7316
+    },
+    {
+      "arquivo": "peca-419.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 783,
+      "y": 549,
+      "largura": 87,
+      "altura": 86,
+      "area": 3901
+    },
+    {
+      "arquivo": "peca-420.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 981,
+      "y": 551,
+      "largura": 75,
+      "altura": 86,
+      "area": 3899
+    },
+    {
+      "arquivo": "peca-421.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1053,
+      "y": 552,
+      "largura": 71,
+      "altura": 80,
+      "area": 3278
+    },
+    {
+      "arquivo": "peca-422.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1122,
+      "y": 554,
+      "largura": 182,
+      "altura": 74,
+      "area": 6164
+    },
+    {
+      "arquivo": "peca-423.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 20,
+      "y": 634,
+      "largura": 77,
+      "altura": 77,
+      "area": 2962
+    },
+    {
+      "arquivo": "peca-424.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 90,
+      "y": 634,
+      "largura": 75,
+      "altura": 74,
+      "area": 3341
+    },
+    {
+      "arquivo": "peca-425.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 158,
+      "y": 635,
+      "largura": 81,
+      "altura": 72,
+      "area": 2379
+    },
+    {
+      "arquivo": "peca-426.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 229,
+      "y": 632,
+      "largura": 77,
+      "altura": 77,
+      "area": 2463
+    },
+    {
+      "arquivo": "peca-427.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 296,
+      "y": 632,
+      "largura": 74,
+      "altura": 78,
+      "area": 2178
+    },
+    {
+      "arquivo": "peca-428.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 359,
+      "y": 635,
+      "largura": 82,
+      "altura": 75,
+      "area": 2977
+    },
+    {
+      "arquivo": "peca-429.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 429,
+      "y": 621,
+      "largura": 71,
+      "altura": 100,
+      "area": 2385
+    },
+    {
+      "arquivo": "peca-430.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 494,
+      "y": 634,
+      "largura": 77,
+      "altura": 76,
+      "area": 2935
+    },
+    {
+      "arquivo": "peca-431.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 581,
+      "y": 639,
+      "largura": 95,
+      "altura": 94,
+      "area": 4909
+    },
+    {
+      "arquivo": "peca-432.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 675,
+      "y": 638,
+      "largura": 98,
+      "altura": 97,
+      "area": 5223
+    },
+    {
+      "arquivo": "peca-433.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 773,
+      "y": 625,
+      "largura": 98,
+      "altura": 116,
+      "area": 6793
+    },
+    {
+      "arquivo": "peca-434.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 872,
+      "y": 548,
+      "largura": 87,
+      "altura": 214,
+      "area": 10017
+    },
+    {
+      "arquivo": "peca-435.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 970,
+      "y": 628,
+      "largura": 129,
+      "altura": 78,
+      "area": 6845
+    },
+    {
+      "arquivo": "peca-436.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1093,
+      "y": 623,
+      "largura": 135,
+      "altura": 66,
+      "area": 5797
+    },
+    {
+      "arquivo": "peca-437.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1222,
+      "y": 621,
+      "largura": 120,
+      "altura": 78,
+      "area": 5798
+    },
+    {
+      "arquivo": "peca-438.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1338,
+      "y": 651,
+      "largura": 184,
+      "altura": 67,
+      "area": 8094
+    },
+    {
+      "arquivo": "peca-439.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 12,
+      "y": 712,
+      "largura": 59,
+      "altura": 60,
+      "area": 1485
+    },
+    {
+      "arquivo": "peca-440.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 51,
+      "y": 750,
+      "largura": 53,
+      "altura": 54,
+      "area": 1125
+    },
+    {
+      "arquivo": "peca-441.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 92,
+      "y": 715,
+      "largura": 112,
+      "altura": 115,
+      "area": 7469
+    },
+    {
+      "arquivo": "peca-442.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 194,
+      "y": 724,
+      "largura": 113,
+      "altura": 117,
+      "area": 7714
+    },
+    {
+      "arquivo": "peca-443.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 311,
+      "y": 709,
+      "largura": 92,
+      "altura": 89,
+      "area": 3774
+    },
+    {
+      "arquivo": "peca-444.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 385,
+      "y": 739,
+      "largura": 95,
+      "altura": 91,
+      "area": 4086
+    },
+    {
+      "arquivo": "peca-445.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 459,
+      "y": 704,
+      "largura": 101,
+      "altura": 110,
+      "area": 5448
+    },
+    {
+      "arquivo": "peca-446.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 582,
+      "y": 728,
+      "largura": 119,
+      "altura": 110,
+      "area": 6705
+    },
+    {
+      "arquivo": "peca-447.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 715,
+      "y": 733,
+      "largura": 113,
+      "altura": 93,
+      "area": 5323
+    },
+    {
+      "arquivo": "peca-448.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 812,
+      "y": 764,
+      "largura": 128,
+      "altura": 94,
+      "area": 4986
+    },
+    {
+      "arquivo": "peca-449.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 967,
+      "y": 686,
+      "largura": 275,
+      "altura": 157,
+      "area": 25227
+    },
+    {
+      "arquivo": "peca-450.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1244,
+      "y": 715,
+      "largura": 294,
+      "altura": 80,
+      "area": 17019
+    },
+    {
+      "arquivo": "peca-451.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 12,
+      "y": 798,
+      "largura": 80,
+      "altura": 81,
+      "area": 3284
+    },
+    {
+      "arquivo": "peca-452.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 83,
+      "y": 816,
+      "largura": 83,
+      "altura": 80,
+      "area": 3386
+    },
+    {
+      "arquivo": "peca-453.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 160,
+      "y": 813,
+      "largura": 149,
+      "altura": 127,
+      "area": 7164
+    },
+    {
+      "arquivo": "peca-454.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 278,
+      "y": 786,
+      "largura": 102,
+      "altura": 104,
+      "area": 5947
+    },
+    {
+      "arquivo": "peca-455.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 328,
+      "y": 877,
+      "largura": 58,
+      "altura": 59,
+      "area": 1432
+    },
+    {
+      "arquivo": "peca-456.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 365,
+      "y": 839,
+      "largura": 52,
+      "altura": 53,
+      "area": 1046
+    },
+    {
+      "arquivo": "peca-457.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 410,
+      "y": 823,
+      "largura": 86,
+      "altura": 74,
+      "area": 3280
+    },
+    {
+      "arquivo": "peca-458.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 484,
+      "y": 868,
+      "largura": 66,
+      "altura": 76,
+      "area": 2199
+    },
+    {
+      "arquivo": "peca-459.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 490,
+      "y": 799,
+      "largura": 75,
+      "altura": 86,
+      "area": 3238
+    },
+    {
+      "arquivo": "peca-460.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 575,
+      "y": 828,
+      "largura": 93,
+      "altura": 95,
+      "area": 4012
+    },
+    {
+      "arquivo": "peca-461.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 664,
+      "y": 811,
+      "largura": 81,
+      "altura": 79,
+      "area": 3145
+    },
+    {
+      "arquivo": "peca-462.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 734,
+      "y": 826,
+      "largura": 89,
+      "altura": 101,
+      "area": 4497
+    },
+    {
+      "arquivo": "peca-463.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 859,
+      "y": 831,
+      "largura": 89,
+      "altura": 92,
+      "area": 4262
+    },
+    {
+      "arquivo": "peca-464.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 964,
+      "y": 826,
+      "largura": 279,
+      "altura": 109,
+      "area": 17285
+    },
+    {
+      "arquivo": "peca-465.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1248,
+      "y": 790,
+      "largura": 283,
+      "altura": 97,
+      "area": 16518
+    },
+    {
+      "arquivo": "peca-466.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 11,
+      "y": 881,
+      "largura": 139,
+      "altura": 95,
+      "area": 5906
+    },
+    {
+      "arquivo": "peca-467.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 17,
+      "y": 918,
+      "largura": 246,
+      "altura": 103,
+      "area": 11706
+    },
+    {
+      "arquivo": "peca-468.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 269,
+      "y": 923,
+      "largura": 100,
+      "altura": 98,
+      "area": 5446
+    },
+    {
+      "arquivo": "peca-469.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 388,
+      "y": 948,
+      "largura": 74,
+      "altura": 74,
+      "area": 2619
+    },
+    {
+      "arquivo": "peca-470.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 412,
+      "y": 892,
+      "largura": 59,
+      "altura": 59,
+      "area": 1452
+    },
+    {
+      "arquivo": "peca-471.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 468,
+      "y": 930,
+      "largura": 106,
+      "altura": 93,
+      "area": 5301
+    },
+    {
+      "arquivo": "peca-472.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 576,
+      "y": 918,
+      "largura": 103,
+      "altura": 104,
+      "area": 6063
+    },
+    {
+      "arquivo": "peca-473.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 653,
+      "y": 880,
+      "largura": 75,
+      "altura": 77,
+      "area": 2897
+    },
+    {
+      "arquivo": "peca-474.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 681,
+      "y": 945,
+      "largura": 73,
+      "altura": 76,
+      "area": 3180
+    },
+    {
+      "arquivo": "peca-475.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 759,
+      "y": 909,
+      "largura": 107,
+      "altura": 103,
+      "area": 5903
+    },
+    {
+      "arquivo": "peca-476.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 862,
+      "y": 915,
+      "largura": 103,
+      "altura": 106,
+      "area": 6192
+    },
+    {
+      "arquivo": "peca-477.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 964,
+      "y": 918,
+      "largura": 80,
+      "altura": 102,
+      "area": 4254
+    },
+    {
+      "arquivo": "peca-478.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1036,
+      "y": 918,
+      "largura": 81,
+      "altura": 102,
+      "area": 4312
+    },
+    {
+      "arquivo": "peca-479.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1110,
+      "y": 918,
+      "largura": 81,
+      "altura": 102,
+      "area": 4349
+    },
+    {
+      "arquivo": "peca-480.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1198,
+      "y": 931,
+      "largura": 92,
+      "altura": 90,
+      "area": 4193
+    },
+    {
+      "arquivo": "peca-481.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1280,
+      "y": 871,
+      "largura": 85,
+      "altura": 89,
+      "area": 3553
+    },
+    {
+      "arquivo": "peca-482.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1294,
+      "y": 953,
+      "largura": 233,
+      "altura": 64,
+      "area": 8009
+    },
+    {
+      "arquivo": "peca-483.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1361,
+      "y": 871,
+      "largura": 96,
+      "altura": 92,
+      "area": 4019
+    },
+    {
+      "arquivo": "peca-484.png",
+      "origem": "file_00000000ac70820e8c329dff04826a98.png",
+      "x": 1448,
+      "y": 873,
+      "largura": 88,
+      "altura": 92,
+      "area": 4371
+    }
+  ]
+}

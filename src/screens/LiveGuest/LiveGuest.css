@@ -1,0 +1,274 @@
+/* ============================================================
+   LIVE GUEST — a festa no bolso do convidado (companion mobile)
+   Espelho ao vivo da partida do host, na identidade adesivo.
+   Mobile-first: uma coluna, alvos grandes, tudo na zona do polegar.
+   ============================================================ */
+
+/* -------------------------------------------------------- topo fixo */
+
+.live__top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.live__id {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+}
+
+.live__idLabel {
+  color: color-mix(in srgb, var(--color-text-on-stage) 75%, transparent);
+}
+
+.live__code {
+  font-size: var(--fs-xl);
+  line-height: 1;
+  letter-spacing: var(--track-wider);
+  color: var(--gold-400);
+  -webkit-text-stroke: var(--stroke-ink) var(--color-ink);
+  paint-order: stroke fill;
+}
+
+/* -------------------------------------------------- chip de ligação */
+
+.live__chip {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 6px 10px;
+  border: var(--stroke-ink) solid var(--color-ink);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--track-wide, 0.02em);
+  box-shadow: var(--shadow-pop-sm);
+  white-space: nowrap;
+}
+
+.live__chip b {
+  font-weight: var(--fw-bold);
+  opacity: 0.7;
+}
+
+.live__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--cyan-400);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-ink) 25%, transparent);
+}
+
+.live__chip--live .live__dot {
+  background: var(--lime-400);
+  animation: live-pulse 1.4s var(--ease-standard) infinite;
+}
+
+.live__chip--waiting .live__dot {
+  background: var(--amber-400);
+  animation: live-pulse 0.8s var(--ease-standard) infinite;
+}
+
+@keyframes live-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.55; }
+}
+
+/* --------------------------------------------- cartão "esse é você" */
+
+.live__me {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  margin-bottom: var(--space-4);
+  border: var(--stroke-ink) solid var(--color-ink);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-pop-md);
+  border-top: 6px solid var(--pcard-color, var(--gold-400));
+}
+
+.live__meInfo {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.live__meName {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-black);
+  color: var(--color-ink);
+  line-height: 1.05;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.live__meTag {
+  color: color-mix(in srgb, var(--color-ink) 60%, var(--color-surface));
+}
+
+.live__meScore {
+  flex: 0 0 auto;
+  font-size: var(--fs-2xl);
+  line-height: 1;
+  color: var(--color-ink);
+}
+
+/* --------------------------------------------------------- o palco */
+
+.live__stage {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.live__lobby,
+.live__hero,
+.live__result,
+.live__final {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-3);
+  animation: live-rise var(--duration-slow, 380ms) var(--ease-out, ease) both;
+}
+
+@keyframes live-rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Títulos sobre o palco roxo = letra creme com contorno de tinta. */
+.live__title,
+.live__name,
+.live__verdict {
+  color: var(--color-text-on-stage);
+  -webkit-text-stroke: var(--stroke-ink) var(--color-ink);
+  paint-order: stroke fill;
+  line-height: 1.02;
+}
+
+.live__title { font-size: var(--fs-2xl); }
+.live__name { font-size: var(--fs-3xl); }
+.live__verdict { font-size: var(--fs-xl); }
+
+.live__title.is-win,
+.live__verdict.is-win {
+  color: var(--gold-400);
+}
+
+.live__kicker,
+.live__round,
+.live__rosterHead {
+  color: color-mix(in srgb, var(--color-text-on-stage) 78%, transparent);
+}
+
+.live__sub,
+.live__mirrorNote {
+  max-width: 30ch;
+  color: var(--color-text-on-stage);
+  opacity: 0.82;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+}
+
+.live__mirrorNote {
+  margin-top: var(--space-1);
+  opacity: 0.6;
+  font-size: var(--fs-xs);
+}
+
+/* ------------------------------------------------ desafio no ar */
+
+.live__emoji {
+  font-size: 76px;
+  line-height: 1;
+  filter: drop-shadow(0 5px 0 var(--color-ink));
+  animation: live-bob 2.4s var(--ease-standard) infinite;
+}
+
+.live__finalEmoji {
+  font-size: 64px;
+  line-height: 1;
+  animation: live-bob 2.4s var(--ease-standard) infinite;
+}
+
+@keyframes live-bob {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+.live__instruction {
+  max-width: 28ch;
+  color: var(--color-text-on-stage);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-semibold);
+  line-height: 1.45;
+}
+
+/* Selo de fase: creme neutro; vira verde vivo quando está JOGANDO. */
+.live__badge {
+  padding: 8px 16px;
+  border: var(--stroke-ink) solid var(--color-ink);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-pop-sm);
+}
+
+.live__badge.is-live {
+  background: var(--lime-400);
+  animation: live-throb 1s var(--ease-standard) infinite;
+}
+
+@keyframes live-throb {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* --------------------------------------------- listas de jogadores */
+
+.live__roster,
+.live__list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.live__rosterHead {
+  align-self: flex-start;
+  margin-bottom: 2px;
+}
+
+/* Botão de sair no fim ocupa a largura toda, na zona do polegar. */
+.live__final .screen__actions {
+  width: 100%;
+  margin-top: var(--space-4);
+}
+
+/* -------------------------------------------------------- desktop */
+/* Numa tela larga o companion vira um cartão central, não uma faixa. */
+@media (min-width: 640px) {
+  .live__stage {
+    max-width: 30rem;
+    width: 100%;
+    align-self: center;
+  }
+  .live__me {
+    max-width: 30rem;
+    width: 100%;
+    align-self: center;
+  }
+}

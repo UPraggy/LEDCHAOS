@@ -1,0 +1,151 @@
+/* DUELO — sem canvas. Um tabuleiro de nove botões grandes. */
+
+.du .gscene__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  /* Campo chapado: sem vinheta radial. A cor do jogo vem do HUD e das peças. */
+  background: var(--color-bg-deep);
+}
+
+/* ----------------------------------------------------------------- estado */
+
+/* Altura fixa: "SUA VEZ" e "VOCÊ VENCEU" têm larguras diferentes, e se a
+   linha mudasse de altura o tabuleiro pularia no meio da partida. */
+.du__status {
+  min-height: 1.6em;
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  animation: du-status var(--duration-base) var(--ease-out);
+}
+
+.du__status--you {
+  color: var(--game-accent);
+  text-shadow: var(--glow-sm) color-mix(in srgb, var(--game-accent) 55%, transparent);
+}
+
+.du__status--win { color: var(--color-success); }
+.du__status--lose { color: var(--color-danger); }
+.du__status--draw { color: var(--color-text-dim); }
+
+@keyframes du-status {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* -------------------------------------------------------------- tabuleiro */
+
+/* O quadrado é calculado na largura, não com transform.
+   MINÚSCULO/GIGANTE entram como teto dessa largura: escalar por transform
+   faria o modo gigante estourar o stage (que tem overflow:hidden) e deixaria
+   os cantos fora do alcance do dedo — dificuldade vira bug.
+   O 52vh está aqui porque o quadrado também precisa caber na ALTURA, e o
+   stage não é um container de tamanho consultável. */
+.du__board {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: var(--space-2);
+  width: min(100%, 52vh, calc(420px * var(--du-scale, 1)));
+  aspect-ratio: 1;
+}
+
+.du__cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color 90ms var(--ease-out),
+    border-color 90ms var(--ease-out),
+    transform 90ms var(--ease-out);
+}
+
+/* Casa ocupada e casa fora de vez usam o MESMO disabled. Apagar a peça já
+   jogada seria mentira: ela continua valendo. */
+.du__cell:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.du__cell:not(:disabled):active {
+  border-color: var(--game-accent);
+  background: color-mix(in srgb, var(--game-accent) 22%, var(--color-surface));
+  transform: scale(0.96);
+}
+
+.du__mark {
+  font-size: min(13vw, var(--fs-4xl));
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* ✕ e ◯ já se distinguem sem cor nenhuma; a cor só acelera a leitura. */
+.du__cell.is-me {
+  border-color: color-mix(in srgb, var(--game-accent) 60%, transparent);
+  background: color-mix(in srgb, var(--game-accent) 16%, var(--color-surface));
+  color: var(--game-accent);
+}
+
+.du__cell.is-foe {
+  border-color: color-mix(in srgb, var(--color-info) 55%, transparent);
+  background: color-mix(in srgb, var(--color-info) 14%, var(--color-surface));
+  color: var(--color-info);
+}
+
+/* ------------------------------------------------------------ linha final */
+
+/* O viewBox é 0 0 3 3 e o tabuleiro é quadrado, então uma unidade do SVG é
+   exatamente uma célula — as pontas em Duel.jsx são coordenadas de casa. */
+.du__line {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.du__line line {
+  stroke: var(--color-text);
+  stroke-width: 0.11;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--game-accent) 70%, transparent));
+  /* pathLength="1" no JSX normaliza o traço: o mesmo tempo de risco vale para
+     a linha reta e para a diagonal, que é mais comprida. */
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: du-draw 260ms var(--ease-out) forwards;
+}
+
+@keyframes du-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .du__status { animation: none; }
+
+  .du__cell { transition: none; }
+  .du__cell:not(:disabled):active { transform: none; }
+
+  /* A linha continua aparecendo — ela é informação, não enfeite. Só deixa de
+     ser desenhada progressivamente. */
+  .du__line line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}

@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CHAOS · Galeria de Jogos, Telas e Assets</title>
+<style>
+  :root {
+    --bg: #2E2080;          /* roxo médio da marca (fundo da tela) */
+    --bg-deep: #170F3E;     /* roxo fundo / tinta (fundo do palco em jogo) */
+    --ink: #170F3E;         /* contorno de tinta */
+    --cream: #FFF7E6;       /* card creme */
+    --cream-2: #FFFDF7;
+    --text: #F3EEFF;
+    --text-dim: #B9AEE6;
+    --accent: #FFCE31;      /* âmbar do "repetir" */
+    --good: #7BE86A;
+    --novo: #4DE3E3;
+    --pill: 999px;
+    --mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', monospace;
+    --disp: 'Baloo 2', 'Segoe UI', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--disp);
+    -webkit-font-smoothing: antialiased;
+    padding: 0 0 64px;
+  }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---- cabeçalho ---- */
+  header { padding: 40px 20px 8px; text-align: center; }
+  .brand {
+    display: inline-block;
+    background: var(--cream);
+    color: var(--ink);
+    border: 4px solid var(--ink);
+    border-radius: 18px;
+    box-shadow: 0 7px 0 var(--ink);
+    padding: 10px 22px;
+    font-weight: 800;
+    font-size: 30px;
+    letter-spacing: 0.04em;
+    transform: rotate(-1.5deg);
+  }
+  header p { color: var(--text-dim); margin: 18px 0 0; font-size: 15px; }
+
+  /* nota para a IA de design */
+  .brief {
+    max-width: 900px;
+    margin: 20px auto 0;
+    background: color-mix(in srgb, var(--cream) 12%, transparent);
+    border: 3px solid var(--ink);
+    border-radius: 14px;
+    padding: 12px 16px;
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.55;
+    text-align: left;
+  }
+  .brief b { color: var(--accent); }
+  .brief code {
+    font-family: var(--mono); font-size: 11px;
+    background: var(--bg-deep); color: var(--text);
+    border-radius: 5px; padding: 1px 5px;
+  }
+  .brief .tag {
+    display: inline-block; font-family: var(--mono); font-size: 10px;
+    background: var(--novo); color: var(--ink); border: 2px solid var(--ink);
+    border-radius: var(--pill); padding: 1px 7px; margin: 0 2px;
+  }
+
+  /* ---- títulos de seção ---- */
+  h2.section {
+    display: inline-block;
+    margin: 46px 0 20px;
+    background: var(--accent);
+    color: var(--ink);
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    box-shadow: 0 5px 0 var(--ink);
+    padding: 6px 16px;
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+  }
+
+  /* ---- grade de jogos ---- */
+  .games {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+    gap: 22px;
+  }
+  .card {
+    background: var(--cream);
+    border: 3px solid var(--ink);
+    border-radius: 20px;
+    box-shadow: 0 8px 0 var(--ink);
+    overflow: hidden;
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+  }
+  .card__head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border-bottom: 3px solid var(--ink);
+  }
+  .card__num {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 12px;
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 8px;
+    padding: 3px 7px;
+  }
+  .card__emoji { font-size: 22px; line-height: 1; }
+  .card__name { font-weight: 800; font-size: 17px; letter-spacing: 0.02em; }
+  .card__tags { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+  .swatch {
+    width: 16px; height: 16px; border-radius: 5px;
+    border: 2px solid var(--ink);
+  }
+  .cat {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: var(--cream-2);
+    border: 2px solid var(--ink);
+    border-radius: var(--pill);
+    padding: 2px 8px;
+  }
+
+  /* ---- tira de variações = PRINTS REAIS do jogo (retrato) ---- */
+  .vars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 14px;
+  }
+  .var { display: flex; flex-direction: column; }
+  /* moldura de celular: recorta a barra do dev bench e mostra só o jogo */
+  .var__screen {
+    position: relative;
+    aspect-ratio: 440 / 782;   /* retrato, já sem a barra de topo do bench */
+    background: var(--bg-deep);
+    border: 3px solid var(--ink);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .var__screen img.shot {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: auto; display: block;
+    transform: translateY(-15%);   /* sobe ~138px: esconde toggles + "repetir" */
+  }
+  .var__tag {
+    position: absolute; top: 6px; left: 6px; z-index: 2;
+    font-family: var(--mono); font-size: 9px; font-weight: 700;
+    background: var(--accent); color: var(--ink);
+    border: 2px solid var(--ink);
+    border-radius: 6px; padding: 2px 6px; letter-spacing: 0.04em;
+  }
+  .var__label {
+    font-weight: 800; font-size: 12.5px; color: var(--ink);
+    margin: 8px 2px 1px; letter-spacing: 0.01em; line-height: 1.15;
+  }
+  .var__desc { font-size: 10.5px; color: #6a5db0; margin: 0 2px; line-height: 1.35; }
+
+  /* ---- biblioteca de assets ---- */
+  .lib-group { margin-bottom: 30px; }
+  .lib-group h3 {
+    font-size: 14px;
+    color: var(--text);
+    letter-spacing: 0.04em;
+    margin: 0 0 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .lib-group h3 .n {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink);
+    background: var(--text-dim);
+    border-radius: var(--pill);
+    padding: 1px 8px;
+  }
+  .lib {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+    gap: 12px;
+  }
+  .tile {
+    position: relative;
+    background: var(--cream);
+    border: 3px solid var(--ink);
+    border-radius: 14px;
+    box-shadow: 0 5px 0 var(--ink);
+    overflow: hidden;
+    text-align: center;
+  }
+  .tile__img {
+    height: 78px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 10px;
+    background: var(--cream-2);
+    border-bottom: 3px solid var(--ink);
+  }
+  .tile__img img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .tile__name {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink);
+    padding: 6px 4px;
+    word-break: break-word;
+  }
+  .tile .badge {
+    position: absolute; top: 5px; right: 5px;
+    font-family: var(--mono); font-size: 8px; font-weight: 700;
+    background: var(--novo); color: var(--ink);
+    border: 2px solid var(--ink); border-radius: var(--pill);
+    padding: 1px 5px; letter-spacing: 0.04em;
+  }
+  footer { text-align: center; color: var(--text-dim); font-size: 12px; margin-top: 40px; }
+</style>
+</head>
+<body>
+  <header>
+    <div class="brand">🎮 CHAOS · GALERIA</div>
+    <p id="sub">Prints reais de cada jogo + biblioteca completa de ícones e imagens</p>
+    <div class="brief">
+      <b>Para a IA de design:</b> cada jogo mostra <b>3 telas reais</b> capturadas ao vivo no
+      dev bench (<code>/dev/&lt;jogo&gt;</code>, retrato 440×920) — momentos diferentes que o jogo
+      exibe <i>enquanto joga</i> (esperar / acertar / erro / evento especial / resultado).
+      Não são montagens de ícones: é o render atual do jogo rodando. A barra de toggles do bench
+      foi recortada; abaixo aparece só o palco. Identidade: fundo do palco <code>#170F3E</code>,
+      faces <b>chapadas</b> (sem gradiente), contorno de tinta, sombra sólida. Os ícones
+      marcados <span class="tag">NOVO</span> (seção Extras) ainda não entraram nos jogos —
+      são candidatos para você propor onde encaixar.
+    </div>
+  </header>
+
+  <div class="wrap">
+    <h2 class="section">Jogos <span id="gcount"></span></h2>
+    <div class="games" id="games"></div>
+
+    <h2 class="section">Biblioteca em uso <span id="acount"></span></h2>
+    <div id="lib"></div>
+
+    <h2 class="section">Extras — pacote icones-todos <span id="excount"></span></h2>
+    <p style="color:var(--text-dim);font-size:13px;max-width:820px;margin:0 0 16px">
+      Os 60 ícones curados do pacote. Vários (<span style="color:var(--novo)">NOVO</span>)
+      foram ignorados no primeiro corte e podem melhorar os jogos: badges de pontuação,
+      LEVEL UP, poção, portal, splat, tornado, halo, cometas, rastro arco-íris, impacto no chão.
+    </p>
+    <div class="lib" id="extras"></div>
+  </div>
+
+  <footer>CHAOS — festa de microjogos · prints ao vivo do dev bench (/dev/&lt;jogo&gt;) · assets de public/assets e do pacote icones-todos</footer>
+
+<script>
+/* ------------------------------------------------------------------ dados
+   Cada jogo tem `shots` = 3 prints REAIS (assets/prints/<id>_N.png), capturados
+   ao vivo no dev bench. Cada um é um momento distinto da partida. */
+const GAMES = [
+  { n:1, id:'reaction', name:'REFLEXO', emoji:'⚡', hue:190, cat:'reflex', shots:[
+    { f:'reaction_1', label:'579ms · devagar', desc:'Tocou ao acender — mede o tempo de reação' },
+    { f:'reaction_2', label:'Cedo demais', desc:'Tocou antes do sinal → tentativa perdida' },
+    { f:'reaction_3', label:'Resultado', desc:'Melhor tempo + ranking da rodada' },
+  ]},
+  { n:2, id:'slice', name:'FATIAR', emoji:'🔪', hue:96, cat:'precision', shots:[
+    { f:'slice_1', label:'Frutas no ar', desc:'Arraste o dedo para cortar as frutas' },
+    { f:'slice_2', label:'Corte + rastro', desc:'Combo de cortes com rastro de lâmina' },
+    { f:'slice_3', label:'Chuva de frutas', desc:'Várias frutas ao mesmo tempo' },
+  ]},
+  { n:3, id:'draw', name:'DESENHAR', emoji:'🎨', hue:280, cat:'creative', shots:[
+    { f:'draw_1', label:'Desenhando · DESERTO', desc:'Desenhe a palavra; rivais chutam sozinhos' },
+    { f:'draw_2', label:'Palpites dos rivais', desc:'Os rivais tentam adivinhar o desenho' },
+    { f:'draw_3', label:'Rodada', desc:'Outra tela da partida de desenho' },
+  ]},
+  { n:4, id:'climb', name:'ESCALAR', emoji:'🧗', hue:210, cat:'platform', shots:[
+    { f:'climb_1', label:'Escalando · 30 m', desc:'Plataformas normais — suba sem cair' },
+    { f:'climb_2', label:'Perigo · bomba', desc:'Bomba flutua; desvie enquanto sobe (67 m)' },
+    { f:'climb_3', label:'Mola! · 204 m', desc:'Plataforma-mola lança pra cima + itens' },
+  ]},
+  { n:5, id:'rhythm', name:'BATIDA', emoji:'🎵', hue:320, cat:'timing', shots:[
+    { f:'rhythm_2', label:'4 pistas · 121 BPM', desc:'Notas caem; toque na linha. Verde = segurar' },
+    { f:'rhythm_1', label:'No ritmo', desc:'Sequência de notas em queda' },
+    { f:'rhythm_3', label:'Combo', desc:'Acertos encadeados nas pistas' },
+  ]},
+  { n:6, id:'memory', name:'MEMÓRIA', emoji:'🧠', hue:265, cat:'memory', shots:[
+    { f:'memory_1', label:'Sua vez', desc:'Repita a sequência de símbolos' },
+    { f:'memory_2', label:'Memorize', desc:'A sequência de símbolos acende' },
+    { f:'memory_3', label:'Rodada', desc:'Outra tela da partida de memória' },
+  ]},
+  { n:7, id:'aim', name:'MIRA', emoji:'🎯', hue:8, cat:'reflex', shots:[
+    { f:'aim_2', label:'Mirando', desc:'Alvos-dardo surgem; acerte o centro' },
+    { f:'aim_1', label:'Alvos', desc:'Vários alvos na tela ao mesmo tempo' },
+    { f:'aim_3', label:'Resultado', desc:'Acertos totais + ranking' },
+  ]},
+  { n:8, id:'tictactoe', name:'DUELO', emoji:'⚔️', hue:45, cat:'strategy', shots:[
+    { f:'tictactoe_2', label:'Sua vez', desc:'Grade 3×3 — marque X/O' },
+    { f:'tictactoe_1', label:'Tabuleiro', desc:'Início da partida' },
+    { f:'tictactoe_3', label:'Jogadas', desc:'Marcações preenchendo o tabuleiro' },
+  ]},
+  { n:9, id:'mash', name:'MARTELO', emoji:'👆', hue:25, cat:'speed', shots:[
+    { f:'mash_1', label:'Enchendo · 69%', desc:'Toque sem parar até encher a barra' },
+    { f:'mash_2', label:'Resultado', desc:'Tempo/percentual + ranking' },
+    { f:'mash_3', label:'Fim da rodada', desc:'Placar final da partida' },
+  ]},
+  { n:10, id:'race', name:'CORRIDA', emoji:'🦖', hue:170, cat:'reflex', shots:[
+    { f:'race_1', label:'Pulo · 83 m', desc:'Salta o cacto que vem na pista' },
+    { f:'race_2', label:'Pterodáctilo · 159 m', desc:'Corre; pterodáctilo à frente' },
+    { f:'race_3', label:'Corrida', desc:'Outra tela da corrida do dino' },
+  ]},
+  { n:11, id:'grow', name:'CRESCER', emoji:'🔵', hue:140, cat:'reflex', shots:[
+    { f:'grow_1', label:'137% · ouro', desc:'Colete esferas; a de ouro vale mais' },
+    { f:'grow_2', label:'163% · crescendo', desc:'A bolinha cresce a cada esfera' },
+    { f:'grow_3', label:'Arena', desc:'Outra tela do jogo de crescer' },
+  ]},
+  { n:12, id:'dodge', name:'DESVIAR', emoji:'💥', hue:300, cat:'reflex', shots:[
+    { f:'dodge_2', label:'Desviando', desc:'Minas-estrela e cristais descem — desvie' },
+    { f:'dodge_1', label:'Esquiva', desc:'Projéteis se aproximam do jogador' },
+    { f:'dodge_3', label:'Sobrevivência', desc:'Aguente o tempo sem ser atingido' },
+  ]},
+  { n:13, id:'osu', name:'NA MOSCA', emoji:'🎯', hue:320, cat:'timing', shots:[
+    { f:'osu_2', label:'Anéis', desc:'Toque quando o anel fechar no alvo' },
+    { f:'osu_3', label:'Anel fechando', desc:'Anel quase no centro (3, 4, 5)' },
+    { f:'osu_1', label:'Rodada', desc:'Outra tela do jogo de precisão' },
+  ]},
+  { n:14, id:'piano', name:'PIANO', emoji:'🎹', hue:185, cat:'speed', shots:[
+    { f:'piano_2', label:'Tiles caindo', desc:'Toque os tiles; diamante = especial' },
+    { f:'piano_1', label:'Teclado', desc:'Início da sequência de tiles' },
+    { f:'piano_3', label:'Resultado', desc:'Acertos + ranking' },
+  ]},
+  { n:15, id:'trace', name:'CONTORNO', emoji:'✏️', hue:45, cat:'creative', shots:[
+    { f:'trace_2', label:'Contorno · 38%', desc:'Cubra a forma arrastando o dedo' },
+    { f:'trace_1', label:'Forma-alvo', desc:'Contorno pontilhado a cobrir' },
+    { f:'trace_3', label:'Traçando', desc:'Cobertura avançando pela forma' },
+  ]},
+];
+
+/* Biblioteca em uso (public/assets), agrupada por categoria. */
+const LIB = {
+  'acoes':       ['cometa-cristal','fechar','foguete','nota-dupla','play','raio-impacto','seta-cima','seta-curva'],
+  'dino':        ['cacto-duplo','cacto','dino-abaixa','dino-corre','dino-pula','pterodatilo'],
+  'efeitos':     ['anel-fogo','explosao','nuvem-roxa'],
+  'jogo':        ['alvo','bomba','cerebro','chama','coracao','gema','melancia','moeda','nota-musical','pincel','raio','trofeu'],
+  'personagens': ['broto','cacto','capitao','chama','coelha','dj','fantasma','gata','panda','punk','robo','tubarao'],
+  'recompensas': ['cronometro','escudo','estrela','gema','medalha-bronze','medalha-ouro','medalha-prata','moeda','raio'],
+  'selos':       ['chaos-event','chaos','good','great','miss','perfect','victory','win-streak'],
+  'simbolos':    ['alvo','coroa','cronometro','duvida','estrela','gema','nota-musical','pincel','raio'],
+};
+const CAT_LABEL = {
+  acoes:'Ações', dino:'Dino (Corrida)', efeitos:'Efeitos', jogo:'Jogo (ícones)',
+  personagens:'Personagens', recompensas:'Recompensas', selos:'Selos de julgamento', simbolos:'Símbolos',
+};
+
+/* Pacote icones-todos: 60 ícones catalogados. novo = candidato ainda fora dos jogos. */
+const EXTRAS = [
+  [1,'CHAOS!',0],[2,'PERFECT!',0],[3,'GREAT!',0],[4,'GOOD!',0],[5,'MISS!',0],
+  [6,'+100 ★',1],[7,'+50 ★',1],[8,'−30 💀',1],[9,'CHAOS EVENT!',0],[10,'WIN STREAK',0],
+  [11,'LEVEL UP!',1],[12,'VICTORY!',0],[13,'Medalha ouro',0],[14,'Medalha prata',0],[15,'Medalha bronze',0],
+  [16,'Cronômetro',0],[17,'Vidas (corações)',1],[18,'Diamante azul',0],[19,'Moeda ouro',0],[20,'Bomba',0],
+  [21,'Raio roxo',0],[22,'Escudo-estrela',0],[23,'Poção verde',1],[24,'Estrela ouro',0],[25,'Portal / vórtice',1],
+  [26,'Explosão',0],[27,'Nuvem branca',1],[28,'Nuvem roxa',0],[29,'Splat verde',1],[30,'Splash água',1],
+  [31,'Tornado',1],[32,'Halo / anel ouro',1],[33,'Cometa de fogo',1],[34,'Cometa de gelo',0],[35,'Rastro arco-íris',1],
+  [36,'Impacto no chão',0],[37,'Raio vermelho',0],[38,'Melancia',0],[39,'Cérebro rosa',0],[40,'Nota dupla',0],
+  [41,'Play',0],[42,'Fechar / X',0],[43,'Seta curva',0],[44,'Cristal de gelo',0],[45,'Moeda chapada',1],
+  [46,'Seta cima',0],[47,'Seta baixo',1],[48,'Foguete',0],[49,'Raio amarelo',0],[50,'Pincel',0],
+  [51,'Melancia 2',0],[52,'Cérebro',0],[53,'Nota musical',0],[54,'Alvo / dardo',0],[55,'Troféu',0],
+  [56,'Chama',0],[57,'Bomba preta',0],[58,'Gema azul',0],[59,'Moeda',0],[60,'Coração',0],
+];
+
+const el = (t, c) => { const e = document.createElement(t); if (c) e.className = c; return e; };
+const pad = (n) => String(n).padStart(2, '0');
+const pad3 = (n) => String(n).padStart(3, '0');
+
+/* ---- jogos + prints reais ---- */
+const gamesEl = document.getElementById('games');
+GAMES.forEach((g) => {
+  const card = el('div', 'card');
+  const accent = `hsl(${g.hue} 78% 58%)`;
+
+  const head = el('div', 'card__head');
+  head.innerHTML =
+    `<span class="card__num">${pad(g.n)}</span>` +
+    `<span class="card__emoji">${g.emoji}</span>` +
+    `<span class="card__name">${g.name}</span>` +
+    `<span class="card__tags">` +
+      `<span class="cat">${g.shots.length} telas reais</span>` +
+      `<span class="swatch" style="background:${accent}"></span>` +
+      `<span class="cat">${g.cat}</span>` +
+    `</span>`;
+  card.appendChild(head);
+
+  const strip = el('div', 'vars');
+  g.shots.forEach((s) => {
+    const item = el('div', 'var');
+    const screen = el('div', 'var__screen');
+
+    const tag = el('span', 'var__tag');
+    tag.textContent = 'REAL';
+    screen.appendChild(tag);
+
+    const img = el('img', 'shot');
+    img.loading = 'lazy'; img.alt = `${g.name} — ${s.label}`;
+    img.src = `assets/prints/${s.f}.png`;
+    screen.appendChild(img);
+    item.appendChild(screen);
+
+    const label = el('div', 'var__label'); label.textContent = s.label;
+    const desc = el('div', 'var__desc'); desc.textContent = s.desc || '';
+    item.appendChild(label); item.appendChild(desc);
+    strip.appendChild(item);
+  });
+  card.appendChild(strip);
+  gamesEl.appendChild(card);
+});
+document.getElementById('gcount').textContent = `(${GAMES.length})`;
+
+/* ---- biblioteca em uso ---- */
+const libEl = document.getElementById('lib');
+let total = 0;
+Object.keys(LIB).forEach((cat) => {
+  const files = LIB[cat];
+  total += files.length;
+  const group = el('div', 'lib-group');
+  const h3 = el('h3');
+  h3.innerHTML = `${CAT_LABEL[cat] || cat} <span class="n">${files.length}</span>`;
+  group.appendChild(h3);
+  const grid = el('div', 'lib');
+  files.forEach((f) => {
+    const tile = el('div', 'tile');
+    const box = el('div', 'tile__img');
+    const img = el('img');
+    img.loading = 'lazy';
+    img.src = `assets/${cat}/${f}.png`;
+    img.alt = f;
+    box.appendChild(img);
+    const name = el('div', 'tile__name');
+    name.textContent = `${f}.png`;
+    tile.appendChild(box);
+    tile.appendChild(name);
+    grid.appendChild(tile);
+  });
+  group.appendChild(grid);
+  libEl.appendChild(group);
+});
+document.getElementById('acount').textContent = `(${total})`;
+
+/* ---- extras (icones-todos) ---- */
+const exEl = document.getElementById('extras');
+let novos = 0;
+EXTRAS.forEach(([num, label, novo]) => {
+  if (novo) novos++;
+  const tile = el('div', 'tile');
+  if (novo) { const b = el('span', 'badge'); b.textContent = 'NOVO'; tile.appendChild(b); }
+  const box = el('div', 'tile__img');
+  const img = el('img');
+  img.loading = 'lazy';
+  img.src = `assets/extras/icone-${pad3(num)}.png`;
+  img.alt = label;
+  box.appendChild(img);
+  const name = el('div', 'tile__name');
+  name.innerHTML = `<b>${pad3(num)}</b> · ${label}`;
+  tile.appendChild(box);
+  tile.appendChild(name);
+  exEl.appendChild(tile);
+});
+document.getElementById('excount').textContent = `(${EXTRAS.length} · ${novos} novos)`;
+
+document.getElementById('sub').textContent =
+  `${GAMES.length} jogos · ${GAMES.reduce((s,g)=>s+g.shots.length,0)} prints reais · ${total} assets em uso + ${EXTRAS.length} extras`;
+</script>
+</body>
+</html>

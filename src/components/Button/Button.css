@@ -1,0 +1,154 @@
+/* Botão-adesivo do protótipo: face CHAPADA (cor sólida via --grad-*, sem
+   degradê), contorno de tinta grosso, sombra sólida deslocada ("pop") e
+   afundamento no toque (translateY + sombra encolhe). Um brilho diagonal
+   varre a face via ::before — isso é reflexo de adesivo, não preenchimento. */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--btn-height);
+  padding: 0 var(--space-5);
+  border: var(--border-ink-thick);
+  border-radius: var(--radius-lg);
+  font-family: var(--btn-font);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--btn-tracking);
+  text-transform: uppercase;
+  color: var(--color-ink);
+  overflow: hidden;
+  --btn-lift: 4px;
+  box-shadow: var(--shadow-pop-md);
+  transition:
+    transform var(--duration-instant) var(--ease-standard),
+    box-shadow var(--duration-instant) var(--ease-standard),
+    filter var(--duration-fast) var(--ease-standard),
+    opacity var(--duration-fast) var(--ease-standard);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+/* Sheen: faixa clara que atravessa a face. Só decorativa. */
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 38px;
+  background: rgba(255, 255, 255, 0.45);
+  transform: translateX(-140%) skewX(-18deg);
+  pointer-events: none;
+}
+.btn--primary::before,
+.btn--success::before,
+.btn--energy::before {
+  animation: shine 3.6s var(--ease-standard) infinite;
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn--lg {
+  min-height: 78px;
+  font-size: var(--fs-xl);
+  --btn-lift: 6px;
+  box-shadow: var(--shadow-pop-lg);
+}
+
+/* Ação secundária (copiar link, compartilhar). Continua acima de --tap-min. */
+.btn--sm {
+  min-height: 52px;
+  padding: 0 var(--space-4);
+  font-size: var(--fs-base);
+  --btn-lift: 3px;
+  box-shadow: var(--shadow-pop-sm);
+}
+
+/* Afundamento no toque: desce a altura da sombra e a sombra some. */
+.btn:active:not(:disabled) {
+  transform: translateY(var(--btn-lift));
+  box-shadow: 0 0 0 var(--color-ink);
+}
+
+.btn:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+.btn__label {
+  position: relative;
+  line-height: 1;
+}
+
+.btn__icon {
+  position: relative;
+  font-size: 1.2em;
+  line-height: 1;
+}
+
+.btn__hint {
+  position: absolute;
+  right: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  opacity: 0.75;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* ─── PRIMARY: âmbar, o "COMEÇAR/confirmar" ─── */
+.btn--primary {
+  background: var(--grad-amber);
+  color: var(--color-ink);
+}
+
+/* ─── SUCCESS: verde, o "CRIAR SALA" ─── */
+.btn--success {
+  background: var(--grad-green);
+  color: #0E2A13;
+}
+
+/* ─── SECONDARY: creme, ação neutra ─── */
+.btn--secondary {
+  background: var(--grad-cream);
+  color: var(--color-ink);
+}
+
+/* ─── ENERGY: violeta, ENTRAR / CHAOS / ações "grandes" ─── */
+.btn--energy {
+  background: var(--grad-violet);
+  color: var(--bone-100);
+}
+
+/* ─── GHOST: sem preenchimento, ação terciária ─── */
+.btn--ghost {
+  background: transparent;
+  color: var(--color-ink);
+  border-width: 3px;
+  box-shadow: var(--shadow-pop-sm);
+  --btn-lift: 3px;
+}
+
+/* ─── CYAN: ciano, "COPIAR LINK" no lobby ─── */
+.btn--cyan {
+  background: var(--grad-cyan);
+  color: var(--color-ink);
+}
+
+/* ─── DANGER / rosa: "ENVIAR/COMPARTILHAR", remover ─── */
+.btn--danger {
+  background: var(--grad-pink);
+  color: var(--color-ink);
+}
+
+/* Hover só existe em desktop; no celular não é o caminho. */
+@media (hover: hover) {
+  .btn:hover:not(:disabled) {
+    filter: brightness(1.05);
+  }
+}

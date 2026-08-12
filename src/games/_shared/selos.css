@@ -1,0 +1,107 @@
+/* ===========================================================================
+   Selos de pontuação — carimbo "na hora" no meio da jogada.
+
+   Identidade adesivo: a palavra do veredito vem em fonte display com contorno
+   grosso de tinta (paint-order stroke fill), os pontos em mono com contorno
+   mais fino. A cor é do ESTADO (verde acerto, âmbar perfeito, rosa erro,
+   acento do jogo), nunca do fundo — o mesmo idioma do GameResult e do ScoreBadge.
+
+   A camada vive dentro do `.gscene__stage`; o keyframe já embute o
+   translate(-50%,-50%) para o selo ancorar pelo próprio centro em (x,y).
+   =========================================================================== */
+
+.selos {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-hud);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.selo {
+  --selo-color: var(--color-success);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  white-space: nowrap;
+  will-change: transform, opacity;
+  /* O translate(-50%,-50%) mora no keyframe — não repita aqui, senão a
+     composição some quando a animação assume o transform. */
+  animation: seloRise 0.85s var(--ease-out) forwards;
+}
+
+.selo__word {
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  font-size: var(--fs-2xl);
+  line-height: 1;
+  letter-spacing: var(--track-wide);
+  color: var(--selo-color);
+  -webkit-text-stroke: 3px var(--color-ink);
+  paint-order: stroke fill;
+}
+
+.selo__pts {
+  font-family: var(--font-mono);
+  font-weight: var(--fw-black);
+  font-size: var(--fs-lg);
+  line-height: 1;
+  color: var(--selo-color);
+  -webkit-text-stroke: 2px var(--color-ink);
+  paint-order: stroke fill;
+}
+
+/* --------------------------------------------------------------- estados */
+
+.selo--good { --selo-color: var(--lime-500); }
+.selo--great { --selo-color: var(--color-warning); }
+.selo--bad { --selo-color: var(--rose-500); }
+.selo--accent { --selo-color: var(--game-accent-soft); }
+
+/* --------------------------------------------------------------- posições */
+
+/* Ancorado num ponto (x,y do stage): só left/top; o keyframe centra e sobe. */
+
+/* Banner no centro do campo (SUBIU DE NÍVEL, COMBO). */
+.selo--center {
+  left: 50%;
+  top: 38%;
+}
+
+.selo--big {
+  animation: seloStamp 1.05s var(--ease-pop) forwards;
+}
+.selo--big .selo__word { font-size: var(--fs-4xl); }
+.selo--big .selo__pts { font-size: var(--fs-2xl); }
+
+/* --------------------------------------------------------------- animação */
+
+/* Sobe pouco, cresce no impacto e some — leitura rápida em tela pequena. */
+@keyframes seloRise {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
+  18% { opacity: 1; transform: translate(-50%, -72%) scale(1.14); }
+  68% { opacity: 1; transform: translate(-50%, -98%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -140%) scale(0.98); }
+}
+
+/* Carimba: entra torto e grande, assenta reto — igual ao stamp do resultado. */
+@keyframes seloStamp {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(2.1) rotate(-8deg); }
+  22% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(-3deg); }
+  74% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(-3deg); }
+  100% { opacity: 0; transform: translate(-50%, -58%) scale(1.05) rotate(-3deg); }
+}
+
+/* Quem pediu menos animação ainda vê o selo — ele só não voa. */
+@media (prefers-reduced-motion: reduce) {
+  .selo,
+  .selo--big {
+    animation: seloHold 0.75s linear forwards;
+  }
+  @keyframes seloHold {
+    0%, 70% { opacity: 1; transform: translate(-50%, -50%); }
+    100% { opacity: 0; transform: translate(-50%, -50%); }
+  }
+}

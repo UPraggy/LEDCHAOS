@@ -1,0 +1,168 @@
+/* Bancada de teste — visual utilitário, não faz parte da identidade do jogo. */
+
+.dev {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-deep);
+  color: var(--color-text);
+  overflow: auto;
+}
+
+.dev__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: var(--space-4);
+}
+
+.dev__title { font-size: var(--fs-2xl); }
+
+.dev__hint {
+  padding: 0 var(--space-4) var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+}
+
+.dev__back {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: var(--fs-sm);
+}
+
+.dev__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--space-3);
+  padding: var(--space-4);
+}
+
+.dev__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: var(--space-4) var(--space-2);
+  border: var(--border-ink);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, hsl(var(--game-hue, 36) 70% 55%) 20%, var(--color-surface));
+  box-shadow: var(--shadow-pop-sm);
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.dev__emoji { font-size: 30px; }
+.dev__name { font-size: var(--fs-md); }
+.dev__id { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--color-text-dim); }
+
+/* --------------------------------------------------------------- bancada */
+
+.dev--bench { overflow: hidden; }
+
+.dev__bar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border-bottom: var(--border-ink);
+  flex-wrap: wrap;
+}
+
+.dev__badge {
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, hsl(var(--game-hue, 36) 70% 55%) 30%, transparent);
+  font-size: var(--fs-sm);
+  white-space: nowrap;
+}
+
+.dev__toggles {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+}
+
+.dev__toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 58px;
+  padding: 4px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  line-height: 1.1;
+}
+
+.dev__toggle b { font-size: 9px; letter-spacing: 0.04em; }
+.dev__toggle i { font-family: var(--font-mono); font-size: var(--fs-xs); font-style: normal; }
+
+.dev__toggle.is-on {
+  border-color: var(--color-accent, hsl(268 84% 64%));
+  background: color-mix(in srgb, hsl(268 84% 64%) 22%, transparent);
+  color: var(--color-text);
+}
+
+.dev__replay {
+  padding: 6px 12px;
+  border: var(--border-ink);
+  border-radius: var(--radius-md);
+  background: var(--color-warning);
+  color: var(--color-bg-deep);
+  font-weight: var(--fw-bold);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* O palco replica o que o motor faz: define --game-hue para os tokens do jogo
+   derivarem --game-accent, e dá altura definida para o .gscene (height:100%). */
+.dev__stage {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ----------------------------------------------------------------- fim */
+
+.dev__result {
+  flex: 0 0 auto;
+  max-height: 40%;
+  overflow: auto;
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border-top: var(--border-ink);
+}
+
+.dev__resultHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+}
+
+.dev__ranks { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+
+.dev__ranks li {
+  display: grid;
+  grid-template-columns: 22px 1fr auto auto;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+}
+
+.dev__ranks li.is-me { background: color-mix(in srgb, var(--color-warning) 18%, transparent); }
+.dev__rank { font-family: var(--font-mono); color: var(--color-text-dim); }
+.dev__who { font-weight: var(--fw-bold); }
+.dev__disp { font-family: var(--font-mono); }
+.dev__raw { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--color-text-dim); }

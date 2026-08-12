@@ -1,0 +1,258 @@
+/* ===========================================================================
+   Esqueleto comum dos microjogos.
+
+   A tela de jogo entra com Screen layout="flush" (padding 0), então a safe-area
+   é responsabilidade daqui. Três faixas fixas, sempre na mesma ordem:
+
+     head   — HUD: quem sou, quanto falta, o que fazer
+     stage  — a área de jogo (flex:1, é ela que estica)
+     pad    — zona do polegar: controles, quando houver
+
+   Por que o pad fica embaixo: num celular em pé, o polegar alcança
+   confortavelmente só o terço inferior. Controle em cima é controle que não é
+   usado. Ver 07-MOBILE.md.
+   =========================================================================== */
+
+.gscene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-top: var(--safe-top);
+  padding-bottom: var(--safe-bottom);
+  /* Fundo da tela = roxo médio da marca (#2E2080), CHAPADO e igual para todo
+     jogo — é o "Fundo da tela" do handoff. A cor do jogo (--game-hue) vive nos
+     ACENTOS (título, cronômetro, preenchimentos, anéis), nunca no fundo: pintar
+     o fundo com --game-wash deixava os tons quentes (âmbar, rosa) marrons e
+     criava um degrau feio sobre o campo escuro. */
+  background: var(--color-bg);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gscene__stage {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.gscene__pad {
+  flex: 0 0 auto;
+  padding: var(--space-3) var(--space-3) var(--space-4);
+}
+
+/* ------------------------------------------------------------------ canvas */
+
+/* touch-action:none é obrigatório: sem isso o navegador rouba o arrasto para
+   rolar/dar zoom e o jogo perde metade dos eventos no meio do gesto. */
+.gcanvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+/* Superfície de toque que cobre o stage inteiro (jogos sem canvas). */
+.gtouch {
+  position: absolute;
+  inset: 0;
+  touch-action: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+}
+
+/* ---------------------------------------------------------------- controles */
+
+.gpad {
+  display: flex;
+  gap: var(--space-3);
+}
+
+/* 96px de altura não é exagero: é o alvo que um polegar acerta sem olhar,
+   com a tela tremendo, no meio de uma partida. */
+/* Botão-adesivo: contorno de tinta + sombra "pop" sólida, igual aos botões do
+   menu. No toque ele afunda (translateY) e a sombra colapsa — a mesma física de
+   toda a interface, agora dentro do jogo. */
+.gpad__btn {
+  flex: 1 1 0;
+  min-height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--border-ink);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--game-accent) 18%, var(--color-surface));
+  color: var(--game-accent-soft);
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-black);
+  line-height: 1;
+  touch-action: none;
+  box-shadow: var(--shadow-pop-sm);
+  transition: transform var(--duration-instant) var(--ease-out),
+    box-shadow var(--duration-instant) var(--ease-out);
+}
+
+.gpad__btn.is-down {
+  transform: translateY(2px);
+  box-shadow: none;
+  background: color-mix(in srgb, var(--game-accent) 34%, var(--color-surface));
+  color: var(--color-text);
+}
+
+/* --------------------------------------------------------------- feedback */
+
+/* Número que sobe e some quando algo pontua. É o retorno mais barato e mais
+   legível que existe em tela pequena: aparece exatamente onde o dedo tocou. */
+.gpop {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  font-family: var(--font-mono);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  white-space: nowrap;
+  animation: gpop var(--duration-slower) var(--ease-out) forwards;
+}
+
+.gpop--good { color: var(--color-success); text-shadow: var(--glow-sm) currentColor; }
+.gpop--bad { color: var(--color-danger); }
+.gpop--rare { color: var(--color-warning); text-shadow: var(--glow-md) currentColor; }
+
+@keyframes gpop {
+  from { opacity: 1; transform: translate(-50%, -50%) scale(0.8); }
+  30% { opacity: 1; transform: translate(-50%, -90%) scale(1.15); }
+  to { opacity: 0; transform: translate(-50%, -160%) scale(1); }
+}
+
+/* ------------------------------------------------------- efeitos do CHAOS */
+
+/* NA PENUMBRA: escurece as bordas e deixa só o centro visível.
+   Vinheta em vez de recorte porque recorte esconde o HUD e o jogador perde a
+   referência de tempo — a punição tem que ser dificuldade, não confusão. */
+.gveil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-hud);
+  background: radial-gradient(
+    circle at 50% 50%,
+    transparent 0%,
+    transparent 22%,
+    color-mix(in srgb, var(--color-bg-deep) 88%, transparent) 52%,
+    var(--color-bg-deep) 78%
+  );
+}
+
+/* ------------------------------------------------------------- desfecho */
+
+/* Cobre o stage com o resultado do microjogo por ~1s antes de entregar a
+   rodada. Sem isso o jogador nunca vê o próprio número: finishRound troca a
+   fase na hora e o microjogo desmonta. Ver useOutcome em _shared/hooks.js. */
+.gover {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5);
+  background: color-mix(in srgb, var(--color-bg-deep) 86%, transparent);
+  animation: goverIn var(--duration-base) var(--ease-out);
+}
+
+@keyframes goverIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Aviso curto no meio da tela ("ESPERE…", "PRONTO?"). */
+.gcue {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  text-align: center;
+  pointer-events: none;
+}
+
+.gcue__big {
+  font-family: var(--font-display);
+  font-size: var(--fs-4xl);
+  font-weight: var(--fw-black);
+  line-height: 1;
+  letter-spacing: var(--track-wide);
+  color: var(--game-accent);
+}
+
+.gcue__small {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  max-width: 24ch;
+  line-height: var(--lh-body);
+}
+
+/* ----------------------------------------------------- placar dos rivais */
+
+/* Fita fina de progresso dos adversários. Fica no topo do stage porque o
+   jogador olha para lá entre uma ação e outra, não durante. */
+.grivals {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-3);
+  right: var(--space-3);
+  z-index: var(--z-hud);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  pointer-events: none;
+}
+
+.grival {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.grival__name {
+  flex: 0 0 68px;
+  font-size: var(--fs-xs);
+  color: var(--color-text-dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.grival__track {
+  flex: 1;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-bg-deep) 60%, transparent);
+  overflow: hidden;
+}
+
+.grival__fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--grival-color, var(--color-info));
+  transition: width var(--duration-base) var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gpop { animation-duration: 1ms; }
+  .gpad__btn,
+  .grival__fill { transition: none; }
+}

@@ -1,0 +1,60 @@
+.chaosb {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  width: 100%;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--grad-violet);
+  border: var(--border-ink-thick);
+  box-shadow: var(--shadow-pop-lg);
+  text-align: center;
+  overflow: hidden;
+  animation: pop var(--duration-slow) var(--ease-pop) both;
+}
+
+/* Varredura de luz que atravessa o banner uma vez. */
+.chaosb__flash {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 40%, rgba(255, 255, 255, 0.28) 50%, transparent 60%);
+  animation: sweep var(--duration-slower) var(--ease-out) both;
+  pointer-events: none;
+}
+
+.chaosb__kicker {
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--track-wider);
+  text-transform: uppercase;
+  color: var(--color-label-on-stage);
+}
+
+/* Nome do evento = adesivo creme com contorno de tinta. */
+.chaosb__name {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  font-size: var(--fs-xl);
+  color: var(--color-text-on-stage);
+  -webkit-text-stroke: var(--stroke-ink) var(--color-ink);
+  paint-order: stroke fill;
+}
+
+.chaosb__emoji {
+  font-size: 1.1em;
+  -webkit-text-stroke: 0;
+}
+
+.chaosb__desc {
+  max-width: 30ch;
+  font-family: var(--font-label);
+  font-size: var(--fs-sm);
+  color: var(--color-text-on-stage);
+  opacity: 0.9;
+}

@@ -1,0 +1,72 @@
+.avatar {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  flex: 0 0 auto;
+}
+
+/* Personagem-adesivo: PNG com sombra sólida de tinta por baixo (não blur). */
+.avatar__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 0 rgba(23, 15, 62, 0.45));
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.avatar--float .avatar__img {
+  animation: floatY 4s var(--ease-standard) infinite;
+}
+
+/* Anel de destaque na cor do jogador (turno, vitória). */
+.avatar--ring::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: var(--radius-pill);
+  border: 3px solid var(--avatar-color);
+  box-shadow: var(--shadow-pop-sm);
+  opacity: 0.95;
+}
+
+.avatar--dim {
+  opacity: 0.4;
+  filter: grayscale(0.7);
+}
+
+/* Fallback quando o PNG não carrega: disco na cor do jogador, contorno de tinta. */
+.avatar__fallback {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--avatar-color);
+  border: var(--border-ink);
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  font-size: calc(var(--avatar-size) * 0.44);
+  line-height: 1;
+}
+
+.avatar__badge {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 4px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  line-height: 1;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  border: var(--border-ink);
+  box-shadow: var(--shadow-pop-sm);
+}

@@ -1,0 +1,100 @@
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.identity__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.identity__field {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Rótulo pequeno DENTRO do cartão creme → violeta apagado (não o creme do palco). */
+.identity__label {
+  color: var(--color-text-muted);
+}
+
+/* Campo-adesivo: violeta bem claro, contorno grosso de tinta, texto preto forte. */
+.identity__input {
+  width: 100%;
+  height: 54px;
+  padding: 0 var(--space-4);
+  border: var(--border-ink-thick);
+  border-radius: var(--radius-md);
+  background: var(--color-field);
+  color: var(--color-text);
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--track-wide);
+  transition: box-shadow var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.identity__input::placeholder {
+  color: var(--bone-700);
+  font-weight: var(--fw-bold);
+}
+
+.identity__input:focus {
+  outline: none;
+  box-shadow: var(--shadow-pop-sm);
+  transform: translateY(-2px);
+}
+
+/* Grade de 6 medalhões-personagem. */
+.identity__grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-2);
+}
+
+/* Célula de avatar: contorno suave + fundo violeta claro quando NÃO selecionado. */
+.identity__pick {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap-min);
+  padding: var(--space-1);
+  border: var(--border-ink-thick);
+  border-color: var(--color-border-soft);
+  border-radius: var(--radius-md);
+  background: var(--color-field);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-pop),
+    border-color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .identity__pick:hover {
+    border-color: var(--color-ink);
+    transform: translateY(-1px);
+  }
+}
+
+.identity__pick:active {
+  transform: translateY(2px);
+}
+
+/* Selecionado = adesivo âmbar com contorno de tinta e sombra sólida "pop". */
+.identity__pick.is-active {
+  border-color: var(--color-ink);
+  background: var(--gold-400);
+  box-shadow: var(--shadow-pop-md);
+}
+
+.identity__pick.is-active:active {
+  transform: translateY(2px);
+  box-shadow: var(--shadow-pop-sm);
+}

@@ -1,0 +1,376 @@
+@import './tokens.css';
+
+/* ============================================================
+   RESET + APP SHELL
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden; /* jogo, não documento: nada de scroll do body */
+}
+
+body {
+  background: var(--color-bg-deep);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+  touch-action: manipulation;
+
+  /* Jogo 100% de toque: arrastar o dedo NUNCA pode selecionar texto nem abrir
+     as alças de seleção do celular — isso destruiria SLICE, DRAW, GROW e DODGE.
+     Os campos de texto reabrem a seleção logo abaixo. */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+input,
+textarea {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+#root {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  margin-inline: auto;
+  max-width: 100%;
+  overflow: hidden;
+  background: var(--color-bg);
+  isolation: isolate;
+}
+
+/* Palco roxo do protótipo: radial claro no topo → poço embaixo, com o
+   brilho da rodada por cima. Sem custo de layout. */
+#root::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  /* Palco CHAPADO: um roxo sólido, sem degradê de fundo. A profundidade da tela
+     vem do cartão creme com contorno de tinta em cima, não de um brilho radial. */
+  background: var(--void-800);
+  transition: background var(--duration-slower) var(--ease-standard);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+canvas {
+  display: block;
+  touch-action: none; /* canvas de jogo: nunca deixar o browser roubar o gesto */
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+::selection {
+  background: var(--color-action);
+  color: var(--color-on-action);
+}
+
+/* ============================================================
+   TIPOGRAFIA UTILITÁRIA
+   ============================================================ */
+
+.u-display {
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+}
+
+/* Título-adesivo: contorno de tinta por fora do preenchimento. A cara do
+   protótipo. Aplique sobre um texto já colorido (creme/gradiente). */
+.u-titlestroke {
+  -webkit-text-stroke: var(--stroke-ink) var(--color-ink);
+  paint-order: stroke fill;
+  text-shadow: var(--shadow-pop-sm);
+}
+
+.u-mono {
+  font-family: var(--font-mono);
+  font-weight: var(--fw-bold);
+  font-variant-numeric: tabular-nums;
+}
+
+.u-label {
+  font-family: var(--font-label);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--track-wider);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.u-muted {
+  color: var(--color-text-muted);
+}
+
+.u-center {
+  text-align: center;
+}
+
+/* ============================================================
+   LAYOUT UTILITÁRIO
+   ============================================================ */
+
+.u-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.u-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.u-fill {
+  flex: 1;
+  min-height: 0;
+}
+
+.u-hidden {
+  display: none !important;
+}
+
+.u-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ============================================================
+   ANIMAÇÕES COMPARTILHADAS — só transform/opacity
+   ============================================================ */
+
+@keyframes pop {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes popOut {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes riseOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-32px);
+    opacity: 0;
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-8px);
+  }
+  40% {
+    transform: translateX(7px);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 0.86;
+  }
+}
+
+@keyframes spinSlow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes flash {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes sweep {
+  from {
+    transform: translateX(-110%);
+  }
+  to {
+    transform: translateX(110%);
+  }
+}
+
+@keyframes floatY {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Balanço de adesivo — logo/títulos do protótipo respiram de leve */
+@keyframes wob {
+  0%,
+  100% {
+    transform: rotate(-2deg) translateY(0);
+  }
+  50% {
+    transform: rotate(2deg) translateY(-4px);
+  }
+}
+
+/* Brilho que varre a face do botão (sheen) */
+@keyframes shine {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  60%,
+  100% {
+    transform: translateX(220%) skewX(-18deg);
+  }
+}
+
+/* Toast/aviso entra de baixo com overshoot */
+@keyframes toastIn {
+  from {
+    transform: translateY(120%) scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Selo/carimbo de resultado bate na tela */
+@keyframes stamp {
+  0% {
+    transform: scale(2.2) rotate(-14deg);
+    opacity: 0;
+  }
+  55% {
+    transform: scale(0.86) rotate(-6deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(-8deg);
+    opacity: 1;
+  }
+}
+
+.u-anim-pop {
+  animation: pop var(--duration-base) var(--ease-pop) both;
+}
+.u-anim-rise {
+  animation: rise var(--duration-base) var(--ease-out) both;
+}
+
+/* ============================================================
+   VIEWPORT LARGO — o jogo continua retrato, centralizado
+   ============================================================ */
+
+@media (min-width: 560px) {
+  #root {
+    max-width: var(--screen-max);
+    height: min(100dvh, 900px);
+    border: var(--border-ink-thick);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--elevation-5);
+  }
+  body {
+    display: grid;
+    place-items: center;
+    background: var(--void-900);
+  }
+}

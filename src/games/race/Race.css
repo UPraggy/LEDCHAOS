@@ -1,0 +1,76 @@
+/* CORRIDA — o runner do dino. A pista é canvas; aqui só os dois polegares. */
+
+.rc .gscene__stage {
+  /* A arena é BRANCA (o dino abre mão do palco roxo). Este fundo só cobre o
+     primeiro quadro, antes de o canvas ter tamanho — sem ele, um flash escuro
+     aparece no meio da contagem regressiva. Branco levíssimo pra não brigar. */
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+}
+
+/* ---------------------------------------------------------------- controle */
+
+/* Dois botões, metade da largura cada. Em celular o polegar acerta por área,
+   não por mira — e aqui um deles fica segurado por vários segundos (ABAIXAR). */
+.rc__pad {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.rc__btn {
+  flex: 1 1 0;
+  min-height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--color-ink, #170f3e);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  font-family: 'Baloo 2', system-ui, sans-serif;
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--color-ink, #170f3e);
+  cursor: pointer;
+  /* Sem isto o navegador tenta rolar a página quando o dedo segura o botão. */
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  /* Sombra "pop" sólida da identidade adesivo-arcade, não um blur macio. */
+  box-shadow: 0 4px 0 var(--color-ink, #170f3e);
+  transition: transform 80ms var(--ease-out), box-shadow 80ms var(--ease-out),
+    background-color 90ms var(--ease-out);
+}
+
+/* PULAR é a ação principal e o gesto que mais se repete: ganha o âmbar. */
+.rc__btn--jump {
+  background: color-mix(in srgb, var(--game-accent, #ffb020) 26%, var(--color-surface));
+}
+
+/* ABAIXAR é o hold: fica frio para diferenciar do pulo num olhar só. */
+.rc__btn--duck {
+  background: var(--color-surface);
+}
+
+/* Apertado: afunda na própria sombra, como um adesivo sendo pressionado. */
+.rc__btn:active,
+.rc__btn.is-on {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 var(--color-ink, #170f3e);
+}
+
+.rc__btn.is-on {
+  background: color-mix(in srgb, var(--game-accent, #ffb020) 42%, var(--color-surface));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rc__btn {
+    transition: background-color 90ms var(--ease-out);
+  }
+  .rc__btn:active,
+  .rc__btn.is-on {
+    transform: none;
+  }
+}

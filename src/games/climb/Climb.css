@@ -1,0 +1,51 @@
+/* ESCALAR — a torre é canvas. Aqui só os dois botões do polegar. */
+
+.cl .gscene__stage {
+  /* Campo escuro e CHAPADO. A direção (pra cima) já é dita pela torre no canvas
+     e pela mecânica de escalar — não precisa de um degradê pra apontar. */
+  background: var(--color-bg-deep);
+}
+
+/* ---------------------------------------------------------------- controle */
+
+/* Dois botões e nada mais. Cada um pega metade da largura e toda a altura do
+   pad — em celular, o polegar acerta por área, não por mira. */
+.cl__pad {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.cl__btn {
+  flex: 1 1 0;
+  min-height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-text-dim);
+  cursor: pointer;
+  /* Sem isto o navegador tenta rolar a página quando o dedo segura o botão. */
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 90ms var(--ease-out), border-color 90ms var(--ease-out);
+}
+
+/* Pressionado: o botão acende. É a única confirmação de que o dedo pegou —
+   o personagem pode estar no ar, longe da vista. */
+.cl__btn.is-on {
+  border-color: var(--game-accent);
+  background: color-mix(in srgb, var(--game-accent) 30%, var(--color-surface));
+  color: var(--color-text);
+  box-shadow: var(--glow-md) color-mix(in srgb, var(--game-accent) 45%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cl__btn { transition: none; }
+}

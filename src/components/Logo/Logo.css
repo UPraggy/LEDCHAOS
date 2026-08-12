@@ -1,0 +1,95 @@
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  --logo-size: 68px;
+}
+
+.logo--md {
+  --logo-size: var(--fs-3xl);
+}
+
+.logo--sm {
+  --logo-size: var(--fs-xl);
+}
+
+/* A palavra inteira balança de leve, como no protótipo (adesivo vivo). */
+.logo__word {
+  display: flex;
+  align-items: center;
+  gap: 0.02em;
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  font-size: var(--logo-size);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--gold-400);
+  -webkit-text-stroke: 0.1em var(--color-ink);
+  paint-order: stroke fill;
+  filter: drop-shadow(0 0.1em 0 rgba(23, 15, 62, 0.5));
+  animation: wob 6s var(--ease-standard) infinite;
+}
+
+.logo__letter {
+  display: block;
+}
+
+/* O "O" da palavra é um alvo concêntrico: disco laranja + anel creme + miolo tinta */
+.logo__target {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 0.82em;
+  height: 0.82em;
+  margin-inline: 0.05em;
+  /* o alvo não herda o traço de texto */
+  -webkit-text-stroke: 0;
+}
+
+.logo__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-pill);
+  background: var(--p8);
+  border: 0.07em solid var(--color-ink);
+}
+.logo__ring::before {
+  content: '';
+  position: absolute;
+  inset: 20%;
+  border-radius: var(--radius-pill);
+  background: var(--bone-100);
+  border: 0.055em solid var(--color-ink);
+}
+
+.logo__dot {
+  position: relative;
+  width: 0.26em;
+  height: 0.26em;
+  border-radius: var(--radius-pill);
+  background: var(--color-ink);
+  animation: pulse 1.5s var(--ease-standard) infinite;
+}
+
+/* Tagline = pílula-adesivo violeta */
+.logo__tagline {
+  margin: 0;
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--violet-500);
+  border: var(--border-ink-thick);
+  box-shadow: var(--shadow-pop-md);
+  font-family: var(--font-label);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--track-wider);
+  text-transform: uppercase;
+  color: var(--bone-100);
+}
+
+.logo--sm .logo__tagline {
+  font-size: 0.7rem;
+  padding: 4px 12px;
+  box-shadow: var(--shadow-pop-sm);
+}

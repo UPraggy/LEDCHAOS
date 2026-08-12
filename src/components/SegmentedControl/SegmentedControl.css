@@ -1,0 +1,75 @@
+.segmented {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.segmented__label {
+  color: var(--color-text-on-stage);
+  opacity: 0.85;
+}
+
+/* Trilho roxo fundo, contorno de tinta — a base onde os chips se encaixam. */
+.segmented__track {
+  display: flex;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  border: var(--border-ink);
+  border-radius: var(--radius-lg);
+  background: var(--void-700);
+  box-shadow: var(--shadow-pop-sm);
+}
+
+.segmented__option {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: var(--tap-min);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: var(--space-2) var(--space-1);
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--bone-700);
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-pop);
+}
+
+.segmented__option:active {
+  transform: scale(0.96);
+}
+
+/* Ativo = chip âmbar encaixado, contorno de tinta, o valor em tinta. */
+.segmented__option.is-active {
+  background: var(--grad-amber);
+  border-color: var(--color-ink);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-pop-sm);
+}
+
+.segmented__value {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--track-wide);
+  line-height: 1;
+}
+
+.segmented__option.is-active .segmented__value {
+  color: var(--color-ink);
+}
+
+.segmented__hint {
+  font-size: 10px;
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: inherit;
+  opacity: 0.75;
+}

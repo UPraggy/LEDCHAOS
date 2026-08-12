@@ -1,0 +1,70 @@
+.ghead {
+  position: relative;
+  z-index: var(--z-hud);
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: calc(var(--safe-top) + var(--space-3)) var(--space-4) var(--space-3);
+  /* Sem véu em degradê: o HUD senta direto sobre o wash sólido do palco. O
+     título já tem contorno de tinta e a instrução tem peso, então lê bem. */
+  background: transparent;
+  pointer-events: none;
+}
+
+.ghead__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.ghead__id {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+/* Chip de rodada = adesivo creme com contorno de tinta. */
+.ghead__round {
+  flex: 0 0 auto;
+  padding: 4px 9px;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  border: var(--border-ink);
+  box-shadow: var(--shadow-pop-sm);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  color: var(--color-ink);
+}
+
+.ghead__title {
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  font-size: var(--fs-lg);
+  text-transform: uppercase;
+  color: var(--game-accent);
+  -webkit-text-stroke: var(--stroke-ink) var(--color-ink);
+  paint-order: stroke fill;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ghead__instruction {
+  font-family: var(--font-label);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--color-text-on-stage);
+  opacity: 0.82;
+}
+
+.ghead__badges {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}

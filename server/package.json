@@ -1,0 +1,15 @@
+{
+  "name": "chaos-relay",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Relay WebSocket do CHAOS — cano burro que junta host e convidados por código de sala. Não guarda estado de jogo.",
+  "author": "Rafael Moreira Ramos",
+  "scripts": {
+    "start": "node relay.js",
+    "dev": "node relay.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

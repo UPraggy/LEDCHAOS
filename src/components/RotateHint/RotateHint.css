@@ -1,0 +1,65 @@
+.rotate {
+  display: none;
+}
+
+/* Celular deitado: paisagem E pouca altura. O `max-height` evita disparar em
+   tablet/desktop, que são paisagem por natureza e continuam rodando o jogo
+   dentro da moldura retrato centralizada. */
+@media (orientation: landscape) and (max-height: 540px) {
+  .rotate {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-toast);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    padding: var(--space-5);
+    text-align: center;
+    background: var(--void-800);
+  }
+
+  .rotate__phone {
+    font-size: 56px;
+    line-height: 1;
+    animation: rotateNudge 2.4s var(--ease-standard) infinite;
+  }
+
+  .rotate__title {
+    font-family: var(--font-display);
+    font-weight: var(--fw-black);
+    font-size: var(--fs-2xl);
+    text-transform: uppercase;
+    color: var(--gold-400);
+    -webkit-text-stroke: var(--stroke-ink) var(--color-ink);
+    paint-order: stroke fill;
+  }
+
+  .rotate__text {
+    max-width: 34ch;
+    color: var(--color-text-on-stage);
+    opacity: 0.82;
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+  }
+}
+
+@keyframes rotateNudge {
+  0%,
+  55%,
+  100% {
+    transform: rotate(-90deg);
+  }
+  75%,
+  90% {
+    transform: rotate(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rotate__phone {
+    animation: none;
+    transform: rotate(-90deg);
+  }
+}

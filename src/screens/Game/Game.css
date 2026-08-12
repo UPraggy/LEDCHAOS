@@ -1,0 +1,84 @@
+/* A tela de jogo é "flush": o microjogo ocupa tudo e desenha o próprio HUD.
+   Nada de padding aqui — canvas colado na borda é parte da sensação de arcade. */
+.game {
+  position: relative;
+}
+
+/* ------------------------------------------------------------------- intro */
+
+.game__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+  animation: gameIntro var(--duration-slow) var(--ease-pop);
+}
+
+.game__introRound {
+  color: var(--color-text-dim);
+}
+
+.game__introEmoji {
+  font-size: 88px;
+  line-height: 1;
+  filter: drop-shadow(0 0 24px var(--game-glow));
+}
+
+.game__introName {
+  font-size: var(--fs-4xl);
+  line-height: 1;
+  letter-spacing: var(--track-wide);
+  color: var(--game-accent);
+}
+
+.game__introText {
+  max-width: 26ch;
+  color: var(--color-text-muted);
+  font-size: var(--fs-lg);
+  line-height: var(--lh-body);
+}
+
+@keyframes gameIntro {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* -------------------------------------------------------------------- erro */
+
+.game__error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+}
+
+.game__errorEmoji {
+  font-size: 64px;
+  line-height: 1;
+}
+
+.game__errorTitle {
+  font-size: var(--fs-2xl);
+  color: var(--color-danger);
+}
+
+.game__errorText {
+  max-width: 30ch;
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-body);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game__intro {
+    animation: none;
+  }
+}

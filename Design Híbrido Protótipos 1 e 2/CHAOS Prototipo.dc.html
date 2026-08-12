@@ -1,0 +1,2280 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+*{scrollbar-width:none}*::-webkit-scrollbar{width:0;height:0;display:none}
+body{margin:0;background:#241B5E;font-family:'Baloo 2',system-ui,sans-serif}
+a{color:#FFCE31;text-decoration:none}a:hover{color:#FFE28A}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+input{font:inherit;color:inherit;background:none;border:none}
+img{user-select:none;-webkit-user-drag:none}
+@keyframes pop{0%{transform:scale(.5);opacity:0}60%{transform:scale(1.12);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes popOut{from{transform:scale(.7);opacity:.9}to{transform:scale(1.9);opacity:0}}
+@keyframes rise{from{transform:translateY(18px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+@keyframes spinSlow{to{transform:rotate(360deg)}}
+@keyframes sweep{from{transform:translateX(-120%)}to{transform:translateX(120%)}}
+@keyframes floatY{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-12px) rotate(var(--r,0deg))}}
+@keyframes wob{0%,100%{transform:rotate(-1.6deg)}50%{transform:rotate(1.6deg)}}
+@keyframes gameIntro{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
+@keyframes podRise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes toastIn{0%{opacity:0;transform:translate(-50%,14px) scale(.9)}60%{transform:translate(-50%,-2px) scale(1.04)}100%{opacity:1;transform:translate(-50%,0) scale(1)}}
+@keyframes targetIn{from{transform:translate(-50%,-50%) scale(.2)}to{transform:translate(-50%,-50%) scale(1)}}
+@keyframes shine{0%{transform:translateX(-140%) skewX(-18deg)}100%{transform:translateX(240%) skewX(-18deg)}}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+@keyframes burst{from{transform:translate(-50%,-50%) scale(.4);opacity:1}to{transform:translate(-50%,-50%) scale(1.8);opacity:0}}
+@keyframes scorePop{from{transform:translate(-50%,-50%) scale(.6);opacity:0}30%{opacity:1}to{transform:translate(-50%,-190%) scale(1.15);opacity:0}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;align-items:flex-start;justify-content:center;gap:40px;padding:40px 32px 64px;background:radial-gradient(120% 80% at 50% 0%,#3A2790 0%,#241B5E 60%,#150F3C 100%);flex-wrap:wrap">
+
+<div style="display:flex;flex-direction:column;gap:14px;align-items:center">
+<p style="margin:0;font-family:'Space Grotesk',system-ui,sans-serif;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#A99AE8">CHAOS · protótipo navegável</p>
+
+<div style="position:relative;flex:0 0 auto;width:402px;height:874px;border-radius:48px;overflow:hidden;background:#0E0930;box-shadow:0 40px 80px rgba(10,5,40,.6),0 0 0 4px #170F3E,0 0 0 7px rgba(255,255,255,.1)">
+<div aria-hidden="true" style="position:absolute;top:11px;left:50%;transform:translateX(-50%);width:126px;height:37px;border-radius:24px;background:#000;z-index:50"></div>
+<div aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:54px;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:0 30px;color:#FFFDF7;font-family:-apple-system,system-ui,sans-serif;font-size:15px;font-weight:600;pointer-events:none">
+<span>9:41</span>
+<span style="display:flex;align-items:center;gap:6px">
+<svg width="17" height="11" viewBox="0 0 17 11" fill="#FFFDF7"><rect x="0" y="7" width="3" height="4" rx="1"></rect><rect x="4.5" y="5" width="3" height="6" rx="1"></rect><rect x="9" y="2.5" width="3" height="8.5" rx="1"></rect><rect x="13.5" y="0" width="3" height="11" rx="1"></rect></svg>
+<svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="#FFFDF7" stroke-width="1.6" stroke-linecap="round"><path d="M1 3.6a10 10 0 0 1 14 0"></path><path d="M3.6 6.4a6.2 6.2 0 0 1 8.8 0"></path><path d="M6.2 9a2.6 2.6 0 0 1 3.6 0"></path></svg>
+<svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.6" y="0.6" width="20" height="10.8" rx="3" stroke="#FFFDF7" stroke-opacity=".55"></rect><rect x="2.4" y="2.4" width="16.4" height="7.2" rx="1.8" fill="#FFFDF7"></rect><path d="M22.4 4.2v3.6a2 2 0 0 0 0-3.6Z" fill="#FFFDF7" fill-opacity=".55"></path></svg>
+</span>
+</div>
+<div aria-hidden="true" style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:139px;height:5px;border-radius:100px;background:rgba(255,255,255,.75);z-index:60;pointer-events:none"></div>
+
+<div style="position:relative;width:100%;height:100%;overflow:hidden;background:#3A2790;color:#FFFDF7;font-family:'Baloo 2',system-ui,sans-serif;font-size:16px;line-height:1.45">
+
+<div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:#2E2080"></div>
+<div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;opacity:.18;background-image:radial-gradient(circle at 10px 10px,rgba(255,255,255,.6) 2px,transparent 2.5px);background-size:32px 32px"></div>
+
+<!-- ═════════════════ HOME ═════════════════ -->
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div style="position:relative;height:100%;display:flex;flex-direction:column;padding:62px 22px 26px;overflow-y:auto;animation:rise 340ms cubic-bezier(.05,.7,.1,1) both">
+
+<div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:hidden">
+<span style="--r:-14deg;position:absolute;left:5%;top:15%;width:62px;height:62px;border-radius:20px;background:#FF6B8B;border:4px solid #170F3E;animation:floatY 7s ease-in-out infinite"></span>
+<span style="position:absolute;right:7%;top:24%;width:50px;height:50px;border-radius:999px;background:#4DE3E3;border:4px solid #170F3E;animation:floatY 9s ease-in-out infinite reverse"></span>
+<span style="--r:18deg;position:absolute;left:12%;bottom:32%;width:42px;height:42px;border-radius:12px;background:#FFCE31;border:4px solid #170F3E;animation:floatY 11s ease-in-out infinite"></span>
+<span style="--r:-8deg;position:absolute;right:12%;bottom:24%;width:36px;height:36px;border-radius:10px;background:#7BE86A;border:4px solid #170F3E;animation:floatY 8.5s ease-in-out infinite reverse"></span>
+</div>
+
+<div style="position:relative;display:flex;justify-content:space-between;align-items:center;gap:12px">
+<button type="button" onClick="{{ toggleMute }}" style="display:grid;place-items:center;width:50px;height:50px;border-radius:16px;background:#FFFDF7;border:4px solid #170F3E;box-shadow:0 5px 0 #170F3E;color:#170F3E;transition:transform 90ms ease,box-shadow 90ms ease" style-active="transform:translateY(4px);box-shadow:0 1px 0 #170F3E">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.6L12 5.6v12.8l-4.4-3.9H4z"></path><path d="{{ soundPath }}"></path></svg>
+</button>
+<button type="button" onClick="{{ openHelp }}" style="display:grid;place-items:center;width:50px;height:50px;border-radius:16px;background:#FFFDF7;border:4px solid #170F3E;box-shadow:0 5px 0 #170F3E;color:#170F3E;transition:transform 90ms ease,box-shadow 90ms ease" style-active="transform:translateY(4px);box-shadow:0 1px 0 #170F3E">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M9.4 9.1a2.7 2.7 0 1 1 3.5 2.6c-.7.3-.9.9-.9 1.6"></path><path d="M12 17h.01"></path></svg>
+</button>
+</div>
+
+<div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:20px;margin-top:30px;text-align:center">
+<div style="display:flex;flex-direction:column;align-items:center;gap:12px;animation:wob 6s ease-in-out infinite">
+<div style="display:flex;align-items:center;gap:.02em;font-family:'Baloo 2',system-ui,sans-serif;font-weight:800;font-size:68px;line-height:1;letter-spacing:.02em;color:#FFCE31;-webkit-text-stroke:7px #170F3E;paint-order:stroke fill;filter:drop-shadow(0 7px 0 rgba(23,15,62,.5))">
+<span>C</span><span>H</span><span>A</span>
+<span style="position:relative;display:inline-grid;place-items:center;width:.82em;height:.82em;margin-inline:.05em">
+<span style="position:absolute;inset:0;border-radius:999px;background:#FF8A3D;border:5px solid #170F3E"></span>
+<span style="position:absolute;inset:20%;border-radius:999px;background:#FFFDF7;border:4px solid #170F3E"></span>
+<span style="position:relative;width:.26em;height:.26em;border-radius:999px;background:#170F3E;animation:pulse 1.5s ease-in-out infinite"></span>
+</span>
+<span>S</span>
+</div>
+<p style="margin:0;padding:6px 16px;border-radius:999px;background:#7C5CFF;border:4px solid #170F3E;box-shadow:0 4px 0 #170F3E;font-family:'Space Grotesk',system-ui,sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#FFFDF7">MICROGAME PARTY</p>
+</div>
+<p style="margin:0;max-width:30ch;color:#E7E0FF;font-size:17px;line-height:1.4;font-weight:600">10 microjogos. Rodadas de 15 a 30 segundos.<br>Ninguém tem tempo de ficar bom em nada.</p>
+</div>
+
+<div style="flex:1 1 auto;min-height:16px"></div>
+
+<div style="position:relative;display:flex;flex-direction:column;gap:14px;margin-top:22px">
+<button type="button" onClick="{{ goCreate }}" style="position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:78px;border-radius:24px;background:linear-gradient(180deg,#7BE86A 0%,#3FBF52 100%);border:5px solid #170F3E;box-shadow:0 8px 0 #170F3E;color:#0E2A13;font-size:26px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;overflow:hidden;transition:transform 90ms ease,box-shadow 90ms ease" style-active="transform:translateY(6px);box-shadow:0 2px 0 #170F3E">
+<span aria-hidden="true" style="position:absolute;top:0;bottom:0;width:40px;background:rgba(255,255,255,.45);animation:shine 3.4s ease-in-out infinite"></span>
+<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><rect x="3.4" y="3.4" width="17.2" height="17.2" rx="5"></rect><circle cx="8.6" cy="8.6" r="1.6" fill="currentColor"></circle><circle cx="15.4" cy="15.4" r="1.6" fill="currentColor"></circle><circle cx="12" cy="12" r="1.6" fill="currentColor"></circle></svg>
+CRIAR SALA</button>
+<div style="display:flex;gap:10px;align-items:stretch">
+<input value="{{ codeInput }}" onInput="{{ onCode }}" placeholder="CÓDIGO" maxlength="4" style="flex:1 1 auto;min-width:0;height:68px;padding:0 14px;border:5px solid #170F3E;border-radius:20px;background:#FFFDF7;box-shadow:0 6px 0 #170F3E;color:#170F3E;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:26px;font-weight:800;letter-spacing:.16em;text-align:center;text-transform:uppercase;outline:none">
+<button type="button" onClick="{{ goJoin }}" style="display:inline-flex;align-items:center;justify-content:center;min-height:68px;padding:0 22px;border-radius:20px;background:linear-gradient(180deg,#A78BFA 0%,#7C5CFF 100%);border:5px solid #170F3E;box-shadow:0 6px 0 #170F3E;color:#FFFDF7;font-size:19px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;opacity:{{ joinOpacity }};transition:transform 90ms ease,box-shadow 90ms ease" style-active="transform:translateY(4px);box-shadow:0 2px 0 #170F3E">ENTRAR</button>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- ═════════════════ COMO JOGA ═════════════════ -->
+<sc-if value="{{ help }}">
+<div style="position:absolute;inset:0;z-index:1300;display:flex;align-items:flex-end;justify-content:center;padding:14px;background:rgba(23,15,62,.7);backdrop-filter:blur(5px)">
+<div style="width:100%;max-height:88%;overflow-y:auto;display:flex;flex-direction:column;gap:16px;padding:26px 22px 22px;border:5px solid #170F3E;border-radius:30px;background:#FFFDF7;box-shadow:0 10px 0 #170F3E;animation:rise 320ms cubic-bezier(.34,1.56,.64,1) both">
+<h2 style="margin:0;font-size:38px;font-weight:800;line-height:1;letter-spacing:.02em;text-transform:uppercase;color:#170F3E">COMO JOGA</h2>
+<ul style="display:flex;flex-direction:column;gap:9px;margin:0;padding:0;list-style:none">
+<sc-for list="{{ gameGuide }}" as="g" hint-placeholder-count="5">
+<li style="display:flex;align-items:center;gap:12px;padding:9px 11px;border:3px solid #170F3E;border-radius:16px;background:#F0ECFF">
+<img src="{{ g.icon }}" alt="" style="width:40px;height:40px;flex:0 0 auto;object-fit:contain;display:block"/>
+<span style="flex:1;min-width:0;display:flex;flex-direction:column">
+<span style="font-size:18px;font-weight:800;text-transform:uppercase;color:#170F3E;line-height:1.15">{{ g.name }}</span>
+<span style="font-size:13px;font-weight:600;color:#5B4E9C;line-height:1.3">{{ g.how }}</span>
+</span>
+</li>
+</sc-for>
+</ul>
+<p style="margin:0;padding:12px 14px;border:3px solid #170F3E;border-radius:14px;background:#E9E2FF;color:#3B3170;font-size:13px;line-height:1.45;font-weight:600">Pontos por colocação: 1º 100 · 2º 75 · 3º 50 · 4º pra baixo 25, com bônus de sequência. Eventos CHAOS caem sem avisar — nunca na primeira rodada. Os outros jogadores ainda são simulados no seu aparelho.</p>
+<button type="button" onClick="{{ closeHelp }}" style="display:inline-flex;align-items:center;justify-content:center;width:100%;min-height:64px;border-radius:20px;background:linear-gradient(180deg,#FFC864 0%,#FF9F1C 100%);border:5px solid #170F3E;box-shadow:0 6px 0 #170F3E;color:#170F3E;font-size:22px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;transition:transform 90ms ease,box-shadow 90ms ease" style-active="transform:translateY(4px);box-shadow:0 2px 0 #170F3E">ENTENDI</button>
+</div>
+</div>
+</sc-if>
+
+<!-- ═════════════════ CRIAR SALA ═════════════════ -->
+<sc-if value="{{ isCreate }}">
+<div style="position:relative;height:100%;display:flex;flex-direction:column;padding:62px 22px 26px;overflow-y:auto;animation:rise 340ms cubic-bezier(.05,.7,.1,1) both">
+<div style="display:grid;grid-template-columns:50px 1fr 50px;align-items:center;gap:10px;margin-bottom:20px">
+<button type="button" onClick="{{ goHome }}" style="display:grid;place-items:center;width:50px;height:50px;border-radius:16px;background:#FFFDF7;border:4px solid #170F3E;box-shadow:0 5px 0 #170F3E;color:#170F3E;transition:transform 90ms ease,box-shadow 90ms ease" style-active="transform:translateY(4px);box-shadow:0 1px 0 #170F3E">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>
+</button>
+<p style="margin:0;text-align:center;font-size:28px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;color:#FFFDF7;-webkit-text-stroke:5px #170F3E;paint-order:stroke fill">CRIAR SALA</p>
+<span></span>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;padding:16px;border:5px solid #170F3E;border-radius:26px;background:#FFFDF7;box-shadow:0 7px 0 #170F3E">
+<div style="display:flex;align-items:center;gap:14px">
+<img src="{{ myAvSrc }}" alt="" style="display:block;width:78px;height:78px;flex:0 0 auto;object-fit:contain;animation:floatY 4s ease-in-out infinite"/>
+<div style="flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:6px">
+<p style="margin:0;font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#7A6FB5">SEU NOME</p>
+<input value="{{ nameInput }}" onInput="{{ onName }}" placeholder="VOCÊ" maxlength="10" style="display:block;width:100%;max-width:100%;min-width:0;height:54px;padding:0 12px;border:4px solid #170F3E;border-radius:16px;background:#F0ECFF;color:#170F3E;font-size:22px;font-weight:800;letter-spacing:.02em;outline:none">
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:7px">
+<sc-for list="{{ avatarChoices }}" as="a" hint-placeholder-count="12">
+<button type="button" onClick="{{ a.pick }}" style="display:flex;align-items:center;justify-content:center;min-height:50px;padding:3px;border:4px solid {{ a.border }};border-radius:14px;background:{{ a.bg }};box-shadow:{{ a.shadow }};transition:transform 90ms ease" style-active="transform:scale(.9)">
+<img src="{{ a.src }}" alt="" style="width:34px;height:34px;object-fit:contain;display:block"/>
+</button>
+</sc-for>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;margin-top:20px">
+<div style="display:flex;flex-direction:column;gap:7px">
+<p style="margin:0;font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#CFC4FF">MODO</p>
+<div style="display:flex;gap:6px;padding:6px;border:4px solid #170F3E;border-radius:22px;background:#2A1C74;box-shadow:0 5px 0 #170F3E">
+<sc-for list="{{ modeOpts }}" as="o" hint-placeholder-count="2">
+<button type="button" onClick="{{ o.pick }}" style="flex:1 1 0;min-width:0;min-height:48px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:{{ o.bg }};border:3px solid {{ o.border }};transition:transform 90ms ease" style-active="transform:scale(.94)"><span style="font-size:17px;font-weight:800;line-height:1;color:{{ o.fg }}">{{ o.label }}</span></button>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:7px">
+<p style="margin:0;font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#CFC4FF">{{ pickerTitle }}</p>
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:7px">
+<sc-for list="{{ gamePicker }}" as="g" hint-placeholder-count="10">
+<button type="button" onClick="{{ g.pick }}" style="display:flex;align-items:center;gap:9px;min-height:54px;padding:6px 10px;border-radius:16px;background:{{ g.bg }};border:3px solid {{ g.border }};opacity:{{ g.opacity }};transition:transform 90ms ease,opacity 90ms ease" style-active="transform:scale(.95)">
+<img src="{{ g.icon }}" alt="" style="width:28px;height:28px;flex:0 0 auto;object-fit:contain;display:block"/>
+<span style="flex:1;min-width:0;text-align:left;font-size:14px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;color:{{ g.fg }};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ g.name }}</span>
+</button>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:7px">
+<p style="margin:0;font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#CFC4FF">DURAÇÃO DA PARTIDA</p>
+<div style="display:flex;gap:6px;padding:6px;border:4px solid #170F3E;border-radius:22px;background:#2A1C74;box-shadow:0 5px 0 #170F3E">
+<sc-for list="{{ roundOpts }}" as="o" hint-placeholder-count="3">
+<button type="button" onClick="{{ o.pick }}" style="flex:1 1 0;min-width:0;min-height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;border-radius:14px;background:{{ o.bg }};border:3px solid {{ o.border }};transition:transform 90ms ease" style-active="transform:scale(.94)">
+<span style="font-size:22px;font-weight:800;line-height:1;color:{{ o.fg }}">{{ o.label }}</span>
+<span style="font-family:'Space Grotesk',system-ui,sans-serif;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:{{ o.sub }}">RODADAS</span>
+</button>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:7px">
+<p style="margin:0;font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#CFC4FF">QUANTOS JOGAM (2 A 8)</p>
+<div style="display:flex;gap:6px;padding:6px;border:4px solid #170F3E;border-radius:22px;background:#2A1C74;box-shadow:0 5px 0 #170F3E">
+<sc-for list="{{ playerOpts }}" as="o" hint-placeholder-count="5">
+<button type="button" onClick="{{ o.pick }}" style="flex:1 1 0;min-width:0;min-height:48px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:{{ o.bg }};border:3px solid {{ o.border }};transition:transform 90ms ease" style-active="transform:scale(.94)"><span style="font-size:22px;font-weight:800;line-height:1;color:{{ o.fg }}">{{ o.label }}</span></button>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:7px">
+<p style="margin:0;font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#CFC4FF">NÍVEL DOS OPONENTES</p>
+<div style="display:flex;gap:6px;padding:6px;border:4px solid #170F3E;border-radius:22px;background:#2A1C74;box-shadow:0 5px 0 #170F3E">
+<sc-for list="{{ skillOpts }}" as="o" hint-placeholder-count="3">
+<button type="button" onClick="{{ o.pick }}" style="flex:1 1 0;min-width:0;min-height:48px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:{{ o.bg }};border:3px solid {{ o.border }};transition:transform 90ms ease" style-active="transform:scale(.94)"><span style="font-size:19px;font-weight:800;line-height:1;color:{{ o.fg }}">{{ o.label }}</span></button>
+</sc-for>
+</div>
+</div>
+</div>
+
+<p style="margin:18px 0 0;padding:12px 14px;border:3px solid #170F3E;border-radius:16px;background:rgba(255,253,247,.14);color:#E7E0FF;font-size:13px;line-height:1.45;font-weight:600">Você joga como <b style="color:#FFCE31">Jogador 1</b>. Os outros são oponentes simulados até o multiplayer em rede entrar (Fase 2) — dá pra convidar gente pelo QR Code do lobby de qualquer forma.</p>
+
+<div style="flex:1 1 auto;min-height:20px"></div>
+<button type="button" onClick="{{ createRoom }}" style="display:inline-flex;align-items:center;justify-content:center;width:100%;min-height:78px;margin-top:20px;border-radius:24px;background:linear-gradient(180deg,#7BE86A 0%,#3FBF52 100%);border:5px solid #170F3E;box-shadow:0 8px 0 #170F3E;color:#0E2A13;font-size:26px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;transition:transform 90ms ease,box-shadow 90ms ease" style-active="transform:translateY(6px);box-shadow:0 2px 0 #170F3E">CRIAR SALA</button>
+</div>
+</sc-if>
+
+<!-- ═════════════════ ENTRAR POR CÓDIGO ═════════════════ -->
+<sc-if value="{{ isJoin }}">
+<div style="position:relative;height:100%;display:flex;flex-direction:column;padding:62px 22px 26px;overflow-y:auto;animation:rise 340ms cubic-bezier(.05,.7,.1,1) both">
+<div style="display:grid;grid-template-columns:50px 1fr 50px;align-items:center;gap:10px;margin-bottom:20px">
+<button type="button" onClick="{{ goHome }}" style="display:grid;place-items:center;width:50px;height:50px;border-radius:16px;background:#FFFDF7;border:4px solid #170F3E;box-shadow:0 5px 0 #170F3E;color:#170F3E;transition:transform 90ms ease,box-shadow 90ms ease" style-active="transform:translateY(4px);box-shadow:0 1px 0 #170F3E">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>
+</button>
+<p style="margin:0;text-align:center;font-size:24px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;color:#FFFDF7;-webkit-text-stroke:5px #170F3E;paint-order:stroke fill">ENTRAR NA SALA</p>
+<span></span>
+</div>
+
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:20px 16px;border:5px solid #170F3E;border-radius:26px;background:#FFCE31;box-shadow:0 7px 0 #170F3E;margin-bottom:20px">
+<p style="margin:0;font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8A6B00">SALA</p>
+<p style="margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:44px;font-weight:800;line-height:1;letter-spacing:.14em;color:#170F3E">{{ joinCode }}</p>
+<p style="margin:0;font-size:13px;font-weight:600;color:#7A5F04">o código veio do link · sem O, 0, I ou 1</p>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;padding:16px;border:5px solid #170F3E;border-radius:26px;background:#FFFDF7;box-shadow:0 7px 0 #170F3E">
+<div style="display:flex;align-items:center;gap:14px">
+<img src="{{ myAvSrc }}" alt="" style="display:block;width:78px;height:78px;flex:0 0 auto;object-fit:contain;animation:floatY 4s ease-in-out infinite"/>
+<div style="flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:6px">
+<p style="margin:0;font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#7A6FB5">SEU NOME</p>
+<input value="{{ nameInput }}" onInput="{{ onName }}" placeholder="VOCÊ" maxlength="10" style="display:block;width:100%;max-width:100%;min-width:0;height:54px;padding:0 12px;border:4px solid #170F3E;border-radius:16px;background:#F0ECFF;color:#170F3E;font-size:22px;font-weight:800;letter-spacing:.02em;outline:none">
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:7px">
+<sc-for list="{{ avatarChoices }}" as="a" hint-placeholder-count="12">
+<button type="button" onClick="{{ a.pick }}" style="display:flex;align-items:center;justify-content:center;min-height:50px;padding:3px;border:4px solid {{ a.border }};border-radius:14px;background:{{ a.bg }};box-shadow:{{ a.shadow }};transition:transform 90ms ease" style-active="transform:scale(.9)">
+<img src="{{ a.src }}" alt="" style="width:34px;height:34px;object-fit:contain;display:block"/>
+</button>
+</sc-for>
+</div>
+</div>
+
+<div style="flex:1 1 auto;min-height:20px"></div>
+<button type="button" onClick="{{ createRoom }}" style="display:inline-flex;align-items:center;justify-content:center;width:100%;min-height:78px;margin-top:20px;border-radius:24px;background:linear-gradient(180deg,#A78BFA 0%,#7C5CFF 100%);border:5px solid #170F3E;box-shadow:0 8px 0 #170F3E;color:#FFFDF7;font-size:24px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;transition:transform 90ms ease,box-shadow 90ms ease" style-active="transform:translateY(6px);box-shadow:0 2px 0 #170F3E">ENTRAR NA SALA</button>
+</div>
+</sc-if>
+
+<!-- ═════════════════ LOBBY ═════════════════ -->
+<sc-if value="{{ isLobby }}">
+<div style="position:relative;height:100%;display:flex;flex-direction:column;padding:62px 22px 26px;overflow-y:auto;animation:rise 340ms cubic-bezier(.05,.7,.1,1) both">
+<div style="display:grid;grid-template-columns:50px 1fr 50px;align-items:center;gap:10px;margin-bottom:18px">
+<button type="button" onClick="{{ goHome }}" style="display:grid;place-items:center;width:50px;height:50px;border-radius:16px;background:#FFFDF7;border:4px solid #170F3E;box-shadow:0 5px 0 #170F3E;color:#170F3E;transition:transform 90ms ease,box-shadow 90ms ease" style-active="transform:translateY(4px);box-shadow:0 1px 0 #170F3E">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>
+</button>
+<div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+<p style="margin:0;font-family:'Space Grotesk',system-ui,sans-serif;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#CFC4FF">SALA</p>
+<p style="margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:38px;font-weight:800;line-height:1;letter-spacing:.14em;color:#FFCE31;-webkit-text-stroke:5px #170F3E;paint-order:stroke fill">{{ roomId }}</p>
+</div>
+<span></span>
+</div>
+
+<div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px 16px;margin-bottom:20px;border:5px solid #170F3E;border-radius:28px;background:#FFFDF7;box-shadow:0 7px 0 #170F3E">
+<div style="width:164px;height:164px;padding:8px;border-radius:16px;background:#FFFDF7;border:4px solid #170F3E">
+<svg viewBox="0 0 29 29" shape-rendering="crispEdges" style="width:100%;height:100%;display:block">
+<rect width="29" height="29" fill="#FFFDF7"></rect>
+<sc-for list="{{ qrCells }}" as="c" hint-placeholder-count="180">
+<rect x="{{ c.x }}" y="{{ c.y }}" width="1" height="1" fill="#170F3E"></rect>
+</sc-for>
+</svg>
+</div>
+<p style="margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;color:#6C5FA8">chaos.game/j/{{ roomId }}</p>
+<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;width:100%">
+<button type="button" onClick="{{ copyLink }}" style="flex:1 1 130px;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;border:4px solid #170F3E;border-radius:16px;background:#4DE3E3;box-shadow:0 5px 0 #170F3E;color:#0B3A3A;font-size:15px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;transition:transform 90ms ease,box-shadow 90ms ease" style-active="transform:translateY(4px);box-shadow:0 1px 0 #170F3E">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M10 13a4 4 0 0 0 5.7.4l3-3A4 4 0 0 0 13 4.7l-1.7 1.7"></path><path d="M14 11a4 4 0 0 0-5.7-.4l-3 3A4 4 0 0 0 11 19.3l1.7-1.7"></path></svg>
+COPIAR</button>
+<button type="button" onClick="{{ shareLink }}" style="flex:1 1 130px;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;border:4px solid #170F3E;border-radius:16px;background:#FF9FC0;box-shadow:0 5px 0 #170F3E;color:#4A1029;font-size:15px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;transition:transform 90ms ease,box-shadow 90ms ease" style-active="transform:translateY(4px);box-shadow:0 1px 0 #170F3E">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5.5" r="2.8"></circle><circle cx="6" cy="12" r="2.8"></circle><circle cx="18" cy="18.5" r="2.8"></circle><path d="M8.5 10.7l7-3.4M8.5 13.3l7 3.4"></path></svg>
+ENVIAR</button>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+<p style="margin:0;font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#CFC4FF">JOGADORES {{ playerCount }}/8</p>
+<button type="button" onClick="{{ addBot }}" style="display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border:4px solid #170F3E;border-radius:999px;background:#FFCE31;box-shadow:0 4px 0 #170F3E;color:#170F3E;font-size:14px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;transition:transform 90ms ease,box-shadow 90ms ease" style-active="transform:translateY(3px);box-shadow:0 1px 0 #170F3E">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+BOT</button>
+</div>
+<div style="display:flex;flex-direction:column;gap:9px">
+<sc-for list="{{ players }}" as="p" hint-placeholder-count="4">
+<div style="position:relative;display:flex;align-items:center;gap:12px;min-height:72px;padding:8px 12px;border:4px solid #170F3E;border-radius:20px;background:{{ p.cardBg }};box-shadow:0 5px 0 #170F3E;overflow:hidden;animation:rise 300ms cubic-bezier(.05,.7,.1,1) both">
+<span style="display:grid;place-items:center;width:54px;height:54px;flex:0 0 auto;border-radius:15px;background:{{ p.color }};border:3px solid #170F3E">
+<img src="{{ p.src }}" alt="" style="width:44px;height:44px;object-fit:contain;display:block"/>
+</span>
+<div style="flex:1;min-width:0">
+<p style="margin:0;display:flex;align-items:center;gap:7px;font-size:19px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;color:{{ p.nameColor }};line-height:1.1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ p.name }}
+<sc-if value="{{ p.isHost }}"><img src="assets/simbolos/coroa.png" alt="anfitrião" style="width:24px;height:24px;flex:0 0 auto;object-fit:contain"/></sc-if>
+<sc-if value="{{ p.isYou }}"><span style="flex:0 0 auto;padding:2px 7px;border-radius:8px;background:#170F3E;color:#FFCE31;font-family:'Space Grotesk',system-ui,sans-serif;font-size:9px;font-weight:700;letter-spacing:.12em">VOCÊ</span></sc-if>
+</p>
+<p style="margin:0;font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;color:{{ p.metaColor }};letter-spacing:.12em;text-transform:uppercase">{{ p.meta }}</p>
+</div>
+<sc-if value="{{ p.removable }}">
+<button type="button" onClick="{{ p.remove }}" style="flex:0 0 auto;width:40px;height:40px;display:grid;place-items:center;border-radius:12px;border:3px solid #170F3E;background:#FF6B57;transition:transform 90ms ease" style-active="transform:scale(.9)">
+<img src="assets/acoes/fechar.png" alt="remover" style="width:20px;height:20px;object-fit:contain"/>
+</button>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;margin-bottom:20px">
+<div style="display:flex;flex-direction:column;gap:7px">
+<p style="margin:0;font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#CFC4FF">RODADAS</p>
+<div style="display:flex;gap:6px;padding:6px;border:4px solid #170F3E;border-radius:22px;background:#2A1C74;box-shadow:0 5px 0 #170F3E">
+<sc-for list="{{ roundOpts }}" as="o" hint-placeholder-count="3">
+<button type="button" onClick="{{ o.pick }}" style="flex:1 1 0;min-height:48px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:{{ o.bg }};border:3px solid {{ o.border }};transition:transform 90ms ease" style-active="transform:scale(.94)"><span style="font-size:22px;font-weight:800;line-height:1;color:{{ o.fg }}">{{ o.label }}</span></button>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:7px">
+<p style="margin:0;font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#CFC4FF">NÍVEL DOS OPONENTES</p>
+<div style="display:flex;gap:6px;padding:6px;border:4px solid #170F3E;border-radius:22px;background:#2A1C74;box-shadow:0 5px 0 #170F3E">
+<sc-for list="{{ skillOpts }}" as="o" hint-placeholder-count="3">
+<button type="button" onClick="{{ o.pick }}" style="flex:1 1 0;min-height:48px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:{{ o.bg }};border:3px solid {{ o.border }};transition:transform 90ms ease" style-active="transform:scale(.94)"><span style="font-size:19px;font-weight:800;line-height:1;color:{{ o.fg }}">{{ o.label }}</span></button>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div style="flex:1 1 auto;min-height:20px"></div>
+<button type="button" onClick="{{ startMatch }}" style="position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:82px;margin-top:20px;border-radius:24px;background:linear-gradient(180deg,#FFC864 0%,#FF9F1C 100%);border:5px solid #170F3E;box-shadow:0 8px 0 #170F3E;color:#170F3E;font-size:28px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;overflow:hidden;transition:transform 90ms ease,box-shadow 90ms ease" style-active="transform:translateY(6px);box-shadow:0 2px 0 #170F3E">
+<span aria-hidden="true" style="position:absolute;top:0;bottom:0;width:44px;background:rgba(255,255,255,.5);animation:shine 2.8s ease-in-out infinite"></span>
+<img src="assets/acoes/play.png" alt="" style="width:32px;height:32px;object-fit:contain"/>
+COMEÇAR</button>
+
+<sc-if value="{{ toast }}">
+<p style="position:absolute;left:50%;bottom:130px;z-index:1400;margin:0;padding:12px 22px;border:4px solid #170F3E;border-radius:999px;background:#FFCE31;color:#170F3E;font-size:16px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;box-shadow:0 5px 0 #170F3E;animation:toastIn 280ms cubic-bezier(.34,1.56,.64,1);pointer-events:none">{{ toast }}</p>
+</sc-if>
+</div>
+</sc-if>
+
+<!-- ═════════════════ INTRO ═════════════════ -->
+<sc-if value="{{ isIntro }}">
+<div style="position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:62px 22px 26px;text-align:center;animation:gameIntro 340ms cubic-bezier(.34,1.56,.64,1)">
+<p style="margin:0;padding:5px 14px;border:3px solid #170F3E;border-radius:999px;background:#FFFDF7;font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#170F3E">DESAFIO {{ round }} DE {{ totalRounds }}</p>
+<div style="display:grid;place-items:center;width:150px;height:150px;border-radius:44px;background:{{ accent }};border:6px solid #170F3E;box-shadow:0 10px 0 #170F3E;animation:floatY 3.4s ease-in-out infinite">
+<img src="{{ pictogram }}" alt="" style="width:98px;height:98px;object-fit:contain;display:block"/>
+</div>
+<h1 style="margin:0;font-size:52px;font-weight:800;line-height:1;letter-spacing:.03em;text-transform:uppercase;color:#FFFDF7;-webkit-text-stroke:7px #170F3E;paint-order:stroke fill">{{ gameName }}</h1>
+<p style="margin:0;max-width:26ch;color:#E7E0FF;font-size:19px;font-weight:600;line-height:1.35">{{ gameInstruction }}</p>
+
+<sc-if value="{{ chaos }}">
+<div style="position:relative;display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;margin-top:10px;border-radius:22px;background:linear-gradient(140deg,#7C5CFF 0%,#4A2FB8 100%);border:5px solid #170F3E;box-shadow:0 8px 0 #170F3E;text-align:left;overflow:hidden;animation:pop 380ms cubic-bezier(.34,1.56,.64,1) both">
+<span aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(100deg,transparent 40%,rgba(255,255,255,.3) 50%,transparent 60%);animation:sweep 900ms cubic-bezier(.05,.7,.1,1) both;pointer-events:none"></span>
+<img src="{{ chaosIcon }}" alt="" style="width:56px;height:56px;flex:0 0 auto;object-fit:contain;display:block"/>
+<span style="flex:1;min-width:0">
+<span style="display:block;font-family:'Space Grotesk',system-ui,sans-serif;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#D9CCFF">EVENTO CHAOS</span>
+<span style="display:block;font-size:24px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;color:#FFFDF7;line-height:1.1">{{ chaosName }}</span>
+<span style="display:block;font-size:14px;font-weight:600;color:#E4DAFF">{{ chaosDesc }}</span>
+</span>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<!-- ═════════════════ 3 · 2 · 1 ═════════════════ -->
+<sc-if value="{{ isCount }}">
+<div style="position:absolute;inset:0;z-index:1200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;text-align:center;background:#241B5E">
+<p style="margin:0;font-size:32px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;color:{{ accent }};-webkit-text-stroke:6px #170F3E;paint-order:stroke fill">{{ gameName }}</p>
+<p style="margin:0;max-width:22ch;font-family:'Space Grotesk',system-ui,sans-serif;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#CFC4FF">{{ gameInstruction }}</p>
+<p key="{{ countKey }}" style="margin:26px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:96px;font-weight:800;line-height:1;color:#FFCE31;-webkit-text-stroke:9px #170F3E;paint-order:stroke fill;animation:pop 380ms cubic-bezier(.34,1.56,.64,1) both">{{ countLabel }}</p>
+<span key="{{ ringKey }}" aria-hidden="true" style="position:absolute;top:50%;left:50%;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:999px;border:8px solid {{ accent }};animation:popOut 700ms cubic-bezier(.05,.7,.1,1) both;pointer-events:none"></span>
+</div>
+</sc-if>
+
+<!-- ═════════════════ JOGANDO ═════════════════ -->
+<sc-if value="{{ isPlay }}">
+<div style="position:relative;height:100%;display:flex;flex-direction:column;overflow:hidden">
+
+<div style="position:relative;z-index:100;flex:0 0 auto;display:flex;flex-direction:column;gap:8px;padding:58px 14px 10px;pointer-events:none">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+<div style="display:flex;align-items:center;gap:8px;min-width:0">
+<span style="flex:0 0 auto;padding:4px 9px;border:3px solid #170F3E;border-radius:10px;background:#FFFDF7;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:800;color:#170F3E">{{ round }}/{{ totalRounds }}</span>
+<p style="margin:0;font-size:24px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;color:{{ accent }};-webkit-text-stroke:5px #170F3E;paint-order:stroke fill;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ gameName }}</p>
+</div>
+<div style="display:flex;align-items:center;gap:8px">
+<span style="display:inline-flex;flex-direction:column;align-items:center;min-width:62px;padding:4px 10px;border:4px solid #170F3E;border-radius:14px;background:#FFFDF7">
+<span style="font-family:'Space Grotesk',system-ui,sans-serif;font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7A6FB5;line-height:1.2">{{ hudLabel }}</span>
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:20px;font-weight:800;line-height:1;color:#170F3E">{{ hudValue }}</span>
+</span>
+<span style="position:relative;display:grid;place-items:center;width:50px;height:50px;flex:0 0 auto;border-radius:999px;border:4px solid #170F3E;background:conic-gradient({{ timerColor }} {{ timerDeg }},#2A1C74 {{ timerDeg }})">
+<span style="position:absolute;inset:5px;border-radius:999px;background:#FFFDF7"></span>
+<span style="position:relative;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:18px;font-weight:800;line-height:1;color:#170F3E">{{ timerValue }}</span>
+</span>
+</div>
+</div>
+<p style="margin:0;align-self:flex-start;padding:4px 12px;border:3px solid #170F3E;border-radius:999px;background:rgba(255,253,247,.92);font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#170F3E">{{ gameHint }}</p>
+</div>
+
+<!-- CORTA FRUTA -->
+<sc-if value="{{ isSlice }}">
+<div ref="{{ sliceRef }}" onPointerDown="{{ sliceDown }}" onPointerMove="{{ sliceMove }}" onPointerUp="{{ sliceUp }}" onPointerCancel="{{ sliceUp }}" onPointerLeave="{{ sliceUp }}" style="position:relative;flex:1 1 auto;min-height:0;margin:0 12px 16px;border:5px solid #170F3E;border-radius:28px;background:radial-gradient(120% 90% at 50% 110%,#3B2A96 0%,#241B5E 70%);box-shadow:0 8px 0 #170F3E;overflow:hidden;touch-action:none;animation:{{ sliceShake }}">
+<sc-for list="{{ fruits }}" as="f" hint-placeholder-count="0">
+<img src="{{ f.src }}" alt="" style="position:absolute;left:{{ f.left }};top:{{ f.top }};width:{{ f.size }};height:{{ f.size }};object-fit:contain;transform:translate(-50%,-50%) rotate({{ f.rot }});filter:drop-shadow(0 4px 0 rgba(23,15,62,.4));pointer-events:none"/>
+</sc-for>
+<sc-for list="{{ trailDots }}" as="d" hint-placeholder-count="0">
+<span style="position:absolute;left:{{ d.left }};top:{{ d.top }};width:{{ d.size }};height:{{ d.size }};margin:0;border-radius:999px;background:#FFFDF7;opacity:{{ d.opacity }};transform:translate(-50%,-50%);pointer-events:none"></span>
+</sc-for>
+<sc-for list="{{ pops }}" as="p" hint-placeholder-count="0">
+<img src="{{ p.src }}" alt="" style="position:absolute;left:{{ p.left }};top:{{ p.top }};width:{{ p.size }};height:{{ p.size }};object-fit:contain;transform:translate(-50%,-50%);animation:burst 420ms ease-out both;pointer-events:none"/>
+</sc-for>
+<sc-for list="{{ floaters }}" as="n" hint-placeholder-count="0">
+<span style="position:absolute;left:{{ n.left }};top:{{ n.top }};font-family:'JetBrains Mono',ui-monospace,monospace;font-size:22px;font-weight:800;color:{{ n.color }};-webkit-text-stroke:5px #170F3E;paint-order:stroke fill;transform:translate(-50%,-50%);animation:scorePop 700ms ease-out both;pointer-events:none">{{ n.text }}</span>
+</sc-for>
+<sc-if value="{{ sliceCombo }}">
+<p style="position:absolute;left:50%;bottom:14px;margin:0;transform:translateX(-50%);padding:5px 14px;border:3px solid #170F3E;border-radius:999px;background:#FFCE31;font-size:15px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#170F3E;pointer-events:none">COMBO x{{ sliceCombo }}</p>
+</sc-if>
+</div>
+</sc-if>
+
+<!-- MIRA -->
+<sc-if value="{{ isAim }}">
+<div onPointerDown="{{ aimMiss }}" style="position:relative;flex:1 1 auto;min-height:0;margin:0 12px 16px;border:5px solid #170F3E;border-radius:28px;background-color:#2A1C74;background-image:linear-gradient(rgba(255,255,255,.08) 2px,transparent 2px),linear-gradient(90deg,rgba(255,255,255,.08) 2px,transparent 2px);background-size:44px 44px,44px 44px;box-shadow:0 8px 0 #170F3E;overflow:hidden;touch-action:none">
+<sc-for list="{{ targets }}" as="t" hint-placeholder-count="0">
+<button type="button" onPointerDown="{{ t.hit }}" style="position:absolute;left:{{ t.left }};top:{{ t.top }};width:{{ t.size }};height:{{ t.size }};transform:translate(-50%,-50%);animation:targetIn 180ms cubic-bezier(.34,1.56,.64,1) both;touch-action:none">
+<img src="{{ t.src }}" alt="" style="width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 4px 0 rgba(23,15,62,.4))"/>
+</button>
+</sc-for>
+<sc-for list="{{ floaters }}" as="n" hint-placeholder-count="0">
+<span style="position:absolute;left:{{ n.left }};top:{{ n.top }};font-family:'JetBrains Mono',ui-monospace,monospace;font-size:22px;font-weight:800;color:{{ n.color }};-webkit-text-stroke:5px #170F3E;paint-order:stroke fill;transform:translate(-50%,-50%);animation:scorePop 700ms ease-out both;pointer-events:none">{{ n.text }}</span>
+</sc-for>
+</div>
+</sc-if>
+
+<!-- ESCALADA -->
+<sc-if value="{{ isClimb }}">
+<div style="position:relative;flex:1 1 auto;min-height:0;margin:0 12px 12px;border:5px solid #170F3E;border-radius:28px;background:linear-gradient(180deg,#1B1350 0%,#33228C 100%);box-shadow:0 8px 0 #170F3E;overflow:hidden;touch-action:none">
+<sc-for list="{{ platforms }}" as="pl" hint-placeholder-count="6">
+<span style="position:absolute;left:{{ pl.left }};top:{{ pl.top }};width:{{ pl.width }};height:16px;transform:translateX(-50%);border:4px solid #170F3E;border-radius:999px;background:{{ pl.color }};box-shadow:0 4px 0 #170F3E;opacity:{{ pl.opacity }}">
+<sc-if value="{{ pl.item }}"><img src="{{ pl.item }}" alt="" style="position:absolute;left:50%;bottom:12px;width:{{ pl.itemSize }};height:{{ pl.itemSize }};object-fit:contain;transform:translateX(-50%);display:block"/></sc-if>
+</span>
+</sc-for>
+<sc-for list="{{ climbHazards }}" as="h" hint-placeholder-count="0">
+<img src="{{ h.src }}" alt="" style="position:absolute;left:{{ h.left }};top:{{ h.top }};width:54px;height:54px;object-fit:contain;transform:translate(-50%,-50%);animation:floatY 2.4s ease-in-out infinite;pointer-events:none"/>
+</sc-for>
+<sc-for list="{{ climbRivals }}" as="r" hint-placeholder-count="0">
+<img src="{{ r.src }}" alt="" style="position:absolute;left:{{ r.left }};top:{{ r.top }};width:42px;height:42px;object-fit:contain;transform:translate(-50%,-50%);opacity:.5;filter:grayscale(.2);pointer-events:none"/>
+</sc-for>
+<span style="position:absolute;left:{{ climbX }};top:{{ climbY }};width:62px;height:62px;transform:translate(-50%,-50%) scaleX({{ climbFace }});pointer-events:none">
+<img src="{{ myAvSrc }}" alt="" style="width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 5px 0 rgba(23,15,62,.45))"/>
+<sc-if value="{{ climbGear }}"><img src="{{ climbGear }}" alt="" style="position:absolute;left:50%;top:-30px;width:44px;height:44px;object-fit:contain;transform:translateX(-50%);display:block;animation:pulse .5s ease-in-out infinite"/></sc-if>
+</span>
+<p style="position:absolute;top:10px;right:12px;margin:0;padding:4px 12px;border:3px solid #170F3E;border-radius:999px;background:#4DE3E3;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:18px;font-weight:800;color:#0B3A3A;pointer-events:none">{{ climbHeight }} m</p>
+<sc-if value="{{ climbBanner }}">
+<p style="position:absolute;left:50%;top:16%;margin:0;transform:translateX(-50%);padding:6px 18px;border:4px solid #170F3E;border-radius:999px;background:{{ climbBannerBg }};font-size:16px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#170F3E;box-shadow:0 5px 0 #170F3E;pointer-events:none;animation:pop 300ms cubic-bezier(.34,1.56,.64,1) both">{{ climbBanner }}</p>
+</sc-if>
+</div>
+<div style="flex:0 0 auto;display:flex;gap:12px;padding:0 14px 18px">
+<button type="button" onPointerDown="{{ climbLeftDown }}" onPointerUp="{{ climbRelease }}" onPointerLeave="{{ climbRelease }}" onPointerCancel="{{ climbRelease }}" style="flex:1 1 0;display:grid;place-items:center;min-height:96px;border-radius:26px;background:linear-gradient(180deg,#A8F4F4,#4DE3E3);border:6px solid #170F3E;box-shadow:0 8px 0 #170F3E;color:#0B3A3A;touch-action:none;transition:transform 70ms ease,box-shadow 70ms ease" style-active="transform:translateY(6px);box-shadow:0 2px 0 #170F3E">
+<svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>
+</button>
+<button type="button" onPointerDown="{{ climbRightDown }}" onPointerUp="{{ climbRelease }}" onPointerLeave="{{ climbRelease }}" onPointerCancel="{{ climbRelease }}" style="flex:1 1 0;display:grid;place-items:center;min-height:96px;border-radius:26px;background:linear-gradient(180deg,#A8F4F4,#4DE3E3);border:6px solid #170F3E;box-shadow:0 8px 0 #170F3E;color:#0B3A3A;touch-action:none;transition:transform 70ms ease,box-shadow 70ms ease" style-active="transform:translateY(6px);box-shadow:0 2px 0 #170F3E">
+<svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg>
+</button>
+</div>
+</sc-if>
+
+<!-- MEMÓRIA -->
+<sc-if value="{{ isMemory }}">
+<div style="flex:1 1 auto;min-height:0;display:flex;flex-direction:column;align-items:center;gap:12px;padding:4px 16px 18px">
+<p style="margin:0;padding:6px 16px;border:4px solid #170F3E;border-radius:999px;background:{{ memoBadgeBg }};box-shadow:0 4px 0 #170F3E;font-size:17px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#170F3E">{{ memoStatus }}</p>
+<div style="flex:1 1 auto;min-height:0;width:100%;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:12px">
+<sc-for list="{{ memoPads }}" as="p" hint-placeholder-count="4">
+<button type="button" onPointerDown="{{ p.tap }}" style="display:grid;place-items:center;border-radius:28px;background:{{ p.bg }};border:6px solid #170F3E;box-shadow:{{ p.shadow }};transform:{{ p.scale }};transition:transform 110ms ease,background 110ms ease;touch-action:none">
+<img src="{{ p.src }}" alt="" style="width:64px;height:64px;object-fit:contain;display:block;opacity:{{ p.opacity }}"/>
+</button>
+</sc-for>
+</div>
+<div style="display:flex;gap:6px;align-items:center">
+<sc-for list="{{ memoDots }}" as="d" hint-placeholder-count="3">
+<span style="width:12px;height:12px;border-radius:999px;border:3px solid #170F3E;background:{{ d.bg }}"></span>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<!-- RITMO -->
+<sc-if value="{{ isRitmo }}">
+<div style="flex:1 1 auto;min-height:0;display:flex;flex-direction:column;padding:0 12px 14px">
+<div style="position:relative;flex:1 1 auto;min-height:0;border:5px solid #170F3E;border-radius:28px 28px 0 0;border-bottom:none;background:linear-gradient(180deg,#1B1350 0%,#2E1F7E 100%);overflow:hidden">
+<sc-for list="{{ ritmoLanes }}" as="l" hint-placeholder-count="4">
+<span style="position:absolute;left:{{ l.left }};top:0;bottom:0;width:25%;border-right:2px solid rgba(255,253,247,.08);background:{{ l.wash }};transition:background 90ms ease"></span>
+</sc-for>
+<span style="position:absolute;left:0;right:0;top:82%;height:8px;background:rgba(255,253,247,.5);box-shadow:0 0 0 3px #170F3E"></span>
+<sc-for list="{{ ritmoFx }}" as="f" hint-placeholder-count="0">
+<span style="position:absolute;left:{{ f.left }};top:82%;width:74px;height:74px;margin:-37px 0 0 -37px;border-radius:999px;border:6px solid {{ f.color }};transform:translate(0,0);animation:burst 460ms ease-out both;pointer-events:none"></span>
+</sc-for>
+<sc-for list="{{ ritmoSparks }}" as="s" hint-placeholder-count="0">
+<span style="position:absolute;left:{{ s.left }};top:{{ s.top }};width:{{ s.size }};height:{{ s.size }};border-radius:999px;background:{{ s.color }};transform:translate(-50%,-50%);animation:scorePop 620ms ease-out both;pointer-events:none"></span>
+</sc-for>
+<sc-for list="{{ ritmoJudge }}" as="j" hint-placeholder-count="0">
+<span style="position:absolute;left:{{ j.left }};top:70%;margin:0;transform:translate(-50%,-50%);font-size:19px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:{{ j.color }};-webkit-text-stroke:5px #170F3E;paint-order:stroke fill;animation:scorePop 700ms ease-out both;pointer-events:none">{{ j.text }}</span>
+</sc-for>
+<sc-for list="{{ ritmoNotes }}" as="n" hint-placeholder-count="0">
+<span style="position:absolute;left:{{ n.left }};top:{{ n.top }};width:19%;height:{{ n.height }};transform:translate(-50%,-100%);border:4px solid #170F3E;border-radius:{{ n.radius }};background:{{ n.bg }};box-shadow:0 4px 0 rgba(23,15,62,.5);display:grid;place-items:center;pointer-events:none">
+<sc-if value="{{ n.icon }}"><img src="{{ n.icon }}" alt="" style="width:30px;height:30px;object-fit:contain;display:block"/></sc-if>
+</span>
+</sc-for>
+<sc-if value="{{ ritmoStar }}">
+<p style="position:absolute;left:50%;top:12px;margin:0;transform:translateX(-50%);padding:5px 16px;border:4px solid #170F3E;border-radius:999px;background:#FFCE31;font-size:15px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#170F3E;pointer-events:none">ENERGIA x2 · {{ ritmoStar }}</p>
+</sc-if>
+<sc-if value="{{ ritmoCombo }}">
+<p style="position:absolute;left:50%;top:46%;margin:0;transform:translateX(-50%);font-family:'JetBrains Mono',ui-monospace,monospace;font-size:40px;font-weight:800;color:#FFCE31;-webkit-text-stroke:7px #170F3E;paint-order:stroke fill;opacity:.9;pointer-events:none">x{{ ritmoCombo }}</p>
+</sc-if>
+<sc-for list="{{ floaters }}" as="n" hint-placeholder-count="0">
+<span style="position:absolute;left:{{ n.left }};top:{{ n.top }};font-family:'JetBrains Mono',ui-monospace,monospace;font-size:20px;font-weight:800;color:{{ n.color }};-webkit-text-stroke:5px #170F3E;paint-order:stroke fill;transform:translate(-50%,-50%);animation:scorePop 700ms ease-out both;pointer-events:none">{{ n.text }}</span>
+</sc-for>
+</div>
+<div style="flex:0 0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:8px 0 0">
+<sc-for list="{{ ritmoLanes }}" as="l" hint-placeholder-count="4">
+<button type="button" onPointerDown="{{ l.down }}" onPointerUp="{{ l.up }}" onPointerLeave="{{ l.up }}" onPointerCancel="{{ l.up }}" style="display:grid;place-items:center;min-height:92px;border-radius:22px;background:{{ l.bg }};border:5px solid #170F3E;box-shadow:{{ l.shadow }};transform:{{ l.press }};transition:transform 70ms ease,box-shadow 70ms ease,background 70ms ease;touch-action:none">
+<span style="width:32px;height:32px;border-radius:999px;border:4px solid #170F3E;background:{{ l.dot }}"></span>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<!-- ALVO NO RITMO (osu) -->
+<sc-if value="{{ isOsu }}">
+<div ref="{{ osuRef }}" onPointerMove="{{ osuMove }}" onPointerUp="{{ osuRelease }}" onPointerCancel="{{ osuRelease }}" style="position:relative;flex:1 1 auto;min-height:0;margin:0 12px 16px;border:5px solid #170F3E;border-radius:28px;background:radial-gradient(120% 100% at 50% 0%,#2B1D7A 0%,#150F3C 100%);box-shadow:0 8px 0 #170F3E;overflow:hidden;touch-action:none">
+<sc-for list="{{ osuSliders }}" as="s" hint-placeholder-count="0">
+<span style="position:absolute;left:{{ s.left }};top:{{ s.top }};width:{{ s.len }};height:26px;transform:translate(0,-50%) rotate({{ s.angle }});transform-origin:13px 50%;border:4px solid rgba(255,253,247,.5);border-radius:999px;background:rgba(255,253,247,.1);pointer-events:none"></span>
+</sc-for>
+<sc-for list="{{ osuBalls }}" as="b" hint-placeholder-count="0">
+<span style="position:absolute;left:{{ b.left }};top:{{ b.top }};width:32px;height:32px;margin:-16px 0 0 -16px;border-radius:999px;border:4px solid #170F3E;background:#FFCE31;pointer-events:none"></span>
+</sc-for>
+<sc-for list="{{ osuNotes }}" as="n" hint-placeholder-count="0">
+<button type="button" onPointerDown="{{ n.hit }}" style="position:absolute;left:{{ n.left }};top:{{ n.top }};width:78px;height:78px;margin:-39px 0 0 -39px;display:grid;place-items:center;border-radius:999px;background:{{ n.bg }};border:5px solid #FFFDF7;box-shadow:0 0 0 4px #170F3E;color:#FFFDF7;font-size:30px;font-weight:800;touch-action:none">{{ n.num }}
+<span style="position:absolute;left:50%;top:50%;width:78px;height:78px;margin:-39px 0 0 -39px;border-radius:999px;border:4px solid {{ n.ringColor }};transform:scale({{ n.ring }});pointer-events:none"></span>
+</button>
+</sc-for>
+<sc-for list="{{ osuFx }}" as="f" hint-placeholder-count="0">
+<span style="position:absolute;left:{{ f.left }};top:{{ f.top }};width:86px;height:86px;margin:-43px 0 0 -43px;border-radius:999px;border:6px solid {{ f.color }};animation:burst 460ms ease-out both;pointer-events:none"></span>
+</sc-for>
+<sc-for list="{{ osuJudge }}" as="j" hint-placeholder-count="0">
+<span style="position:absolute;left:{{ j.left }};top:{{ j.top }};transform:translate(-50%,-50%);font-size:20px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:{{ j.color }};-webkit-text-stroke:5px #170F3E;paint-order:stroke fill;animation:scorePop 700ms ease-out both;pointer-events:none">{{ j.text }}</span>
+</sc-for>
+<sc-if value="{{ osuCombo }}">
+<p style="position:absolute;left:14px;bottom:12px;margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:26px;font-weight:800;color:#FFCE31;-webkit-text-stroke:6px #170F3E;paint-order:stroke fill;pointer-events:none">{{ osuCombo }}x</p>
+</sc-if>
+</div>
+</sc-if>
+
+<!-- PIANO TILE -->
+<sc-if value="{{ isPiano }}">
+<div style="position:relative;flex:1 1 auto;min-height:0;margin:0 12px 16px;border:5px solid #170F3E;border-radius:28px;background:#FFFDF7;box-shadow:0 8px 0 #170F3E;overflow:hidden;touch-action:none;animation:{{ pianoShake }}">
+<sc-for list="{{ pianoCols }}" as="c" hint-placeholder-count="4">
+<button type="button" onPointerDown="{{ c.tap }}" style="position:absolute;left:{{ c.left }};top:0;bottom:0;width:25%;border-right:3px solid #E4DDF6;background:transparent;touch-action:none"></button>
+</sc-for>
+<sc-for list="{{ pianoTiles }}" as="t" hint-placeholder-count="0">
+<span style="position:absolute;left:{{ t.left }};top:{{ t.top }};width:25%;height:22%;padding:3px;pointer-events:none">
+<span style="display:grid;place-items:center;width:100%;height:100%;border:4px solid #170F3E;border-radius:14px;background:{{ t.bg }}">
+<sc-if value="{{ t.icon }}"><img src="{{ t.icon }}" alt="" style="width:40px;height:40px;object-fit:contain;display:block"/></sc-if>
+</span>
+</span>
+</sc-for>
+<sc-for list="{{ floaters }}" as="n" hint-placeholder-count="0">
+<span style="position:absolute;left:{{ n.left }};top:{{ n.top }};font-family:'JetBrains Mono',ui-monospace,monospace;font-size:20px;font-weight:800;color:{{ n.color }};-webkit-text-stroke:5px #170F3E;paint-order:stroke fill;transform:translate(-50%,-50%);animation:scorePop 700ms ease-out both;pointer-events:none">{{ n.text }}</span>
+</sc-for>
+<sc-if value="{{ pianoSlow }}">
+<p style="position:absolute;left:50%;top:10px;margin:0;transform:translateX(-50%);padding:4px 14px;border:3px solid #170F3E;border-radius:999px;background:#4DE3E3;font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#0B3A3A;pointer-events:none">CÂMERA LENTA</p>
+</sc-if>
+</div>
+</sc-if>
+
+<!-- CONTORNO -->
+<sc-if value="{{ isTraco }}">
+<div style="flex:1 1 auto;min-height:0;display:flex;flex-direction:column;align-items:center;gap:10px;padding:4px 14px 16px">
+<div style="display:flex;align-items:center;gap:10px;width:100%">
+<p style="margin:0;flex:0 0 auto;padding:5px 14px;border:4px solid #170F3E;border-radius:999px;background:#FFCE31;font-size:16px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#170F3E">{{ tracoName }}</p>
+<span style="flex:1;height:18px;border:4px solid #170F3E;border-radius:999px;background:#2A1C74;overflow:hidden"><span style="display:block;height:100%;width:{{ tracoPct }};background:linear-gradient(90deg,#7BE86A,#4DE3E3);transition:width 90ms linear"></span></span>
+<span style="flex:0 0 auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:18px;font-weight:800;color:#FFFDF7">{{ tracoPct }}</span>
+</div>
+<div ref="{{ tracoRef }}" onPointerDown="{{ tracoDown }}" onPointerMove="{{ tracoMove }}" onPointerUp="{{ tracoUp }}" onPointerCancel="{{ tracoUp }}" onPointerLeave="{{ tracoUp }}" style="position:relative;width:100%;aspect-ratio:1;max-height:100%;border:5px solid #170F3E;border-radius:28px;background:#FFFDF7;box-shadow:0 8px 0 #170F3E;overflow:hidden;touch-action:none">
+<sc-for list="{{ tracoDots }}" as="d" hint-placeholder-count="0">
+<span style="position:absolute;left:{{ d.left }};top:{{ d.top }};width:{{ d.size }};height:{{ d.size }};border-radius:999px;background:{{ d.color }};transform:translate(-50%,-50%);pointer-events:none"></span>
+</sc-for>
+<img src="assets/jogo/pincel.png" alt="" style="position:absolute;left:{{ tracoTipX }};top:{{ tracoTipY }};width:44px;height:44px;object-fit:contain;transform:translate(-30%,-70%);opacity:{{ tracoTipOn }};pointer-events:none"/>
+<sc-if value="{{ tracoDoneBanner }}">
+<p style="position:absolute;left:50%;top:50%;margin:0;transform:translate(-50%,-50%);padding:8px 20px;border:5px solid #170F3E;border-radius:999px;background:#7BE86A;font-size:22px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0E2A13;box-shadow:0 6px 0 #170F3E;animation:pop 320ms cubic-bezier(.34,1.56,.64,1) both;pointer-events:none">FECHOU!</p>
+</sc-if>
+</div>
+<p style="margin:0;font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#CFC4FF">FORMAS FECHADAS: {{ tracoDoneCount }}</p>
+</div>
+</sc-if>
+
+<!-- CORRIDA (dino) -->
+<sc-if value="{{ isDino }}">
+<div style="flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:10px;padding:4px 12px 16px">
+<div style="position:relative;flex:1 1 auto;min-height:0;border:5px solid #170F3E;border-radius:28px;background:#FFFFFF;box-shadow:0 8px 0 #170F3E;overflow:hidden;touch-action:none;animation:{{ dinoShake }}">
+<span style="position:absolute;left:0;right:0;bottom:22%;height:4px;background:#535353"></span>
+<span style="position:absolute;left:{{ dinoGround }};bottom:calc(22% - 9px);width:200%;height:6px;background:repeating-linear-gradient(90deg,#535353 0 14px,transparent 14px 46px)"></span>
+<sc-for list="{{ dinoClouds }}" as="c" hint-placeholder-count="2">
+<span style="position:absolute;left:{{ c.left }};top:{{ c.top }};width:56px;height:16px;border-radius:999px;background:#EDEDED"></span>
+</sc-for>
+<sc-for list="{{ dinoObstacles }}" as="o" hint-placeholder-count="0">
+<img src="{{ o.src }}" alt="" style="position:absolute;left:{{ o.left }};bottom:{{ o.bottom }};width:auto;height:{{ o.height }};object-fit:contain;transform:translateX(-50%);pointer-events:none"/>
+</sc-for>
+<img src="{{ dinoSprite }}" alt="" style="position:absolute;left:22%;bottom:{{ dinoBottom }};width:auto;height:{{ dinoH }};object-fit:contain;transform:translateX(-50%);pointer-events:none"/>
+<p style="position:absolute;top:10px;right:14px;margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:20px;font-weight:800;letter-spacing:.1em;color:#535353;pointer-events:none">{{ dinoDist }} m</p>
+<sc-if value="{{ dinoBanner }}">
+<p style="position:absolute;left:50%;top:26%;margin:0;transform:translateX(-50%);padding:6px 18px;border:4px solid #170F3E;border-radius:999px;background:#FF6B57;font-size:16px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#FFFDF7;box-shadow:0 5px 0 #170F3E;pointer-events:none;animation:pop 280ms cubic-bezier(.34,1.56,.64,1) both">BATEU!</p>
+</sc-if>
+</div>
+<div style="flex:0 0 auto;display:flex;gap:12px">
+<button type="button" onPointerDown="{{ dinoDuckDown }}" onPointerUp="{{ dinoDuckUp }}" onPointerLeave="{{ dinoDuckUp }}" onPointerCancel="{{ dinoDuckUp }}" style="flex:1 1 0;display:grid;place-items:center;min-height:92px;border-radius:24px;background:#FFFDF7;border:5px solid #170F3E;box-shadow:0 7px 0 #170F3E;color:#170F3E;font-size:19px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;touch-action:none;transition:transform 70ms ease,box-shadow 70ms ease" style-active="transform:translateY(5px);box-shadow:0 2px 0 #170F3E">ABAIXAR</button>
+<button type="button" onPointerDown="{{ dinoJump }}" style="flex:1.6 1 0;display:grid;place-items:center;min-height:92px;border-radius:24px;background:linear-gradient(180deg,#B7F5AC,#7BE86A);border:5px solid #170F3E;box-shadow:0 7px 0 #170F3E;color:#0E2A13;font-size:24px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;touch-action:none;transition:transform 70ms ease,box-shadow 70ms ease" style-active="transform:translateY(5px);box-shadow:0 2px 0 #170F3E">PULAR</button>
+</div>
+</div>
+</sc-if>
+
+<!-- MARTELO -->
+<sc-if value="{{ isMash }}">
+<div style="flex:1 1 auto;min-height:0;display:flex;flex-direction:column;align-items:center;gap:12px;padding:8px 14px 12px">
+<div style="position:relative;flex:1 1 auto;width:196px;min-height:0;overflow:hidden;border:6px solid #170F3E;border-radius:34px;background:#2A1C74;box-shadow:0 8px 0 #170F3E">
+<div style="position:absolute;left:0;right:0;bottom:0;height:{{ mashPct }};background:linear-gradient(to top,{{ accentDeep }},{{ accent }});transition:height 90ms linear"></div>
+<div style="position:absolute;left:0;right:0;top:22px;border-top:5px dashed rgba(255,253,247,.6);pointer-events:none"><span style="display:block;padding-top:4px;text-align:center;font-family:'Space Grotesk',system-ui,sans-serif;font-size:12px;font-weight:700;letter-spacing:.16em;color:rgba(255,253,247,.75)">META</span></div>
+<div style="position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:44px;font-weight:800;color:#FFFDF7;-webkit-text-stroke:6px #170F3E;paint-order:stroke fill;pointer-events:none">{{ mashPercent }}%</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:7px;width:100%;max-width:260px">
+<sc-for list="{{ rivals }}" as="r" hint-placeholder-count="3">
+<div style="display:flex;align-items:center;gap:8px">
+<span style="flex:0 0 56px;font-family:'Space Grotesk',system-ui,sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;color:#E7E0FF;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.name }}</span>
+<span style="flex:1;height:14px;border:3px solid #170F3E;border-radius:999px;background:#2A1C74;overflow:hidden"><span style="display:block;height:100%;width:{{ r.pct }};background:{{ r.color }};transition:width 140ms linear"></span></span>
+</div>
+</sc-for>
+</div>
+</div>
+<div style="flex:0 0 auto;display:flex;justify-content:center;padding:0 14px 20px">
+<button type="button" onPointerDown="{{ mashTap }}" style="position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;width:100%;max-width:330px;min-height:128px;border-radius:34px;background:linear-gradient(180deg,{{ accentSoft }},{{ accent }});border:6px solid #170F3E;box-shadow:0 10px 0 #170F3E;color:#170F3E;font-size:38px;font-weight:800;letter-spacing:.1em;touch-action:none;overflow:hidden;transition:transform 60ms ease,box-shadow 60ms ease" style-active="transform:translateY(8px);box-shadow:0 2px 0 #170F3E">
+<span aria-hidden="true" style="position:absolute;top:0;bottom:0;width:50px;background:rgba(255,255,255,.4);animation:shine 2.2s ease-in-out infinite"></span>
+<img src="assets/jogo/raio.png" alt="" style="width:44px;height:44px;object-fit:contain"/>
+TOQUE!</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ outcome }}">
+<div style="position:absolute;inset:0;z-index:1200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(23,15,62,.72)">
+<img src="{{ outcomeSelo }}" alt="" style="width:230px;max-width:78%;height:auto;display:block;animation:pop 420ms cubic-bezier(.34,1.56,.64,1) both"/>
+<div style="display:flex;flex-direction:column;align-items:center;gap:2px;padding:20px 34px;border:6px solid #170F3E;border-radius:26px;background:{{ outcomeBg }};box-shadow:0 10px 0 #170F3E;animation:pop 380ms cubic-bezier(.34,1.56,.64,1) both">
+<p style="margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:48px;font-weight:800;line-height:1;color:#170F3E">{{ outcomeValue }}</p>
+<p style="margin:0;font-family:'Space Grotesk',system-ui,sans-serif;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(23,15,62,.66)">{{ outcomeLabel }}</p>
+<p style="margin:0;font-size:15px;font-weight:700;color:rgba(23,15,62,.8)">{{ outcomeNote }}</p>
+</div>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<!-- ═════════════════ RESULTADO DA RODADA ═════════════════ -->
+<sc-if value="{{ isResult }}">
+<div style="position:relative;height:100%;display:flex;flex-direction:column;padding:62px 22px 26px;overflow-y:auto;animation:rise 340ms cubic-bezier(.05,.7,.1,1) both">
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;margin-bottom:20px">
+<p style="margin:0;padding:5px 14px;border:3px solid #170F3E;border-radius:999px;background:#FFFDF7;font-family:'Space Grotesk',system-ui,sans-serif;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#170F3E">DESAFIO {{ round }}/{{ totalRounds }} · {{ gameName }}</p>
+<p style="margin:0;font-size:40px;font-weight:800;line-height:1;letter-spacing:.02em;text-transform:uppercase;color:{{ verdictColor }};-webkit-text-stroke:7px #170F3E;paint-order:stroke fill;animation:pop 420ms cubic-bezier(.34,1.56,.64,1) both">{{ verdict }}</p>
+<p style="margin:0;color:#E7E0FF;font-size:16px;font-weight:600">você fez <b style="font-family:'JetBrains Mono',ui-monospace,monospace;color:#FFCE31">{{ myDisplay }}</b>{{ myPlaceText }}</p>
+</div>
+
+<sc-if value="{{ doubled }}">
+<p style="margin:0 0 14px;padding:10px 16px;border:4px solid #170F3E;border-radius:16px;background:#7C5CFF;box-shadow:0 5px 0 #170F3E;text-align:center;font-size:16px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#FFFDF7">PONTOS DOBRADOS NESTA RODADA</p>
+</sc-if>
+
+<div style="display:flex;flex-direction:column;gap:9px">
+<sc-for list="{{ results }}" as="p" hint-placeholder-count="4">
+<div style="position:relative;display:flex;align-items:center;gap:7px;min-height:72px;padding:8px 10px;border:4px solid #170F3E;border-radius:20px;background:{{ p.cardBg }};box-shadow:0 5px 0 #170F3E;overflow:hidden;animation:rise 380ms cubic-bezier(.34,1.56,.64,1) both;animation-delay:{{ p.delay }}">
+<span style="min-width:20px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:20px;font-weight:800;text-align:center;color:{{ p.posColor }};flex:0 0 auto">{{ p.position }}</span>
+<span style="display:grid;place-items:center;width:46px;height:46px;flex:0 0 auto;border-radius:13px;background:{{ p.color }};border:3px solid #170F3E">
+<img src="{{ p.src }}" alt="" style="width:38px;height:38px;object-fit:contain;display:block"/>
+</span>
+<div style="flex:1;min-width:0">
+<p style="margin:0;font-size:18px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;color:{{ p.nameColor }};line-height:1.1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ p.name }}</p>
+<p style="margin:0;font-family:'Space Grotesk',system-ui,sans-serif;font-size:10px;font-weight:700;color:{{ p.metaColor }};letter-spacing:.12em;text-transform:uppercase">{{ p.meta }}</p>
+</div>
+<span style="flex:0 0 auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:15px;font-weight:800;color:{{ p.nameColor }}">{{ p.display }}</span>
+<span style="flex:0 0 auto;padding:2px 7px;border:3px solid #170F3E;border-radius:999px;background:#7BE86A;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:800;color:#0E2A13">{{ p.delta }}</span>
+</div>
+</sc-for>
+</div>
+
+<div style="flex:1 1 auto;min-height:20px"></div>
+<div style="display:flex;flex-direction:column;gap:6px;margin-top:20px">
+<div style="display:flex;align-items:center;justify-content:space-between">
+<span style="font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#CFC4FF">PARTIDA</span>
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:800;color:#FFCE31">{{ round }}/{{ totalRounds }}</span>
+</div>
+<span style="display:block;height:18px;border:4px solid #170F3E;border-radius:999px;background:#2A1C74;overflow:hidden"><span style="display:block;height:100%;width:{{ matchPct }};background:linear-gradient(90deg,#FFCE31,#FF9F1C);transition:width 420ms cubic-bezier(.34,1.56,.64,1)"></span></span>
+</div>
+</div>
+</sc-if>
+
+<!-- ═════════════════ PLACAR FINAL ═════════════════ -->
+<sc-if value="{{ isFinal }}">
+<div style="position:relative;height:100%;display:flex;flex-direction:column;padding:62px 22px 26px;overflow-y:auto;animation:rise 340ms cubic-bezier(.05,.7,.1,1) both">
+<div aria-hidden="true" style="position:absolute;top:-40px;left:50%;transform:translateX(-50%);width:460px;height:380px;pointer-events:none;background:radial-gradient(closest-side,rgba(255,206,49,.22),rgba(255,206,49,0) 72%)"></div>
+
+<div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;margin-bottom:22px">
+<p style="margin:0;padding:5px 14px;border:3px solid #170F3E;border-radius:999px;background:#FFFDF7;font-family:'Space Grotesk',system-ui,sans-serif;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#170F3E">FIM DE PARTIDA · {{ totalRounds }} DESAFIOS</p>
+<img src="{{ finalSelo }}" alt="" style="width:236px;max-width:82%;height:auto;display:block;animation:pop 500ms cubic-bezier(.34,1.56,.64,1) both"/>
+<h1 style="margin:0;font-size:34px;font-weight:800;line-height:1;letter-spacing:.02em;text-transform:uppercase;color:{{ finalTitleColor }};-webkit-text-stroke:6px #170F3E;paint-order:stroke fill">{{ finalTitle }}</h1>
+</div>
+
+<div style="position:relative;display:flex;align-items:flex-end;justify-content:center;gap:8px;margin-bottom:26px">
+<sc-for list="{{ podium }}" as="p" hint-placeholder-count="3">
+<div style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:5px;animation:podRise 620ms cubic-bezier(.34,1.56,.64,1) backwards;animation-delay:{{ p.delay }}">
+<img src="{{ p.medal }}" alt="" style="width:36px;height:36px;object-fit:contain;display:block;animation:floatY 2.6s ease-in-out infinite"/>
+<span style="display:grid;place-items:center;width:{{ p.avSize }};height:{{ p.avSize }};border-radius:22px;background:{{ p.color }};border:5px solid #170F3E;box-shadow:0 6px 0 #170F3E">
+<img src="{{ p.src }}" alt="" style="width:78%;height:78%;object-fit:contain;display:block"/>
+</span>
+<p style="margin:0;max-width:100%;font-size:{{ p.nameSize }};font-weight:800;letter-spacing:.02em;text-transform:uppercase;color:#FFFDF7;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ p.name }}</p>
+<p style="margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:21px;font-weight:800;color:#FFCE31">{{ p.score }}</p>
+<div style="width:100%;height:{{ p.stepH }};display:flex;align-items:flex-start;justify-content:center;padding-top:8px;border:4px solid #170F3E;border-bottom:none;border-radius:16px 16px 0 0;background:{{ p.stepBg }}">
+<span style="font-size:18px;font-weight:800;color:{{ p.stepFg }}">{{ p.position }}º</span>
+</div>
+</div>
+</sc-for>
+</div>
+
+<div style="position:relative;display:flex;flex-direction:column;gap:10px;margin-bottom:24px">
+<p style="margin:0;font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#CFC4FF">CONQUISTAS</p>
+<ul style="display:flex;flex-direction:column;gap:9px;margin:0;padding:0;list-style:none">
+<sc-for list="{{ achievements }}" as="a" hint-placeholder-count="3">
+<li style="display:flex;align-items:center;gap:12px;padding:11px;border:4px solid #170F3E;border-radius:18px;background:#FFFDF7;box-shadow:0 5px 0 #170F3E">
+<span style="display:grid;place-items:center;width:48px;height:48px;flex:0 0 auto;border-radius:14px;background:{{ a.color }};border:3px solid #170F3E">
+<img src="{{ a.icon }}" alt="" style="width:32px;height:32px;object-fit:contain;display:block"/>
+</span>
+<span style="flex:1;min-width:0;display:flex;flex-direction:column">
+<span style="font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#7A6FB5">{{ a.label }}</span>
+<span style="font-size:18px;font-weight:800;text-transform:uppercase;color:#170F3E;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ a.who }}</span>
+</span>
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:17px;font-weight:800;color:#7C5CFF">{{ a.value }}</span>
+</li>
+</sc-for>
+</ul>
+</div>
+
+<div style="position:relative;display:flex;flex-direction:column;gap:10px;margin-bottom:24px">
+<p style="margin:0;font-family:'Space Grotesk',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#CFC4FF">PLACAR</p>
+<div style="display:flex;flex-direction:column;gap:9px">
+<sc-for list="{{ restTable }}" as="p" hint-placeholder-count="2">
+<div style="position:relative;display:flex;align-items:center;gap:11px;min-height:66px;padding:8px 12px;border:4px solid #170F3E;border-radius:20px;background:{{ p.cardBg }};box-shadow:0 5px 0 #170F3E">
+<span style="min-width:28px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:20px;font-weight:800;text-align:center;color:{{ p.posColor }};flex:0 0 auto">{{ p.position }}</span>
+<span style="display:grid;place-items:center;width:46px;height:46px;flex:0 0 auto;border-radius:13px;background:{{ p.color }};border:3px solid #170F3E">
+<img src="{{ p.src }}" alt="" style="width:36px;height:36px;object-fit:contain;display:block"/>
+</span>
+<div style="flex:1;min-width:0">
+<p style="margin:0;font-size:18px;font-weight:800;text-transform:uppercase;color:{{ p.nameColor }};line-height:1.1">{{ p.name }}</p>
+<p style="margin:0;font-family:'Space Grotesk',system-ui,sans-serif;font-size:10px;font-weight:700;color:{{ p.metaColor }};letter-spacing:.12em;text-transform:uppercase">{{ p.meta }}</p>
+</div>
+<span style="flex:0 0 auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:20px;font-weight:800;color:{{ p.nameColor }}">{{ p.score }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div style="flex:1 1 auto;min-height:20px"></div>
+<div style="position:relative;display:flex;flex-direction:column;gap:12px;margin-top:20px">
+<button type="button" onClick="{{ replay }}" style="position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:80px;border-radius:24px;background:linear-gradient(180deg,#FFC864 0%,#FF9F1C 100%);border:5px solid #170F3E;box-shadow:0 8px 0 #170F3E;color:#170F3E;font-size:26px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;overflow:hidden;transition:transform 90ms ease,box-shadow 90ms ease" style-active="transform:translateY(6px);box-shadow:0 2px 0 #170F3E">
+<span aria-hidden="true" style="position:absolute;top:0;bottom:0;width:44px;background:rgba(255,255,255,.5);animation:shine 3s ease-in-out infinite"></span>
+<img src="assets/acoes/seta-curva.png" alt="" style="width:30px;height:30px;object-fit:contain"/>
+JOGAR DE NOVO</button>
+<button type="button" onClick="{{ goLobby }}" style="display:inline-flex;align-items:center;justify-content:center;width:100%;min-height:62px;border-radius:20px;background:#4DE3E3;border:5px solid #170F3E;box-shadow:0 6px 0 #170F3E;color:#0B3A3A;font-size:19px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;transition:transform 90ms ease,box-shadow 90ms ease" style-active="transform:translateY(4px);box-shadow:0 2px 0 #170F3E">VOLTAR PRA SALA</button>
+<button type="button" onClick="{{ goHome }}" style="display:inline-flex;align-items:center;justify-content:center;width:100%;min-height:52px;border-radius:18px;border:4px solid #170F3E;background:rgba(255,253,247,.14);color:#FFFDF7;font-size:16px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;transition:transform 90ms ease" style-active="transform:scale(.97)">INÍCIO</button>
+</div>
+</div>
+</sc-if>
+
+<!-- ═════════════════ DEBUG ═════════════════ -->
+<button type="button" onClick="{{ toggleDebug }}" aria-label="debug" style="position:absolute;left:0;top:0;width:56px;height:56px;z-index:1500;background:transparent"></button>
+<sc-if value="{{ debug }}">
+<div style="position:absolute;left:0;right:0;bottom:0;z-index:1500;padding:14px 16px 20px;background:#170F3E;border-top:4px solid #7BE86A;animation:rise 220ms cubic-bezier(.05,.7,.1,1) both">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+<p style="margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#7BE86A">DEBUG · DEV ONLY</p>
+<button type="button" onClick="{{ toggleDebug }}" style="width:32px;height:32px;display:grid;place-items:center;border-radius:9px;border:2px solid #4A3F8A;color:#CFC4FF">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+</button>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px">
+<sc-for list="{{ debugJumps }}" as="d" hint-placeholder-count="12">
+<button type="button" onClick="{{ d.go }}" style="padding:9px 11px;border:2px solid #4A3F8A;border-radius:9px;background:#241B5E;color:#E7E0FF;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;font-weight:700;letter-spacing:.06em;transition:transform 90ms ease" style-active="transform:scale(.94)">{{ d.label }}</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+</div>
+</div>
+<p style="margin:0;max-width:402px;text-align:center;font-size:13px;line-height:1.5;color:#8E7FD0">Toque no canto superior esquerdo para abrir o painel de debug e pular para qualquer tela.</p>
+</div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:520,&quot;height&quot;:1020},&quot;chaosChance&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:0.5,&quot;min&quot;:0,&quot;max&quot;:1,&quot;step&quot;:0.05,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Partida&quot;}}">
+class Component extends DCLogic {
+  INK = '#170F3E';
+  AVATARS = [
+    { id: 'gata', src: 'assets/personagens/gata.png' },
+    { id: 'robo', src: 'assets/personagens/robo.png' },
+    { id: 'panda', src: 'assets/personagens/panda.png' },
+    { id: 'dj', src: 'assets/personagens/dj.png' },
+    { id: 'chama', src: 'assets/personagens/chama.png' },
+    { id: 'coelha', src: 'assets/personagens/coelha.png' },
+    { id: 'fantasma', src: 'assets/personagens/fantasma.png' },
+    { id: 'punk', src: 'assets/personagens/punk.png' },
+    { id: 'tubarao', src: 'assets/personagens/tubarao.png' },
+    { id: 'capitao', src: 'assets/personagens/capitao.png' },
+    { id: 'cacto', src: 'assets/personagens/cacto.png' },
+    { id: 'broto', src: 'assets/personagens/broto.png' },
+  ];
+  COLORS = ['#FFB13D', '#7FB2FF', '#7BE86A', '#FF6B8B', '#4DE3E3', '#A78BFA', '#FFCE31', '#FF8A3D'];
+  BOT_NAMES = ['ANA', 'LUCAS', 'JULIA', 'PEDRO', 'BIA', 'THIAGO', 'LARA', 'RAFA', 'NINA', 'DAVI', 'MEL', 'IGOR'];
+  SKILLS = { EASY: { label: 'FÁCIL', min: 0.24, max: 0.5 }, MEDIUM: { label: 'MÉDIO', min: 0.45, max: 0.74 }, HARD: { label: 'DIFÍCIL', min: 0.68, max: 0.95 } };
+  FRUITS = ['assets/jogo/melancia.png', 'assets/jogo/coracao.png', 'assets/jogo/gema.png', 'assets/jogo/moeda.png', 'assets/jogo/chama.png'];
+  PADS = [
+    { src: 'assets/jogo/gema.png', on: '#4DE3E3', off: '#1E7C8C' },
+    { src: 'assets/jogo/moeda.png', on: '#FFCE31', off: '#8A6B14' },
+    { src: 'assets/jogo/coracao.png', on: '#FF6B8B', off: '#8A2E45' },
+    { src: 'assets/jogo/nota-musical.png', on: '#7BE86A', off: '#2E7A34' },
+  ];
+  GAMES = {
+    slice: {
+      id: 'slice', name: 'CORTA FRUTA', instruction: 'Arraste o dedo e corte tudo. Menos as bombas.',
+      hint: 'ARRASTE O DEDO PRA CORTAR', duration: 30000,
+      accent: '#7BE86A', soft: '#B7F5AC', deep: '#2E8B3D', pict: 'assets/jogo/melancia.png',
+    },
+    aim: {
+      id: 'aim', name: 'MIRA', instruction: 'Toque nos alvos com mira. Fuja das bombas.',
+      hint: 'ACERTE OS ALVOS', duration: 20000,
+      accent: '#FF6B8B', soft: '#FFA0B6', deep: '#B02F4E', pict: 'assets/jogo/alvo.png',
+    },
+    climb: {
+      id: 'climb', name: 'ESCALADA', instruction: 'Segure ← ou → pra guiar o pulo. Quem sobe mais alto?',
+      hint: 'SUBA O MÁXIMO QUE CONSEGUIR', duration: 30000,
+      accent: '#4DE3E3', soft: '#A8F4F4', deep: '#0E7A7A', pict: 'assets/acoes/seta-cima.png',
+    },
+    memory: {
+      id: 'memory', name: 'MEMÓRIA', instruction: 'Repita a sequência que piscou. Ela cresce a cada acerto.',
+      hint: 'REPITA A SEQUÊNCIA', duration: 30000,
+      accent: '#A78BFA', soft: '#CDBBFF', deep: '#5B3BC4', pict: 'assets/jogo/cerebro.png',
+    },
+    mash: {
+      id: 'mash', name: 'MARTELO', instruction: 'Toque sem parar. A barra cai sozinha se você parar.',
+      hint: 'TOQUE SEM PARAR ATÉ ENCHER', duration: 15000,
+      accent: '#FF9F1C', soft: '#FFC864', deep: '#C25E00', pict: 'assets/jogo/raio.png',
+    },
+    ritmo: {
+      id: 'ritmo', name: 'RITMO', instruction: 'As notas descem nas 4 teclas. Toque na hora — e segure as compridas.',
+      hint: 'TOQUE NA LINHA · SEGURE AS COMPRIDAS', duration: 30000,
+      accent: '#FF6BD6', soft: '#FFB0EA', deep: '#9A2B7E', pict: 'assets/jogo/nota-musical.png',
+    },
+    piano: {
+      id: 'piano', name: 'PIANO TILE', instruction: 'Toque só nas teclas pretas. Bomba nunca. E acelera.',
+      hint: 'SÓ NAS TECLAS PRETAS', duration: 30000,
+      accent: '#4DE3E3', soft: '#A8F4F4', deep: '#0E7A7A', pict: 'assets/simbolos/nota-musical.png',
+    },
+    osu: {
+      id: 'osu', name: 'NA MOSCA', instruction: 'Toque no círculo quando o anel fechar. Nos rastros, arraste a bolinha.',
+      hint: 'TOQUE QUANDO O ANEL FECHAR', duration: 30000,
+      accent: '#FF6BD6', soft: '#FFB0EA', deep: '#8E2A75', pict: 'assets/simbolos/alvo.png',
+    },
+    dino: {
+      id: 'dino', name: 'CORRIDA', instruction: 'Pule os cactos, abaixe dos pterodátilos. Distância é ponto.',
+      hint: 'PULAR NOS CACTOS · ABAIXAR NOS VOADORES', duration: 30000,
+      accent: '#B6B6B6', soft: '#E4E4E4', deep: '#535353', pict: 'assets/dino/dino-corre.png',
+    },
+    traco: {
+      id: 'traco', name: 'CONTORNO', instruction: 'Contorne a forma com o dedo. Quem fechar primeiro leva.',
+      hint: 'PASSE O DEDO POR CIMA DO CONTORNO', duration: 30000,
+      accent: '#FFCE31', soft: '#FFE59A', deep: '#C29200', pict: 'assets/jogo/pincel.png',
+    },
+  };
+  LANES = ['#7BE86A', '#FF6B8B', '#FFCE31', '#4DE3E3'];
+  SHAPES = [
+    { name: 'CÍRCULO', pts: 'circle' },
+    { name: 'QUADRADO', pts: 'square' },
+    { name: 'TRIÂNGULO', pts: 'tri' },
+    { name: 'ESTRELA', pts: 'star' },
+    { name: 'CORAÇÃO', pts: 'heart' },
+  ];
+  CHAOS = [
+    { id: 'doubleScore', name: 'PONTO DOBRADO', description: 'Esta rodada vale o dobro de pontos.', icon: 'assets/recompensas/estrela.png' },
+    { id: 'speedUp', name: 'ACELERADO', description: 'Tudo 50% mais rápido.', icon: 'assets/simbolos/raio.png' },
+    { id: 'tiny', name: 'MINÚSCULO', description: 'Os alvos encolheram.', icon: 'assets/simbolos/alvo.png' },
+    { id: 'slowMotion', name: 'CÂMERA LENTA', description: 'Tudo mais devagar. Precisão importa mais.', icon: 'assets/simbolos/cronometro.png' },
+  ];
+  QUEUE = ['slice', 'ritmo', 'osu', 'dino', 'traco', 'climb', 'piano', 'aim', 'memory', 'mash'];
+
+  state = {
+    screen: 'home', help: false, debug: false, muted: false, toast: null,
+    codeInput: '', nameInput: '', avatarIndex: 0,
+    rounds: 5, totalPlayers: 4, difficulty: 'MEDIUM',
+    roomId: 'KXTP', players: [],
+    round: 0, gameId: 'slice', chaos: null,
+    countStep: 0, remaining: 15000, elapsed: 0,
+    fruits: [], trail: [], pops: [], floaters: [], slicePoints: 0, sliceCombo: 0, sliceHits: 0, sliceBombs: 0, sliceShake: 'none',
+    targets: [], aimHits: 0, aimMisses: 0,
+    platforms: [], climbPos: { x: 50, y: 0, vy: 0 }, climbBest: 0, climbFace: 1,
+    memoSeq: [], memoStep: 0, memoActive: -1, memoPhase: 'show', memoLevel: 0, memoBest: 0, memoFlash: null,
+    rNow: 0, rPoints: 0, rCombo: 0, rBest: 0, rHits: 0, rMiss: 0, rStar: 0, rPress: [0, 0, 0, 0],
+    rFx: [], rSparks: [], rJudge: [],
+    oNow: 0, oPoints: 0, oGreat: 0, oGood: 0, oMiss: 0, oCombo: 0, oBest: 0, oFx: [], oJudge: [], oSlider: null,
+    mode: 'partida', picked: ['slice', 'ritmo', 'osu', 'dino', 'traco', 'climb', 'piano', 'aim', 'memory', 'mash'], soloGame: 'slice',
+    pTiles: [], pPoints: 0, pHits: 0, pMiss: 0, pSlow: 0, pShake: 'none',
+    tDots: [], tShape: 0, tPct: 0, tDoneCount: 0, tScore: 0, tBanner: false, tTip: { x: 50, y: 50, on: 0 },
+    dObs: [], dY: 0, dDuck: false, dDist: 0, dHits: 0, dGround: 0, dBanner: false, dShake: 'none', dClouds: [],
+    climbGear: null, climbBanner: null, climbBannerBg: '#FFCE31', climbHazards: [],
+    mashPercent: 0, mashTaps: 0,
+    outcome: null, results: [], table: [],
+  };
+
+  timers = [];
+  loops = [];
+  mashFill = 0;
+  over = false;
+  nextId = 1;
+  climb = { x: 50, y: 0, vy: 0, dir: 0, best: 0 };
+  sliceRef = React.createRef();
+  slicing = false;
+  lastPt = null;
+
+  componentWillUnmount() { this.clearAll(); }
+  clearAll() {
+    this.timers.forEach(clearTimeout);
+    this.loops.forEach(clearInterval);
+    this.timers = [];
+    this.loops = [];
+  }
+  later(fn, ms) { this.timers.push(setTimeout(fn, ms)); }
+  every(fn, ms) { const id = setInterval(fn, ms); this.loops.push(id); return id; }
+  uid() { this.nextId += 1; return this.nextId; }
+
+  avatar(i) { return this.AVATARS[((i % 12) + 12) % 12]; }
+
+  code() {
+    const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let out = '';
+    for (let i = 0; i < 4; i += 1) out += alphabet[Math.floor(Math.random() * alphabet.length)];
+    return out;
+  }
+
+  buildPlayers(total) {
+    const names = this.BOT_NAMES.slice().sort(() => Math.random() - 0.5);
+    const list = [{
+      id: 'p0', name: (this.state.nameInput || 'VOCÊ').toUpperCase(), color: this.COLORS[0],
+      avatar: this.state.avatarIndex, isBot: false, score: 0, wins: 0, streak: 0,
+    }];
+    for (let i = 1; i < total; i += 1) {
+      list.push({
+        id: 'p' + i, name: names[i - 1], color: this.COLORS[i % 8],
+        avatar: (this.state.avatarIndex + i * 3) % 12, isBot: true, score: 0, wins: 0, streak: 0,
+      });
+    }
+    return list;
+  }
+
+  queue() {
+    if (this.state.mode === 'unico') return [this.state.soloGame];
+    const list = this.QUEUE.filter((id) => this.state.picked.indexOf(id) > -1);
+    return list.length ? list : this.QUEUE.slice();
+  }
+
+  goto = (screen) => { this.clearAll(); this.setState({ screen, help: false }); };
+
+  createRoom = () => {
+    this.clearAll();
+    this.setState({ screen: 'lobby', roomId: this.state.roomId || this.code(), players: this.buildPlayers(this.state.totalPlayers) });
+  };
+
+  startMatch = () => {
+    this.clearAll();
+    const players = this.state.players.map((p) => ({ ...p, score: 0, wins: 0, streak: 0 }));
+    this.setState({ players, round: 0 }, () => this.beginRound(1));
+  };
+
+  beginRound(round) {
+    this.clearAll();
+    const queue = this.queue();
+    const gameId = queue[(round - 1) % queue.length];
+    const roll = round > 1 && Math.random() < (this.props.chaosChance ?? 0.5);
+    const chaos = roll ? this.CHAOS[Math.floor(Math.random() * this.CHAOS.length)] : null;
+    this.setState({ screen: 'intro', round, gameId, chaos, outcome: null, results: [] });
+    this.later(() => this.startCountdown(), 2200);
+  }
+
+  startCountdown() {
+    this.setState({ screen: 'count', countStep: 0 });
+    let step = 0;
+    this.every(() => {
+      step += 1;
+      if (step > 3) { this.clearAll(); this.startPlay(); return; }
+      this.setState({ countStep: step });
+    }, 780);
+  }
+
+  scale() {
+    const c = this.state.chaos;
+    if (c && c.id === 'speedUp') return 1.5;
+    if (c && c.id === 'slowMotion') return 0.6;
+    return 1;
+  }
+
+  startPlay() {
+    const game = this.GAMES[this.state.gameId];
+    this.over = false;
+    this.mashFill = 0;
+    this.slicing = false;
+    this.lastPt = null;
+    this.climb = { x: 50, y: 0, vy: 520, dir: 0, best: 0 };
+    this.setState({
+      screen: 'play', remaining: game.duration, elapsed: 0,
+      fruits: [], trail: [], pops: [], floaters: [], slicePoints: 0, sliceCombo: 0, sliceHits: 0, sliceBombs: 0, sliceShake: 'none',
+      targets: [], aimHits: 0, aimMisses: 0,
+      platforms: this.seedPlatforms(), climbPos: { x: 50, y: 0, vy: 520 }, climbBest: 0, climbFace: 1,
+      climbGear: null, climbBanner: null, climbHazards: this.seedHazards(),
+      memoSeq: [], memoStep: 0, memoActive: -1, memoPhase: 'show', memoLevel: 0, memoBest: 0,
+      rNow: 0, rPoints: 0, rCombo: 0, rBest: 0, rHits: 0, rMiss: 0, rStar: 0, rPress: [0, 0, 0, 0],
+      rFx: [], rSparks: [], rJudge: [],
+      oNow: 0, oPoints: 0, oGreat: 0, oGood: 0, oMiss: 0, oCombo: 0, oBest: 0, oFx: [], oJudge: [], oSlider: null,
+      pTiles: [], pPoints: 0, pHits: 0, pMiss: 0, pSlow: 0, pShake: 'none',
+      tDots: this.shapePoints(0), tShape: 0, tPct: 0, tDoneCount: 0, tScore: 0, tBanner: false, tTip: { x: 50, y: 50, on: 0 },
+      dObs: [], dY: 0, dDuck: false, dDist: 0, dHits: 0, dGround: 0, dBanner: false, dShake: 'none',
+      dClouds: [{ id: 1, x: 60, y: 18 }, { id: 2, x: 110, y: 32 }],
+      mashPercent: 0, mashTaps: 0, outcome: null,
+    });
+
+    const started = Date.now();
+    this.every(() => {
+      const elapsed = Date.now() - started;
+      const remaining = Math.max(0, game.duration - elapsed);
+      this.setState({ remaining, elapsed });
+      if (remaining <= 0 && !this.over) this.closeRound();
+    }, 100);
+
+    if (game.id === 'slice') this.runSlice();
+    else if (game.id === 'aim') this.runAim();
+    else if (game.id === 'climb') this.runClimb();
+    else if (game.id === 'memory') this.runMemory();
+    else if (game.id === 'ritmo') this.runRitmo();
+    else if (game.id === 'piano') this.runPiano();
+    else if (game.id === 'traco') { /* orientado por gesto */ }
+    else if (game.id === 'dino') this.runDino();
+    else if (game.id === 'osu') this.runOsu();
+    else this.runMash();
+  }
+
+  /* ── CORTA FRUTA ─────────────────────────────── */
+  runSlice() {
+    const scale = this.scale();
+    const tiny = this.state.chaos && this.state.chaos.id === 'tiny';
+    this.every(() => {
+      if (this.over) return;
+      const n = Math.random() < 0.35 ? 2 : 1;
+      const batch = [];
+      for (let i = 0; i < n; i += 1) {
+        const bomb = Math.random() < 0.22;
+        const x = 14 + Math.random() * 72;
+        batch.push({
+          id: this.uid(), x, y: 112,
+          vx: (50 - x) * 0.22 + (Math.random() * 16 - 8),
+          vy: -(104 + Math.random() * 16) * Math.sqrt(scale),
+          rot: Math.random() * 360, spin: (Math.random() * 220 - 110),
+          size: (tiny ? 40 : 60) + Math.random() * (tiny ? 8 : 16),
+          bomb, src: bomb ? 'assets/jogo/bomba.png' : this.FRUITS[Math.floor(Math.random() * this.FRUITS.length)],
+        });
+      }
+      this.setState((s) => ({ fruits: s.fruits.concat(batch) }));
+    }, 760 / scale);
+
+    this.every(() => {
+      if (this.over) return;
+      const dt = 0.032;
+      const g = 108 * scale;
+      this.setState((s) => ({
+        fruits: s.fruits.map((f) => ({
+          ...f, x: f.x + f.vx * dt, y: f.y + f.vy * dt, vy: f.vy + g * dt, rot: f.rot + f.spin * dt,
+        })).filter((f) => f.y < 128),
+        trail: s.trail.length ? s.trail.slice(1) : s.trail,
+      }));
+    }, 32);
+  }
+
+  toPct(ev) {
+    const el = this.sliceRef.current;
+    if (!el) return null;
+    const r = el.getBoundingClientRect();
+    return { x: ((ev.clientX - r.left) / r.width) * 100, y: ((ev.clientY - r.top) / r.height) * 100 };
+  }
+
+  sliceDown = (ev) => {
+    if (this.over) return;
+    this.slicing = true;
+    const p = this.toPct(ev);
+    this.lastPt = p;
+    if (p) this.setState({ trail: [p] });
+  };
+
+  sliceUp = () => {
+    this.slicing = false;
+    this.lastPt = null;
+    this.setState({ trail: [], sliceCombo: 0 });
+  };
+
+  sliceMove = (ev) => {
+    if (!this.slicing || this.over) return;
+    const p = this.toPct(ev);
+    if (!p) return;
+    const prev = this.lastPt || p;
+    this.lastPt = p;
+    const hit = [];
+    const kept = this.state.fruits.filter((f) => {
+      const dx = Math.abs(f.x - p.x) + Math.abs(f.x - prev.x) * 0.15;
+      const dy = Math.abs(f.y - p.y) + Math.abs(f.y - prev.y) * 0.15;
+      const near = dx < 11 && dy < 9;
+      if (near) hit.push(f);
+      return !near;
+    });
+    if (!hit.length) {
+      this.setState((s) => ({ trail: s.trail.concat([p]).slice(-9) }));
+      return;
+    }
+    let points = 0;
+    let bombs = 0;
+    const pops = [];
+    const floaters = [];
+    hit.forEach((f) => {
+      const id = this.uid();
+      if (f.bomb) {
+        bombs += 1; points -= 30;
+        pops.push({ id, x: f.x, y: f.y, size: 96, src: 'assets/efeitos/explosao.png' });
+        floaters.push({ id: id + 0.5, x: f.x, y: f.y, text: '-30', color: '#FF5C4D' });
+      } else {
+        points += 10;
+        pops.push({ id, x: f.x, y: f.y, size: 76, src: 'assets/efeitos/anel-fogo.png' });
+        floaters.push({ id: id + 0.5, x: f.x, y: f.y, text: '+10', color: '#FFCE31' });
+      }
+    });
+    this.setState((s) => ({
+      fruits: kept,
+      trail: s.trail.concat([p]).slice(-9),
+      pops: s.pops.concat(pops).slice(-6),
+      floaters: s.floaters.concat(floaters).slice(-6),
+      slicePoints: Math.max(0, s.slicePoints + points),
+      sliceHits: s.sliceHits + (hit.length - bombs),
+      sliceBombs: s.sliceBombs + bombs,
+      sliceCombo: bombs ? 0 : s.sliceCombo + hit.length,
+      sliceShake: bombs ? 'shake 320ms ease' : 'none',
+    }));
+    const stamp = pops[0].id;
+    this.later(() => this.setState((s) => ({
+      pops: s.pops.filter((x) => x.id > stamp),
+      floaters: s.floaters.filter((x) => x.id > stamp + 0.5),
+    })), 700);
+    if (bombs) this.later(() => this.setState({ sliceShake: 'none' }), 340);
+  };
+
+  /* ── MIRA ────────────────────────────────────── */
+  runAim() {
+    const scale = this.scale();
+    this.every(() => {
+      if (this.over) return;
+      const bad = Math.random() < 0.28;
+      const tiny = this.state.chaos && this.state.chaos.id === 'tiny';
+      const t = {
+        id: this.uid(),
+        left: 14 + Math.random() * 72,
+        top: 14 + Math.random() * 68,
+        size: (tiny ? 48 : 74) + Math.random() * (tiny ? 8 : 18),
+        bad,
+      };
+      this.setState((s) => ({ targets: s.targets.concat([t]) }));
+      this.later(() => this.setState((s) => ({ targets: s.targets.filter((x) => x.id !== t.id) })), 1500);
+    }, 620 / scale);
+  }
+
+  aimHit = (t) => (event) => {
+    if (event && event.stopPropagation) event.stopPropagation();
+    if (this.over) return;
+    this.setState((s) => ({
+      targets: s.targets.filter((x) => x.id !== t.id),
+      aimHits: t.bad ? s.aimHits : s.aimHits + 1,
+      aimMisses: t.bad ? s.aimMisses + 1 : s.aimMisses,
+      floaters: s.floaters.concat([{ id: this.uid(), x: t.left, y: t.top, text: t.bad ? '-1' : '+1', color: t.bad ? '#FF5C4D' : '#7BE86A' }]).slice(-4),
+    }));
+  };
+
+  aimMiss = () => { if (!this.over) this.setState((s) => ({ aimMisses: s.aimMisses + 1 })); };
+
+  /* ── ESCALADA ────────────────────────────────── */
+  makePlatform(y, first) {
+    const r = Math.random();
+    const type = first || y < 240 ? 'normal'
+      : r < 0.12 ? 'mola' : r < 0.28 ? 'movel' : r < 0.42 ? 'quebra' : 'normal';
+    const item = !first && type !== 'quebra' && Math.random() < 0.07 ? 'foguete' : null;
+    return { id: this.uid(), x: first ? 50 : 14 + Math.random() * 72, y, type, item, dir: Math.random() < 0.5 ? -1 : 1, broken: false };
+  }
+
+  seedPlatforms() {
+    const list = [this.makePlatform(-40, true)];
+    for (let i = 1; i < 26; i += 1) list.push(this.makePlatform(-40 + i * 108, false));
+    return list;
+  }
+
+  seedHazards() {
+    const list = [];
+    for (let i = 1; i < 8; i += 1) {
+      if (Math.random() < 0.55) list.push({ id: this.uid(), x: 16 + Math.random() * 68, y: 620 + i * 430, kind: Math.random() < 0.5 ? 'bomba' : 'nuvem' });
+    }
+    return list;
+  }
+
+  climbBanner(text, bg) {
+    this.setState({ climbBanner: text, climbBannerBg: bg });
+    this.later(() => this.setState({ climbBanner: null }), 900);
+  }
+
+  runClimb() {
+    const scale = this.scale();
+    this.every(() => {
+      if (this.over) return;
+      const dt = 0.032;
+      const c = this.climb;
+      if (c.boost > 0) {
+        c.boost -= 32;
+        c.vy = 1180;
+        if (c.boost <= 0) this.setState({ climbGear: null });
+      } else {
+        c.vy -= 980 * dt * scale;
+      }
+      c.y += c.vy * dt * scale;
+      c.x += c.dir * 78 * dt * scale;
+      if (c.x < 4) c.x = 96;
+      if (c.x > 96) c.x = 4;
+
+      let platforms = this.state.platforms.map((p) => {
+        if (p.type !== 'movel') return p;
+        let x = p.x + p.dir * 26 * dt * scale;
+        let dir = p.dir;
+        if (x < 12) { x = 12; dir = 1; }
+        if (x > 88) { x = 88; dir = -1; }
+        return { ...p, x, dir };
+      });
+
+      if (c.vy < 0 && c.boost <= 0) {
+        const idx = platforms.findIndex((p) => !p.broken && Math.abs(p.x - c.x) < 15 && c.y <= p.y + 12 && c.y > p.y - 26);
+        if (idx > -1) {
+          const p = platforms[idx];
+          if (p.type === 'quebra') {
+            platforms = platforms.map((x, i) => (i === idx ? { ...x, broken: true } : x));
+            this.climbBanner('QUEBROU', '#FF6B57');
+          } else if (p.type === 'mola') {
+            c.vy = 1020;
+            this.climbBanner('MOLA!', '#FFCE31');
+          } else {
+            c.vy = 540;
+          }
+          if (p.item === 'foguete') {
+            platforms = platforms.map((x, i) => (i === idx ? { ...x, item: null } : x));
+            c.boost = 1250;
+            this.setState({ climbGear: 'assets/acoes/foguete.png' });
+            this.climbBanner('FOGUETE!', '#7BE86A');
+          }
+        }
+      }
+
+      const hazards = this.state.climbHazards.filter((h) => {
+        const hit = Math.abs(h.x - c.x) < 9 && Math.abs(h.y - c.y) < 30;
+        if (hit && c.boost <= 0) {
+          c.vy = -420;
+          this.climbBanner(h.kind === 'bomba' ? 'TOMOU!' : 'CAIU NA NUVEM', '#FF6B57');
+        }
+        return !hit;
+      });
+
+      if (c.y > c.best) c.best = c.y;
+      const top = platforms[platforms.length - 1];
+      if (top && c.y > top.y - 420) platforms = platforms.slice(-24).concat([this.makePlatform(top.y + 96 + Math.random() * 26, false)]);
+
+      this.setState({
+        platforms, climbHazards: hazards,
+        climbPos: { x: c.x, y: c.y, vy: c.vy },
+        climbBest: Math.max(0, Math.round(c.best / 10)),
+        climbFace: c.dir < 0 ? -1 : 1,
+      });
+    }, 32);
+  }
+
+  /* ── RITMO (4 teclas) ────────────────────────── */
+  TRAVEL = 1750;
+
+  runRitmo() {
+    const scale = this.scale();
+    this.rStart = Date.now();
+    this.held = [null, null, null, null];
+    this.chart = [];
+    let t = 1500;
+    for (let i = 0; i < 110; i += 1) {
+      const roll = Math.random();
+      const type = roll < 0.2 ? 'hold' : 'tap';
+      const kind = roll > 0.95 ? 'star' : roll > 0.88 ? 'double' : 'normal';
+      const len = type === 'hold' ? 620 + Math.random() * 620 : 0;
+      this.chart.push({ id: this.uid(), lane: Math.floor(Math.random() * 4), t, len, type, kind, done: false, missed: false, holding: false });
+      t += (type === 'hold' ? len + 320 : 360 + Math.random() * 200) / scale;
+    }
+    this.every(() => {
+      if (this.over) return;
+      const now = Date.now() - this.rStart;
+      let miss = 0;
+      this.chart.forEach((n) => {
+        if (n.done || n.missed) return;
+        if (n.holding && now > n.t + n.len) { n.done = true; n.holding = false; this.held[n.lane] = null; this.award(30, n.lane, '+30'); }
+        else if (!n.holding && n.t < now - 175) { n.missed = true; miss += 1; }
+      });
+      this.setState((s) => ({
+        rNow: now,
+        rStar: Math.max(0, s.rStar - 32),
+        rMiss: s.rMiss + miss,
+        rCombo: miss ? 0 : s.rCombo,
+      }));
+    }, 32);
+  }
+
+  award(base, lane, text) {
+    const fxId = this.uid();
+    const color = this.LANES[lane];
+    const sparks = [];
+    for (let i = 0; i < 5; i += 1) {
+      sparks.push({
+        id: fxId + i / 10,
+        x: 12.5 + lane * 25 + (Math.random() * 16 - 8),
+        y: 78 + Math.random() * 8,
+        size: 6 + Math.random() * 8,
+        color: i % 2 ? '#FFFDF7' : color,
+      });
+    }
+    this.setState((s) => {
+      const combo = s.rCombo + 1;
+      const mult = s.rStar > 0 ? 2 : 1;
+      const pts = (base + Math.min(20, combo)) * mult;
+      return {
+        rPoints: s.rPoints + pts,
+        rHits: s.rHits + 1,
+        rCombo: combo,
+        rBest: Math.max(s.rBest, combo),
+        rFx: s.rFx.concat([{ id: fxId, lane, color }]).slice(-4),
+        rSparks: s.rSparks.concat(sparks).slice(-20),
+        rJudge: s.rJudge.concat([{ id: fxId, lane, text: text || ('+' + pts), color: text === 'PERFEITO' ? '#7BE86A' : '#FFCE31' }]).slice(-3),
+      };
+    });
+    this.later(() => this.setState((s) => ({
+      rFx: s.rFx.filter((x) => x.id !== fxId),
+      rSparks: s.rSparks.filter((x) => Math.floor(x.id) !== fxId),
+      rJudge: s.rJudge.filter((x) => x.id !== fxId),
+    })), 700);
+  }
+
+  ritmoDown = (lane) => () => {
+    if (this.over) return;
+    const now = Date.now() - this.rStart;
+    const n = this.chart.find((x) => !x.done && !x.missed && !x.holding && x.lane === lane && Math.abs(x.t - now) < 175);
+    this.setState((s) => {
+      const press = s.rPress.slice();
+      press[lane] = 1;
+      return { rPress: press };
+    });
+    if (!n) {
+      this.setState((s) => ({ rCombo: 0, rMiss: s.rMiss + 1 }));
+      return;
+    }
+    if (n.type === 'hold') { n.holding = true; this.held[lane] = n; this.award(12, lane, 'SEGURA'); return; }
+    n.done = true;
+    if (n.kind === 'star') {
+      this.setState({ rStar: 5000 });
+      this.award(20, lane, 'ENERGIA!');
+    } else if (n.kind === 'double') {
+      this.award(35, lane, 'x2');
+    } else {
+      this.award(Math.abs(n.t - now) < 70 ? 20 : 10, lane, Math.abs(n.t - now) < 70 ? 'PERFEITO' : null);
+    }
+  };
+
+  ritmoUp = (lane) => () => {
+    this.setState((s) => { const press = s.rPress.slice(); press[lane] = 0; return { rPress: press }; });
+    const n = this.held && this.held[lane];
+    if (!n) return;
+    const now = Date.now() - this.rStart;
+    n.holding = false;
+    this.held[lane] = null;
+    if (now >= n.t + n.len - 220) { n.done = true; this.award(30, lane, '+30'); }
+    else { n.done = true; this.setState((s) => ({ rCombo: 0, rMiss: s.rMiss + 1 })); }
+  };
+
+  /* ── NA MOSCA (osu) ──────────────────────────── */
+  OAR = 950;
+  osuRef = React.createRef();
+
+  runOsu() {
+    const scale = this.scale();
+    this.oStart = Date.now();
+    this.oChart = [];
+    let t = 1200;
+    let num = 1;
+    for (let i = 0; i < 70; i += 1) {
+      const slider = Math.random() < 0.3;
+      const x = 18 + Math.random() * 64;
+      const y = 16 + Math.random() * 66;
+      const a = Math.random() * Math.PI * 2;
+      const dist = 18 + Math.random() * 16;
+      const n = {
+        id: this.uid(), t, x, y, num, slider, done: false, missed: false,
+        ex: Math.max(12, Math.min(88, x + Math.cos(a) * dist)),
+        ey: Math.max(12, Math.min(88, y + Math.sin(a) * dist * 0.8)),
+        len: slider ? 700 : 0,
+      };
+      this.oChart.push(n);
+      num = num >= 5 ? 1 : num + 1;
+      t += (slider ? n.len + 380 : 520 + Math.random() * 260) / scale;
+    }
+    this.every(() => {
+      if (this.over) return;
+      const now = Date.now() - this.oStart;
+      let miss = 0;
+      this.oChart.forEach((n) => {
+        if (n.done || n.missed) return;
+        if (n.holding && now > n.t + n.len) { n.holding = false; n.done = true; this.osuScore(n, 40, 'PERFEITO', '#7BE86A'); }
+        else if (!n.holding && n.t < now - 200) { n.missed = true; miss += 1; }
+      });
+      this.setState((s) => ({ oNow: now, oMiss: s.oMiss + miss, oCombo: miss ? 0 : s.oCombo }));
+    }, 32);
+  }
+
+  osuScore(n, base, text, color) {
+    const fxId = this.uid();
+    this.setState((s) => {
+      const combo = s.oCombo + 1;
+      return {
+        oPoints: s.oPoints + base + Math.min(20, combo),
+        oGreat: s.oGreat + (base >= 30 ? 1 : 0),
+        oGood: s.oGood + (base < 30 ? 1 : 0),
+        oCombo: combo, oBest: Math.max(s.oBest, combo),
+        oFx: s.oFx.concat([{ id: fxId, x: n.x, y: n.y, color }]).slice(-4),
+        oJudge: s.oJudge.concat([{ id: fxId, x: n.x, y: n.y, text, color }]).slice(-3),
+      };
+    });
+    this.later(() => this.setState((s) => ({
+      oFx: s.oFx.filter((x) => x.id !== fxId), oJudge: s.oJudge.filter((x) => x.id !== fxId),
+    })), 700);
+  }
+
+  osuHit = (n) => (ev) => {
+    if (ev && ev.stopPropagation) ev.stopPropagation();
+    if (this.over || n.done || n.missed) return;
+    const now = Date.now() - this.oStart;
+    const dt = Math.abs(n.t - now);
+    if (dt > 260) return;
+    if (n.slider) { n.holding = true; this.osuScore(n, 15, 'SEGURA', '#4DE3E3'); return; }
+    n.done = true;
+    if (dt < 95) this.osuScore(n, 30, 'PERFEITO', '#7BE86A');
+    else if (dt < 175) this.osuScore(n, 18, 'BOM', '#FFCE31');
+    else { this.setState((s) => ({ oMiss: s.oMiss + 1, oCombo: 0 })); }
+  };
+
+  osuMove = (ev) => {
+    if (this.over) return;
+    const held = (this.oChart || []).find((n) => n.holding);
+    if (!held) return;
+    const el = this.osuRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const px = ((ev.clientX - r.left) / r.width) * 100;
+    const py = ((ev.clientY - r.top) / r.height) * 100;
+    const now = Date.now() - this.oStart;
+    const k = Math.max(0, Math.min(1, (now - held.t) / held.len));
+    const bx = held.x + (held.ex - held.x) * k;
+    const by = held.y + (held.ey - held.y) * k;
+    if (Math.abs(px - bx) > 14 || Math.abs(py - by) > 14) {
+      held.holding = false; held.done = true;
+      this.setState((s) => ({ oMiss: s.oMiss + 1, oCombo: 0 }));
+    }
+  };
+
+  osuRelease = () => {
+    const held = (this.oChart || []).find((n) => n.holding);
+    if (!held) return;
+    const now = Date.now() - this.oStart;
+    held.holding = false; held.done = true;
+    if (now >= held.t + held.len - 180) this.osuScore(held, 40, 'PERFEITO', '#7BE86A');
+    else this.setState((s) => ({ oMiss: s.oMiss + 1, oCombo: 0 }));
+  };
+
+  /* ── CORRIDA (dino) ──────────────────────────── */
+  runDino() {
+    const scaleBase = this.scale();
+    this.dino = { y: 0, vy: 0, speed: 46 * scaleBase, dist: 0, gap: 0, stun: 0, ground: 0 };
+    this.every(() => {
+      if (this.over) return;
+      const dt = 0.032;
+      const d = this.dino;
+      d.speed = Math.min(96 * scaleBase, d.speed + 1.6 * dt);
+      d.dist += d.speed * dt * 0.42;
+      d.ground = (d.ground - d.speed * dt) % 40;
+      if (d.stun > 0) d.stun -= 32;
+
+      if (d.y > 0 || d.vy > 0) {
+        d.vy -= 168 * dt * 1.9;
+        d.y = Math.max(0, d.y + d.vy * dt * 1.9);
+        if (d.y === 0) d.vy = 0;
+      }
+
+      let obs = this.state.dObs.map((o) => ({ ...o, x: o.x - d.speed * dt }));
+      const clouds = this.state.dClouds.map((c) => {
+        const x = c.x - d.speed * dt * 0.22;
+        return x < -20 ? { ...c, x: 118, y: 10 + Math.random() * 30 } : { ...c, x };
+      });
+      d.gap -= d.speed * dt;
+      if (d.gap <= 0) {
+        const r = Math.random();
+        const kind = r < 0.34 ? 'cacto' : r < 0.66 ? 'duplo' : 'ptero';
+        obs = obs.concat([{ id: this.uid(), x: 112, kind, hit: false }]);
+        d.gap = 40 + Math.random() * 46;
+      }
+
+      const HALF = { cacto: 5.5, duplo: 6.5, ptero: 6 };
+      let hits = 0;
+      obs = obs.filter((o) => {
+        if (!o.hit && Math.abs(o.x - 22) < 7 + HALF[o.kind]) {
+          const cleared = o.kind === 'ptero' ? this.state.dDuck : d.y > 25;
+          if (!cleared && d.stun <= 0) {
+            hits += 1; d.stun = 700; d.speed = Math.max(38, d.speed * 0.72);
+            this.setState({ dBanner: true, dShake: 'shake 320ms ease' });
+            this.later(() => this.setState({ dBanner: false, dShake: 'none' }), 620);
+            return false;
+          }
+        }
+        return o.x > -14;
+      });
+
+      this.setState((s) => ({
+        dObs: obs, dClouds: clouds, dY: d.y,
+        dDist: Math.round(d.dist), dHits: s.dHits + hits, dGround: d.ground,
+      }));
+    }, 32);
+  }
+
+  dinoJump = () => {
+    if (this.over || !this.dino) return;
+    if (this.dino.y <= 0.5) { this.dino.vy = 142; this.setState({ dDuck: false }); }
+  };
+  dinoDuckDown = () => { if (!this.over) this.setState({ dDuck: true }); };
+  dinoDuckUp = () => { this.setState({ dDuck: false }); };
+
+  /* ── CONTORNO (traçar a forma) ───────────────── */
+  shapePoints(index) {
+    const kind = this.SHAPES[index % this.SHAPES.length].pts;
+    const out = [];
+    const push = (x, y) => out.push({ x: 50 + x * 38, y: 50 + y * 38, done: false });
+    if (kind === 'circle') {
+      for (let i = 0; i < 64; i += 1) { const a = (i / 64) * Math.PI * 2; push(Math.cos(a), Math.sin(a)); }
+    } else if (kind === 'square') {
+      const v = [[-1, -1], [1, -1], [1, 1], [-1, 1]];
+      v.forEach((p, i) => { const q = v[(i + 1) % 4]; for (let k = 0; k < 16; k += 1) push(p[0] + (q[0] - p[0]) * (k / 16), p[1] + (q[1] - p[1]) * (k / 16)); });
+    } else if (kind === 'tri') {
+      const v = [[0, -1.05], [1, 0.75], [-1, 0.75]];
+      v.forEach((p, i) => { const q = v[(i + 1) % 3]; for (let k = 0; k < 22; k += 1) push(p[0] + (q[0] - p[0]) * (k / 22), p[1] + (q[1] - p[1]) * (k / 22)); });
+    } else if (kind === 'star') {
+      const v = [];
+      for (let i = 0; i < 10; i += 1) { const a = -Math.PI / 2 + (i / 10) * Math.PI * 2; const r = i % 2 ? 0.46 : 1; v.push([Math.cos(a) * r, Math.sin(a) * r]); }
+      v.forEach((p, i) => { const q = v[(i + 1) % 10]; for (let k = 0; k < 7; k += 1) push(p[0] + (q[0] - p[0]) * (k / 7), p[1] + (q[1] - p[1]) * (k / 7)); });
+    } else {
+      for (let i = 0; i < 66; i += 1) {
+        const t = (i / 66) * Math.PI * 2;
+        const x = 16 * Math.pow(Math.sin(t), 3) / 17;
+        const y = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)) / 17;
+        push(x, y);
+      }
+    }
+    return out;
+  }
+
+  tracoRef = React.createRef();
+  tracing = false;
+
+  tracoPoint(ev) {
+    const el = this.tracoRef.current;
+    if (!el) return null;
+    const r = el.getBoundingClientRect();
+    return { x: ((ev.clientX - r.left) / r.width) * 100, y: ((ev.clientY - r.top) / r.height) * 100 };
+  }
+
+  tracoDown = (ev) => { if (!this.over) { this.tracing = true; this.tracoMove(ev); } };
+  tracoUp = () => { this.tracing = false; this.setState((s) => ({ tTip: { ...s.tTip, on: 0 } })); };
+
+  tracoMove = (ev) => {
+    if (!this.tracing || this.over) return;
+    const p = this.tracoPoint(ev);
+    if (!p) return;
+    let touched = 0;
+    const dots = this.state.tDots.map((d) => {
+      if (d.done) return d;
+      if (Math.abs(d.x - p.x) < 6 && Math.abs(d.y - p.y) < 6) { touched += 1; return { ...d, done: true }; }
+      return d;
+    });
+    const done = dots.filter((d) => d.done).length;
+    const pct = Math.round((done / dots.length) * 100);
+    if (pct >= 97) {
+      this.setState((s) => ({
+        tDots: dots, tPct: 100, tBanner: true,
+        tDoneCount: s.tDoneCount + 1, tScore: s.tScore + 100,
+        tTip: { x: p.x, y: p.y, on: 1 },
+      }));
+      this.later(() => {
+        if (this.over) return;
+        const next = this.state.tShape + 1;
+        this.setState({ tShape: next, tDots: this.shapePoints(next), tPct: 0, tBanner: false });
+      }, 700);
+      return;
+    }
+    this.setState({ tDots: dots, tPct: pct, tTip: { x: p.x, y: p.y, on: touched ? 1 : 0.5 } });
+  };
+
+  /* ── PIANO TILE ──────────────────────────────── */
+  runPiano() {
+    const scale = this.scale();
+    this.pSpeed = 40 * scale;
+    this.pLast = 100;
+    this.every(() => {
+      if (this.over) return;
+      const dt = 0.032;
+      const slow = this.state.pSlow > 0 ? 0.45 : 1;
+      const step = this.pSpeed * slow * dt;
+      let missed = 0;
+      const tiles = this.state.pTiles.map((t) => ({ ...t, y: t.y + step })).filter((t) => {
+        if (t.y > 100) { if (t.kind !== 'bomba') missed += 1; return false; }
+        return true;
+      });
+      this.pLast += step;
+      if (this.pLast >= 24) {
+        this.pLast = 0;
+        const r = Math.random();
+        const kind = r < 0.08 ? 'ouro' : r < 0.15 ? 'gema' : r < 0.24 ? 'bomba' : 'normal';
+        tiles.push({ id: this.uid(), col: Math.floor(Math.random() * 4), y: -22, kind });
+      }
+      this.setState((s) => ({
+        pTiles: tiles,
+        pSlow: Math.max(0, s.pSlow - 32),
+        pMiss: s.pMiss + missed,
+      }));
+    }, 32);
+  }
+
+  pianoTap = (col) => (ev) => {
+    if (ev && ev.stopPropagation) ev.stopPropagation();
+    if (this.over) return;
+    const t = this.state.pTiles.find((x) => x.col === col && x.y > 8 && x.y < 92);
+    if (!t) {
+      this.setState((s) => ({ pMiss: s.pMiss + 1, pPoints: Math.max(0, s.pPoints - 5) }));
+      return;
+    }
+    if (t.kind === 'bomba') {
+      this.setState((s) => ({
+        pTiles: s.pTiles.filter((x) => x.id !== t.id),
+        pMiss: s.pMiss + 1,
+        pPoints: Math.max(0, s.pPoints - 25),
+        pShake: 'shake 320ms ease',
+        floaters: s.floaters.concat([{ id: this.uid(), x: 12.5 + col * 25, y: t.y + 10, text: '-25', color: '#FF5C4D' }]).slice(-4),
+      }));
+      this.later(() => this.setState({ pShake: 'none' }), 340);
+      return;
+    }
+    const gain = t.kind === 'ouro' ? 30 : 10;
+    this.pSpeed = Math.min(96, this.pSpeed + 0.9);
+    this.setState((s) => ({
+      pTiles: s.pTiles.filter((x) => x.id !== t.id),
+      pPoints: s.pPoints + gain,
+      pHits: s.pHits + 1,
+      pSlow: t.kind === 'gema' ? 3200 : s.pSlow,
+      floaters: s.floaters.concat([{ id: this.uid(), x: 12.5 + col * 25, y: t.y + 10, text: t.kind === 'gema' ? 'LENTO' : '+' + gain, color: t.kind === 'ouro' ? '#FFCE31' : '#7BE86A' }]).slice(-4),
+    }));
+  };
+
+  climbLeftDown = () => { this.climb.dir = -1; };
+  climbRightDown = () => { this.climb.dir = 1; };
+  climbRelease = () => { this.climb.dir = 0; };
+
+  /* ── MEMÓRIA ─────────────────────────────────── */
+  runMemory() { this.nextMemoRound([]); }
+
+  nextMemoRound(seq) {
+    if (this.over) return;
+    const next = seq.concat([Math.floor(Math.random() * 4)]);
+    this.setState({ memoSeq: next, memoPhase: 'show', memoStep: 0, memoActive: -1 });
+    const speed = 620 / this.scale();
+    next.forEach((pad, i) => {
+      this.later(() => this.setState({ memoActive: pad }), 400 + i * speed);
+      this.later(() => this.setState({ memoActive: -1 }), 400 + i * speed + speed * 0.55);
+    });
+    this.later(() => { if (!this.over) this.setState({ memoPhase: 'input', memoStep: 0 }); }, 400 + next.length * speed + 150);
+  }
+
+  memoTap = (i) => () => {
+    if (this.over || this.state.memoPhase !== 'input') return;
+    const s = this.state;
+    const expected = s.memoSeq[s.memoStep];
+    this.setState({ memoActive: i });
+    this.later(() => this.setState({ memoActive: -1 }), 160);
+    if (i !== expected) {
+      this.setState({ memoPhase: 'wrong' });
+      this.later(() => this.nextMemoRound([]), 900);
+      return;
+    }
+    const step = s.memoStep + 1;
+    if (step >= s.memoSeq.length) {
+      const level = s.memoSeq.length;
+      this.setState({ memoPhase: 'ok', memoLevel: level, memoBest: Math.max(s.memoBest, level), memoStep: step });
+      this.later(() => this.nextMemoRound(s.memoSeq), 800);
+    } else {
+      this.setState({ memoStep: step });
+    }
+  };
+
+  /* ── MARTELO ─────────────────────────────────── */
+  runMash() {
+    const scale = this.scale();
+    this.every(() => {
+      if (this.over) return;
+      this.mashFill = Math.max(0, this.mashFill - 7 * scale * 0.06);
+      const next = Math.floor(this.mashFill);
+      if (next !== this.state.mashPercent) this.setState({ mashPercent: next });
+    }, 60);
+  }
+
+  mashTap = () => {
+    if (this.over) return;
+    this.mashFill = Math.min(100, this.mashFill + 100 / 55);
+    this.setState({ mashTaps: this.state.mashTaps + 1, mashPercent: Math.floor(this.mashFill) });
+    if (this.mashFill >= 100) this.closeRound();
+  };
+
+  /* ── FECHAMENTO DE RODADA ────────────────────── */
+  myResult() {
+    const s = this.state;
+    const g = s.gameId;
+    if (g === 'slice') return { score: s.slicePoints * 6, display: s.slicePoints + ' pts', label: 'CORTADOS', note: s.sliceHits + ' cortes · ' + s.sliceBombs + ' bombas' };
+    if (g === 'aim') return { score: Math.max(0, s.aimHits * 100 - s.aimMisses * 40), display: s.aimHits + ' acertos', label: 'NA MIRA', note: s.aimMisses + ' erros' };
+    if (g === 'climb') return { score: s.climbBest * 12, display: s.climbBest + ' m', label: 'DE ALTURA', note: 'topo alcançado' };
+    if (g === 'memory') return { score: s.memoBest * 220, display: 'nível ' + s.memoBest, label: 'DE MEMÓRIA', note: s.memoBest + ' na sequência' };
+    if (g === 'ritmo') return { score: s.rPoints * 3, display: s.rPoints + ' pts', label: 'NO RITMO', note: 'combo máx x' + s.rBest + ' · ' + s.rMiss + ' erros' };
+    if (g === 'piano') return { score: s.pPoints * 5, display: s.pPoints + ' pts', label: 'NAS TECLAS', note: s.pHits + ' teclas · ' + s.pMiss + ' erros' };
+    if (g === 'osu') return { score: s.oPoints * 4, display: s.oPoints + ' pts', label: 'NA MOSCA', note: s.oGreat + ' perfeitos · ' + s.oMiss + ' erros' };
+    if (g === 'dino') return { score: Math.max(0, s.dDist * 10 - s.dHits * 260), display: s.dDist + ' m', label: 'DE CORRIDA', note: s.dHits ? s.dHits + ' batidas' : 'sem bater' };
+    if (g === 'traco') return { score: (s.tScore + s.tPct) * 8, display: s.tDoneCount + ' formas · ' + s.tPct + '%', label: 'CONTORNADO', note: s.tDoneCount ? 'fechou ' + s.tDoneCount : 'nenhuma fechada' };
+    const done = this.mashFill >= 100;
+    return {
+      score: done ? 1000 + Math.round((this.GAMES.mash.duration - s.elapsed) / 10) : Math.round(s.mashPercent * 9),
+      display: done ? (s.elapsed / 1000).toFixed(1) + 's' : s.mashPercent + '%',
+      label: done ? 'PARA ENCHER' : 'DA BARRA', note: s.mashTaps + ' toques',
+    };
+  }
+
+  botResult(perf, game) {
+    if (game === 'slice') { const pts = Math.round(perf * 320); return { score: pts * 6, display: pts + ' pts' }; }
+    if (game === 'aim') { const h = Math.round(perf * 16); return { score: h * 100, display: h + ' acertos' }; }
+    if (game === 'climb') { const m = Math.round(perf * 190); return { score: m * 12, display: m + ' m' }; }
+    if (game === 'memory') { const lv = Math.max(1, Math.round(perf * 9)); return { score: lv * 220, display: 'nível ' + lv }; }
+    if (game === 'ritmo') { const pts = Math.round(perf * 900); return { score: pts * 3, display: pts + ' pts' }; }
+    if (game === 'piano') { const pts = Math.round(perf * 560); return { score: pts * 5, display: pts + ' pts' }; }
+    if (game === 'osu') { const pts = Math.round(perf * 780); return { score: pts * 4, display: pts + ' pts' }; }
+    if (game === 'dino') { const m = Math.round(perf * 640); return { score: m * 10, display: m + ' m' }; }
+    if (game === 'traco') {
+      const shapes = Math.floor(perf * 2.8);
+      const pct = Math.round((perf * 2.8 - shapes) * 100);
+      return { score: (shapes * 100 + pct) * 8, display: shapes + ' formas · ' + pct + '%' };
+    }
+    const dur = this.GAMES.mash.duration;
+    const finish = Math.round(dur * (1.3 - perf * 0.88));
+    const done = finish <= dur;
+    return {
+      score: done ? 1000 + Math.round((dur - finish) / 10) : Math.round(perf * 90 * 9),
+      display: done ? (finish / 1000).toFixed(1) + 's' : Math.round(perf * 90) + '%',
+    };
+  }
+
+  closeRound() {
+    if (this.over) return;
+    this.over = true;
+    this.clearAll();
+    const s = this.state;
+    const skill = this.SKILLS[s.difficulty];
+    const mine = this.myResult();
+
+    const entries = s.players.map((p) => {
+      if (!p.isBot) return { playerId: p.id, score: mine.score, display: mine.display };
+      const perf = skill.min + Math.random() * (skill.max - skill.min);
+      return { playerId: p.id, ...this.botResult(perf, s.gameId) };
+    });
+
+    entries.sort((a, b) => b.score - a.score);
+    const mult = s.chaos && s.chaos.id === 'doubleScore' ? 2 : 1;
+    const POINTS = [100, 75, 50];
+    const results = entries.map((e, i) => ({ ...e, position: i + 1, points: (POINTS[i] || 25) * mult }));
+
+    const players = s.players.map((p) => {
+      const idx = results.findIndex((x) => x.playerId === p.id);
+      const r = results[idx];
+      const won = r && r.position === 1;
+      const streak = won ? p.streak + 1 : 0;
+      const bonus = streak >= 2 ? Math.min(100, 25 * (streak - 1)) : 0;
+      const gained = (r ? r.points : 0) + bonus;
+      if (idx > -1) { results[idx].points = gained; results[idx].streak = streak; }
+      return { ...p, score: p.score + gained, wins: p.wins + (won ? 1 : 0), streak };
+    });
+
+    const me = results.find((r) => r.playerId === 'p0');
+    const place = me ? me.position : 9;
+    this.setState({
+      outcome: {
+        value: mine.display, label: mine.label, note: mine.note,
+        good: place === 1,
+        selo: place === 1 ? 'assets/selos/perfect.png' : place <= 2 ? 'assets/selos/great.png' : place <= 3 ? 'assets/selos/good.png' : 'assets/selos/miss.png',
+      },
+    });
+    this.later(() => this.setState({ screen: 'result', results, players }), 1500);
+    this.later(() => {
+      if (this.state.round >= this.state.rounds) this.finishMatch();
+      else this.beginRound(this.state.round + 1);
+    }, 5700);
+  }
+
+  finishMatch() {
+    this.clearAll();
+    const table = this.state.players.slice().sort((a, b) => b.score - a.score).map((p, i) => ({ ...p, position: i + 1 }));
+    this.setState({ screen: 'final', table });
+  }
+
+  replay = () => { this.setState({ screen: 'lobby' }, () => this.startMatch()); };
+
+  flash(msg) {
+    this.setState({ toast: msg });
+    this.later(() => this.setState({ toast: null }), 2000);
+  }
+
+  qrCells() {
+    const cells = [];
+    const seedStr = this.state.roomId || 'KXTP';
+    let seed = 0;
+    for (let i = 0; i < seedStr.length; i += 1) seed = (seed * 31 + seedStr.charCodeAt(i)) % 99991;
+    const rnd = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
+    const finder = (ox, oy) => {
+      for (let y = 0; y < 7; y += 1) {
+        for (let x = 0; x < 7; x += 1) {
+          const edge = x === 0 || y === 0 || x === 6 || y === 6;
+          const core = x >= 2 && x <= 4 && y >= 2 && y <= 4;
+          if (edge || core) cells.push({ x: ox + x, y: oy + y });
+        }
+      }
+    };
+    finder(1, 1); finder(21, 1); finder(1, 21);
+    for (let y = 1; y < 28; y += 1) {
+      for (let x = 1; x < 28; x += 1) {
+        if ((x < 9 && y < 9) || (x > 19 && y < 9) || (x < 9 && y > 19)) continue;
+        if (rnd() > 0.52) cells.push({ x, y });
+      }
+    }
+    return cells;
+  }
+
+  renderVals() {
+    const s = this.state;
+    const game = this.GAMES[s.gameId];
+
+    const avatarChoices = this.AVATARS.map((a, i) => ({
+      src: a.src, id: a.id,
+      border: i === s.avatarIndex ? '#170F3E' : '#D9D2F5',
+      bg: i === s.avatarIndex ? '#FFCE31' : '#F0ECFF',
+      shadow: i === s.avatarIndex ? '0 4px 0 #170F3E' : 'none',
+      pick: () => this.setState({ avatarIndex: i }),
+    }));
+
+    const players = s.players.map((p, i) => ({
+      ...p, src: this.avatar(p.avatar).src,
+      isHost: i === 0, isYou: i === 0,
+      cardBg: i === 0 ? '#FFFDF7' : 'rgba(255,253,247,.14)',
+      nameColor: i === 0 ? '#170F3E' : '#FFFDF7',
+      metaColor: i === 0 ? '#7A6FB5' : '#CFC4FF',
+      meta: p.isBot ? 'BOT · ' + this.SKILLS[s.difficulty].label : 'ANFITRIÃO',
+      removable: p.isBot && s.players.length > 2,
+      remove: () => this.setState({ players: s.players.filter((x) => x.id !== p.id) }),
+    }));
+
+    const mkOpts = (list, current, set) => list.map((o) => {
+      const v = o.value !== undefined ? o.value : o;
+      const on = v === current;
+      return {
+        label: String(o.label !== undefined ? o.label : o),
+        bg: on ? '#FFCE31' : 'transparent',
+        border: on ? '#170F3E' : 'rgba(255,253,247,.18)',
+        fg: on ? '#170F3E' : '#E7E0FF',
+        sub: on ? 'rgba(23,15,62,.6)' : '#9C8FD8',
+        pick: () => set(v),
+      };
+    });
+
+    const results = s.results.map((r, i) => {
+      const p = s.players.find((x) => x.id === r.playerId) || {};
+      const first = r.position === 1;
+      return {
+        src: this.avatar(p.avatar || 0).src,
+        position: r.position, name: p.name || '—', color: p.color || '#FFB13D',
+        display: r.display, delta: '+' + r.points,
+        meta: r.streak >= 2 ? 'SEQUÊNCIA x' + r.streak : (r.playerId === 'p0' ? 'VOCÊ' : 'BOT'),
+        cardBg: first ? '#FFCE31' : (r.playerId === 'p0' ? '#FFFDF7' : 'rgba(255,253,247,.14)'),
+        nameColor: first || r.playerId === 'p0' ? '#170F3E' : '#FFFDF7',
+        metaColor: first || r.playerId === 'p0' ? 'rgba(23,15,62,.6)' : '#CFC4FF',
+        posColor: first || r.playerId === 'p0' ? '#170F3E' : '#FFCE31',
+        delay: (i * 70) + 'ms',
+      };
+    });
+
+    const me = s.results.find((r) => r.playerId === 'p0');
+    const winner = s.results.find((r) => r.position === 1);
+    const iWon = !!winner && winner.playerId === 'p0';
+    const winnerName = winner ? (s.players.find((p) => p.id === winner.playerId) || {}).name : '—';
+
+    const MEDALS = ['assets/recompensas/medalha-ouro.png', 'assets/recompensas/medalha-prata.png', 'assets/recompensas/medalha-bronze.png'];
+    const top3 = s.table.filter((p) => p.position <= 3);
+    const podium = [top3[1], top3[0], top3[2]].filter(Boolean).map((p) => ({
+      src: this.avatar(p.avatar).src, medal: MEDALS[p.position - 1],
+      name: p.name, score: p.score, position: p.position, color: p.color,
+      avSize: p.position === 1 ? '86px' : '66px',
+      nameSize: p.position === 1 ? '18px' : '15px',
+      stepH: p.position === 1 ? '104px' : p.position === 2 ? '76px' : '58px',
+      stepBg: p.position === 1 ? '#FFCE31' : 'rgba(255,253,247,.18)',
+      stepFg: p.position === 1 ? '#170F3E' : '#FFFDF7',
+      delay: p.position === 1 ? '80ms' : p.position === 2 ? '0ms' : '160ms',
+    }));
+
+    const restTable = s.table.filter((p) => p.position > 3).map((p) => ({
+      src: this.avatar(p.avatar).src, name: p.name, score: p.score, position: p.position, color: p.color,
+      cardBg: p.id === 'p0' ? '#FFFDF7' : 'rgba(255,253,247,.14)',
+      nameColor: p.id === 'p0' ? '#170F3E' : '#FFFDF7',
+      metaColor: p.id === 'p0' ? '#7A6FB5' : '#CFC4FF',
+      posColor: p.id === 'p0' ? '#170F3E' : '#FFCE31',
+      meta: p.wins > 0 ? p.wins + (p.wins > 1 ? ' VITÓRIAS' : ' VITÓRIA') : 'SEM VITÓRIA',
+    }));
+
+    const champ = s.table[0];
+    const achievements = s.table.length ? [
+      { icon: 'assets/simbolos/raio.png', color: '#4DE3E3', label: 'REFLEXO MAIS RÁPIDO', who: (s.table[0] || {}).name, value: '182ms' },
+      { icon: 'assets/jogo/melancia.png', color: '#FFCE31', label: 'MAIS CORTES', who: (s.table[Math.min(1, s.table.length - 1)] || {}).name, value: String(24 + s.rounds * 6) },
+      { icon: 'assets/jogo/chama.png', color: '#FF6B8B', label: 'MAIOR SEQUÊNCIA', who: (s.table[0] || {}).name, value: 'x' + Math.max(2, (s.table[0] || {}).wins || 2) },
+    ] : [];
+
+    const remainingSec = Math.ceil(s.remaining / 1000);
+    const ratio = s.remaining / (game.duration || 1);
+    const urgent = remainingSec <= 5;
+
+    const targets = s.targets.map((t) => ({
+      hit: this.aimHit(t),
+      left: t.left + '%', top: t.top + '%', size: t.size + 'px',
+      src: t.bad ? 'assets/jogo/bomba.png' : 'assets/jogo/alvo.png',
+    }));
+
+    const fruits = s.fruits.map((f) => ({
+      src: f.src, left: f.x + '%', top: f.y + '%', size: f.size + 'px', rot: Math.round(f.rot) + 'deg',
+    }));
+    const trailDots = s.trail.map((p, i) => ({
+      left: p.x + '%', top: p.y + '%',
+      size: (4 + i * 1.4) + 'px', opacity: String(0.12 + i * 0.09),
+    }));
+    const pops = s.pops.map((p) => ({ src: p.src, left: p.x + '%', top: p.y + '%', size: p.size + 'px' }));
+    const floaters = s.floaters.map((f) => ({ text: f.text, color: f.color, left: f.x + '%', top: f.y + '%' }));
+
+    const camY = Math.max(0, s.climbPos.y);
+    const unit = 100 / 460;
+    const platforms = s.platforms
+      .filter((p) => p.y > camY - 300 && p.y < camY + 320)
+      .map((p) => ({
+        left: p.x + '%', top: (62 - (p.y - camY) * unit) + '%', width: '30%',
+        color: p.broken ? '#5A4A8C' : p.type === 'mola' ? '#FFCE31' : p.type === 'movel' ? '#4DE3E3' : p.type === 'quebra' ? '#C08457' : '#A78BFA',
+        opacity: p.broken ? '0.35' : '1',
+        item: p.item === 'foguete' ? 'assets/acoes/foguete.png' : (p.type === 'mola' ? 'assets/acoes/seta-cima.png' : ''),
+        itemSize: p.item === 'foguete' ? '34px' : '22px',
+      }));
+    const climbHazards = s.climbHazards
+      .filter((h) => h.y > camY - 300 && h.y < camY + 320)
+      .map((h) => ({ src: h.kind === 'bomba' ? 'assets/jogo/bomba.png' : 'assets/efeitos/nuvem-roxa.png', left: h.x + '%', top: (62 - (h.y - camY) * unit) + '%' }));
+    const climbRivals = s.players.filter((p) => p.isBot).slice(0, 3).map((p, i) => {
+      const skill = this.SKILLS[s.difficulty];
+      const perf = skill.min + (((i * 41) % 100) / 100) * (skill.max - skill.min);
+      const y = (s.elapsed / 1000) * 62 * perf * 10;
+      return { src: this.avatar(p.avatar).src, left: (18 + i * 26) + '%', top: (62 - (y - camY) * unit) + '%' };
+    });
+
+    const memoPads = this.PADS.map((pad, i) => {
+      const on = s.memoActive === i;
+      return {
+        src: pad.src, bg: on ? pad.on : pad.off,
+        opacity: on ? '1' : '0.55',
+        scale: on ? 'scale(1.05)' : 'scale(1)',
+        shadow: on ? '0 3px 0 #170F3E' : '0 8px 0 #170F3E',
+        tap: this.memoTap(i),
+      };
+    });
+    const memoDots = s.memoSeq.map((x, i) => ({ bg: i < s.memoStep ? '#7BE86A' : 'rgba(255,253,247,.25)' }));
+    const memoStatus = s.memoPhase === 'show' ? 'OLHE A SEQUÊNCIA'
+      : s.memoPhase === 'wrong' ? 'ERROU · RECOMEÇANDO'
+        : s.memoPhase === 'ok' ? 'NÍVEL ' + s.memoLevel + ' ✓' : 'SUA VEZ';
+    const memoBadgeBg = s.memoPhase === 'wrong' ? '#FF6B57' : s.memoPhase === 'ok' ? '#7BE86A' : '#FFCE31';
+
+    const NOTE_BG = { normal: null, star: '#FFCE31', double: '#FF8A3D' };
+    const NOTE_ICON = { star: 'assets/recompensas/estrela.png', double: 'assets/acoes/nota-dupla.png' };
+    const now = s.rNow;
+    const ritmoNotes = (this.chart || []).filter((n) => !n.done && !n.missed && n.t - now < this.TRAVEL && n.t + n.len > now - 300).map((n) => ({
+      left: (12.5 + n.lane * 25) + '%',
+      top: (82 * (1 - (n.t - now) / this.TRAVEL)) + '%',
+      height: n.type === 'hold' ? Math.max(6, (n.len / this.TRAVEL) * 82) + '%' : '26px',
+      radius: n.type === 'hold' ? '14px' : '999px',
+      bg: NOTE_BG[n.kind] || this.LANES[n.lane],
+      icon: NOTE_ICON[n.kind] || '',
+    }));
+    const ritmoLanes = this.LANES.map((color, i) => ({
+      left: (i * 25) + '%',
+      wash: s.rPress[i] ? 'rgba(255,253,247,.14)' : 'transparent',
+      bg: s.rPress[i] ? color : 'rgba(255,253,247,.12)',
+      dot: color,
+      shadow: s.rPress[i] ? '0 2px 0 #170F3E' : '0 6px 0 #170F3E',
+      press: s.rPress[i] ? 'translateY(4px)' : 'translateY(0)',
+      down: this.ritmoDown(i), up: this.ritmoUp(i),
+    }));
+    const TILE_BG = { normal: '#170F3E', ouro: '#FFCE31', gema: '#4DE3E3', bomba: '#FF5C4D' };
+    const TILE_ICON = { ouro: 'assets/recompensas/moeda.png', gema: 'assets/recompensas/gema.png', bomba: 'assets/jogo/bomba.png' };
+    const pianoTiles = s.pTiles.map((t) => ({
+      left: (t.col * 25) + '%', top: t.y + '%',
+      bg: TILE_BG[t.kind], icon: TILE_ICON[t.kind] || '',
+    }));
+    const pianoCols = [0, 1, 2, 3].map((c) => ({ left: (c * 25) + '%', tap: this.pianoTap(c) }));
+    const oNow = s.oNow;
+    const oLive = (this.oChart || []).filter((n) => !n.done && !n.missed && n.t - oNow < this.OAR && n.t + n.len > oNow - 260);
+    const osuNotes = oLive.map((n) => ({
+      left: n.x + '%', top: n.y + '%', num: String(n.num),
+      bg: n.slider ? 'rgba(77,227,227,.85)' : 'rgba(255,107,214,.85)',
+      ringColor: n.slider ? '#4DE3E3' : '#FFCE31',
+      ring: String(Math.max(1, 1 + 1.9 * ((n.t - oNow) / this.OAR)).toFixed(2)),
+      hit: this.osuHit(n),
+    }));
+    const osuSliders = oLive.filter((n) => n.slider).map((n) => {
+      const dx = n.ex - n.x;
+      const dy = n.ey - n.y;
+      return {
+        left: n.x + '%', top: n.y + '%',
+        len: Math.sqrt(dx * dx + dy * dy * 0.6) + '%',
+        angle: (Math.atan2(dy, dx) * 180 / Math.PI) + 'deg',
+      };
+    });
+    const osuBalls = oLive.filter((n) => n.holding).map((n) => {
+      const k = Math.max(0, Math.min(1, (oNow - n.t) / (n.len || 1)));
+      return { left: (n.x + (n.ex - n.x) * k) + '%', top: (n.y + (n.ey - n.y) * k) + '%' };
+    });
+    const osuFx = s.oFx.map((f) => ({ left: f.x + '%', top: f.y + '%', color: f.color }));
+    const osuJudge = s.oJudge.map((j) => ({ left: j.x + '%', top: j.y + '%', text: j.text, color: j.color }));
+
+    const OBS = {
+      cacto: { src: 'assets/dino/cacto.png', h: '11%', b: '22%' },
+      duplo: { src: 'assets/dino/cacto-duplo.png', h: '10%', b: '22%' },
+      ptero: { src: 'assets/dino/pterodatilo.png', h: '7%', b: '36%' },
+    };
+    const dinoObstacles = s.dObs.map((o) => {
+      const c = OBS[o.kind];
+      return { src: c.src, left: o.x + '%', bottom: c.b, height: c.h };
+    });
+    const dinoClouds = s.dClouds.map((c) => ({ left: c.x + '%', top: c.y + '%' }));
+
+    const tracoDots = s.tDots.map((d) => ({
+      left: d.x + '%', top: d.y + '%',
+      size: d.done ? '13px' : '9px',
+      color: d.done ? '#7BE86A' : '#D9D2F5',
+    }));
+
+    const rivals = s.players.filter((p) => p.isBot).slice(0, 4).map((p, i) => {
+      const skill = this.SKILLS[s.difficulty];
+      const perf = skill.min + (((i * 37) % 100) / 100) * (skill.max - skill.min);
+      return { name: p.name, color: p.color, pct: Math.min(100, Math.round((s.elapsed / (game.duration * (1.3 - perf * 0.88))) * 100)) + '%' };
+    });
+
+    const hud = s.gameId === 'slice' ? ['PONTOS', String(s.slicePoints)]
+      : s.gameId === 'aim' ? ['ACERTOS', String(s.aimHits)]
+        : s.gameId === 'climb' ? ['ALTURA', s.climbBest + 'm']
+          : s.gameId === 'memory' ? ['NÍVEL', String(s.memoBest)]
+            : s.gameId === 'ritmo' ? ['PONTOS', String(s.rPoints)]
+              : s.gameId === 'piano' ? ['PONTOS', String(s.pPoints)]
+                : s.gameId === 'traco' ? ['FORMAS', String(s.tDoneCount)]
+                  : s.gameId === 'dino' ? ['METROS', String(s.dDist)]
+                    : s.gameId === 'osu' ? ['PONTOS', String(s.oPoints)]
+                      : ['TOQUES', String(s.mashTaps)];
+
+    return {
+      isHome: s.screen === 'home', isCreate: s.screen === 'create', isJoin: s.screen === 'join',
+      isLobby: s.screen === 'lobby', isIntro: s.screen === 'intro', isCount: s.screen === 'count',
+      isPlay: s.screen === 'play', isResult: s.screen === 'result', isFinal: s.screen === 'final',
+      isSlice: s.gameId === 'slice', isAim: s.gameId === 'aim', isClimb: s.gameId === 'climb',
+      isMemory: s.gameId === 'memory', isMash: s.gameId === 'mash',
+      isRitmo: s.gameId === 'ritmo', isPiano: s.gameId === 'piano', isTraco: s.gameId === 'traco',
+      isDino: s.gameId === 'dino',
+      dinoObstacles, dinoClouds,
+      dinoSprite: s.dDuck && s.dY <= 0.5 ? 'assets/dino/dino-abaixa.png' : s.dY > 0.5 ? 'assets/dino/dino-pula.png' : 'assets/dino/dino-corre.png',
+      dinoH: s.dDuck && s.dY <= 0.5 ? '7%' : '13%',
+      dinoBottom: 'calc(22% + ' + s.dY * 0.42 + '%)',
+      dinoDist: String(s.dDist), dinoHits: String(s.dHits),
+      dinoGround: s.dGround + 'px', dinoBanner: s.dBanner, dinoShake: s.dShake,
+      dinoJump: this.dinoJump, dinoDuckDown: this.dinoDuckDown, dinoDuckUp: this.dinoDuckUp,
+      tracoRef: this.tracoRef, tracoDown: this.tracoDown, tracoMove: this.tracoMove, tracoUp: this.tracoUp,
+      tracoDots, tracoPct: s.tPct + '%', tracoName: this.SHAPES[s.tShape % this.SHAPES.length].name,
+      tracoDoneCount: String(s.tDoneCount), tracoDoneBanner: s.tBanner,
+      tracoTipX: s.tTip.x + '%', tracoTipY: s.tTip.y + '%', tracoTipOn: String(s.tTip.on),
+      ritmoNotes, ritmoLanes,
+      ritmoFx: s.rFx.map((f) => ({ left: (12.5 + f.lane * 25) + '%', color: f.color })),
+      ritmoSparks: s.rSparks.map((f) => ({ left: f.x + '%', top: f.y + '%', size: f.size + 'px', color: f.color })),
+      ritmoJudge: s.rJudge.map((j) => ({ left: (12.5 + j.lane * 25) + '%', text: j.text, color: j.color })),
+      isOsu: s.gameId === 'osu',
+      osuRef: this.osuRef, osuMove: this.osuMove, osuRelease: this.osuRelease,
+      osuNotes, osuSliders, osuBalls, osuFx, osuJudge,
+      osuCombo: s.oCombo >= 3 ? s.oCombo : 0,
+      ritmoStar: s.rStar > 0 ? (Math.ceil(s.rStar / 1000) + 's') : '',
+      ritmoCombo: s.rCombo >= 5 ? s.rCombo : 0,
+      pianoTiles, pianoCols, pianoShake: s.pShake,
+      pianoSlow: s.pSlow > 0,
+      climbHazards, climbGear: s.climbGear || '',
+      climbBanner: s.climbBanner || '', climbBannerBg: s.climbBannerBg,
+      help: s.help, debug: s.debug, toast: s.toast,
+      soundPath: s.muted ? 'M16 9.5l4.5 5M20.5 9.5l-4.5 5' : 'M15.6 9a4.5 4.5 0 0 1 0 6M18.4 6.6a8 8 0 0 1 0 10.8',
+      codeInput: s.codeInput, nameInput: s.nameInput,
+      joinCode: s.codeInput || s.roomId,
+      joinOpacity: s.codeInput.length === 4 ? '1' : '0.45',
+      roomId: s.roomId, playerCount: s.players.length,
+      accent: game.accent, accentSoft: game.soft, accentDeep: game.deep,
+      myAvSrc: this.avatar(s.avatarIndex).src,
+      avatarChoices, players, qrCells: this.qrCells(),
+      gameGuide: [
+        { icon: 'assets/jogo/melancia.png', name: 'CORTA FRUTA', how: 'Arraste o dedo pela tela e corte tudo. Bomba tira 30.' },
+        { icon: 'assets/jogo/alvo.png', name: 'MIRA', how: 'Toque nos alvos que aparecem. Bomba conta erro.' },
+        { icon: 'assets/jogo/nota-musical.png', name: 'RITMO', how: '4 teclas, notas descendo. Toque na linha e segure as compridas. Estrela dobra tudo.' },
+        { icon: 'assets/simbolos/nota-musical.png', name: 'PIANO TILE', how: 'Só nas teclas pretas. Moeda vale 30, gema deixa lento, bomba nunca.' },
+        { icon: 'assets/simbolos/alvo.png', name: 'NA MOSCA', how: 'Círculos numerados com anel que fecha: toque na hora. Nos rastros, arraste a bolinha até o fim.' },
+        { icon: 'assets/dino/dino-corre.png', name: 'CORRIDA', how: 'Pule os cactos e abaixe dos pterodátilos. Vale a distância; bater custa caro.' },
+        { icon: 'assets/jogo/pincel.png', name: 'CONTORNO', how: 'Passe o dedo por cima do contorno da forma. Quem fechar primeiro leva; o resto pontua pela porcentagem.' },
+        { icon: 'assets/acoes/seta-cima.png', name: 'ESCALADA', how: 'Pulo automático, segure ← →. Mola, foguete, plataforma que quebra e nuvem que derruba.' },
+        { icon: 'assets/jogo/cerebro.png', name: 'MEMÓRIA', how: 'A sequência pisca e cresce. Repita sem errar.' },
+        { icon: 'assets/jogo/raio.png', name: 'MARTELO', how: 'Toque sem parar até encher a barra antes de todo mundo.' },
+      ],
+      modeOpts: mkOpts([{ value: 'partida', label: 'PARTIDA' }, { value: 'unico', label: 'JOGO ÚNICO' }], s.mode, (v) => this.setState({ mode: v })),
+      isSolo: s.mode === 'unico',
+      pickerTitle: s.mode === 'unico' ? 'ESCOLHA O MICROJOGO' : 'MICROJOGOS NA PARTIDA',
+      gamePicker: this.QUEUE.map((id) => {
+        const g = this.GAMES[id];
+        const on = s.mode === 'unico' ? s.soloGame === id : s.picked.indexOf(id) > -1;
+        return {
+          id, name: g.name, icon: g.pict,
+          bg: on ? '#FFCE31' : 'rgba(255,253,247,.1)',
+          border: on ? '#170F3E' : 'rgba(255,253,247,.2)',
+          fg: on ? '#170F3E' : '#E7E0FF',
+          opacity: on ? '1' : '0.5',
+          pick: () => {
+            if (this.state.mode === 'unico') { this.setState({ soloGame: id }); return; }
+            const has = this.state.picked.indexOf(id) > -1;
+            const next = has ? this.state.picked.filter((x) => x !== id) : this.state.picked.concat([id]);
+            this.setState({ picked: next.length ? next : [id] });
+          },
+        };
+      }),
+      roundOpts: mkOpts([5, 7, 10], s.rounds, (v) => this.setState({ rounds: v })),
+      playerOpts: mkOpts([2, 3, 4, 6, 8], s.totalPlayers, (v) => this.setState({ totalPlayers: v })),
+      skillOpts: mkOpts([{ value: 'EASY', label: 'FÁCIL' }, { value: 'MEDIUM', label: 'MÉDIO' }, { value: 'HARD', label: 'DIFÍCIL' }], s.difficulty, (v) => this.setState({ difficulty: v })),
+      round: s.round, totalRounds: s.rounds,
+      gameName: game.name, gameInstruction: game.instruction, gameHint: game.hint, pictogram: game.pict,
+      chaos: !!s.chaos, chaosName: s.chaos ? s.chaos.name : '', chaosDesc: s.chaos ? s.chaos.description : '',
+      chaosIcon: s.chaos ? s.chaos.icon : 'assets/selos/chaos-event.png',
+      countLabel: s.countStep >= 3 ? 'JÁ!' : String(3 - s.countStep),
+      countKey: 'c' + s.countStep, ringKey: 'r' + s.countStep,
+      timerValue: String(remainingSec), timerDeg: (ratio * 360) + 'deg',
+      timerColor: urgent ? '#FF5C4D' : '#7BE86A',
+      hudLabel: hud[0], hudValue: hud[1],
+      sliceRef: this.sliceRef, sliceDown: this.sliceDown, sliceMove: this.sliceMove, sliceUp: this.sliceUp,
+      fruits, trailDots, pops, floaters,
+      sliceCombo: s.sliceCombo >= 3 ? s.sliceCombo : 0,
+      sliceShake: s.sliceShake,
+      targets,
+      platforms, climbRivals,
+      climbX: s.climbPos.x + '%', climbY: '62%', climbFace: String(s.climbFace),
+      climbHeight: String(s.climbBest),
+      memoPads, memoDots, memoStatus, memoBadgeBg,
+      mashPercent: s.mashPercent, mashPct: s.mashPercent + '%',
+      rivals,
+      outcome: !!s.outcome,
+      outcomeValue: s.outcome ? s.outcome.value : '', outcomeLabel: s.outcome ? s.outcome.label : '',
+      outcomeNote: s.outcome ? s.outcome.note : '',
+      outcomeSelo: s.outcome ? s.outcome.selo : 'assets/selos/good.png',
+      outcomeBg: s.outcome && s.outcome.good ? '#7BE86A' : '#FFCE31',
+      results, doubled: !!(s.chaos && s.chaos.id === 'doubleScore'),
+      verdict: iWon ? 'VOCÊ VENCEU!' : (winnerName || '—') + ' VENCEU',
+      verdictColor: iWon ? '#FFCE31' : '#FFFDF7',
+      myDisplay: me ? me.display : '—',
+      myPlaceText: me && me.position > 1 ? ' · ' + me.position + 'º lugar' : '',
+      matchPct: Math.round((s.round / s.rounds) * 100) + '%',
+      podium, restTable, achievements,
+      finalSelo: champ && champ.id === 'p0' ? 'assets/selos/victory.png' : 'assets/selos/great.png',
+      finalTitle: champ && champ.id === 'p0' ? 'VOCÊ VENCEU!' : ((champ ? champ.name : '—') + ' VENCEU'),
+      finalTitleColor: champ && champ.id === 'p0' ? '#FFCE31' : '#FFFDF7',
+      toggleMute: () => this.setState({ muted: !s.muted }),
+      openHelp: () => this.setState({ help: true }),
+      closeHelp: () => this.setState({ help: false }),
+      goHome: () => this.goto('home'),
+      goCreate: () => this.goto('create'),
+      goJoin: () => { if (s.codeInput.length === 4) this.setState({ screen: 'join', roomId: s.codeInput }); },
+      goLobby: () => this.goto('lobby'),
+      onCode: (e) => this.setState({ codeInput: e.target.value.toUpperCase().replace(/[^A-Z2-9]/g, '').slice(0, 4) }),
+      onName: (e) => this.setState({ nameInput: e.target.value.toUpperCase() }),
+      createRoom: this.createRoom,
+      copyLink: () => this.flash('LINK COPIADO'),
+      shareLink: () => this.flash('COMPARTILHANDO…'),
+      addBot: () => { if (s.players.length < 8) this.setState({ players: this.buildPlayers(s.players.length + 1) }); },
+      startMatch: this.startMatch,
+      mashTap: this.mashTap, aimMiss: this.aimMiss,
+      climbLeftDown: this.climbLeftDown, climbRightDown: this.climbRightDown, climbRelease: this.climbRelease,
+      replay: this.replay,
+      toggleDebug: () => this.setState({ debug: !s.debug }),
+      debugJumps: [
+        { label: 'HOME', go: () => this.goto('home') },
+        { label: 'CRIAR', go: () => this.goto('create') },
+        { label: 'CÓDIGO', go: () => this.setState({ screen: 'join', codeInput: 'KXTP' }) },
+        { label: 'LOBBY', go: () => this.createRoom() },
+        { label: 'INTRO+CHAOS', go: () => { this.clearAll(); this.setState({ screen: 'intro', round: 2, gameId: 'aim', chaos: this.CHAOS[0], players: s.players.length ? s.players : this.buildPlayers(4) }); } },
+        { label: 'CORTA', go: () => this.jumpTo('slice') },
+        { label: 'MIRA', go: () => this.jumpTo('aim') },
+        { label: 'RITMO', go: () => this.jumpTo('ritmo') },
+        { label: 'PIANO', go: () => this.jumpTo('piano') },
+        { label: 'CONTORNO', go: () => this.jumpTo('traco') },
+        { label: 'CORRIDA', go: () => this.jumpTo('dino') },
+        { label: 'NA MOSCA', go: () => this.jumpTo('osu') },
+        { label: 'ESCALADA', go: () => this.jumpTo('climb') },
+        { label: 'MEMÓRIA', go: () => this.jumpTo('memory') },
+        { label: 'MARTELO', go: () => this.jumpTo('mash') },
+        { label: 'RESULTADO', go: () => { this.clearAll(); this.setState({ players: s.players.length ? s.players : this.buildPlayers(4) }, () => { this.over = false; this.closeRound(); }); } },
+        { label: 'PLACAR', go: () => { this.clearAll(); const base = s.players.length ? s.players : this.buildPlayers(4); this.setState({ players: base.map((p, i) => ({ ...p, score: 400 - i * 65, wins: Math.max(0, 3 - i) })) }, () => this.finishMatch()); } },
+      ],
+    };
+  }
+
+  jumpTo(gameId) {
+    this.clearAll();
+    const players = this.state.players.length ? this.state.players : this.buildPlayers(4);
+    this.setState({ gameId, round: 1, chaos: null, players }, () => this.startPlay());
+  }
+}
+
+</script>
+</body>
+</html>

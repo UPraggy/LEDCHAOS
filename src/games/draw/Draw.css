@@ -1,0 +1,211 @@
+/* DESENHAR — a tela é o jogo. Aqui: palavra, feed de palpites e a paleta. */
+
+.dw .gscene__stage {
+  /* Papel creme CHAPADO: superfície de desenho lisa, sem brilho radial. O traço
+     lê melhor sobre creme sólido e o palco fica fiel aos adesivos flat. */
+  background: var(--color-surface);
+}
+
+/* A tela de desenho não pode rolar a página junto com o dedo. */
+.dw__board {
+  touch-action: none;
+}
+
+/* ---------------------------------------------------------------- palavra */
+
+/* A palavra fica no cabeçalho, não em ScoreBadge: "GUARDA-CHUVA" estoura a
+   largura de um badge em celular pequeno. Aqui ela pode quebrar e encolher. */
+.dw__word {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dw__word-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+}
+
+.dw__word-value {
+  font-size: var(--fs-lg);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  color: var(--game-accent);
+  text-shadow: var(--glow-sm) color-mix(in srgb, var(--game-accent) 55%, transparent);
+  overflow-wrap: anywhere;
+}
+
+.dw__solved {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: baseline;
+  gap: 1px;
+  font-family: var(--font-mono);
+}
+
+.dw__solved-value {
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  color: var(--color-success);
+}
+
+.dw__solved-label {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+/* ------------------------------------------------------------------- feed */
+
+/* Os palpites flutuam sobre o desenho, ancorados embaixo. `pointer-events:
+   none` é obrigatório: o dedo tem que continuar desenhando por baixo deles. */
+.dw__feed {
+  position: absolute;
+  left: var(--space-3);
+  right: var(--space-3);
+  bottom: var(--space-3);
+  z-index: var(--z-hud);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  list-style: none;
+  pointer-events: none;
+}
+
+.dw__guess {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  align-self: flex-start;
+  max-width: 100%;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-bg-deep) 82%, transparent);
+  border: 1px solid var(--color-border);
+  font-size: var(--fs-sm);
+  color: var(--color-text-dim);
+  animation: dw-in 220ms var(--ease-out) both;
+}
+
+/* Acerto: borda verde + selo escrito. Nunca só a cor — a regra de daltonismo
+   vale aqui também. */
+.dw__guess--hit {
+  border-color: var(--color-success);
+  background: color-mix(in srgb, var(--color-success) 18%, var(--color-bg-deep));
+  color: var(--color-text);
+}
+
+.dw__guess-who {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+
+.dw__guess-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dw__guess-tag {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-success);
+}
+
+@keyframes dw-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------- paleta */
+
+.dw__pad {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.dw__colors {
+  display: flex;
+  gap: var(--space-2);
+}
+
+/* Alvo de 44px mesmo com o disco de cor menor: em celular, o que importa é a
+   área que aceita o toque, não o que aparece pintado. */
+.dw__swatch {
+  flex: 1 1 0;
+  height: 44px;
+  min-width: 44px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  background: var(--swatch);
+  cursor: pointer;
+  transition: transform 120ms var(--ease-out), border-color 120ms var(--ease-out);
+}
+
+.dw__swatch.is-on {
+  border-color: var(--color-text);
+  transform: translateY(-3px);
+  box-shadow: var(--glow-sm) color-mix(in srgb, var(--swatch) 60%, transparent);
+}
+
+.dw__tools {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.dw__tool {
+  flex: 1 1 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-text-dim);
+  cursor: pointer;
+}
+
+.dw__tool--size {
+  flex: 0 0 44px;
+}
+
+.dw__tool.is-on {
+  border-color: var(--game-accent);
+  background: color-mix(in srgb, var(--game-accent) 22%, var(--color-surface));
+  color: var(--color-text);
+}
+
+.dw__tool--warn {
+  color: var(--color-danger);
+}
+
+/* O disco mostra a espessura real do traço em vez de escrever "fino/médio/
+   grosso" — se dá para ver, não precisa ler. */
+.dw__dot {
+  width: var(--dot);
+  height: var(--dot);
+  border-radius: var(--radius-pill);
+  background: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dw__guess { animation: none; }
+  .dw__swatch { transition: none; }
+  .dw__swatch.is-on { transform: none; }
+}

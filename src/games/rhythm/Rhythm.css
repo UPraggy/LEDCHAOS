@@ -1,0 +1,61 @@
+/* BATIDA — as faixas são canvas. Aqui só os quatro botões, colados nelas. */
+
+.rh .gscene__stage {
+  background: var(--color-bg-deep);
+}
+
+/* ---------------------------------------------------------------- controle */
+
+/* Zero gap de propósito: os botões precisam ficar exatamente sob as faixas
+   desenhadas no canvas, que dividem a largura em quatro partes iguais. Qualquer
+   espaço entre eles quebraria esse alinhamento — e o alinhamento é a única
+   coisa que explica o jogo sem tutorial. */
+.rh__pad {
+  display: flex;
+  gap: 0;
+  padding-inline: 0;
+}
+
+.rh__key {
+  flex: 1 1 0;
+  min-height: 100px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  /* Só linhas divisórias internas: a borda externa cortaria o alinhamento. */
+  border-inline-end: 2px solid var(--color-bg-deep);
+  background: color-mix(in srgb, var(--lane) 16%, var(--color-surface));
+  cursor: pointer;
+  /* O dedo desce rápido e repetido: sem isto o navegador rola a página, e o
+     duplo toque tenta dar zoom no meio da música. */
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.rh__key:last-child {
+  border-inline-end: none;
+}
+
+/* A barra colorida fica no TOPO do botão, apontando para a coluna que ele
+   controla. É o que costura o controle à faixa sem precisar de legenda. */
+.rh__key-bar {
+  display: block;
+  width: 100%;
+  height: 6px;
+  background: var(--lane);
+  box-shadow: var(--glow-sm) color-mix(in srgb, var(--lane) 60%, transparent);
+}
+
+/* Afundamento no toque: a face escurece e a barra engrossa. Serve tanto para o
+   TAP quanto para o HOLD (o dedo fica preso e a barra continua grossa). */
+.rh__key:active {
+  background: color-mix(in srgb, var(--lane) 42%, var(--color-surface));
+}
+
+.rh__key:active .rh__key-bar {
+  height: 10px;
+}

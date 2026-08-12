@@ -1,0 +1,65 @@
+.cdown {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  text-align: center;
+  /* Mesmo roxo-médio da tela do jogo (#2E2080), chapado. A cor do jogo aparece
+     no título e no anel, não no fundo — assim a contagem continua a mesma tela,
+     sem virar um retângulo marrom nos jogos de tom quente. */
+  background: var(--color-bg);
+}
+
+/* Nome do microjogo com contorno de tinta na cor do jogo. */
+.cdown__title {
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  font-size: var(--fs-2xl);
+  color: var(--game-accent);
+  -webkit-text-stroke: var(--stroke-ink) var(--color-ink);
+  paint-order: stroke fill;
+}
+
+.cdown__hint {
+  max-width: 22ch;
+  font-family: var(--font-label);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--track-wider);
+  text-transform: uppercase;
+  color: var(--color-text-on-stage);
+  opacity: 0.82;
+}
+
+/* Número gigante = adesivo creme com grosso contorno de tinta. */
+.cdown__number {
+  margin-top: var(--space-4);
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  font-size: var(--fs-6xl);
+  line-height: 1;
+  color: var(--color-text-on-stage);
+  -webkit-text-stroke: 6px var(--color-ink);
+  paint-order: stroke fill;
+  animation: pop var(--duration-slow) var(--ease-pop) both;
+}
+
+/* Onda que sai do número a cada passo. */
+.cdown__ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140px;
+  height: 140px;
+  margin: -70px 0 0 -70px;
+  border-radius: var(--radius-pill);
+  border: var(--border-ink-thick);
+  border-color: var(--game-accent);
+  animation: popOut var(--duration-slower) var(--ease-out) both;
+  pointer-events: none;
+}

@@ -1,0 +1,38 @@
+.eboundary {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  text-align: center;
+  /* Chapado: tela de erro com um roxo levemente avermelhado, sem vinheta. */
+  background: color-mix(in srgb, var(--rose-500) 12%, var(--void-800));
+}
+
+.eboundary__emoji {
+  font-size: var(--fs-4xl);
+  line-height: 1;
+  animation: shake var(--duration-slower) var(--ease-standard) both;
+}
+
+/* Título de erro = adesivo rosa com contorno de tinta. */
+.eboundary__title {
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  font-size: var(--fs-2xl);
+  color: var(--rose-400);
+  -webkit-text-stroke: var(--stroke-ink) var(--color-ink);
+  paint-order: stroke fill;
+}
+
+.eboundary__text {
+  max-width: 28ch;
+  font-family: var(--font-label);
+  font-size: var(--fs-sm);
+  color: var(--color-text-on-stage);
+  opacity: 0.82;
+}

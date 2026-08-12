@@ -1,0 +1,27 @@
+{
+  "name": "chaos",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "CHAOS — Microgame Party. Jogo de festa multiplayer mobile-first (React + JSX, sem TypeScript).",
+  "author": "Rafael Moreira Ramos",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node scripts/p2p-contract.test.mjs && node scripts/scoremerge-contract.test.mjs",
+    "test:p2p": "node scripts/p2p-contract.test.mjs",
+    "test:scores": "node scripts/scoremerge-contract.test.mjs"
+  },
+  "dependencies": {
+    "jsqr": "^1.4.0",
+    "qrcode": "^1.5.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.8"
+  }
+}

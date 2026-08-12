@@ -1,0 +1,67 @@
+.gresult {
+  --gresult-color: var(--game-accent);
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  text-align: center;
+  /* Mesmo roxo-médio da tela (#2E2080), chapado. O resultado grande já carrega
+     a cor (verde/vermelho/acento) com contorno de tinta; o fundo fica neutro
+     para não virar marrom nos jogos de tom quente. */
+  background: var(--color-bg);
+  animation: rise var(--duration-base) var(--ease-out) both;
+}
+
+.gresult--good {
+  --gresult-color: var(--lime-500);
+}
+.gresult--bad {
+  --gresult-color: var(--rose-500);
+}
+
+.gresult__label {
+  font-family: var(--font-label);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--track-wider);
+  text-transform: uppercase;
+  color: var(--color-text-on-stage);
+  opacity: 0.8;
+}
+
+/* Resultado grande = adesivo com contorno grosso de tinta na cor do estado. */
+.gresult__value {
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  font-size: var(--fs-5xl);
+  line-height: 1;
+  color: var(--gresult-color);
+  -webkit-text-stroke: 5px var(--color-ink);
+  paint-order: stroke fill;
+  animation: pop var(--duration-slow) var(--ease-pop) both;
+}
+
+.gresult__note {
+  max-width: 26ch;
+  font-family: var(--font-label);
+  font-size: var(--fs-sm);
+  color: var(--color-text-on-stage);
+  opacity: 0.82;
+}
+
+.gresult__wait {
+  margin-top: var(--space-5);
+  font-family: var(--font-label);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--track-wider);
+  text-transform: uppercase;
+  color: var(--color-text-on-stage);
+  opacity: 0.6;
+  animation: pulse 1.4s var(--ease-standard) infinite;
+}

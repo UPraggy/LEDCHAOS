@@ -1,0 +1,586 @@
+/* ============================================================
+   P2PLab — prova de conexão P2P (QR/hash, sem servidor).
+   Cartões creme com contorno de tinta sobre o palco roxo.
+   Mobile-first: alvos ≥64px, QR grande, sem hover obrigatório.
+   Safe-area já vem do <Screen>.
+   ============================================================ */
+
+.lab {
+  gap: var(--space-4);
+}
+
+.lab__top {
+  display: grid;
+  grid-template-columns: var(--tap-min) 1fr var(--tap-min);
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.lab__title {
+  text-align: center;
+  font-size: var(--fs-lg);
+  color: var(--color-text-on-stage);
+  text-shadow: var(--shadow-pop-sm);
+}
+
+.lab__role {
+  align-self: center;
+  font-family: var(--font-label);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--bone-100);
+  border: var(--border-ink);
+  border-radius: var(--radius-pill);
+  padding: var(--space-1) var(--space-4);
+  box-shadow: var(--shadow-pop-sm);
+}
+.lab__role--host {
+  background: var(--peri-300);
+}
+.lab__role--guest {
+  background: var(--violet-300);
+}
+
+/* aviso amigável (erro que não derruba o fluxo) */
+.lab__err {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--rose-400);
+  color: var(--ink);
+  border: var(--border-ink);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-pop-sm);
+  padding: var(--space-3) var(--space-4);
+  font-weight: var(--fw-semibold);
+}
+.lab__errX {
+  margin-left: auto;
+  flex: none;
+  width: var(--tap-min);
+  height: var(--tap-min);
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  font-size: var(--fs-lg);
+  cursor: pointer;
+}
+
+/* ── escolha inicial ─────────────────────────────────────── */
+
+.lab__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.lab__lead {
+  color: var(--color-text-on-stage);
+  font-size: var(--fs-lg);
+  line-height: var(--lh-body);
+  text-align: center;
+}
+.lab__lead b {
+  color: var(--amber-300);
+}
+
+.lab__cards {
+  display: grid;
+  gap: var(--space-4);
+}
+.pick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  text-align: center;
+  padding: var(--space-6) var(--space-4);
+  border: var(--border-ink-thick);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-pop-lg);
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-pop),
+    box-shadow var(--duration-fast) var(--ease-standard);
+}
+.pick--host {
+  background: var(--grad-green);
+}
+.pick--guest {
+  background: var(--grad-violet);
+}
+.pick:active {
+  transform: translateY(4px);
+  box-shadow: var(--shadow-pop-sm);
+}
+.pick__emoji {
+  font-size: var(--fs-4xl);
+  line-height: 1;
+}
+.pick__t {
+  font-size: var(--fs-xl);
+}
+.pick__d {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  opacity: 0.85;
+}
+
+.lab__note {
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--color-label-on-stage);
+  line-height: var(--lh-body);
+}
+
+/* ── palco de passos (cartão creme) ──────────────────────── */
+
+.lab__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-4);
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding: var(--space-5);
+}
+.lab__stage--live {
+  gap: var(--space-3);
+}
+.lab__stepLabel {
+  color: var(--peri-600);
+  text-align: center;
+}
+.lab__hint {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: var(--lh-body);
+}
+.lab__sep {
+  border: none;
+  border-top: 2px dashed var(--violet-100);
+  margin: var(--space-1) 0;
+}
+
+/* ── QR ──────────────────────────────────────────────────── */
+
+.qr {
+  align-self: center;
+  width: min(72vw, 260px);
+  height: min(72vw, 260px);
+  object-fit: contain;
+  background: #fff;
+  border: var(--border-ink);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-pop-md);
+  image-rendering: pixelated; /* QR nítido, sem borrar ao escalar */
+}
+.qr--msg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  padding: var(--space-4);
+  image-rendering: auto;
+}
+
+/* ── copiar hash ─────────────────────────────────────────── */
+
+.hash {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--bone-300);
+  border: var(--border-ink);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-3);
+}
+.hash__preview {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--fs-xs);
+  color: var(--ink-soft);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* ── importar (colar / escanear) ─────────────────────────── */
+
+.import {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.import__box {
+  width: 100%;
+  resize: vertical;
+  min-height: 84px;
+  font-size: var(--fs-sm);
+  color: var(--ink);
+  background: var(--color-field);
+  border: var(--border-ink);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  line-height: var(--lh-body);
+  word-break: break-all;
+}
+.import__box:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+.import__actions {
+  display: flex;
+  gap: var(--space-3);
+}
+.import__actions .btn {
+  flex: 1;
+}
+
+/* ── câmera / scanner ────────────────────────────────────── */
+
+.scan {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: stretch;
+}
+.scan__frame {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  overflow: hidden;
+  background: var(--void-900);
+  border: var(--border-ink);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-pop-md);
+}
+.scan__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.scan__reticle {
+  position: absolute;
+  inset: 16%;
+  border: 3px solid var(--cyan-400);
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 0 100vmax rgba(11, 6, 40, 0.45);
+  pointer-events: none;
+}
+.scan__hint {
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+.scan__err {
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--rose-500);
+  font-weight: var(--fw-semibold);
+}
+
+/* ── selos de estado + log ───────────────────────────────── */
+
+.states {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.states__row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+}
+.chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--space-2) var(--space-1);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-sm);
+  background: var(--bone-50);
+  text-align: center;
+}
+.chip__k {
+  font-size: 0.62rem;
+  letter-spacing: var(--track-wide);
+}
+.chip__v {
+  font-size: var(--fs-xs);
+  color: var(--ink);
+  word-break: break-word;
+}
+.chip--ok {
+  background: var(--lime-400);
+}
+.chip--bad {
+  background: var(--rose-400);
+}
+.chip--wait {
+  background: var(--amber-200);
+}
+
+.states__log {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}
+.states__log summary {
+  cursor: pointer;
+  font-family: var(--font-label);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+}
+.states__log ol {
+  margin: var(--space-2) 0 0;
+  padding-left: var(--space-5);
+  max-height: 140px;
+  overflow-y: auto;
+}
+.states__log li {
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
+
+/* ── conectado: chat ─────────────────────────────────────── */
+
+.lab__ok {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--track-wide);
+  color: var(--lime-500);
+  font-size: var(--fs-xl);
+}
+.lab__okDot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--lime-400);
+  border: 2px solid var(--ink);
+  box-shadow: 0 0 12px var(--lime-400);
+  animation: labPulse 1.4s var(--ease-standard) infinite;
+}
+.lab__okDot--bad {
+  background: var(--rose-400);
+  box-shadow: 0 0 12px var(--rose-400);
+  animation: none;
+  width: 18px;
+  height: 18px;
+}
+@keyframes labPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.7;
+  }
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.chat__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-height: 140px;
+  max-height: 34vh;
+  overflow-y: auto;
+  background: var(--bone-300);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+}
+.chat__empty {
+  margin: auto;
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+.bubble {
+  max-width: 84%;
+  padding: var(--space-2) var(--space-3);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-body);
+  word-break: break-word;
+}
+.bubble--me {
+  align-self: flex-end;
+  background: var(--violet-300);
+  border-bottom-right-radius: var(--radius-sm);
+}
+.bubble--peer {
+  align-self: flex-start;
+  background: var(--bone-50);
+  border-bottom-left-radius: var(--radius-sm);
+}
+.chat__form {
+  display: flex;
+  gap: var(--space-2);
+}
+.chat__input {
+  flex: 1;
+  min-width: 0;
+  height: var(--tap-big);
+  font-size: var(--fs-base);
+  color: var(--ink);
+  background: var(--color-field);
+  border: var(--border-ink);
+  border-radius: var(--radius-md);
+  padding: 0 var(--space-4);
+}
+.chat__input:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+.chat__form .btn {
+  flex: none;
+  width: var(--tap-big);
+  padding: 0;
+}
+
+/* ── esperando / falha ───────────────────────────────────── */
+
+.lab__wait {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-6) var(--space-4);
+}
+.lab__waitText {
+  color: var(--color-text-on-stage);
+  text-align: center;
+  line-height: var(--lh-body);
+}
+.lab__stage .lab__waitText {
+  color: var(--color-text);
+}
+
+.lab__fail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: center;
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding: var(--space-6) var(--space-5);
+}
+.lab__failTitle {
+  font-size: var(--fs-2xl);
+  color: var(--rose-500);
+}
+.lab__failText {
+  color: var(--ink);
+  font-weight: var(--fw-semibold);
+}
+
+.spinner {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 5px solid var(--void-300);
+  border-top-color: var(--amber-400);
+  animation: labSpin 0.8s linear infinite;
+}
+@keyframes labSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── prova do hub (só em dev) ────────────────────────────── */
+
+.hubcheck {
+  margin-top: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  background: var(--bone-50);
+  border: var(--border-ink);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-pop-sm);
+  padding: var(--space-4);
+}
+.hubcheck__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.hubcheck__tag {
+  font-family: var(--font-label);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--track-wide);
+  color: var(--ink);
+}
+.hubcheck__live {
+  font-size: var(--fs-sm);
+  color: var(--ink);
+  opacity: 0.8;
+}
+.hubcheck__verdict {
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+}
+.hubcheck__verdict.is-ok {
+  color: var(--lime-500);
+}
+.hubcheck__verdict.is-bad {
+  color: var(--rose-500);
+}
+.hubcheck__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.hubcheck__list li {
+  font-size: var(--fs-sm);
+  color: var(--ink);
+  line-height: var(--lh-body);
+}
+.hubcheck__list li.is-ok span {
+  color: var(--lime-500);
+  font-weight: var(--fw-bold);
+}
+.hubcheck__list li.is-bad {
+  color: var(--rose-500);
+  font-weight: var(--fw-semibold);
+}
+.hubcheck__list li em {
+  opacity: 0.65;
+  font-style: normal;
+}
+.hubcheck__err {
+  color: var(--rose-500);
+  font-size: var(--fs-sm);
+}

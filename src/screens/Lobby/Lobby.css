@@ -1,0 +1,159 @@
+/* ============================================================
+   LOBBY — sala de espera + centro de convite (recriação fiel)
+   Código dourado no topo, cartão-convite creme com QR, lista de
+   jogadores-adesivo, seletores e CTA "COMEÇAR PARTIDA".
+   ============================================================ */
+
+.lobby__top {
+  display: grid;
+  grid-template-columns: var(--tap-min) 1fr var(--tap-min);
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.lobby__code {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.lobby__codeLabel {
+  color: var(--color-label-on-stage);
+}
+
+/* Código da sala = estrela do topo: dourado com contorno de tinta. */
+.lobby__codeValue {
+  font-size: var(--fs-3xl);
+  line-height: 1;
+  letter-spacing: var(--track-wider);
+  color: var(--gold-400);
+  -webkit-text-stroke: 5px var(--color-ink);
+  paint-order: stroke fill;
+}
+
+/* ------------------------------------------------------------------ convite */
+
+/* Cartão-convite = adesivo creme grande, contorno de tinta, sombra sólida. */
+.lobby__invite {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-4);
+  margin-bottom: var(--space-6);
+  border: 5px solid var(--color-ink);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  box-shadow: 0 7px 0 var(--color-ink);
+}
+
+/* Dentro do cartão creme, a legenda do QR precisa de tinta, não de creme. */
+.lobby__invite .qr__caption {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
+/* Dois botões lado a lado só cabem no polegar se forem largos.
+   Em telas muito estreitas eles empilham sozinhos pelo wrap. */
+.lobby__inviteActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.lobby__inviteActions .btn {
+  flex: 1 1 140px;
+}
+
+/* ------------------------------------------------------------------- seções */
+
+.lobby__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.lobby__sectionHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.lobby__sectionHead .u-label {
+  color: var(--color-label-on-stage);
+}
+
+/* "+ ADICIONAR" bot = pílula dourada-adesivo, contorno de tinta, afunda no toque. */
+.lobby__add {
+  min-height: var(--tap-min);
+  padding: 0 var(--space-4);
+  border: var(--border-ink);
+  border-radius: var(--radius-pill);
+  background: var(--gold-400);
+  box-shadow: var(--shadow-pop-sm);
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--track-wide);
+  transition:
+    transform var(--duration-instant) var(--ease-standard),
+    box-shadow var(--duration-instant) var(--ease-standard);
+}
+
+.lobby__add:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 var(--color-ink);
+}
+
+.lobby__players {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* -------------------------------------------------------------------- toast */
+
+/* Feedback de "copiei o link". Fica acima do botão de começar, preso na tela,
+   porque em celular a mão cobre a metade de baixo e um toast no rodapé some.
+   Pílula dourada-adesivo, contorno de tinta e sombra sólida "pop". */
+.lobby__toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--space-10) + var(--safe-bottom));
+  transform: translateX(-50%);
+  z-index: var(--z-toast);
+  padding: var(--space-3) var(--space-5);
+  border: var(--border-ink-thick);
+  border-radius: var(--radius-pill);
+  background: var(--gold-400);
+  color: var(--color-ink);
+  font-size: var(--fs-sm);
+  letter-spacing: var(--track-wide);
+  box-shadow: var(--shadow-pop-md);
+  animation: lobbyToast var(--duration-base) var(--ease-pop);
+  pointer-events: none;
+}
+
+@keyframes lobbyToast {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 12px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lobby__toast {
+    animation: none;
+  }
+}

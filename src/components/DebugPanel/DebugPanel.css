@@ -1,0 +1,146 @@
+/* Botão recolhido: canto de cima, longe da zona do polegar. Pequeno e discreto
+   de propósito — não pode competir com o jogo por atenção nem por toque. */
+.dbg__fab {
+  position: fixed;
+  top: calc(var(--safe-top) + var(--space-2));
+  right: var(--space-2);
+  z-index: var(--z-modal);
+  width: 40px;
+  height: 40px;
+  border: var(--border-ink);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-pop-sm);
+  color: var(--color-ink);
+  font-size: var(--fs-base);
+  line-height: 1;
+}
+
+.dbg__fab:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 var(--color-ink);
+}
+
+/* Aberto, cobre tudo. É ferramenta de dev: melhor esconder o jogo do que
+   deixar o dedo escapar num alvo do microjogo enquanto se testa. */
+.dbg {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  flex-direction: column;
+  background: var(--void-800);
+  padding-top: var(--safe-top);
+  padding-bottom: var(--safe-bottom);
+}
+
+.dbg__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 2px solid var(--color-ink);
+}
+
+.dbg__title {
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  font-size: var(--fs-lg);
+  letter-spacing: var(--track-wider);
+  color: var(--gold-400);
+}
+
+.dbg__close {
+  min-width: var(--tap-min);
+  min-height: var(--tap-min);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-text-on-stage);
+  font-size: var(--fs-lg);
+}
+
+.dbg__body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.dbg__state {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--color-label-on-stage);
+  word-break: break-word;
+}
+
+.dbg__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.dbg__label {
+  font-family: var(--font-label);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--color-label-on-stage);
+}
+
+.dbg__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.dbg__btn {
+  min-height: var(--tap-min);
+  padding: 0 var(--space-3);
+  border: var(--border-ink);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-pop-sm);
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--track-wide);
+}
+
+.dbg__btn:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 var(--color-ink);
+}
+
+.dbg__btn:disabled {
+  opacity: var(--opacity-disabled);
+}
+
+.dbg__btn.is-on {
+  background: var(--grad-amber);
+  color: var(--color-ink);
+}
+
+.dbg__btn--num {
+  min-width: var(--tap-min);
+  padding: 0;
+}
+
+.dbg__btn--wide {
+  width: 100%;
+  min-height: var(--tap-big);
+  background: var(--gold-400);
+  color: var(--color-ink);
+}
+
+.dbg__empty {
+  font-family: var(--font-label);
+  font-size: var(--fs-xs);
+  color: var(--color-label-on-stage);
+  font-style: italic;
+}

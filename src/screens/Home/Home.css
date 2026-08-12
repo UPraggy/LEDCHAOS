@@ -1,0 +1,239 @@
+/* ============================================================
+   HOME — porta de entrada (recriação fiel do protótipo)
+   Palco roxo, formas-adesivo flutuando, marca CHAOS, CTA verde
+   "CRIAR SALA" + entrada por código.
+   ============================================================ */
+
+/* Camada decorativa: quadrados/círculos-adesivo boiando atrás do conteúdo.
+   Puramente enfeite — aria-hidden, sem toque, atrás de tudo. */
+.home__decor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.home__shape {
+  position: absolute;
+  border: var(--border-ink-thick);
+  animation: floatY 8s var(--ease-standard) infinite;
+}
+
+.home__shape--1 {
+  left: 5%;
+  top: 15%;
+  width: 62px;
+  height: 62px;
+  border-radius: 20px;
+  background: var(--rose-400);
+  animation-duration: 7s;
+}
+
+.home__shape--2 {
+  right: 7%;
+  top: 24%;
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-pill);
+  background: var(--cyan-400);
+  animation-duration: 9s;
+  animation-direction: reverse;
+}
+
+.home__shape--3 {
+  left: 12%;
+  bottom: 32%;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--gold-400);
+  animation-duration: 11s;
+}
+
+.home__shape--4 {
+  right: 12%;
+  bottom: 24%;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--lime-400);
+  animation-duration: 8.5s;
+  animation-direction: reverse;
+}
+
+/* Todo o conteúdo real fica acima da camada decorativa. */
+.home__top,
+.home__hero,
+.home__actions {
+  position: relative;
+  z-index: 1;
+}
+
+.home__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.home__hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+  text-align: center;
+}
+
+.home__pitch {
+  max-width: 30ch;
+  color: var(--color-text-on-stage);
+  opacity: 0.92;
+  font-size: var(--fs-base);
+  font-weight: var(--fw-semibold);
+  line-height: 1.4;
+}
+
+.home__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+/* Acesso discreto ao laboratório P2P (prova de conexão direta) */
+.home__p2p {
+  align-self: center;
+  margin-top: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  border: none;
+  background: transparent;
+  color: var(--color-label-on-stage);
+  font-family: var(--font-label);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--track-wide);
+  cursor: pointer;
+  min-height: var(--tap-min);
+}
+.home__p2p:active {
+  transform: translateY(1px);
+  color: var(--bone-100);
+}
+
+/* ------------------------------------------------------ entrada por código */
+
+.home__join {
+  display: flex;
+  gap: var(--space-2);
+  align-items: stretch;
+}
+
+/* Campo de código = adesivo creme, contorno de tinta grosso, mono. */
+.home__code {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 68px;
+  padding: 0 var(--space-4);
+  border: 5px solid var(--color-ink);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-pop-lg);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--track-wider);
+  text-align: center;
+  text-transform: uppercase;
+  transition:
+    transform var(--duration-instant) var(--ease-standard),
+    box-shadow var(--duration-instant) var(--ease-standard);
+}
+
+.home__code::placeholder {
+  color: var(--bone-700);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--track-wide);
+}
+
+.home__code:focus {
+  outline: none;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-pop-xl);
+}
+
+/* --------------------------------------------------------- folha COMO JOGA */
+
+.home__sheet {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: var(--space-4);
+  padding-bottom: calc(var(--safe-bottom) + var(--space-4));
+  background: color-mix(in srgb, var(--color-ink) 70%, transparent);
+  backdrop-filter: blur(5px);
+}
+
+.home__sheetCard {
+  width: 100%;
+  max-width: var(--screen-max);
+  max-height: 88%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-6) var(--space-5) var(--space-5);
+  border: 5px solid var(--color-ink);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  box-shadow: 0 10px 0 var(--color-ink);
+  animation: rise var(--duration-slow) var(--ease-pop) both;
+}
+
+.home__sheetTitle {
+  font-size: var(--fs-3xl);
+  color: var(--color-text);
+}
+
+/* Cada passo = cartãozinho-adesivo violeta claro, contorno de tinta. */
+.home__steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home__steps li {
+  padding: var(--space-3);
+  border: var(--border-ink);
+  border-radius: var(--radius-md);
+  background: var(--color-field);
+  color: var(--bone-500);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  line-height: 1.4;
+}
+
+.home__steps b {
+  color: var(--color-text);
+  font-weight: var(--fw-black);
+}
+
+.home__note {
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-ink);
+  border-radius: var(--radius-md);
+  background: var(--violet-100);
+  color: var(--color-ink-soft);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  line-height: 1.45;
+}

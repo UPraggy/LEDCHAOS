@@ -1,0 +1,151 @@
+.create__top {
+  display: grid;
+  grid-template-columns: var(--tap-min) 1fr var(--tap-min);
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+/* Título sobre o palco roxo = adesivo creme com contorno de tinta. */
+.create__title {
+  text-align: center;
+  font-size: var(--fs-2xl);
+  color: var(--color-text-on-stage);
+  -webkit-text-stroke: 5px var(--color-ink);
+  paint-order: stroke fill;
+}
+
+.create__settings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+/* Nota informativa direto no palco = cartão creme translúcido, contorno tinta. */
+.create__note {
+  margin-top: var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-ink);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--bone-100) 14%, transparent);
+  color: var(--color-text-on-stage);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+}
+
+.create__note b {
+  color: var(--gold-400);
+  font-weight: var(--fw-black);
+}
+
+/* ------------------------------------------------------------- modos (§2.3) */
+
+.create__mode,
+.create__games {
+  margin-top: var(--space-6);
+}
+
+/* Rótulo de seção — igual ao SegmentedControl, tipografia do handoff. */
+.create__modeLabel {
+  margin: 0 0 var(--space-2);
+  font-family: 'Space Grotesk', var(--font-ui), sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #cfc4ff;
+}
+
+/* (a) MODO — trilho com dois botões PARTIDA / JOGO ÚNICO */
+.modeTrack {
+  display: flex;
+  gap: 6px;
+  padding: 6px;
+  border: 4px solid #170f3e;
+  border-radius: 22px;
+  background: #2a1c74;
+  box-shadow: 0 5px 0 #170f3e;
+}
+
+.modeBtn {
+  flex: 1;
+  min-height: 48px;
+  border-radius: 14px;
+  border: 3px solid rgba(255, 253, 247, 0.18);
+  background: transparent;
+  color: #e7e0ff;
+  font-family: var(--font-display), sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: transform 0.08s ease;
+}
+
+.modeBtn.is-on {
+  background: #ffce31;
+  border-color: #170f3e;
+  color: #170f3e;
+}
+
+.modeBtn:active {
+  transform: scale(0.96);
+}
+
+/* (b) MICROJOGOS — grade 2 colunas, célula com ícone + nome */
+.gamesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 7px;
+}
+
+.gameCell {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 54px;
+  padding: 6px 10px;
+  border-radius: 16px;
+  border: 3px solid rgba(255, 253, 247, 0.2);
+  background: rgba(255, 253, 247, 0.1);
+  color: #e7e0ff;
+  opacity: 0.5;
+  cursor: pointer;
+  text-align: left;
+  transition: transform 0.08s ease, opacity 0.12s ease;
+}
+
+.gameCell.is-on {
+  background: #ffce31;
+  border-color: #170f3e;
+  color: #170f3e;
+  opacity: 1;
+}
+
+.gameCell:active {
+  transform: scale(0.95);
+}
+
+.gameCell__icon {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.gameCell__name {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

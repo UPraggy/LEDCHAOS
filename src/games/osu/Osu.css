@@ -1,0 +1,43 @@
+/* NA MOSCA — arena de mira única. Círculos com anel de aproximação e sliders
+   para arrastar. O handoff pede um radial-gradient de fundo, mas o contrato do
+   repo (sem degradê) vence: arena CHAPADA na cor funda, os alvos é que trazem a
+   cor. Tudo desenhado no canvas; a caixa só dá a moldura adesiva. */
+
+.os .gscene__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-3) var(--space-4);
+  background: var(--color-bg-deep);
+}
+
+/* Placar dos rivais como faixa própria acima da arena — a arena é um card
+   emoldurado, então a fita não flutua por cima da moldura; ganha lugar no topo,
+   alinhada à largura da arena. */
+.os .grivals {
+  position: static;
+  width: min(94vw, 480px);
+}
+
+.os__box {
+  position: relative;
+  flex: 1 1 auto;
+  width: min(94vw, 480px);
+  min-height: 0;
+  background: var(--color-bg-deep);
+  border: 5px solid var(--color-ink);
+  border-radius: 22px;
+  box-shadow: 0 8px 0 var(--color-ink);
+  overflow: hidden;
+  touch-action: none;
+}
+
+.os__canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}

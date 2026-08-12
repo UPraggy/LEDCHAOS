@@ -1,0 +1,218 @@
+/* ============================================================
+   FINAL SCORE — fim da partida (recriação fiel)
+   Campeão em destaque dourado, pódio-adesivo, conquistas e placar
+   em cartões creme sobre o palco roxo.
+   ============================================================ */
+
+/* Metais do pódio são cor de componente: só existem aqui. O ouro é o token
+   da marca; prata e bronze não têm equivalente na paleta e ficam locais. */
+.fscore {
+  --fscore-gold: var(--gold-400);
+  --fscore-silver: #C2CBD6;
+  --fscore-bronze: #C98B5A;
+}
+
+.fscore__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+  margin-bottom: var(--space-6);
+}
+
+.fscore__head .u-label {
+  color: var(--color-label-on-stage);
+}
+
+/* Título sobre o palco = letra creme com contorno de tinta. */
+.fscore__title {
+  font-size: var(--fs-4xl);
+  line-height: 1;
+  letter-spacing: var(--track-wide);
+  color: var(--color-text-on-stage);
+  -webkit-text-stroke: 4px var(--color-ink);
+  paint-order: stroke fill;
+}
+
+/* Você venceu = vira dourado comemorativo, mesmo contorno. */
+.fscore__title.is-win {
+  color: var(--gold-400);
+  animation: wob 5s var(--ease-standard) infinite;
+}
+
+/* ------------------------------------------------------------------- pódio */
+
+/* Alinhado pelo rodapé: os degraus crescem para cima e o 1º fica no meio,
+   que é como um pódio se lê sem legenda nenhuma. */
+.fscore__podium {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.fscore__slot {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  animation: fscoreRise var(--duration-slower) var(--ease-pop) backwards;
+}
+
+.fscore__slot:nth-child(1) { animation-delay: 60ms; }
+.fscore__slot:nth-child(2) { animation-delay: 0ms; }
+.fscore__slot:nth-child(3) { animation-delay: 120ms; }
+
+.fscore__slotName {
+  max-width: 100%;
+  font-size: var(--fs-sm);
+  letter-spacing: var(--track-wide);
+  color: var(--color-text-on-stage);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fscore__slotScore {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-black);
+  color: var(--gold-400);
+}
+
+/* Degrau = bloco-adesivo creme, contorno de tinta, topo arredondado. */
+.fscore__step {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: var(--space-2);
+  margin-top: var(--space-1);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  background: var(--color-surface);
+  border: var(--border-ink);
+  border-bottom: none;
+}
+
+.fscore__stepNum {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-black);
+  color: var(--color-text-muted);
+}
+
+/* 1º lugar: degrau dourado, número em tinta, nome maior. */
+.fscore__slot.is-first .fscore__step {
+  background: var(--fscore-gold);
+}
+
+.fscore__slot.is-first .fscore__stepNum {
+  color: var(--color-ink);
+}
+
+.fscore__slot.is-first .fscore__slotName {
+  font-size: var(--fs-base);
+}
+
+@keyframes fscoreRise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* -------------------------------------------------------------- conquistas */
+
+.fscore__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.fscore__section .u-label {
+  color: var(--color-label-on-stage);
+}
+
+.fscore__achievements {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Conquista = cartãozinho-adesivo creme, contorno de tinta, sombra "pop". */
+.fscore__ach {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border: var(--border-ink);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-pop-sm);
+}
+
+.fscore__achEmoji {
+  font-size: var(--fs-2xl);
+  line-height: 1;
+}
+
+.fscore__achText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fscore__achLabel {
+  font-size: var(--fs-xs);
+  letter-spacing: var(--track-wide);
+  color: var(--color-text);
+}
+
+.fscore__achWho {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fscore__achValue {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-black);
+  color: var(--color-info);
+}
+
+/* ------------------------------------------------------------------ placar */
+
+.fscore__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.fscore__value {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-black);
+  color: var(--color-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fscore__slot {
+    animation: none;
+  }
+  .fscore__title.is-win {
+    animation: none;
+  }
+}

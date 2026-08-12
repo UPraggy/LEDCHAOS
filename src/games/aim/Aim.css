@@ -1,0 +1,21 @@
+/* MIRA — a tela inteira é o controle. Sem pad: qualquer pixel é alvo. */
+
+.am .gscene__stage {
+  /* Grade discreta. Serve de referência de posição para o olho voltar depois
+     de cada estouro, sem competir com as bolhas. */
+  /* A grade fina (duas linhas de 1px) NÃO é degradê decorativo: é a referência
+     de posição pro olho voltar depois de cada estouro. Fica. O brilho radial de
+     fundo saiu — o campo agora é chapado pra bolha colorida saltar. */
+  background:
+    linear-gradient(
+      color-mix(in srgb, var(--color-surface-2) 55%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-surface-2) 55%, transparent) 1px,
+      transparent 1px
+    ),
+    var(--color-bg-deep);
+  background-size: 48px 48px, 48px 48px, 100% 100%;
+}

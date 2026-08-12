@@ -1,0 +1,40 @@
+/* Botão-ícone adesivo do protótipo: quadrado creme, contorno de tinta grosso,
+   sombra sólida "pop" que encolhe no toque. 50×50 mas o alvo real é --tap-min. */
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: var(--tap-min);
+  height: var(--tap-min);
+  flex: 0 0 auto;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: var(--border-ink);
+  color: var(--color-ink);
+  font-size: var(--fs-lg);
+  line-height: 1;
+  box-shadow: var(--shadow-pop-sm);
+  --icon-lift: 3px;
+  transition:
+    transform var(--duration-instant) var(--ease-standard),
+    box-shadow var(--duration-instant) var(--ease-standard),
+    background var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+  touch-action: manipulation;
+}
+
+.icon-btn:active {
+  transform: translateY(var(--icon-lift));
+  box-shadow: 0 0 0 var(--color-ink);
+}
+
+@media (hover: hover) {
+  .icon-btn:hover {
+    filter: brightness(1.04);
+  }
+}
+
+/* Ligado: face âmbar em vez de creme, o ícone salta contra a tinta. */
+.icon-btn--active {
+  background: var(--grad-amber);
+  color: var(--color-ink);
+}

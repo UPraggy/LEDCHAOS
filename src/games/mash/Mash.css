@@ -1,0 +1,158 @@
+/* MARTELO — um tubo que enche e um botão do tamanho do polegar. */
+
+.ms .gscene__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-3) var(--space-3);
+  /* Campo chapado: sem vinheta radial. A cor do jogo vive no tubo e no botão. */
+  background: var(--color-bg-deep);
+}
+
+/* ------------------------------------------------------------------- tubo */
+
+/* Vertical porque encher de baixo para cima é a única metáfora que não precisa
+   de legenda: todo mundo já viu um copo. */
+.ms__tube {
+  position: relative;
+  flex: 1 1 auto;
+  width: min(46vw, 200px);
+  min-height: 0;
+  overflow: hidden;
+  border: 3px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+}
+
+.ms__fill {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  /* Face chapada na cor do jogo — o medidor é um adesivo sólido subindo. */
+  background: var(--game-accent);
+  box-shadow: var(--glow-md) color-mix(in srgb, var(--game-accent) 55%, transparent);
+  /* 90ms costura os degraus de 1%: o estado só guarda inteiros, e sem a
+     transição a barra andaria aos pulos. Linear, não ease — a barra é um
+     medidor, e ease faria ela parecer que desacelera sozinha. */
+  transition: height 90ms linear;
+}
+
+/* A meta é o topo do tubo, e a palavra está lá para dizer isso sem tutorial.
+   A borda sozinha leria como "fim do desenho", não como "fim da corrida". */
+.ms__goal {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  border-top: 3px dashed color-mix(in srgb, var(--color-text) 45%, transparent);
+  pointer-events: none;
+}
+
+.ms__goal::after {
+  content: 'META';
+  display: block;
+  padding-top: 2px;
+  text-align: center;
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+  text-shadow: 0 1px 4px var(--color-bg-deep);
+}
+
+.ms__percent {
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xl);
+  font-weight: 800;
+  color: var(--color-text);
+  /* O número fica por cima do preenchimento e do fundo escuro; o contorno
+     escuro é o que garante contraste nos dois. */
+  text-shadow: 0 2px 10px var(--color-bg-deep), 0 0 3px var(--color-bg-deep);
+  pointer-events: none;
+}
+
+.ms__tube.is-full {
+  border-color: var(--color-success);
+  animation: ms-pop 320ms var(--ease-out);
+}
+
+@keyframes ms-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+/* -------------------------------------------------------------------- pad */
+
+.ms__pad {
+  display: flex;
+  justify-content: center;
+}
+
+/* MINÚSCULO/GIGANTE entram no tamanho do alvo — é aqui que a mão sente o
+   caos. O teto de 100% impede que o modo gigante estoure a largura da tela. */
+.ms__tap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  width: min(100%, calc(340px * var(--ms-scale, 1)));
+  min-height: calc(120px * var(--ms-scale, 1));
+  border: var(--border-ink-thick);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-pop-md);
+  /* Adesivo chapado: face sólida na cor do jogo, contorno de tinta, pop-shadow. */
+  background: var(--game-accent);
+  color: var(--color-ink);
+  font-size: var(--fs-2xl);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: var(--glow-md) color-mix(in srgb, var(--game-accent) 45%, transparent);
+  transition: transform 60ms var(--ease-out), box-shadow 60ms var(--ease-out);
+}
+
+/* 60ms de propósito: num jogo de martelar, o retorno visual tem que acabar
+   antes do próximo toque, senão o botão parece travado. */
+.ms__tap:active {
+  transform: scale(0.97);
+  box-shadow: var(--glow-sm) color-mix(in srgb, var(--game-accent) 35%, transparent);
+}
+
+.ms__tap:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* O raio flanqueia o texto: dá a cara de botão de fliperama sem legenda. Fixo
+   em 44 px porque o texto ao lado também não escala com GIGANTE/MINÚSCULO — os
+   dois crescem juntos ou o botão fica desproporcional. O drop-shadow sólido é a
+   mesma tinta das bordas: contorno, nunca desfoque. */
+.ms__bolt {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 0 var(--color-ink));
+}
+
+.ms__bolt--flip {
+  transform: scaleX(-1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ms__tube.is-full { animation: none; }
+  .ms__fill { transition: none; }
+  .ms__tap { transition: none; }
+  .ms__tap:active { transform: none; }
+}
