@@ -15,7 +15,9 @@ export default function IdentityForm({ name, avatar, onName, onAvatar }) {
   return (
     <div className="identity">
       <div className="identity__head">
-        <PlayerAvatar avatar={avatar} color={color} size={78} float />
+        <div className="identity__avatar">
+          <PlayerAvatar avatar={avatar} color={color} size={64} />
+        </div>
         <div className="identity__field">
           <label className="identity__label u-label" htmlFor="identity-name">
             SEU NOME

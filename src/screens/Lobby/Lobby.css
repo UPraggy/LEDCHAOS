@@ -67,6 +67,12 @@
 
 .lobby__inviteActions .btn {
   flex: 1 1 140px;
+  /* Piso de largura = a palavra mais longa (COMPARTILHAR) cabe inteira numa
+     linha. Sem isto o .btn (overflow:hidden) resolve min-width:auto = 0 e os
+     dois nunca disparam o wrap: ficariam espremidos lado a lado cortando o
+     texto. Com o piso, quando os dois não cabem na linha eles empilham
+     full-width (alvo de toque grande no polegar). */
+  min-width: 13rem;
 }
 
 /* ------------------------------------------------------------------- seções */

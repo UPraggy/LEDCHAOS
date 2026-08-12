@@ -18,6 +18,35 @@ Fonte da verdade do design:
 
 ---
 
+## Pronto (passe de enquadramento mobile — pedido "texto/personagens saindo")
+
+Auditoria de overflow no shell a 430px (largura de celular real), validada tela a
+tela pelo Visual Inspector. Três correções + varredura das demais telas:
+
+- **(A) Botões de convite (COPIAR LINK / COMPARTILHAR).** O rótulo cortava
+  horizontalmente e o multi-palavra quebrava em 2 linhas dentro da altura fixa.
+  Causa: `.btn { overflow:hidden }` zera o `min-width:auto`, então o `flex-wrap`
+  nunca disparava e os dois ficavam espremidos lado a lado. Fix em dois pontos:
+  `white-space:nowrap` no `.btn__label` (rótulo nunca quebra em 2 linhas) +
+  `min-width:13rem` nos botões de convite (piso = largura de "COMPARTILHAR", então
+  quando não cabem os dois na linha eles empilham full-width).
+- **(C) Avatar "saindo do enquadramento" (criar/entrar).** O preview grande era um
+  `PlayerAvatar float` nu que vazava por cima de "SEU NOME". Agora vive numa moldura
+  `.identity__avatar` (mesma célula-adesivo do grid, `overflow:hidden`) que trava o
+  sticker dentro. Vale para as duas telas (é o `IdentityForm` compartilhado).
+- **(D) Varredura das outras telas.** Lobby (START + segmentados RODADAS/NÍVEL) e
+  Entrar-na-sala: sem vazamento. **Achado na Home:** o botão "VOLTAR PARA <código>"
+  tinha o `hint` ("N jogadores") posicionado `absolute right` colidindo com o
+  rótulo centralizado. Corrigido tornando o hint uma **legenda empilhada** (`.btn__text`
+  em coluna: rótulo em cima, hint pequeno embaixo) — nunca mais colide, serve tanto
+  p/ hint curto quanto longo (ex.: "conectando ao vivo com o host" no modo relay do
+  Entrar), com `text-overflow:ellipsis` de guarda. Build limpo (255 módulos).
+
+Arquivos: `components/Button/{index.jsx,Button.css}`,
+`components/IdentityForm/{index.jsx,IdentityForm.css}`, `screens/Lobby/Lobby.css`.
+
+---
+
 ## Pronto (fase visual)
 
 - **#22 · `assets.js`** — banco de imagens p/ canvas: `preloadImages`,

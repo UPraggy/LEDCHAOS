@@ -83,6 +83,11 @@
 .btn__label {
   position: relative;
   line-height: 1;
+  /* Label nunca quebra em 2 linhas: a altura do botão é fixa e o .btn tem
+     overflow:hidden — quebrar cortaria o texto verticalmente. Uma palavra
+     longa (ex.: COMPARTILHAR) fica numa linha só; se o botão for estreito
+     demais, quem cede é o layout do container (empilhar), não o rótulo. */
+  white-space: nowrap;
 }
 
 .btn__icon {
@@ -91,14 +96,34 @@
   line-height: 1;
 }
 
+/* Quando o botão tem "hint" (contagem/estado), rótulo e hint empilham numa
+   coluna: o hint vira uma LEGENDA sob o rótulo. Antes o hint era absolute
+   right e colidia com rótulos longos ("VOLTAR PARA AT8HA" batia em "N
+   jogadores"). Empilhado nunca há colisão horizontal, e serve tanto p/ hint
+   curto quanto longo. */
+.btn__text {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 0;
+}
+
 .btn__hint {
-  position: absolute;
-  right: var(--space-4);
+  position: relative;
+  max-width: 100%;
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
   opacity: 0.75;
   letter-spacing: 0;
   text-transform: none;
+  /* Legenda de uma linha; se for longa demais p/ o botão, corta com "…"
+     em vez de vazar (o .btn tem overflow:hidden). */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ─── PRIMARY: âmbar, o "COMEÇAR/confirmar" ─── */

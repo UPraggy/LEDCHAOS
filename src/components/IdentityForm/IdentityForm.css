@@ -10,6 +10,23 @@
   gap: var(--space-4);
 }
 
+/* Moldura do preview grande: mesma célula-adesivo das escolhas do grid, só
+   que maior. Emoldura o personagem (contorno + fundo creme) e o overflow:hidden
+   trava o sticker DENTRO — sem isso o avatar nu "vaza" por cima de SEU NOME. */
+.identity__avatar {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  padding: var(--space-1);
+  border: var(--border-ink-thick);
+  border-color: var(--color-border-soft);
+  border-radius: var(--radius-md);
+  background: var(--color-field);
+  overflow: hidden;
+}
+
 .identity__field {
   flex: 1 1 auto;
   min-width: 0;

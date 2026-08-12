@@ -36,8 +36,14 @@ export default function Button({
       {...rest}
     >
       {icon && <span className="btn__icon" aria-hidden="true">{icon}</span>}
-      <span className="btn__label">{children}</span>
-      {hint && <span className="btn__hint">{hint}</span>}
+      {hint ? (
+        <span className="btn__text">
+          <span className="btn__label">{children}</span>
+          <span className="btn__hint">{hint}</span>
+        </span>
+      ) : (
+        <span className="btn__label">{children}</span>
+      )}
     </button>
   );
 }
