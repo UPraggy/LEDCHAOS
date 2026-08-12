@@ -17,20 +17,19 @@ import react from '@vitejs/plugin-react';
  * Em dev nada disso se aplica: console e nomes de arquivo continuam úteis.
  *
  * ── base ─────────────────────────────────────────────────────────────────────
- * O jogo é publicado como SUBPÁGINA de projeto: upraggy.github.io/LEDCHAOS/
- * (a raiz do domínio hospeda o portfólio, igual ao SaiBH). Então o build assume
- * base '/LEDCHAOS/' por padrão — sobrescrevível por VITE_BASE se um dia mudar.
+ * O jogo é publicado em DOMÍNIO PRÓPRIO na raiz: https://ledchaos.rafaelmr.com.br/
+ * (CNAME em public/CNAME). Domínio próprio serve na raiz, então base '/'.
+ * Sobrescrevível por VITE_BASE se um dia virar subpágina (aí base '/LEDCHAOS/'
+ * + pathSegmentsToKeep=1 no public/404.html — ver docs/DEPLOY.md).
  *
- * DEV continua em '/' de propósito: o QR aponta pro IP da LAN na raiz
- * (http://192.168.x.x:5173/join/…) e o celular precisa abrir sem o prefixo.
- * Só o build carrega o /LEDCHAOS/. Trocar aqui exige trocar também o
- * pathSegmentsToKeep do public/404.html (ver docs/DEPLOY.md).
+ * DEV também em '/': o QR aponta pro IP da LAN na raiz
+ * (http://192.168.x.x:5173/join/…) e o celular abre sem prefixo.
  */
 export default defineConfig(({ command }) => {
   const isBuild = command === 'build';
 
   return {
-    base: isBuild ? (process.env.VITE_BASE || '/LEDCHAOS/') : '/',
+    base: process.env.VITE_BASE || '/',
     plugins: [react()],
 
     esbuild: {

@@ -264,22 +264,27 @@ Fonte da verdade do design:
      `/LEDCHAOS/a/*.js|css`; o literal `/LEDCHAOS/` inlinado no bundle JS
      (BASE_URL resolvido); `dist/404.html` com `pathSegmentsToKeep = 1`; manifest
      relativo. `npm test` **57/57**, `npm run build` OK (255 módulos).
-- **#43 · Deploy migrado para o modelo *Deploy from a branch* — código na `main`,
-  site no `gh-pages`.** O Rafael habilitou o Pages e pediu: fonte fica na `main`,
-  mas a **página buildada vai pro branch `gh-pages`**. Troca do modelo *GitHub
-  Actions artifact* (sem branch) para *branch*:
-  1. **`deploy.yml` reescrito.** Um job só: `npm ci` → build (`VITE_BASE`
-     `/LEDCHAOS/`) → dentro do `dist/` faz `git init` + commit + **force-push pro
-     `gh-pages`** via `GITHUB_TOKEN`. Saíram os passos `upload-pages-artifact`/
-     `deploy-pages`. `permissions: contents: write` (escrever no branch). O
-     `gh-pages` guarda **só o site** (sem histórico do código) e é substituído
-     inteiro a cada deploy; `touch .nojekyll` desliga o Jekyll.
-  2. **Base intacta.** Pages serve o `gh-pages` na **raiz** do repo → a URL de
-     subpágina `…/LEDCHAOS/` é preservada; nada do #42 mudou (base, 404.html,
-     asset()).
+- **#43 · Deploy migrado para *Deploy from a branch* + DOMÍNIO PRÓPRIO na raiz.**
+  O Rafael habilitou o Pages, **criou o CNAME `ledchaos.rafaelmr.com.br`** (commit
+  "Create CNAME" na `main`) e pediu: fonte na `main`, **página no `gh-pages`**. O
+  CNAME reverteu a decisão de subpágina do #42 — domínio próprio serve na raiz, e
+  base `/LEDCHAOS/` deixaria o site em branco. Confirmado com ele e reconfigurado:
+  1. **`deploy.yml` reescrito.** Um job só: `npm ci` → build (`VITE_BASE` `/`) →
+     dentro do `dist/` faz `git init` + commit + **force-push pro `gh-pages`** via
+     `GITHUB_TOKEN`. Saíram `upload-pages-artifact`/`deploy-pages`.
+     `permissions: contents: write`. O `gh-pages` guarda **só o site** (sem
+     histórico do código), substituído inteiro a cada deploy; `.nojekyll` desliga
+     o Jekyll.
+  2. **Base revertida pra raiz** (desfaz o #42): `vite.config.js` base `/`;
+     `public/404.html` `pathSegmentsToKeep = 0`; **`CNAME` movido pra
+     `public/CNAME`** (Vite copia pro `dist/` → `gh-pages`, fixando o domínio no
+     modelo branch). `basePath.js`/`roomLink.js`/`asset()` são base-driven → com
+     `BASE='/'` já saem certos, sem tocar em código de jogo. QR vira
+     `https://ledchaos.rafaelmr.com.br/join/…`.
   3. **`gh-pages` semeado à mão** a partir do build local, pra o branch já existir
      e o Rafael poder apontar o Pages nele sem esperar o 1º run (e independe da
-     permissão do token). Docs (`DEPLOY.md`) e handoff (#21) atualizados.
+     permissão do token). Handoff: DNS `CNAME ledchaos → upraggy.github.io` +
+     Custom domain no Pages. Docs (`DEPLOY.md`) e #21 atualizados.
 
 ## Pronto (fase F7 · transporte P2P)
 
@@ -351,19 +356,21 @@ Fonte da verdade do design:
 
 ## Próximos passos
 
-1. **#21 · Deploy no GitHub Pages (SUBPÁGINA `/LEDCHAOS/`, modelo *branch*)** —
+1. **#21 · Deploy no GitHub Pages (DOMÍNIO PRÓPRIO na raiz, modelo *branch*)** —
    **código já na `main`, `gh-pages` já semeado com o build** (ver #43). O Rafael
-   pediu: fonte na `main`, **página no branch `gh-pages`**. Falta **só o que é
-   clique/credencial do Rafael**, no navegador externo dele:
+   habilitou o Pages e **criou o CNAME `ledchaos.rafaelmr.com.br`** → domínio
+   próprio na raiz (base `/`), fonte na `main`, **página no branch `gh-pages`**.
+   Falta **só o que é clique/credencial/DNS do Rafael**, no navegador externo dele:
    1. GitHub → **Settings ▸ Actions ▸ General ▸ Workflow permissions =
       "Read and write permissions"** ▸ Save (senão o auto-deploy dá 403).
    2. GitHub → **Settings ▸ Pages ▸ Source = "Deploy from a branch"** ▸
       Branch **`gh-pages`** ▸ `/ (root)` ▸ Save.
-   3. GitHub → **Settings ▸ Pages ▸ Custom domain**: deixar **vazio**. Se houver
-      um domínio salvo, **remover** — domínio próprio serve a raiz e conflita com o
-      caminho `/LEDCHAOS/`.
-   4. Conferir o site em **`https://upraggy.github.io/LEDCHAOS/`** (1–2 min após o
-      Save do Pages). Passo a passo completo em `docs/DEPLOY.md`.
+   3. **DNS** no provedor do `rafaelmr.com.br`: **CNAME** `ledchaos` →
+      `upraggy.github.io`.
+   4. GitHub → **Settings ▸ Pages ▸ Custom domain** = `ledchaos.rafaelmr.com.br` ▸
+      Save ▸ marcar **Enforce HTTPS** quando liberar.
+   5. Conferir o site em **`https://ledchaos.rafaelmr.com.br/`** (após validação de
+      DNS/HTTPS). Passo a passo completo em `docs/DEPLOY.md`.
 2. **F7-C — runner do lado convidado (precisa de 2 aparelhos).** A fusão de placares
    já está pronta e provada; falta a UX do convidado rodando o microjogo por conta
    própria e reportando `sendScore` no fim. Só valida com 2 telas físicas.

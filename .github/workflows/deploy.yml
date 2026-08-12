@@ -1,19 +1,21 @@
 # Publica o CHAOS no GitHub Pages pelo modelo "Deploy from a branch":
 # o CODIGO-FONTE vive na `main`; o SITE BUILDADO e' empurrado para o branch
-# `gh-pages` a cada push na main. O Pages serve o gh-pages na RAIZ do repo, o que
-# preserva a URL de subpagina: https://upraggy.github.io/LEDCHAOS/
+# `gh-pages` a cada push na main. O site roda em DOMINIO PROPRIO na raiz:
+# https://ledchaos.rafaelmr.com.br/  (o CNAME vem de public/CNAME -> dist -> gh-pages).
 #
 # Config unica do Rafael (uma vez, no navegador dele):
-#   1. Settings > Pages > Source = "Deploy from a branch"
-#      Branch: gh-pages  /  Pasta: / (root)
-#      (o branch gh-pages nasce no primeiro run bem-sucedido deste workflow)
-#   2. Settings > Actions > General > Workflow permissions =
+#   1. Settings > Actions > General > Workflow permissions =
 #      "Read and write permissions"
 #      (sem isso o GITHUB_TOKEN nao consegue escrever no branch gh-pages -> 403)
+#   2. Settings > Pages > Source = "Deploy from a branch"
+#      Branch: gh-pages  /  Pasta: / (root)
+#   3. Settings > Pages > Custom domain = ledchaos.rafaelmr.com.br > Save
+#      (+ Enforce HTTPS quando liberar) e no provedor do rafaelmr.com.br um
+#      registro DNS: CNAME  ledchaos -> upraggy.github.io
 #
 # Variaveis (Settings > Secrets and variables > Actions > Variables):
-#   VITE_BASE   caminho base do site. Default "/LEDCHAOS/" (subpagina de projeto,
-#               igual ao SaiBH: a raiz do dominio e' o portfolio).
+#   VITE_BASE   caminho base do site. Default "/" (dominio proprio na raiz).
+#               So mudar para "/LEDCHAOS/" se um dia virar subpagina de projeto.
 name: Deploy CHAOS to GitHub Pages
 
 on:
@@ -45,7 +47,7 @@ jobs:
 
       - name: Build (Vite)
         env:
-          VITE_BASE: ${{ vars.VITE_BASE || '/LEDCHAOS/' }}
+          VITE_BASE: ${{ vars.VITE_BASE || '/' }}
         run: npm run build
 
       - name: Publica dist/ no branch gh-pages
