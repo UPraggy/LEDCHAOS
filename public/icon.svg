@@ -4,15 +4,16 @@
     Marca do CHAOS: o "O" da palavra é um alvo (ver components/Logo).
     Cores travadas nos tokens do projeto (styles/tokens.css) porque SVG de
     ícone é servido fora do app e não enxerga var(--token):
-      #0B0D14 = void-800 (--color-bg)   #07080E = void-900 (--color-bg-deep)
-      #EAA94E = amber-400 (--color-action)   #9DB1EA = peri-400 (--color-info)
+      #2E2080 = void-600 (--color-bg, a tela roxa)   #1C1550 = void-800
+      #150F3C = void-900 (--color-bg-deep)
+      #FFB43C = amber-400 (--color-action)   #9DB1EA = peri-400 (--color-info)
     Geometria dentro do círculo seguro de maskable (raio <= 40% de 512 = 204,8).
   -->
   <defs>
     <radialGradient id="field" cx="50%" cy="42%" r="72%">
-      <stop offset="0%" stop-color="#141829" />
-      <stop offset="62%" stop-color="#0B0D14" />
-      <stop offset="100%" stop-color="#07080E" />
+      <stop offset="0%" stop-color="#2E2080" />
+      <stop offset="62%" stop-color="#1C1550" />
+      <stop offset="100%" stop-color="#150F3C" />
     </radialGradient>
   </defs>
 
@@ -25,8 +26,8 @@
   </g>
 
   <!-- anel do alvo -->
-  <circle cx="256" cy="256" r="140" fill="none" stroke="#EAA94E" stroke-width="44" />
+  <circle cx="256" cy="256" r="140" fill="none" stroke="#FFB43C" stroke-width="44" />
 
   <!-- centro -->
-  <circle cx="256" cy="256" r="48" fill="#EAA94E" />
+  <circle cx="256" cy="256" r="48" fill="#FFB43C" />
 </svg>
