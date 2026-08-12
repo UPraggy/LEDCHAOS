@@ -1,17 +1,19 @@
-# Publica o CHAOS no GitHub Pages a cada push na main.
+# Publica o CHAOS no GitHub Pages pelo modelo "Deploy from a branch":
+# o CODIGO-FONTE vive na `main`; o SITE BUILDADO e' empurrado para o branch
+# `gh-pages` a cada push na main. O Pages serve o gh-pages na RAIZ do repo, o que
+# preserva a URL de subpagina: https://upraggy.github.io/LEDCHAOS/
 #
-# Fluxo moderno de Pages via Actions (sem branch gh-pages): o job de build gera
-# o dist/ e o de deploy publica o artefato. O Rafael só precisa habilitar, uma
-# vez, em Settings ▸ Pages ▸ Source = "GitHub Actions" (ver docs/DEPLOY.md).
+# Config unica do Rafael (uma vez, no navegador dele):
+#   1. Settings > Pages > Source = "Deploy from a branch"
+#      Branch: gh-pages  /  Pasta: / (root)
+#      (o branch gh-pages nasce no primeiro run bem-sucedido deste workflow)
+#   2. Settings > Actions > General > Workflow permissions =
+#      "Read and write permissions"
+#      (sem isso o GITHUB_TOKEN nao consegue escrever no branch gh-pages -> 403)
 #
-# Variáveis de repositório (Settings ▸ Secrets and variables ▸ Actions ▸ Variables):
-#   VITE_BASE       caminho base do site. Padrão "/LEDCHAOS/" (subpágina de
-#                   projeto, igual ao SaiBH: a raiz do domínio é o portfólio).
-#                   O public/404.html já usa pathSegmentsToKeep = 1 pra casar.
-#   CUSTOM_DOMAIN   domínio próprio (ex.: ledchaos.exemplo.com.br). Deixe VAZIO
-#                   nesta configuração de subpágina — o site fica em *.github.io
-#                   e nenhum CNAME é escrito. (Um CNAME serviria a raiz do
-#                   domínio, o que conflitaria com o base /LEDCHAOS/.)
+# Variaveis (Settings > Secrets and variables > Actions > Variables):
+#   VITE_BASE   caminho base do site. Default "/LEDCHAOS/" (subpagina de projeto,
+#               igual ao SaiBH: a raiz do dominio e' o portfolio).
 name: Deploy CHAOS to GitHub Pages
 
 on:
@@ -19,19 +21,17 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# Permissões mínimas que o deploy-pages exige.
+# Escrever no branch gh-pages exige contents: write.
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
-# Uma publicação por vez; um push novo cancela a anterior em andamento.
+# Uma publicacao por vez; um push novo cancela a anterior em andamento.
 concurrency:
-  group: pages
+  group: pages-ghbranch
   cancel-in-progress: true
 
 jobs:
-  build:
+  build-and-publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -48,24 +48,20 @@ jobs:
           VITE_BASE: ${{ vars.VITE_BASE || '/LEDCHAOS/' }}
         run: npm run build
 
-      - name: Domínio próprio (CNAME)
-        if: ${{ vars.CUSTOM_DOMAIN != '' }}
-        run: echo "${{ vars.CUSTOM_DOMAIN }}" > dist/CNAME
-
-      - name: Desliga o Jekyll
-        # Sem isto o Pages roda Jekyll e some com arquivos/pastas iniciados por "_".
-        run: touch dist/.nojekyll
-
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Publica dist/ no branch gh-pages
+        # Repo git isolado dentro do dist/: um commit e force-push. O branch
+        # gh-pages guarda SO o site (sem o historico do codigo) e e' substituido
+        # inteiro a cada deploy. O `touch .nojekyll` desliga o Jekyll: sem isso o
+        # Pages some com pastas iniciadas por "_" e pode reprocessar o site.
+        working-directory: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          touch .nojekyll
+          git init -q
+          git config user.name "Rafael Moreira Ramos"
+          git config user.email "rafaelmoreira2001ofc@gmail.com"
+          git add -A
+          git commit -q -m "deploy: build de ${GITHUB_SHA::7}"
+          git branch -M gh-pages
+          git push -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages

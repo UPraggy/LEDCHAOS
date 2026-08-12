@@ -264,6 +264,22 @@ Fonte da verdade do design:
      `/LEDCHAOS/a/*.js|css`; o literal `/LEDCHAOS/` inlinado no bundle JS
      (BASE_URL resolvido); `dist/404.html` com `pathSegmentsToKeep = 1`; manifest
      relativo. `npm test` **57/57**, `npm run build` OK (255 módulos).
+- **#43 · Deploy migrado para o modelo *Deploy from a branch* — código na `main`,
+  site no `gh-pages`.** O Rafael habilitou o Pages e pediu: fonte fica na `main`,
+  mas a **página buildada vai pro branch `gh-pages`**. Troca do modelo *GitHub
+  Actions artifact* (sem branch) para *branch*:
+  1. **`deploy.yml` reescrito.** Um job só: `npm ci` → build (`VITE_BASE`
+     `/LEDCHAOS/`) → dentro do `dist/` faz `git init` + commit + **force-push pro
+     `gh-pages`** via `GITHUB_TOKEN`. Saíram os passos `upload-pages-artifact`/
+     `deploy-pages`. `permissions: contents: write` (escrever no branch). O
+     `gh-pages` guarda **só o site** (sem histórico do código) e é substituído
+     inteiro a cada deploy; `touch .nojekyll` desliga o Jekyll.
+  2. **Base intacta.** Pages serve o `gh-pages` na **raiz** do repo → a URL de
+     subpágina `…/LEDCHAOS/` é preservada; nada do #42 mudou (base, 404.html,
+     asset()).
+  3. **`gh-pages` semeado à mão** a partir do build local, pra o branch já existir
+     e o Rafael poder apontar o Pages nele sem esperar o 1º run (e independe da
+     permissão do token). Docs (`DEPLOY.md`) e handoff (#21) atualizados.
 
 ## Pronto (fase F7 · transporte P2P)
 
@@ -335,19 +351,19 @@ Fonte da verdade do design:
 
 ## Próximos passos
 
-1. **#21 · Deploy no GitHub Pages (SUBPÁGINA `/LEDCHAOS/`)** — **prep local 100%
-   pronta e já configurada para o subcaminho** (ver #42). O build assume
-   `base '/LEDCHAOS/'` sozinho, `npm test` 57/57 e `npm run build` verdes, e o
-   `dist/` foi conferido carregando assets e chunks sob `/LEDCHAOS/`. Falta **só o
-   que é clique/credencial do Rafael**, no navegador externo dele, nesta ordem:
-   1. `git remote add origin https://github.com/UPraggy/LEDCHAOS.git` (se ainda não)
-   2. `git push -u origin main`
-   3. GitHub → **Settings ▸ Pages ▸ Source = GitHub Actions** (o workflow builda e publica sozinho)
-   4. GitHub → **Settings ▸ Pages ▸ Custom domain**: deixar **vazio**. Se houver
+1. **#21 · Deploy no GitHub Pages (SUBPÁGINA `/LEDCHAOS/`, modelo *branch*)** —
+   **código já na `main`, `gh-pages` já semeado com o build** (ver #43). O Rafael
+   pediu: fonte na `main`, **página no branch `gh-pages`**. Falta **só o que é
+   clique/credencial do Rafael**, no navegador externo dele:
+   1. GitHub → **Settings ▸ Actions ▸ General ▸ Workflow permissions =
+      "Read and write permissions"** ▸ Save (senão o auto-deploy dá 403).
+   2. GitHub → **Settings ▸ Pages ▸ Source = "Deploy from a branch"** ▸
+      Branch **`gh-pages`** ▸ `/ (root)` ▸ Save.
+   3. GitHub → **Settings ▸ Pages ▸ Custom domain**: deixar **vazio**. Se houver
       um domínio salvo, **remover** — domínio próprio serve a raiz e conflita com o
       caminho `/LEDCHAOS/`.
-   5. Conferir o site em **`https://upraggy.github.io/LEDCHAOS/`** (o link também
-      sai no resumo do workflow). Passo a passo completo em `docs/DEPLOY.md`.
+   4. Conferir o site em **`https://upraggy.github.io/LEDCHAOS/`** (1–2 min após o
+      Save do Pages). Passo a passo completo em `docs/DEPLOY.md`.
 2. **F7-C — runner do lado convidado (precisa de 2 aparelhos).** A fusão de placares
    já está pronta e provada; falta a UX do convidado rodando o microjogo por conta
    própria e reportando `sendScore` no fim. Só valida com 2 telas físicas.
