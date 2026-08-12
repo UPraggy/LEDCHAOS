@@ -34,25 +34,29 @@ aponta pra ele.
 
 ## Passo a passo (domínio próprio — configuração atual)
 
-Tudo no **navegador externo do Rafael**, logado na conta dele. O `gh-pages` já
-nasce populado (o build local semeou o branch); estes cliques apontam o Pages e o
-DNS para ele:
+O **branch `gh-pages` já está PUBLICADO pelo CI**: o push na `main` disparou o
+workflow, que buildou e empurrou o site pro `gh-pages` (o `GITHUB_TOKEN` já tinha
+escrita — sem 403). O pipeline técnico está fechado. O que sobra são cliques na
+conta do Rafael, no **navegador externo dele**, pra apontar o Pages e o DNS:
 
-1. GitHub ▸ **Settings ▸ Actions ▸ General ▸ Workflow permissions =
-   "Read and write permissions"** ▸ Save. Sem isto o workflow leva **403** ao
-   escrever no `gh-pages` (os deploys automáticos futuros param — o branch
-   semeado à mão continua no ar, mas não se atualiza sozinho).
-2. GitHub ▸ **Settings ▸ Pages ▸ Source = "Deploy from a branch"** ▸
-   Branch: **`gh-pages`** ▸ Pasta: **`/ (root)`** ▸ Save.
-3. **DNS** — no provedor onde o `rafaelmr.com.br` é gerenciado, criar 1 registro:
+1. GitHub ▸ **Settings ▸ Pages ▸ Source = "Deploy from a branch"** ▸
+   Branch: **`gh-pages`** ▸ Pasta: **`/ (root)`** ▸ Save. **Passo crítico** — sem
+   isto o Pages não serve o `gh-pages`.
+2. **DNS** — no provedor onde o `rafaelmr.com.br` é gerenciado, criar 1 registro:
    **CNAME** · nome `ledchaos` · valor `upraggy.github.io` (sem `https://`, sem
    barra). É o que faz o subdomínio resolver para o Pages.
-4. GitHub ▸ **Settings ▸ Pages ▸ Custom domain** = `ledchaos.rafaelmr.com.br` ▸
-   Save. O GitHub valida o DNS (pode levar alguns minutos) e depois libera
-   **Enforce HTTPS** — marque quando aparecer.
-5. Dali em diante, cada push na `main` rebuilda e atualiza o `gh-pages` sozinho.
+3. GitHub ▸ **Settings ▸ Pages ▸ Custom domain** = `ledchaos.rafaelmr.com.br` ▸
+   Save (pode já estar preenchido — foi ao criar o CNAME que o Pages gerou o
+   commit "Create CNAME"). O GitHub valida o DNS (pode levar alguns minutos) e
+   depois libera **Enforce HTTPS** — marque quando aparecer.
+4. Dali em diante, cada push na `main` rebuilda e atualiza o `gh-pages` sozinho.
    Site no ar em **`https://ledchaos.rafaelmr.com.br/`** (1ª publicação + validação
    de DNS/HTTPS podem levar de minutos a algumas horas na propagação).
+
+> **Conferência opcional:** Settings ▸ Actions ▸ General ▸ **Workflow permissions**
+> — o deploy já provou que está em "Read and write permissions" (o `gh-pages` foi
+> escrito sem 403). Só vale conferir pra garantir que os deploys futuros continuem
+> passando; se um dia der 403, é aqui que se resolve.
 
 ## Checar antes de publicar
 

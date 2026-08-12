@@ -281,10 +281,15 @@ Fonte da verdade do design:
      modelo branch). `basePath.js`/`roomLink.js`/`asset()` são base-driven → com
      `BASE='/'` já saem certos, sem tocar em código de jogo. QR vira
      `https://ledchaos.rafaelmr.com.br/join/…`.
-  3. **`gh-pages` semeado à mão** a partir do build local, pra o branch já existir
-     e o Rafael poder apontar o Pages nele sem esperar o 1º run (e independe da
-     permissão do token). Handoff: DNS `CNAME ledchaos → upraggy.github.io` +
-     Custom domain no Pages. Docs (`DEPLOY.md`) e #21 atualizados.
+  3. **`gh-pages` PUBLICADO pelo CI (ponta a ponta funcionando).** O push da `main`
+     (`e50b340`) disparou o workflow, que buildou e **force-pushou o site pro
+     `gh-pages`** (`1e677eb`) — o token **já tinha `contents: write`**, sem 403.
+     Conteúdo do branch conferido: `CNAME` = `ledchaos.rafaelmr.com.br`,
+     `index.html` com refs na raiz (`/a/…`, `/icon.svg`), `404.html` `keep=0`,
+     `.nojekyll` presente, 90+ sprites. O seed manual foi recusado só porque o
+     branch já existia (o CI chegou antes) — irrelevante. **Sobra só clique/DNS do
+     Rafael:** apontar Pages Source no `gh-pages`, DNS `CNAME ledchaos →
+     upraggy.github.io` e Custom domain. Docs (`DEPLOY.md`) e #21 atualizados.
 
 ## Pronto (fase F7 · transporte P2P)
 
@@ -357,20 +362,25 @@ Fonte da verdade do design:
 ## Próximos passos
 
 1. **#21 · Deploy no GitHub Pages (DOMÍNIO PRÓPRIO na raiz, modelo *branch*)** —
-   **código já na `main`, `gh-pages` já semeado com o build** (ver #43). O Rafael
-   habilitou o Pages e **criou o CNAME `ledchaos.rafaelmr.com.br`** → domínio
-   próprio na raiz (base `/`), fonte na `main`, **página no branch `gh-pages`**.
-   Falta **só o que é clique/credencial/DNS do Rafael**, no navegador externo dele:
-   1. GitHub → **Settings ▸ Actions ▸ General ▸ Workflow permissions =
-      "Read and write permissions"** ▸ Save (senão o auto-deploy dá 403).
-   2. GitHub → **Settings ▸ Pages ▸ Source = "Deploy from a branch"** ▸
-      Branch **`gh-pages`** ▸ `/ (root)` ▸ Save.
-   3. **DNS** no provedor do `rafaelmr.com.br`: **CNAME** `ledchaos` →
-      `upraggy.github.io`.
-   4. GitHub → **Settings ▸ Pages ▸ Custom domain** = `ledchaos.rafaelmr.com.br` ▸
-      Save ▸ marcar **Enforce HTTPS** quando liberar.
-   5. Conferir o site em **`https://ledchaos.rafaelmr.com.br/`** (após validação de
-      DNS/HTTPS). Passo a passo completo em `docs/DEPLOY.md`.
+   **código na `main` + `gh-pages` JÁ PUBLICADO pelo CI** (ver #43): o workflow
+   rodou, buildou e empurrou o site pro `gh-pages` sem 403 (o token já tinha
+   escrita). O pipeline técnico está **fechado**. Falta **só clique/DNS do
+   Rafael**, no navegador externo dele — e a permissão de escrita já provou estar
+   ok, então o passo de Workflow permissions vira só conferência:
+   1. GitHub → **Settings ▸ Pages ▸ Source = "Deploy from a branch"** ▸
+      Branch **`gh-pages`** ▸ `/ (root)` ▸ Save. **(passo crítico — sem isto o
+      Pages não serve o `gh-pages`.)**
+   2. **DNS** no provedor do `rafaelmr.com.br`: **CNAME** `ledchaos` →
+      `upraggy.github.io` (sem `https://`, sem barra).
+   3. GitHub → **Settings ▸ Pages ▸ Custom domain** = `ledchaos.rafaelmr.com.br` ▸
+      Save (ele pode já ter feito ao criar o CNAME) ▸ marcar **Enforce HTTPS**
+      quando o GitHub validar o DNS.
+   4. Conferir o site em **`https://ledchaos.rafaelmr.com.br/`** (após validação de
+      DNS/HTTPS) — e dar **F5 numa rota profunda** (`/join/XXXX`) pra provar o
+      404.html. Passo a passo completo em `docs/DEPLOY.md`.
+   *(Conferência opcional: Settings ▸ Actions ▸ General ▸ Workflow permissions =
+   "Read and write permissions" — já efetivo, mas bom garantir pros deploys
+   futuros.)*
 2. **F7-C — runner do lado convidado (precisa de 2 aparelhos).** A fusão de placares
    já está pronta e provada; falta a UX do convidado rodando o microjogo por conta
    própria e reportando `sendScore` no fim. Só valida com 2 telas físicas.
