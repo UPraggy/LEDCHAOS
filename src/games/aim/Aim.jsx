@@ -6,6 +6,7 @@ import RivalBars from '../_shared/RivalBars.jsx';
 import { attachPointer } from '../../engine/inputManager.js';
 import { mapPerformance } from '../../engine/botProfile.js';
 import { paceValue, simulateBots } from '../_shared/bots.js';
+import { pickTune, scheduleTune, midiToFreq } from '../_shared/melodies.js';
 import { drawImageCentered, preloadImages } from '../_shared/assets.js';
 import {
   readCssColors,
@@ -75,11 +76,25 @@ export default function Aim({
   const overRef = useRef(false);
   const tallyRef = useRef({ score: 0, hits: 0, misses: 0, combo: 0, best: 0 });
   const rngRef = useRef(rng);
+  // Relógio da música (tempo REAL, não escalado): a canção não pode acelerar
+  // junto com o RÁPIDO. `melodyRef` guarda a partitura achatada + o cursor da
+  // próxima nota a soar; `grooveRef` é o último oitavo já batido pela bateria.
+  const musicStartRef = useRef(0);
+  const melodyRef = useRef({ events: [], cursor: 0 });
+  const grooveRef = useRef(-1);
+  const reduceMotionRef = useRef(false);
 
   const [score, setScore] = useState(0);
   const [combo, setCombo] = useState(0);
   const [accuracy, setAccuracy] = useState(100);
   const [outcome, end] = useOutcome(onFinish);
+
+  // Música de fundo reconhecível (Ode à Alegria, Para Elisa…) sorteada pela
+  // mesma seed da rodada. `beatMs` sai do bpm da própria música — SEM dividir
+  // pelo timeScale, senão a canção correria no modo rápido. Os alvos nascem
+  // nessa mesma grade, então a arte "acompanha o ritmo" como o Rafael pediu.
+  const [tune] = useState(() => pickTune(rng));
+  const [beatMs] = useState(() => Math.max(220, Math.round(60000 / tune.bpm)));
 
   const [rivalFinals] = useState(() => simulateBots(players, localPlayerId, rng, (perf) => {
     const value = Math.round(mapPerformance(perf, 40, 460) / 5) * 5;
@@ -146,6 +161,14 @@ export default function Aim({
     return delta;
   }, [sound]);
 
+  /* ---------------------------------------------------- movimento reduzido */
+
+  // Quem pede menos movimento não recebe o "respiro" dos alvos na batida (a
+  // música continua; só a pulsação visual é gated).
+  useEffect(() => {
+    reduceMotionRef.current = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
+  }, []);
+
   /* --------------------------------------------------------------- toque */
 
   useEffect(() => {
@@ -188,16 +211,68 @@ export default function Aim({
 
     if (!colorsRef.current) colorsRef.current = readCssColors(canvas, TOKENS);
     if (!imagesRef.current) imagesRef.current = preloadImages(IMG_SRC);
-    if (!worldRef.current) worldRef.current = { targets: [], floats: [], next: 300, elapsed: 0 };
+    if (!worldRef.current) worldRef.current = { targets: [], floats: [] };
+    if (!musicStartRef.current) {
+      // Só no primeiro frame: zera o relógio da música e achata a partitura
+      // pra cobrir a rodada inteira (+4s de folga no fim).
+      musicStartRef.current = performance.now();
+      melodyRef.current = {
+        events: scheduleTune(tune, { startMs: 0, totalMs: duration + 4000, beatMs }),
+        cursor: 0,
+      };
+    }
 
     const world = worldRef.current;
+    const now = performance.now();
     const simDt = outcome ? 0 : dt * 1000 * timeScale;
+    const musicT = now - musicStartRef.current;
+    const progress = Math.min(1, musicT / duration);
 
+    // ------------------------------------------- música + batida (tempo real)
+    let beatPulse = 0;
+    if (!outcome) {
+      // Melodia: dispara cada nota da partitura na hora exata — nota a nota, é
+      // a canção tocada de verdade, sem áudio gravado nem API externa.
+      const mel = melodyRef.current;
+      while (mel.cursor < mel.events.length && mel.events[mel.cursor].atMs <= musicT) {
+        const ev = mel.events[mel.cursor];
+        const noteDur = Math.min(0.26, (ev.durMs / 1000) * 0.9);
+        sound?.note?.(midiToFreq(ev.midi), noteDur, 'triangle', 0.15, { reverb: 0.3, sustain: 0.6 });
+        mel.cursor += 1;
+      }
+
+      // Groove na grade de oitavos: bumbo no tempo, caixa no contratempo,
+      // chimbal em todo oitavo. E é AQUI que os alvos nascem — na batida.
+      const eighth = beatMs / 2;
+      const idx = Math.floor(musicT / eighth);
+      if (idx > grooveRef.current) {
+        const from = Math.max(grooveRef.current + 1, idx - 1);
+        for (let k = from; k <= idx; k += 1) {
+          if (k < 0) continue;
+          const onBeat = k % 2 === 0;
+          if (onBeat) sound?.drum?.('kick', { gain: 0.4 });
+          if (k % 4 === 2) sound?.drum?.('snare', { gain: 0.2 });
+          sound?.drum?.('hat', { gain: onBeat ? 0.05 : 0.09, open: k % 8 === 6 });
+
+          // Alvo na batida: no tempo sempre; no contratempo só quando aperta
+          // (rápido ou reta final). Teto de 6 vivos pra não virar bagunça.
+          const alive = world.targets.reduce((n, t) => n + (t.dead ? 0 : 1), 0);
+          if ((onBeat || timeScale > 1 || progress > 0.55) && alive < 6) {
+            spawn(world, w, h, rngRef.current, progress, sizeScale);
+          }
+        }
+        grooveRef.current = idx;
+      }
+
+      // Pulso da batida (1 no ataque, decai até o próximo tempo). Gated por
+      // reduce-motion; alimenta o "respiro" dos alvos no paint.
+      const beatPhase = (musicT % beatMs) / beatMs;
+      beatPulse = reduceMotionRef.current ? 0 : Math.max(0, 1 - beatPhase * 2.6);
+    }
+
+    // ---------------------------------- envelhecimento dos alvos (escala c/ timeScale)
     if (simDt > 0) {
-      world.elapsed += simDt;
-      const progress = Math.min(1, world.elapsed / duration);
       let expired = 0;
-
       for (let i = world.targets.length - 1; i >= 0; i -= 1) {
         const target = world.targets[i];
         target.age += simDt;
@@ -205,22 +280,16 @@ export default function Aim({
           target.dead = true;
           // Deixar um alvo bom passar conta contra a precisão; deixar uma
           // armadilha passar é exatamente o que se pedia.
-          if (!target.trap) { target.popped = 'gone'; target.popAt = performance.now(); expired += 1; }
+          if (!target.trap) { target.popped = 'gone'; target.popAt = now; expired += 1; }
         }
-        if (target.dead && performance.now() - (target.popAt || 0) > 260) {
+        if (target.dead && now - (target.popAt || 0) > 260) {
           world.targets.splice(i, 1);
         }
       }
       for (let i = 0; i < expired; i += 1) register('gone');
-
-      world.next -= simDt;
-      if (world.next <= 0) {
-        world.next = 620 - progress * 320 + rngRef.current.range(-70, 70);
-        spawn(world, w, h, rngRef.current, progress, sizeScale);
-      }
     }
 
-    paint(ctx, w, h, colorsRef.current, worldRef.current, imagesRef.current, performance.now());
+    paint(ctx, w, h, colorsRef.current, worldRef.current, imagesRef.current, now, beatPulse);
   }, true);
 
   /* ---------------------------------------------------------------- render */
@@ -241,7 +310,7 @@ export default function Aim({
     <div className="gscene am">
       <GameHeader
         title="MIRA"
-        instruction="Acerte o alvo. A bomba tira ponto."
+        instruction={`${tune.name} · acerte o alvo, a bomba tira ponto`}
         round={round}
         totalRounds={totalRounds}
         remaining={remaining}
@@ -314,9 +383,14 @@ function spawn(world, w, h, rng, progress, sizeScale) {
 /* pintura                                                                    */
 /* ========================================================================= */
 
-function paint(ctx, w, h, colors, world, images, now) {
+function paint(ctx, w, h, colors, world, images, now, beatPulse = 0) {
   ctx.clearRect(0, 0, w, h);
   if (!world) return;
+
+  // A arte "respira" na batida: o alvo desenhado incha ~9% no ataque e volta.
+  // É só no DESENHO — o raio de acerto (target.scale) não muda, então mirar
+  // continua justo.
+  const throb = 1 + beatPulse * 0.09;
 
   for (let i = 0; i < world.targets.length; i += 1) {
     const target = world.targets[i];
@@ -338,7 +412,7 @@ function paint(ctx, w, h, colors, world, images, now) {
     // O PNG cabe num quadrado de lado ≈ diâmetro do alvo (com uma folga de 15%
     // porque os sprites têm margem transparente). A bomba balança de leve — vida
     // sem custo de leitura. Se a imagem ainda não veio, cai no vetor.
-    const size = target.r * target.scale * 2.3;
+    const size = target.r * target.scale * 2.3 * throb;
     const img = target.trap ? images?.bomba : images?.alvo;
     const rot = target.trap ? Math.sin(now / 260 + target.spin) * 0.14 : 0;
     if (!drawImageCentered(ctx, img, target.x, target.y, size, rot)) {

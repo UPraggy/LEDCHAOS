@@ -4,6 +4,7 @@ import GameResult from '../../components/GameResult';
 import ScoreBadge from '../../components/ScoreBadge';
 import RivalBars from '../_shared/RivalBars.jsx';
 import { paceValue, simulateBots } from '../_shared/bots.js';
+import { pickTune, scheduleTune, midiToFreq } from '../_shared/melodies.js';
 import {
   readCssColors,
   useCanvasSize,
@@ -37,10 +38,6 @@ const NOTE_COUNT = 110;
 /** Duração da ENERGIA ×2 depois de pegar uma estrela. */
 const ENERGY_MS = 5000;
 
-/** Tônica da melodia (A3). A partitura anda numa pentatônica a partir daqui:
- *  qualquer sequência de acertos soa consonante — nunca "erra" de nota. */
-const ROOT_MIDI = 57;
-
 /** Cores das faixas, na ordem do handoff (§5). Literais de propósito: são a
  *  identidade rítmica fixada no design, não derivam do hue do jogo. Índice = a
  *  COLUNA na tela (esquerda→direita), que é a mesma do botão embaixo. */
@@ -65,15 +62,18 @@ const TOKENS = [
 /**
  * BATIDA — quatro faixas de notas descendo até a linha; um dedo por coluna.
  *
- * A partitura é gerada na hora a partir do rng da rodada — mesma semente, mesma
- * música. Nenhum áudio gravado: os tons saem do Web Audio no momento do acerto,
- * então a "música" é literalmente o que você toca. Cada bloco carrega seu grau
- * na pentatônica; tocar a fase inteira desenha uma melodia de verdade.
+ * A partitura é uma MÚSICA DE VERDADE (domínio público: Ode à Alegria, Para
+ * Elisa, Brilha Estrela…), sorteada pelo rng da rodada — mesma semente, mesma
+ * canção. Nenhum áudio gravado: cada bloco carrega o MIDI real da nota e o tom
+ * sai do Web Audio no momento do acerto, então a "música" é literalmente o que
+ * você toca — tocar a fase inteira toca a melodia reconhecível. O andamento
+ * (beatMs) vem do bpm da própria música, e o groove + o pulso visual dos botões
+ * andam nessa mesma batida (o pedido: "a arte acompanha o ritmo da música").
  *
- * Tipos de nota: TAP (padrão), HOLD (segura e solta no fim), ESTRELA (liga a
- * ENERGIA ×2 por 5 s) e DUPLA (vale mais). timeScale não mexe no relógio do
- * julgamento — ele aperta o ESPAÇAMENTO do chart (mais denso = mais difícil),
- * mantendo as janelas de acerto em milissegundos reais.
+ * Tipos de nota: TAP (padrão), HOLD (nota longa da melodia — segura e solta no
+ * fim), ESTRELA (liga a ENERGIA ×2 por 5 s) e DUPLA (vale mais). timeScale não
+ * mexe no relógio do julgamento — ele aperta o beatMs (mais denso = mais
+ * difícil), mantendo as janelas de acerto em milissegundos reais.
  */
 export default function Rhythm({
   players, localPlayerId, duration, effects, rng, bus, sound,
@@ -81,10 +81,10 @@ export default function Rhythm({
 }) {
   const timeScale = effects?.timeScale ?? 1;
   const invert = !!effects?.invert;
-  const hidden = !!effects?.hidden;
 
   const canvasRef = useRef(null);
   const sizeRef = useCanvasSize(canvasRef);
+  const padRef = useRef(null); // recebe --beat pra pulsar as barras dos botões
   const colorsRef = useRef(null);
   const startRef = useRef(0);
   const overRef = useRef(false);
@@ -92,11 +92,15 @@ export default function Rhythm({
   const heldRef = useRef([null, null, null, null]); // nota em segurança por coluna
   const energyUntilRef = useRef(-1); // ms de jogo até quando a ENERGIA ×2 dura
   const grooveRef = useRef(-1); // último oitavo já disparado no groove
+  const reduceMotionRef = useRef(false); // desliga o pulso decorativo se pedido
   const fxRef = useRef({ rings: [], sparks: [], words: [] });
   const tallyRef = useRef({ pontos: 0, hits: 0, misses: 0, combo: 0, best: 0 });
 
-  const [beatMs] = useState(() => Math.round(rng.range(430, 500)));
-  const [chart] = useState(() => buildChart(rng, timeScale));
+  // Sorteia a música e trava o andamento nela: beatMs = uma batida do bpm da
+  // canção, dividida por timeScale (RÁPIDO/LENTO adensa/afrouxa junto).
+  const [tune] = useState(() => pickTune(rng));
+  const [beatMs] = useState(() => Math.max(210, Math.round((60000 / tune.bpm) / timeScale)));
+  const [chart] = useState(() => buildChart(rng, tune, beatMs));
   const [score, setScore] = useState(0);
   const [combo, setCombo] = useState(0);
   const [outcome, end] = useOutcome(onFinish);
@@ -137,10 +141,12 @@ export default function Rhythm({
 
   /* ----------------------------------------------------------------- áudio */
 
-  // A NOTA é a recompensa. Faixa vira PAN; a qualidade do acerto muda o timbre.
-  const playNote = useCallback((laneIndex, deg, perfeito, type) => {
+  // A NOTA é a recompensa — e é a nota REAL da melodia (freq direto do MIDI,
+  // porque a fachada de som não expõe midiToFreq e a pentatônica não daria uma
+  // canção clássica). Faixa vira PAN; a qualidade do acerto muda o timbre.
+  const playNote = useCallback((laneIndex, midi, perfeito, type) => {
     const pan = ((laneIndex - (LANES - 1) / 2) / ((LANES - 1) / 2)) * 0.55;
-    const freq = sound?.scale ? sound.scale(ROOT_MIDI, deg) : 440;
+    const freq = midiToFreq(midi);
     if (perfeito) {
       sound?.note?.(freq, 0.2, 'triangle', 0.2, { pan, reverb: 0.3, sustain: 0.78 });
       sound?.note?.(freq * 2, 0.16, 'sine', 0.09, { pan, reverb: 0.34 }); // oitava de brilho
@@ -211,7 +217,7 @@ export default function Rhythm({
       if (energyActive) gain *= 2;
       tally.pontos += gain;
       spawnFx(col, perfeito, 'SEGURA', now);
-      playNote(col, target.deg, perfeito);
+      playNote(col, target.midi, perfeito);
     } else {
       target.judged = perfeito ? 'PERFEITO' : 'ACERTO';
       let base = perfeito ? 20 : 10;
@@ -226,7 +232,7 @@ export default function Rhythm({
       if (energyActive) gain *= 2;
       tally.pontos += gain;
       spawnFx(col, perfeito, word, now);
-      playNote(col, target.deg, perfeito, target.type);
+      playNote(col, target.midi, perfeito, target.type);
     }
 
     setScore(tally.pontos);
@@ -252,7 +258,7 @@ export default function Rhythm({
       if (now < energyUntilRef.current) gain *= 2;
       tally.pontos += gain;
       spawnFx(col, true, 'SOLTA', now);
-      playNote(col, note.deg, true);
+      playNote(col, note.midi, true);
       setScore(tally.pontos);
     } else {
       note.judged = 'HOLD_EARLY'; // soltou cedo demais: zera o combo
@@ -272,6 +278,11 @@ export default function Rhythm({
       else if (action.action === 'RELEASE') release(lane);
     });
   }, [bus, localPlayerId, press, release]);
+
+  // O pulso na batida é decoração; quem pede menos movimento não recebe.
+  useEffect(() => {
+    reduceMotionRef.current = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
+  }, []);
 
   /* ------------------------------------------------------------- simulação */
 
@@ -345,8 +356,17 @@ export default function Rhythm({
     fx.sparks = fx.sparks.filter((s) => now - s.born < s.max);
     fx.words = fx.words.filter((wd) => now - wd.born < wd.max);
 
+    // Pulso na MESMA grade do groove/melodia: pico na batida, decai até a
+    // próxima. Alimenta a linha de acerto (canvas) e as barras dos botões (via
+    // --beat no CSS) — a arte "acompanha o ritmo" mesmo sem o dedo tocar.
+    const sinceLead = now - LEAD;
+    const beatPulse = (reduceMotionRef.current || sinceLead < 0)
+      ? 0
+      : Math.max(0, 1 - ((sinceLead % beatMs) / beatMs) * 2.6);
+    if (padRef.current) padRef.current.style.setProperty('--beat', beatPulse.toFixed(3));
+
     const energyActive = now < energyUntilRef.current;
-    paint(ctx, w, h, colors, chart, now, pulseRef.current, fx, invert, energyActive, tallyRef.current.combo);
+    paint(ctx, w, h, colors, chart, now, pulseRef.current, fx, invert, energyActive, tallyRef.current.combo, beatPulse);
   }, true);
 
   /* ----------------------------------------------------------------- render */
@@ -376,7 +396,7 @@ export default function Rhythm({
     <div className="gscene rh">
       <GameHeader
         title="BATIDA"
-        instruction={invert ? 'FAIXAS TROCADAS.' : `Toque na linha · ${Math.round(60000 / beatMs)} BPM`}
+        instruction={invert ? 'FAIXAS TROCADAS.' : `${tune.name} · ${Math.round(60000 / beatMs)} BPM`}
         round={round}
         totalRounds={totalRounds}
         remaining={remaining}
@@ -389,7 +409,6 @@ export default function Rhythm({
       <div className="gscene__stage">
         <canvas ref={canvasRef} className="gcanvas" />
         <RivalBars rivals={rivals} max={ceiling} />
-        {hidden ? <div className="gveil" /> : null}
 
         {outcome ? (
           <div className="gover">
@@ -403,7 +422,7 @@ export default function Rhythm({
         ) : null}
       </div>
 
-      <div className="gscene__pad rh__pad">
+      <div className="gscene__pad rh__pad" ref={padRef}>
         {Array.from({ length: LANES }, (item, index) => (
           <button
             key={index}
@@ -426,44 +445,39 @@ export default function Rhythm({
 /* ========================================================================= */
 
 /**
- * Gera as 110 notas antes de começar.
+ * Constrói o chart a partir da MÚSICA sorteada: cada nota da partitura (já
+ * achatada em ms por `scheduleTune`, na grade do bpm/timeScale) vira um bloco
+ * carregando o MIDI real — tocar a fase inteira toca a canção reconhecível.
  *
- * Regras de jogabilidade: nunca repetir a faixa anterior (senão vira
- * metrônomo) e a melodia caminha numa pentatônica (qualquer sequência soa
- * musical). O ESPAÇAMENTO é dividido por timeScale — RÁPIDO aperta o chart,
- * LENTO o afrouxa, sem mexer nas janelas de acerto (que ficam em ms reais).
+ * Sobre a partitura pura, só duas regras de jogabilidade: (1) nunca a mesma
+ * faixa duas vezes seguidas (senão vira metrônomo numa coluna só) e (2) as
+ * notas longas da melodia (mínima+) viram HOLD; nas curtas rola estrela/dupla.
+ * O ESPAÇAMENTO já vem de `beatMs` (bpm ÷ timeScale) — RÁPIDO adensa a música,
+ * LENTO a espaça, sem tocar nas janelas de acerto (que ficam em ms reais).
  */
-function buildChart(rng, timeScale) {
+function buildChart(rng, tune, beatMs) {
+  const events = scheduleTune(tune, { startMs: LEAD, totalMs: 34000, beatMs, maxNotes: NOTE_COUNT });
   const notes = [];
-  let t = LEAD;
   let lane = rng.int(0, LANES - 1);
-  let deg = 0; // grau atual na pentatônica
-  let dir = 1; // sentido do passo melódico
 
-  const stepMelody = () => {
-    const jump = rng.chance(0.22) ? rng.pick([2, 3, 4]) : rng.pick([1, 1, 2]);
-    deg += dir * jump;
-    if (deg > 11) { deg = 11; dir = -1; }
-    else if (deg < 0) { deg = 0; dir = 1; }
-    else if (rng.chance(0.3)) dir *= -1;
-    return deg;
-  };
-
-  for (let i = 0; i < NOTE_COUNT; i += 1) {
+  for (let i = 0; i < events.length; i += 1) {
+    const ev = events[i];
     lane = (lane + rng.pick([1, 2, 3])) % LANES; // nunca a mesma faixa seguida
-    const d = stepMelody();
 
-    const roll = rng.range(0, 1);
     let type = 'tap';
-    if (roll < 0.20) type = 'hold';
-    else if (roll < 0.25) type = 'star'; // 5% do total
-    else if (roll < 0.32) type = 'double'; // 7% do total
+    let len = 0;
+    if (ev.durMs >= beatMs * 1.5) {
+      // Nota longa da melodia → HOLD (segura e solta). Encurta um tico pra
+      // deixar respiro antes da próxima, e limita pra não virar barra gigante.
+      type = 'hold';
+      len = Math.min(ev.durMs * 0.8, beatMs * 1.6);
+    } else {
+      const roll = rng.range(0, 1);
+      if (roll < 0.06) type = 'star'; // ~6%: liga a ENERGIA ×2
+      else if (roll < 0.16) type = 'double'; // ~10%: vale mais
+    }
 
-    const len = type === 'hold' ? 620 + rng.range(0, 620) : 0;
-    notes.push({ id: i, t, lane, deg: d, type, len, judged: null, held: false });
-
-    const gap = (type === 'hold' ? len + 320 : 360 + rng.range(0, 200)) / timeScale;
-    t += gap;
+    notes.push({ id: i, t: ev.atMs, lane, midi: ev.midi, type, len, judged: null, held: false });
   }
 
   return notes;
@@ -473,7 +487,7 @@ function buildChart(rng, timeScale) {
 /* pintura                                                                    */
 /* ========================================================================= */
 
-function paint(ctx, w, h, colors, chart, now, pulses, fx, invert, energyActive, combo) {
+function paint(ctx, w, h, colors, chart, now, pulses, fx, invert, energyActive, combo, beatPulse = 0) {
   const laneW = w / LANES;
   const hitY = h * HIT_FRAC;
   const noteH = Math.max(16, h * 0.032);
@@ -510,15 +524,20 @@ function paint(ctx, w, h, colors, chart, now, pulses, fx, invert, energyActive, 
 
   /* ------------------------------------------------------- linha de acerto */
 
+  // A linha de acerto ENGROSSA na batida (beatPulse pico=1) e afina até a
+  // próxima — é a batida da música virando movimento, sem depender do toque.
+  const lineH = 2 + beatPulse * 3;
   ctx.fillStyle = energyActive ? colors['--color-warning'] : colors['--color-text'];
   ctx.globalAlpha = 0.9;
-  ctx.fillRect(0, hitY - 2, w, 4);
+  ctx.fillRect(0, hitY - lineH, w, lineH * 2);
   ctx.globalAlpha = 1;
 
   for (let c = 0; c < LANES; c += 1) {
+    // Tampa da faixa: brilha no toque (pulses[c]) E respira na batida (beatPulse).
+    const capH = 10 + beatPulse * 6;
     ctx.fillStyle = LANE_COLORS[c];
-    ctx.globalAlpha = 0.32 + pulses[c] * 0.68;
-    ctx.fillRect(c * laneW + 4, hitY - 5, laneW - 8, 10);
+    ctx.globalAlpha = Math.min(1, 0.32 + pulses[c] * 0.68 + beatPulse * 0.22);
+    ctx.fillRect(c * laneW + 4, hitY - capH / 2, laneW - 8, capH);
     ctx.globalAlpha = 1;
   }
 

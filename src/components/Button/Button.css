@@ -82,12 +82,17 @@
 
 .btn__label {
   position: relative;
-  line-height: 1;
-  /* Label nunca quebra em 2 linhas: a altura do botão é fixa e o .btn tem
-     overflow:hidden — quebrar cortaria o texto verticalmente. Uma palavra
-     longa (ex.: COMPARTILHAR) fica numa linha só; se o botão for estreito
-     demais, quem cede é o layout do container (empilhar), não o rótulo. */
-  white-space: nowrap;
+  min-width: 0;
+  line-height: 1.05;
+  text-align: center;
+  /* Rótulo longo (ex.: "ENTRAR COMO CONVIDADO") QUEBRA em até 2 linhas DENTRO do
+     botão em vez de vazar. Em 360px, mesmo o botão em largura total não cabe esse
+     rótulo numa linha no --fs-xl, então o antigo nowrap + overflow:hidden CORTAVA
+     as pontas do texto — era o "texto fora do botão" que o Rafael viu. O botão
+     cresce pela min-height, então quebrar NÃO corta na vertical; e uma palavra
+     única gigante quebra no limite em vez de estourar a caixa. */
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 
 .btn__icon {

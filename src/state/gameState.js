@@ -123,13 +123,17 @@ export function reducer(state, action) {
     case ACTIONS.ROOM_RESET_SCORES:
       return state.room ? { ...state, room: resetScores(state.room) } : state;
 
-    // Convidado de verdade entrou pela rede (host recebeu HELLO). Só mexemos no
-    // elenco no LOBBY: trocar jogador no meio de uma rodada bagunçaria o placar,
-    // então uma entrada que chega tarde é ignorada (o transporte dele conecta,
-    // mas ele só ganha cadeira na próxima sala/lobby).
+    // Convidado de verdade entrou pela rede (host recebeu HELLO). SEMPRE ganha
+    // cadeira — o convidado tem que JOGAR (host x convidados disputando), esse é
+    // o ponto do modo direto. Antes a gente barrava HELLO que chegasse depois do
+    // START (para o placar não pular), mas o aperto de mão por QR leva segundos:
+    // um HELLO tardio deixava o convidado BANIDO (sem cadeira → me===null → só a
+    // tela "NO PALCO AGORA", nunca jogando). joinGuest é seguro em qualquer fase:
+    // reconexão (id já na sala) só re-marca a cadeira como gente e MANTÉM o placar;
+    // cadeira nova toma o lugar de um bot. Placar embaralhado numa rodada é um mal
+    // menor perto de o convidado não conseguir jogar de jeito nenhum.
     case ACTIONS.ROOM_GUEST_JOIN: {
       if (!state.room) return state;
-      if (state.match && state.room.status !== 'lobby') return state;
       return { ...state, room: joinGuest(state.room, action.player) };
     }
 

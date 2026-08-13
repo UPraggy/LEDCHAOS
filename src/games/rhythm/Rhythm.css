@@ -14,6 +14,9 @@
   display: flex;
   gap: 0;
   padding-inline: 0;
+  /* O loop de RAF escreve o pulso da batida aqui (0 no vale, 1 no pico). As
+     barras leem via var() e "respiram" no ritmo da música mesmo sem o dedo. */
+  --beat: 0;
 }
 
 .rh__key {
@@ -48,6 +51,21 @@
   height: 6px;
   background: var(--lane);
   box-shadow: var(--glow-sm) color-mix(in srgb, var(--lane) 60%, transparent);
+  /* Movimento só em transform/filter (contrato de design): a barra estica pra
+     cima na batida e clareia, ancorada no topo onde ela aponta pra faixa. O RAF
+     já atualiza --beat a cada frame, então não precisa de transition. */
+  transform: scaleY(calc(1 + var(--beat) * 0.9));
+  transform-origin: top;
+  filter: brightness(calc(1 + var(--beat) * 0.7));
+}
+
+/* Quem pede menos movimento não recebe o pulso decorativo (o RAF também zera
+   o --beat, mas isto trava no CSS de qualquer jeito). */
+@media (prefers-reduced-motion: reduce) {
+  .rh__key-bar {
+    transform: none;
+    filter: none;
+  }
 }
 
 /* Afundamento no toque: a face escurece e a barra engrossa. Serve tanto para o

@@ -58,10 +58,15 @@ const GRAVITY = 168 * 1.9;
 /** Cacto/duplo são "limpos" só com o pulo alto o bastante (y acima disto). */
 const CLEAR_Y = 25;
 
-/** Velocidade de rolagem, em % da arena por segundo (carrega o timeScale). */
-const SPEED0 = 46;
-const SPEED_ACCEL = 1.6;
-const SPEED_MAX = 96;
+/** Velocidade de rolagem, em % da arena por segundo (carrega o timeScale).
+ *  Rápido desde a largada (SPEED0 alto) e acelerando FORTE ao longo da rodada:
+ *  com SPEED_ACCEL 2.8 e teto 112, a pista só chega no máximo perto dos ~21s de
+ *  30, então ela cresce durante quase o jogo inteiro ("vai acelerando com o
+ *  tempo"). O pulo continua com física fixa — quem sobe a velocidade encolhe a
+ *  janela de acerto, não muda o arco do salto. */
+const SPEED0 = 54;
+const SPEED_ACCEL = 2.8;
+const SPEED_MAX = 112;
 /** Metros do HUD = distância acumulada; 0.42 calibra "quanto anda por %". */
 const DIST_K = 0.42;
 
@@ -320,7 +325,7 @@ function newWorld(timeScale) {
     shakeT: 0,
     seal: null,    // { life, max } do "BATEU!"
     cloud: 0,      // rolagem paralaxe das nuvens
-    gap: 60,       // % percorridos até o próximo obstáculo
+    gap: 68,       // % percorridos até o próximo obstáculo
     obstacles: [],
     crashes: 0,
     seq: 0,
@@ -350,12 +355,15 @@ function step(world, dt, timeScale, rng, sound, reduced) {
     if (world.y <= 0) { world.y = 0; world.vy = 0; }
   }
 
-  // Semeia obstáculos por distância percorrida, sempre fora da tela (x=104).
+  // Semeia obstáculos por distância percorrida, sempre fora da tela (x=104). O
+  // espaçamento sobe junto com o teto de velocidade (46+..): assim o intervalo em
+  // SEGUNDOS entre obstáculos no topo da pista continua ≳ o tempo de um pulo, e a
+  // pista fica mais RÁPIDA sem virar dois cactos colados impossíveis de limpar.
   world.gap -= scroll;
   if (world.gap <= 0) {
     world.seq += 1;
     world.obstacles.push({ id: world.seq, tipo: rng.pick(OBST_TYPES), x: 104, done: false });
-    world.gap = 40 + rng() * 46;
+    world.gap = 46 + rng() * 52;
   }
 
   // Move e resolve. A colisão é decidida no CRUZAMENTO do centro do dino: é o
