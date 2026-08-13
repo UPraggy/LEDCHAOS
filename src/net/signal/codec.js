@@ -2,17 +2,22 @@
  * codec — o que vira TEXTO no QR Code e no "copiar hash".
  *
  * Uma descrição WebRTC ({ type, sdp }) é texto longo e repetitivo. Para caber
- * num QR nítido e num hash curto de mandar no WhatsApp:
+ * num QR nítido e num hash curto de mandar no WhatsApp temos DOIS caminhos, e o
+ * primeiro caractere marca qual foi usado:
  *
- *   { type, sdp }  →  JSON mínimo {v,k,s}  →  deflate  →  base64url  →  string
+ *   'Z'  compacto  — só {ufrag,pwd,fingerprint,setup,candidatos UDP} em binário;
+ *                    a SDP é REMONTADA de um template no destino. ~200–320 chars,
+ *                    QR versão ~11: o único que a câmera de celular lê de fato.
+ *   'C'  comprimido — { type, sdp }→JSON→deflate→base64url. Fallback universal
+ *                    (SDP fora do padrão datachannel); blob grande, QR denso.
+ *   'R'  cru        — sem compressão (iOS antigo sem CompressionStream).
  *
- * A compressão usa `CompressionStream` nativo (sem dependência). Onde ele não
- * existe (iOS antigo), caímos para SEM compressão — o blob fica maior, o QR
- * pode não caber, mas o "copiar hash" (colar) continua funcionando.
- *
- * O primeiro caractere marca o formato: 'C' comprimido, 'R' cru. Assim o
- * decode sabe o que fazer sem adivinhar.
+ * O compacto é tentado primeiro (com auto-checagem de roundtrip); se a SDP não
+ * for do feitio esperado, cai no deflate. O decode reconhece os três pelo 1º
+ * char — retrocompatível com convites 'C'/'R' já gerados.
  */
+
+import { encodeCompactSignal, decodeCompactSignal, COMPACT_FLAG } from './compactSignal.js';
 
 export const SIGNAL_KIND = { OFFER: 'offer', ANSWER: 'answer' };
 const VERSION = 1;
@@ -60,6 +65,15 @@ export async function encodeSignal(desc) {
   if (!desc || !desc.sdp || !desc.type) {
     throw invalid('Descrição WebRTC vazia ou incompleta.');
   }
+  // Caminho compacto 'Z' (o que torna o QR realmente escaneável). Auto-checa o
+  // roundtrip: se o blob não decodifica de volta pro mesmo tipo, desce pro deflate.
+  try {
+    const z = encodeCompactSignal(desc);
+    const back = decodeCompactSignal(z);
+    if (back.type === desc.type && back.sdp) return z;
+  } catch {
+    /* SDP fora do padrão datachannel — segue no deflate abaixo */
+  }
   const json = JSON.stringify({ v: VERSION, k: desc.type, s: desc.sdp });
   const raw = new TextEncoder().encode(json);
   if (hasCompression) {
@@ -81,6 +95,13 @@ export async function decodeSignal(text) {
   const trimmed = String(text || '').trim();
   if (!trimmed) throw invalid('Nada foi colado/lido.');
   const flag = trimmed[0];
+  if (flag === COMPACT_FLAG) {
+    try {
+      return decodeCompactSignal(trimmed);
+    } catch {
+      throw invalid('Convite compacto ilegível.');
+    }
+  }
   const body = trimmed.slice(1);
   let jsonBytes;
   try {

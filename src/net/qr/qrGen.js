@@ -10,9 +10,11 @@ import QRCode from 'qrcode';
 
 /** ECC conforme o tamanho: texto curto pode ter correção alta; longo, baixa. */
 function pickEcc(len) {
-  if (len <= 300) return 'M';
-  if (len <= 800) return 'L';
-  return 'L';
+  // Convite compacto 'Z' (~200–320 chars) cabe folgado em ECC 'M': 15% de
+  // recuperação ajuda contra reflexo/ângulo sem re-adensar o QR (fica ~v13,
+  // ~69×69 — bem menos denso que o antigo blob deflate ~v37).
+  if (len <= 360) return 'M';
+  return 'L'; // fallback deflate (blob grande): prioriza caber
 }
 
 /**
