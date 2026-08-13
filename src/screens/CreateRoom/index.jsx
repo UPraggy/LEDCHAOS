@@ -64,7 +64,9 @@ export default function CreateRoom() {
   const [total, setTotal] = useState(4);
 
   // Conexão: falso = sala local (bots); verdadeiro = modo direto por QR (P2P).
-  const [direct, setDirect] = useState(false);
+  // Padrão CELULARES: o caminho principal do CHAOS é jogar com amigos por QR.
+  // Quem quiser treinar sozinho contra bots é só trocar para SÓ BOTS.
+  const [direct, setDirect] = useState(true);
 
   // Modos (§2). picked começa com TODOS os jogos; soloGame com o padrão.
   const [mode, setMode] = useState(DEFAULT_MODE);

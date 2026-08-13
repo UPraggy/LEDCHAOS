@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createP2PHub } from './p2pTransport.js';
 import { createNetSession } from './netSession.js';
 import { ROLES } from './protocol.js';
@@ -22,9 +22,11 @@ import { LINK, deviceGuestId } from './useGuestLink.js';
  * resposta — por isso o hello espera o 'join' do transporte (antes disso o
  * `send` volta false e o host nunca saberia que o convidado chegou).
  *
- * Paridade com useGuestLink (F7-C): este hook entrega PRESENÇA + espelho ao vivo,
- * NÃO manda placar. O slot do convidado é simulado no host (o seam multi-device);
- * ver games/_shared/bots.js e docs/05-FASE2-MULTIPLAYER.md §7.
+ * F7-C (multi-device de verdade): além de PRESENÇA + espelho, este hook expõe
+ * `sendScore`. Durante o JOGANDO o convidado joga o PRÓPRIO slot no aparelho dele
+ * (screens/LiveGuest/GuestPlay.jsx) e reporta só o seu placar; o host funde esse
+ * placar real sobre o bot fabricado antes de fechar a rodada. Ver
+ * games/_shared/bots.js e docs/05-FASE2-MULTIPLAYER.md §7.
  *
  * @param {object} opts
  * @param {string} opts.name    nome do convidado (vitrine)
@@ -57,6 +59,8 @@ export function useDirectGuest({ name, avatar }) {
   const [hs, setHs] = useState(HS.INVITE);
   const [answer, setAnswer] = useState(''); // texto da resposta (QR/hash) p/ o host
   const [err, setErr] = useState('');
+  // Passou muito tempo no passo da RESPOSTA sem o canal abrir? (feedback de conexão)
+  const [stalled, setStalled] = useState(false);
   // Geração do hub: bump remonta um hub LIMPO. Necessário porque `acceptInvite`
   // registra o peer ANTES de validar o offer — um convite inválido deixaria o
   // slot HOST_ID preso ("já há um convite em andamento") e travaria a 2ª tentativa.
@@ -125,6 +129,21 @@ export function useDirectGuest({ name, avatar }) {
     session.hello({ id: guestId, name, avatar });
   }, [name, avatar, guestId, hs]);
 
+  /* -------------------------------------------------- feedback de conexão (§5) */
+  // No passo da RESPOSTA o convidado espera o host ler o QR e o canal abrir
+  // (onPeer('join') → HS.LIVE). Sem servidor não há reconexão automática: se em
+  // ~20s nada acontece, o silêncio precisa virar texto ("o host não leu ainda"),
+  // senão a tela fica parada e parece travada (foi o que o Rafael viu).
+  useEffect(() => {
+    if (hs !== HS.ANSWER) {
+      setStalled(false);
+      return undefined;
+    }
+    setStalled(false);
+    const t = setTimeout(() => setStalled(true), 20000);
+    return () => clearTimeout(t);
+  }, [hs]);
+
   /* ------------------------------------------------------ aperto de mão (QR) */
   // Recebe o convite (offer) do host e produz a resposta (answer) pra devolver.
   async function submitInvite(inviteText) {
@@ -153,5 +172,11 @@ export function useDirectGuest({ name, avatar }) {
     setGen((g) => g + 1);
   }
 
-  return { ...state, hs, answer, err, submitInvite, reset };
+  // Reporta o placar do próprio slot ao host (fim da rodada, F7-C). Estável: lê
+  // o sessionRef, então o <GuestPlay> pode passar direto como onFinish sem churn.
+  const sendScore = useCallback((entry) => {
+    sessionRef.current?.sendScore(entry);
+  }, []);
+
+  return { ...state, hs, answer, err, stalled, submitInvite, reset, sendScore };
 }

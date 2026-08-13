@@ -40,14 +40,68 @@ export function QrImage({ text }) {
   if (tooBig) {
     return (
       <div className="qr qr--msg">
-        Convite grande demais para um QR nítido nesta rede.
+        Não deu pra desenhar o QR aqui.
         <br />
-        Use o <b>copiar hash</b> abaixo.
+        Toque em <b>ENVIAR QR</b> abaixo.
       </div>
     );
   }
   if (!src) return <div className="qr qr--msg">gerando QR…</div>;
   return <img className="qr" src={src} alt="QR Code de conexão" />;
+}
+
+/**
+ * ShareQrButton — o jeito FÁCIL de mandar o convite: compartilha a IMAGEM do QR.
+ *
+ * Em vez de copiar um hash gigante (que o WhatsApp quebra em linhas e a pessoa
+ * cola errado), gera o PNG do QR e abre o menu nativo com o ARQUIVO — a pessoa
+ * escolhe WhatsApp e manda a figura. Quem recebe abre em /direto e toca em
+ * "LER QR DE UMA FOTO". Sem câmera, sem hash, sem mesma rede.
+ *
+ * Sem Web Share de arquivo (desktop, navegador antigo): baixa o PNG para anexar
+ * à mão. É a mesma imagem — só muda quem aperta "enviar".
+ */
+export function ShareQrButton({ text, label = 'ENVIAR QR' }) {
+  const [busy, setBusy] = useState(false);
+  const [note, setNote] = useState('');
+
+  async function send() {
+    setBusy(true);
+    setNote('');
+    try {
+      const dataUrl = await toDataUrl(text, { scale: 8, margin: 3 });
+      const blob = await (await fetch(dataUrl)).blob();
+      const file = new File([blob], 'chaos-qr.png', { type: 'image/png' });
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], title: 'CHAOS — QR de conexão' });
+        setBusy(false);
+        return;
+      }
+
+      // fallback desktop: baixa o PNG para a pessoa anexar onde quiser.
+      const a = document.createElement('a');
+      a.href = dataUrl;
+      a.download = 'chaos-qr.png';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setNote('QR salvo na galeria/downloads — anexe no WhatsApp.');
+    } catch (err) {
+      if (err && err.name === 'AbortError') { setBusy(false); return; } // fechou o menu: ok
+      setNote('Não deu pra gerar a imagem do QR.');
+    }
+    setBusy(false);
+  }
+
+  return (
+    <div className="qrsend">
+      <Button variant="energy" icon="📤" disabled={busy} onClick={send}>
+        {busy ? 'GERANDO…' : label}
+      </Button>
+      {note ? <p className="qrsend__note">{note}</p> : null}
+    </div>
+  );
 }
 
 /** Copiar/compartilhar o convite — manda o hash pra quem não está do seu lado. */
@@ -93,8 +147,15 @@ export function CopyHashRow({ text }) {
   );
 }
 
-/** Colar hash, escanear QR ao vivo OU anexar uma foto do QR — serve host e convidado. */
-export function ImportPanel({ cta, placeholder, scanHint, onSubmit }) {
+/**
+ * Receber o QR do outro lado. Dois jeitos: ESCANEAR ao vivo (câmera) ou LER a
+ * FOTO que a pessoa te mandou (o print do QR).
+ *
+ * `hidePaste` (padrão true no fluxo direto) esconde o campo de colar hash — o
+ * Rafael não quer hash, só a imagem. A prova /p2p passa `hidePaste={false}` e
+ * mantém o textarea para depurar. Serve host e convidado.
+ */
+export function ImportPanel({ cta, placeholder, scanHint, onSubmit, hidePaste = true }) {
   const [text, setText] = useState('');
   const [scanning, setScanning] = useState(false);
   const [imgErr, setImgErr] = useState('');
@@ -124,6 +185,29 @@ export function ImportPanel({ cta, placeholder, scanHint, onSubmit }) {
         }}
         onCancel={() => setScanning(false)}
       />
+    );
+  }
+
+  // Fluxo direto: só as duas formas por IMAGEM, com rótulo que se explica.
+  // Nada de hash — é o que confundia o Rafael.
+  if (hidePaste) {
+    return (
+      <div className="import import--simple">
+        <div className="import__actions">
+          <Button variant="energy" icon="📷" onClick={() => setScanning(true)}>
+            ESCANEAR COM A CÂMERA
+          </Button>
+          <Button variant="cyan" icon="🖼️" onClick={() => fileRef.current?.click()}>
+            LER QR DE UMA FOTO
+          </Button>
+          <input ref={fileRef} type="file" accept="image/*" hidden onChange={pickImage} />
+        </div>
+        {imgErr ? (
+          <p className="scan__err" role="alert">
+            {imgErr}
+          </p>
+        ) : null}
+      </div>
     );
   }
 

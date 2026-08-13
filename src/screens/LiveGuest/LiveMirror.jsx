@@ -3,6 +3,7 @@ import Button from '../../components/Button';
 import IconButton from '../../components/IconButton';
 import PlayerCard from '../../components/PlayerCard';
 import PlayerAvatar from '../../components/PlayerAvatar';
+import GuestPlay from './GuestPlay.jsx';
 import { LINK } from '../../net/useGuestLink.js';
 import { getGame } from '../../engine/gameRegistry.js';
 import { PHASES } from '../../engine/roundManager.js';
@@ -165,6 +166,14 @@ export default function LiveMirror({ link, code, onExit }) {
         ) : null}
       </section>
     );
+  }
+
+  // F7-C — durante o JOGANDO, o convidado com cadeira JOGA o próprio slot em tela
+  // cheia (não só espelha). Sem cadeira ou jogo desconhecido → cai no espelho de
+  // sempre (espectador), que ainda mostra "NO PALCO AGORA". Fora do JOGANDO
+  // (intro/contagem/resultado) todo mundo volta a espelhar a festa.
+  if (phase === PHASES.PLAYING && link.round && me && game?.Component) {
+    return <GuestPlay link={link} game={game} />;
   }
 
   return (

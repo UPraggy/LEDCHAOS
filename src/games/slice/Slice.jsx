@@ -186,6 +186,11 @@ export default function Slice({
     setScore(scoreRef.current);
     sound?.play?.(comboRef.current >= 3 ? 'perfect' : 'hit');
 
+    // A fruta se PARTE: duas metades do próprio sprite voam perpendicular à
+    // lâmina e desbotam. É a transição inteira→fatiada — sem sprite novo, o
+    // corte nasce recortando o PNG que já existe (ver drawHalf).
+    spawnHalves(world, object);
+
     // Corte em sequência (combo ≥3) ganha um halo dourado grande, atrás de tudo:
     // é o prêmio visual de manter a corrente sem encostar em bomba.
     if (comboRef.current >= 3) {
@@ -229,6 +234,8 @@ export default function Slice({
       if (!cutIt) continue;
 
       object.alive = false;
+      // ângulo da lâmina neste segmento: as metades se separam perpendicular a ele.
+      object.cutAngle = Math.atan2(by - ay, bx - ax);
       award(object);
       if (object.kind === 'bomb' && oneLife) {
         closeRound({ blownUp: true });
@@ -305,6 +312,18 @@ export default function Slice({
       }
       world.objects = world.objects.filter((o) => o.alive && o.y < 128);
 
+      // metades da fruta cortada: mesma física (gravidade + spin), com vida
+      // própria que as desbota. Somem ao apagar ou ao sair por baixo.
+      for (let i = 0; i < world.halves.length; i += 1) {
+        const hf = world.halves[i];
+        hf.vy += gravity * simDt;
+        hf.x += hf.vx * simDt;
+        hf.y += hf.vy * simDt;
+        hf.rot += hf.spin * simDt;
+        hf.life -= dt;
+      }
+      world.halves = world.halves.filter((hf) => hf.life > 0 && hf.y < 132);
+
       for (let i = 0; i < world.bursts.length; i += 1) world.bursts[i].life -= dt;
       world.bursts = world.bursts.filter((b) => b.life > 0);
 
@@ -345,6 +364,13 @@ export default function Slice({
       const k = 1 - b.life / b.max;
       const size = b.size * (0.6 + k * 0.7);
       drawImageCentered(ctx, images[b.img], px(b.x), py(b.y), size, 0, 1 - k);
+    }
+
+    // metades da fruta cortada — desenhadas por cima do respingo, cada uma é
+    // o sprite inteiro recortado por um lado da lâmina (a transição fatiada).
+    for (let i = 0; i < world.halves.length; i += 1) {
+      const hf = world.halves[i];
+      drawHalf(ctx, images[hf.kind], px(hf.x), py(hf.y), hf.size, hf.rot, hf.cutAngle, hf.side, Math.max(0, hf.life / hf.max));
     }
 
     // rastro do dedo (creme, visível sobre o fundo escuro)
@@ -422,7 +448,37 @@ export default function Slice({
 /* ========================================================================= */
 
 function newWorld() {
-  return { objects: [], bursts: [], pops: [], trail: [], combo: null, timer: 0.4, shake: 0, seq: 0 };
+  return { objects: [], halves: [], bursts: [], pops: [], trail: [], combo: null, timer: 0.4, shake: 0, seq: 0 };
+}
+
+/**
+ * Parte uma fruta em DUAS metades do próprio sprite. Cada metade herda posição,
+ * rotação e metade da velocidade da fruta, e ganha um empurrão perpendicular à
+ * lâmina (sinais opostos) mais um leve pulo para cima e spin divergente — então
+ * as duas se abrem em arco. O recorte real (mostrar só um lado) mora em drawHalf.
+ */
+function spawnHalves(world, object) {
+  const cutAngle = object.cutAngle ?? 0;
+  const perp = cutAngle + Math.PI / 2;   // direção em que as metades se afastam
+  const nx = Math.cos(perp);
+  const ny = Math.sin(perp);
+  const kick = 16;                        // separação perpendicular (%/s)
+  for (let s = -1; s <= 1; s += 2) {
+    world.halves.push({
+      kind: object.kind,
+      x: object.x,
+      y: object.y,
+      vx: object.vx * 0.5 + nx * kick * s,
+      vy: object.vy * 0.5 + ny * kick * s - 8,
+      rot: object.rot,
+      spin: object.spin + s * 3.4,
+      size: object.size,
+      cutAngle,
+      side: s,
+      life: 0.72,
+      max: 0.72,
+    });
+  }
 }
 
 /**
@@ -475,6 +531,44 @@ function drawFallback(ctx, object, cx, cy, colors) {
   ctx.arc(cx, cy, r, 0, TAU);
   ctx.fillStyle = object.kind === 'bomb' ? colors['--color-danger'] : colors['--game-accent'];
   ctx.fill();
+}
+
+/**
+ * Desenha UMA metade de uma fruta cortada. Não existe sprite "fatiado" no repo,
+ * então a metade é o PNG inteiro recortado por um plano que passa pelo centro da
+ * própria metade, na direção da lâmina (`cutAngle`); `side` (+1/−1) escolhe qual
+ * lado fica. Como as duas metades divergem em posição no mundo, o corte "abre"
+ * sozinho — cada uma mostra o seu lado e a fenda cresce entre elas.
+ *
+ * A convenção de tamanho é a mesma de drawImageCentered: a maior dimensão vira
+ * `size`, proporção preservada, desenho centrado em (cx,cy).
+ */
+function drawHalf(ctx, img, cx, cy, size, rot, cutAngle, side, alpha) {
+  if (!img || !img.ready) return false;
+  const iw = img.naturalWidth || img.width;
+  const ih = img.naturalHeight || img.height;
+  if (!iw || !ih) return false;
+
+  const scale = size / Math.max(iw, ih);
+  const w = iw * scale;
+  const h = ih * scale;
+  const big = Math.max(w, h) * 2;
+
+  ctx.save();
+  ctx.globalAlpha = Math.max(0, Math.min(1, alpha));
+  ctx.translate(cx, cy);
+  // frame da lâmina: o eixo x fica ALINHADO ao corte, o y é a perpendicular.
+  ctx.rotate(cutAngle);
+  ctx.beginPath();
+  if (side > 0) ctx.rect(-big, 0, big * 2, big);   // mantém o lado +perp
+  else ctx.rect(-big, -big, big * 2, big);          // mantém o lado −perp
+  ctx.clip();
+  // desfaz a rotação da lâmina e aplica a rotação própria do sprite antes de pintar.
+  ctx.rotate(-cutAngle);
+  ctx.rotate(rot);
+  ctx.drawImage(img, -w / 2, -h / 2, w, h);
+  ctx.restore();
+  return true;
 }
 
 /**

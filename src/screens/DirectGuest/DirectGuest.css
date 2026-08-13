@@ -81,6 +81,20 @@
   color: var(--rose-500);
 }
 
+/* Passo 2 sem resposta do host em ~20s. NÃO é erro (o QR pode estar certo, só
+   não foi lido ainda): instrução em tinta cheia, legível sobre o cartão creme,
+   com o próximo passo em destaque peri. O "recomeçar" logo abaixo é a saída. */
+.dg__waiting {
+  text-align: center;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-body);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text);
+}
+.dg__waiting b {
+  color: var(--peri-600);
+}
+
 /* gerando a resposta: espera curta com giro (mesmo spinner do P2PLab). */
 .dg__wait {
   display: flex;

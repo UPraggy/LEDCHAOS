@@ -6,7 +6,7 @@ import IconButton from '../../components/IconButton';
 import PlayerCard from '../../components/PlayerCard';
 import QRCode from '../../components/QRCode';
 import SegmentedControl from '../../components/SegmentedControl';
-import { QrImage, CopyHashRow, ImportPanel } from '../../net/qr/handshake.jsx';
+import { QrImage, ShareQrButton, ImportPanel } from '../../net/qr/handshake.jsx';
 import { useGame } from '../../state/GameProvider.jsx';
 import { normalizeRoomCode } from '../../room/roomCode.js';
 import { roomUrl, prettyRoomUrl, copyText, shareRoom, canShare } from '../../room/roomLink.js';
@@ -261,20 +261,15 @@ function DirectInvite({ signaling, full, onFlash }) {
         </>
       ) : (
         <>
-          <p className="lobby__directStep u-label">1 · MOSTRE ESTE QR AO CONVIDADO</p>
+          <p className="lobby__directStep u-label">1 · MANDE ESTE QR AO CONVIDADO</p>
           <QrImage text={invite.text} />
-          <CopyHashRow text={invite.text} />
-          <p className="lobby__directHint">
-            No celular dele, na tela inicial, ele toca <b>entrar por QR — modo direto</b> e lê este
-            QR (ou cola o hash).
-          </p>
+          <ShareQrButton text={invite.text} label="ENVIAR QR AO CONVIDADO" />
 
           <hr className="lobby__directSep" />
 
-          <p className="lobby__directStep u-label">2 · COLE A RESPOSTA DELE</p>
+          <p className="lobby__directStep u-label">2 · LEIA A RESPOSTA DELE</p>
           <ImportPanel
             cta="CONECTAR"
-            placeholder="cole aqui o hash de resposta do convidado…"
             scanHint="Aponte para o QR de resposta"
             onSubmit={accept}
           />

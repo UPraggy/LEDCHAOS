@@ -16,6 +16,18 @@ import './Game.css';
 const ERROR_HOLD = 1800;
 
 /**
+ * Folga para o placar do convidado chegar (F7-C, multi-device).
+ *
+ * Host e convidado seguram o resultado o MESMO tempo (useOutcome/END_HOLD) antes
+ * de chamar onFinish. Logo o ACT_SCORE do celular do convidado chega ~1 RTT DEPOIS
+ * do host já ter fechado a própria rodada. Sem essa folga, o host drena o ledger
+ * antes do placar real aterrissar e o slot do convidado ficaria com o bot
+ * fabricado. Esperamos um tico só quando HÁ convidado vivo — e bem dentro do
+ * watchdog (game.duration + WATCHDOG_GRACE), então nunca trava a partida.
+ */
+const GUEST_SCORE_GRACE = 1200;
+
+/**
  * Game — o motor da partida em forma de tela.
  *
  * Ela não sabe jogar nada. Ela só conduz a máquina de fases e entrega ao
@@ -49,6 +61,14 @@ export default function Game() {
   // clique e de novo no fim do tempo). O reducer também blinda por fase; aqui é
   // barato e evita até o dispatch.
   const doneRef = useRef(0);
+  // Timer da folga do placar do convidado (F7-C). Guardado para ser cancelado se
+  // a tela desmontar antes de fechar a rodada.
+  const graceRef = useRef(0);
+  useEffect(() => () => clearTimeout(graceRef.current), []);
+
+  // Há gente de verdade no celular? (Só então vale a pena esperar o placar dela.)
+  // Sem convidado vivo — só bots — o fim é imediato, como sempre foi.
+  const hasLiveGuest = !!room?.players?.some((p) => !p.isBot && p.id !== room.hostId);
 
   /* ------------------------------------------------------- intro → contagem */
   useEffect(() => {
@@ -104,8 +124,16 @@ export default function Game() {
     doneRef.current = round;
     // F7-C: onde o adversário fabricado cede lugar ao celular de verdade. Se
     // ninguém reportou (jogo local), `mergeEntries` devolve a lista intacta.
-    finishRound(mergeEntries(round, entries));
-  }, [round, finishRound, mergeEntries]);
+    const finalize = () => finishRound(mergeEntries(round, entries));
+    // Com convidado vivo, o placar dele chega ~1 RTT depois do host terminar;
+    // segura um tico para o ledger já ter o valor real ao fundir. Só bots → já.
+    if (hasLiveGuest) {
+      clearTimeout(graceRef.current);
+      graceRef.current = setTimeout(finalize, GUEST_SCORE_GRACE);
+    } else {
+      finalize();
+    }
+  }, [round, finishRound, mergeEntries, hasLiveGuest]);
 
   /* --------------------------------------------------------------- guardas */
   if (!room || room.id !== code) return <Navigate to={`/join/${code}`} replace />;

@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import Screen from '../../components/Screen';
 import IconButton from '../../components/IconButton';
 import IdentityForm from '../../components/IdentityForm';
-import { QrImage, CopyHashRow, ImportPanel } from '../../net/qr/handshake.jsx';
+import { QrImage, ShareQrButton, ImportPanel } from '../../net/qr/handshake.jsx';
 import { useGame } from '../../state/GameProvider.jsx';
 import { useDirectGuest, HS } from '../../net/useDirectGuest.js';
 import LiveMirror from '../LiveGuest/LiveMirror.jsx';
@@ -52,17 +52,12 @@ export default function DirectGuest() {
       <div className="dg__stage">
         {guest.hs === HS.INVITE ? (
           <>
-            <p className="dg__step u-label">1 · LEIA O CONVITE DO HOST</p>
+            <p className="dg__step u-label">1 · LEIA O QR DO HOST</p>
             <ImportPanel
               cta="GERAR RESPOSTA"
-              placeholder="cole aqui o hash de convite do host…"
               scanHint="Aponte para o QR do host"
               onSubmit={guest.submitInvite}
             />
-            <p className="dg__hint">
-              No aparelho do host, ele gera um <b>convite QR</b> no lobby. Escaneie aqui — ou cole o
-              hash / anexe um print.
-            </p>
           </>
         ) : guest.hs === HS.ANSWERING ? (
           <div className="dg__wait">
@@ -71,13 +66,17 @@ export default function DirectGuest() {
           </div>
         ) : guest.hs === HS.ANSWER ? (
           <>
-            <p className="dg__step u-label">2 · MOSTRE ESTA RESPOSTA AO HOST</p>
+            <p className="dg__step u-label">2 · MANDE ESTA RESPOSTA AO HOST</p>
             <QrImage text={guest.answer} />
-            <CopyHashRow text={guest.answer} />
-            <p className="dg__hint">
-              O host lê este QR (ou cola o hash) no lobby. Assim que ele concluir, você entra na
-              festa — não feche esta tela.
-            </p>
+            <ShareQrButton text={guest.answer} label="ENVIAR MINHA RESPOSTA" />
+            {guest.stalled ? (
+              <p className="dg__waiting" role="status">
+                O host ainda não entrou. Confirme que ele <b>leu seu QR de resposta</b> na
+                sala — ou recomece com outro convite.
+              </p>
+            ) : (
+              <p className="dg__hint">esperando o host ler sua resposta…</p>
+            )}
             <button type="button" className="dg__restart" onClick={guest.reset}>
               recomeçar com outro convite
             </button>

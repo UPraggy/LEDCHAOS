@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createRelayHub } from './wsTransport.js';
 import { createNetSession } from './netSession.js';
 import { ROLES } from './protocol.js';
@@ -16,10 +16,11 @@ import { ROLES } from './protocol.js';
  * só que com o papel invertido (GUEST). O convidado se apresenta com `hello()`
  * e, no lugar de um bot, vira gente na sala do host (ver roomManager.joinGuest).
  *
- * ⚠️ O convidado PODE mandar ações (`sendAction`), mas os 12 microjogos de hoje
- * só consomem o input do jogador LOCAL de cada aparelho — o slot do convidado é
- * simulado no host (ver games/_shared/bots.js, o seam multi-device). Por isso
- * este hook entrega PRESENÇA + espelho ao vivo, não controle de jogo. Ver
+ * F7-C (multi-device de verdade): além de PRESENÇA + espelho, este hook expõe
+ * `sendScore`. Cada microjogo é single-device — lê só o dedo LOCAL —, então o
+ * convidado monta o MESMO microjogo no aparelho dele (screens/LiveGuest/
+ * GuestPlay.jsx), joga o próprio slot e reporta só o seu placar; o host funde
+ * sobre o bot fabricado antes de fechar a rodada. Ver games/_shared/bots.js e
  * `docs/05-FASE2-MULTIPLAYER.md` §7.
  *
  * @param {object} opts
@@ -138,5 +139,11 @@ export function useGuestLink({ url, code, name, avatar }) {
     session.hello({ id: guestId, name, avatar });
   }, [name, avatar, guestId]);
 
-  return state;
+  // Reporta o placar do próprio slot ao host (fim da rodada, F7-C). Estável: lê
+  // o sessionRef, então o <GuestPlay> pode passar direto como onFinish sem churn.
+  const sendScore = useCallback((entry) => {
+    sessionRef.current?.sendScore(entry);
+  }, []);
+
+  return { ...state, sendScore };
 }

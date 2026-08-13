@@ -5,28 +5,21 @@ import Logo from '../../components/Logo';
 import Button from '../../components/Button';
 import IconButton from '../../components/IconButton';
 import { useGame } from '../../state/GameProvider.jsx';
-import { normalizeRoomCode, isValidRoomCode, CODE_LENGTH } from '../../room/roomCode.js';
 import { GAMES } from '../../engine/gameRegistry.js';
 import './Home.css';
 
 /**
  * Home — porta de entrada.
- * Três caminhos: criar sala, entrar por código, ou voltar pra sala salva.
+ * Dois caminhos: CRIAR SALA (você é o host) ou ENTRAR COMO CONVIDADO (lê o QR
+ * do host). Antes havia um campo de CÓDIGO, mas sem servidor de rendezvous ele
+ * não conectava ninguém — o caminho de verdade é o convite direto por QR.
  * Nada aqui depende de rede: a sala salva vem do localStorage.
  */
 
 export default function Home() {
   const navigate = useNavigate();
   const { room, prefs, setMuted } = useGame();
-  const [code, setCode] = useState('');
   const [help, setHelp] = useState(false);
-
-  const valid = isValidRoomCode(code);
-
-  function join(event) {
-    event.preventDefault();
-    if (valid) navigate(`/join/${code}`);
-  }
 
   return (
     <Screen className="home">
@@ -75,27 +68,9 @@ export default function Home() {
           CRIAR SALA
         </Button>
 
-        <form className="home__join" onSubmit={join}>
-          <input
-            className="home__code"
-            value={code}
-            onChange={(e) => setCode(normalizeRoomCode(e.target.value))}
-            placeholder="CÓDIGO"
-            inputMode="text"
-            autoComplete="off"
-            autoCapitalize="characters"
-            spellCheck="false"
-            maxLength={CODE_LENGTH}
-            aria-label="Código da sala"
-          />
-          <Button variant="energy" block={false} disabled={!valid} type="submit">
-            ENTRAR
-          </Button>
-        </form>
-
-        <button className="home__p2p" type="button" onClick={() => navigate('/direct')}>
-          📲 entrar por QR — modo direto, sem servidor →
-        </button>
+        <Button variant="energy" size="lg" icon="📲" onClick={() => navigate('/direct')}>
+          ENTRAR COMO CONVIDADO
+        </Button>
 
         {import.meta.env.DEV ? (
           <button className="home__p2p home__p2p--dev" type="button" onClick={() => navigate('/p2p')}>
@@ -116,7 +91,8 @@ function HowToPlay({ onClose }) {
         <h2 className="home__sheetTitle u-display">COMO JOGA</h2>
         <ol className="home__steps">
           <li>
-            <b>Crie a sala</b> e mostre o QR Code (ou manda o link) pra galera.
+            <b>Crie a sala</b> e mande o <b>QR</b> do convite pra galera — cada um entra como
+            convidado direto no seu aparelho.
           </li>
           <li>
             <b>Cada rodada é um jogo novo</b>, sorteado. Você descobre no ar — a instrução aparece
@@ -136,8 +112,9 @@ function HowToPlay({ onClose }) {
           </li>
         </ol>
         <p className="home__note">
-          Quem entrar pelo QR (ou link) da sala vira jogador de verdade — os bots só preenchem as
-          vagas que sobrarem. O código, o link e o QR já são reais.
+          Quem entrar pelo <b>QR</b> do convite vira jogador de verdade — os bots só preenchem as
+          vagas que sobrarem. O host cria a sala e manda o QR; o convidado entra direto, sem
+          servidor.
         </p>
         <Button variant="primary" onClick={onClose}>ENTENDI</Button>
       </div>
