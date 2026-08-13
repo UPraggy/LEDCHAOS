@@ -38,6 +38,16 @@ const SKILL_OPTS = Object.entries(SKILL_PRESETS).map(([key, preset]) => ({
 // 360px o texto repetido não cabe, e o rótulo da seção já explica o número.
 const PLAYER_OPTS = [2, 3, 4, 6, 8].map((n) => ({ value: n, label: String(n) }));
 
+// CONEXÃO — como os outros jogadores entram na sala.
+//   SÓ BOTS   → sala local: os oponentes são simulados neste mesmo aparelho.
+//   CELULARES → modo direto (WebRTC P2P, zero-servidor): cada amigo entra por um
+//               aperto de mão de QR no lobby. Bots preenchem as vagas que sobrarem.
+// O valor é o próprio `direct` (boolean) que a sala guarda em settings.
+const CONNECT_OPTS = [
+  { value: false, label: 'SÓ BOTS', hint: 'NESTE APARELHO' },
+  { value: true, label: 'CELULARES', hint: 'QR · SEM SERVIDOR' },
+];
+
 /**
  * Criar sala. Tudo que o host decide antes de existir uma sala.
  *
@@ -52,6 +62,9 @@ export default function CreateRoom() {
   const [rounds, setRounds] = useState(DEFAULT_ROUNDS);
   const [difficulty, setDifficulty] = useState(DEFAULT_SKILL);
   const [total, setTotal] = useState(4);
+
+  // Conexão: falso = sala local (bots); verdadeiro = modo direto por QR (P2P).
+  const [direct, setDirect] = useState(false);
 
   // Modos (§2). picked começa com TODOS os jogos; soloGame com o padrão.
   const [mode, setMode] = useState(DEFAULT_MODE);
@@ -87,6 +100,7 @@ export default function CreateRoom() {
       mode,
       picked,
       soloGame,
+      direct,
     });
     navigate(`/room/${id}`);
   }
@@ -159,6 +173,13 @@ export default function CreateRoom() {
 
       <div className="create__settings">
         <SegmentedControl
+          label="CONEXÃO"
+          name="conexao"
+          options={CONNECT_OPTS}
+          value={direct}
+          onChange={setDirect}
+        />
+        <SegmentedControl
           label="DURAÇÃO DA PARTIDA"
           name="rodadas"
           options={ROUND_OPTS}
@@ -182,8 +203,18 @@ export default function CreateRoom() {
       </div>
 
       <p className="create__note">
-        Você joga como <b>Jogador 1</b>. Crie a sala e compartilhe o <b>QR Code</b> do lobby:
-        quem entrar vira jogador de verdade — os bots só preenchem as vagas que sobrarem.
+        Você joga como <b>Jogador 1</b>.{' '}
+        {direct ? (
+          <>
+            No lobby, gere um <b>convite QR</b> para cada amigo — eles entram direto no seu
+            aparelho, <b>sem servidor nenhum</b>. Os bots preenchem as vagas que sobrarem.
+          </>
+        ) : (
+          <>
+            Os oponentes são <b>bots</b> neste mesmo aparelho. Quer amigos de verdade? Escolha{' '}
+            <b>CELULARES</b> na conexão.
+          </>
+        )}
       </p>
 
       <div className="screen__spacer" />

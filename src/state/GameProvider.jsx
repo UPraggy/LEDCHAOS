@@ -1,10 +1,11 @@
-import { createContext, useContext, useEffect, useMemo, useReducer, useRef } from 'react';
+import { createContext, useContext, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { ACTIONS, createInitialState, reducer, joinRoomAction } from './gameState.js';
 import { saveRoom, savePrefs, clearRoom } from '../room/roomManager.js';
 import { createActionBus } from '../engine/inputManager.js';
 import { unlockAudio, onMuteChange, setMuted, isMuted } from '../audio/soundManager.js';
 import { createLoopbackHub } from '../net/transport.js';
 import { createRelayHub } from '../net/wsTransport.js';
+import { createP2PHub } from '../net/p2pTransport.js';
 import { createNetSession } from '../net/netSession.js';
 import { createScoreLedger, mergeRealScores } from '../net/scoreMerge.js';
 import { ROLES } from '../net/protocol.js';
@@ -107,6 +108,13 @@ export function GameProvider({ children }) {
   const relayUrl = import.meta.env.VITE_RELAY_URL;
   const roomId = state.room?.id ?? null;
   const hostsThisRoom = state.room ? state.room.hostId === 'p1' : false;
+  // Modo direto (zero-servidor): a sala pediu WebRTC P2P por handshake de QR.
+  const directMode = state.room?.settings?.direct === true;
+
+  // Superfície de signaling do cano direto exposta ao Lobby: o host gera um
+  // convite (offer) por convidado e cola a resposta (answer). Só existe no modo
+  // direto — relay/loopback têm rendezvous automático e não precisam disto.
+  const [directSignaling, setDirectSignaling] = useState(null);
 
   // Espelho da sala p/ o efeito empurrar o estado atual assim que o cano abrir,
   // sem re-derrubar o relay a cada jogador que entra.
@@ -146,6 +154,53 @@ export function GameProvider({ children }) {
       netRef.current = loopback; // volta ao loopback: o app segue offline
     };
   }, [relayUrl, roomId, hostsThisRoom]);
+
+  /* --------------------------------------------- rede DIRETA, ZERO-SERVIDOR (P2P)
+   * Mesma peça que o relay, mas o cano é `createP2PHub` (WebRTC DataChannel) e
+   * NÃO há servidor de rendezvous: o host abre uma conexão por convidado e a
+   * troca de offer/answer sai por FORA da rede — QR/hash colado à mão no Lobby.
+   *
+   * O contrato é idêntico ao do relay (mesmo netSession host, mesmos handlers
+   * onJoin/onLeave/onGuestScore), então telas e microjogos continuam cegos ao
+   * cano. A única superfície extra é `hub.signaling`, que exponho ao Lobby via
+   * `directSignaling` para ele gerar convites e aceitar respostas.
+   *
+   * Só liga quando a sala foi criada em modo direto E não há relay configurado
+   * (o relay, se existir, tem rendezvous automático e é o caminho preferido). */
+  useEffect(() => {
+    if (relayUrl || !directMode || !roomId || !hostsThisRoom) return undefined;
+
+    const bus = busRef.current;
+    const loopback = netRef.current; // guardado para restaurar no teardown
+
+    const hub = createP2PHub();
+    const session = createNetSession({
+      transport: hub.connect({ id: 'host', role: ROLES.HOST }),
+      bus,
+      handlers: {
+        onJoin: (player) => dispatch({ type: ACTIONS.ROOM_GUEST_JOIN, player }),
+        onLeave: (playerId) => dispatch({ type: ACTIONS.ROOM_GUEST_LEAVE, playerId }),
+        onGuestScore: recordGuestScore,
+      },
+    });
+    session.hub = hub;
+    netRef.current = session; // a partir daqui, todo broadcast sai pelos canos P2P
+
+    // Lobby ganha a manivela do handshake (createInvite / acceptAnswer).
+    setDirectSignaling(hub.signaling);
+
+    // Empurra a sala atual assim que um convidado abre o canal (broadcastRoom é
+    // no-op enquanto ninguém conectou; cada `onJoin` re-emite via o efeito de sala).
+    const room = roomRef.current;
+    if (room) session.broadcastRoom(room.players, room.settings);
+
+    return () => {
+      setDirectSignaling(null);
+      session.close();
+      hub.close();
+      netRef.current = loopback; // volta ao loopback: o app segue offline
+    };
+  }, [relayUrl, directMode, roomId, hostsThisRoom]);
 
   /* ------------------------------------------------- placares reais (F7-C)
    * Partida nova (seed muda) ou saída (seed some) zera o livro-caixa: reportes
@@ -270,11 +325,12 @@ export function GameProvider({ children }) {
     debugAvailable: import.meta.env.DEV,
     bus: busRef.current,
     net: netRef.current,
+    directSignaling, // manivela do handshake P2P (null fora do modo direto)
     mergeEntries, // (round, entries) → entries com placares reais fundidos (F7-C)
     scoreLedger: ledgerRef.current, // livro-caixa dos reportes (debug/painel)
     dispatch,
     ...actions,
-  }), [state, actions, mergeEntries]);
+  }), [state, actions, mergeEntries, directSignaling]);
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }

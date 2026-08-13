@@ -122,6 +122,13 @@
   color: var(--bone-100);
 }
 
+/* Link de diagnóstico (só em dev): menor e mais apagado que a entrada real. */
+.home__p2p--dev {
+  margin-top: 0;
+  font-size: var(--fs-xs);
+  opacity: 0.6;
+}
+
 /* ------------------------------------------------------ entrada por código */
 
 .home__join {

@@ -31,8 +31,9 @@ import { ROLES } from './protocol.js';
 
 const GUEST_ID_KEY = 'chaos.guest.v1';
 
-/** Id estável POR APARELHO: a mesma cadeira ao recarregar/reconectar. */
-function deviceGuestId() {
+/** Id estável POR APARELHO: a mesma cadeira ao recarregar/reconectar.
+ *  Exportado porque o convidado DIRETO (useDirectGuest) usa a mesma cadeira. */
+export function deviceGuestId() {
   try {
     const saved = localStorage.getItem(GUEST_ID_KEY);
     if (saved) return saved;

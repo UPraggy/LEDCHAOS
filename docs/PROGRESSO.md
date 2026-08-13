@@ -388,6 +388,49 @@ Arquivos: `components/Button/{index.jsx,Button.css}`,
      documentado (`bots.js` L10-12: "trocar isto é substituir a chamada, não
      reescrever o microjogo").
 
+## Pronto (fase F7-B-direto · cano P2P zero-servidor por 2 QR)
+
+Pedido do Rafael, literal: *"quero um modo de conexão… compartilhando IP via
+qrcode"*, *"deixe sem cloudflare relay"*, *"deixei 0 servidor"*, *"Até 8 (sala
+cheia)"*, *"não quero precisar usar o Render, quero algo sem precisar de site
+externo nenhum"*. Entregue: um **segundo transporte real**, irmão do relay, que
+não usa **servidor nenhum** — nem relay, nem rendezvous. Liga o `createP2PHub`
+(WebRTC DataChannel, #19) no **fluxo de jogo de verdade**, não numa prova solta.
+
+- **#57 · Flag `direct` na sala.** `CreateRoom` ganhou CONEXÃO = **CELULARES**, que
+  grava `settings.direct = true`. Sem o flag (e sem `VITE_RELAY_URL`), o app roda
+  idêntico à Fase 1.
+- **#58 · Widgets de handshake compartilhados** (`net/qr/handshake.jsx`): `QrImage`,
+  `CopyHashRow`, `ImportPanel` (câmera + colar + anexar imagem) — usados pelos dois
+  lados do aperto de mão, migrados da P2PLab.
+- **#59 · Efeito P2P no host** (`GameProvider.jsx`): quando `directMode &&
+  !relayUrl && hostsThisRoom`, abre `createP2PHub()` como HOST com o **mesmo**
+  `netSession` do relay (handlers `onJoin/onLeave/onGuestScore`) e expõe
+  `hub.signaling` ao Lobby via `directSignaling`. Teardown restaura o loopback.
+- **#60 · Painel de convite no Lobby** (`DirectInvite`): **GERAR CONVITE** →
+  `signaling.createInvite()` mostra o QR da offer; **COLE A RESPOSTA** →
+  `signaling.acceptAnswer(peerId, resposta)` conecta. Um convidado por vez, até a
+  sala encher (esconde o gerador no `full`).
+- **#61 · Convidado direto** (`Home` → **entrar por QR — modo direto** → `/direct`):
+  `screens/DirectGuest/` + `net/useDirectGuest.js`. Lê o convite
+  (`signaling.acceptInvite` → answer), mostra o QR da resposta; ao abrir o canal dá
+  `hello()` **dentro do `onPeer('join')`** (no P2P o DataChannel só abre depois que
+  o host aceita — enviar antes cairia no vazio). A apresentação ao vivo é o **mesmo**
+  componente do relay: extraí o `LiveMirror` do `LiveGuest`, e o `LiveGuest` virou
+  um wrapper fino do relay. Retry limpo por contador `gen` (remonta hub a cada erro
+  de convite, contornando o slot preso do `acceptInvite`).
+
+**Verificação:** `npm run build` OK (261 módulos, sem erros — só o aviso de chunk
+>500kB pré-existente). `npm test` verde: **25/25** (p2p-contract) + **32/32**
+(scoremerge-contract). Igual ao `useGuestLink`, o convidado direto é **presença +
+espelho**, não roda o próprio slot ainda — isso é a F7-C (§9), pendente e honesta.
+
+**Limitação honesta (documentada em `05-FASE2-MULTIPLAYER.md` §10):** o
+`createP2PHub` usa **só STUN do Google, sem TURN** (TURN é servidor → fora por
+projeto). Mesma Wi-Fi conecta; **4G ↔ Wi-Fi com CGNAT duro pode não fechar** — não
+é bug, é a física do NAT sem TURN. Nesse caso, o caminho é a mesma rede ou o relay
+(F7-B). **Prova real = 2 celulares**, roteiro passo a passo no §10.
+
 ## Próximos passos
 
 1. **#21 · Deploy no GitHub Pages (DOMÍNIO PRÓPRIO na raiz, modelo *branch*)** —

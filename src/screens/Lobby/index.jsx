@@ -6,6 +6,7 @@ import IconButton from '../../components/IconButton';
 import PlayerCard from '../../components/PlayerCard';
 import QRCode from '../../components/QRCode';
 import SegmentedControl from '../../components/SegmentedControl';
+import { QrImage, CopyHashRow, ImportPanel } from '../../net/qr/handshake.jsx';
 import { useGame } from '../../state/GameProvider.jsx';
 import { normalizeRoomCode } from '../../room/roomCode.js';
 import { roomUrl, prettyRoomUrl, copyText, shareRoom, canShare } from '../../room/roomLink.js';
@@ -40,6 +41,7 @@ export default function Lobby() {
     setDifficulty,
     leaveRoom,
     startMatch,
+    directSignaling,
   } = useGame();
 
   const [toast, setToast] = useState(null);
@@ -104,19 +106,23 @@ export default function Lobby() {
         <span aria-hidden="true" />
       </div>
 
-      <div className="lobby__invite">
-        <QRCode value={url} size={168} caption={prettyRoomUrl(room.id)} />
-        <div className="lobby__inviteActions">
-          <Button variant="cyan" size="sm" icon="🔗" onClick={handleCopy}>
-            COPIAR LINK
-          </Button>
-          {canShare() ? (
-            <Button variant="danger" size="sm" icon="📤" onClick={handleShare}>
-              COMPARTILHAR
+      {room.settings.direct ? (
+        <DirectInvite signaling={directSignaling} full={full} onFlash={flash} />
+      ) : (
+        <div className="lobby__invite">
+          <QRCode value={url} size={168} caption={prettyRoomUrl(room.id)} />
+          <div className="lobby__inviteActions">
+            <Button variant="cyan" size="sm" icon="🔗" onClick={handleCopy}>
+              COPIAR LINK
             </Button>
-          ) : null}
+            {canShare() ? (
+              <Button variant="danger" size="sm" icon="📤" onClick={handleShare}>
+                COMPARTILHAR
+              </Button>
+            ) : null}
+          </div>
         </div>
-      </div>
+      )}
 
       <section className="lobby__section">
         <div className="lobby__sectionHead">
@@ -186,5 +192,110 @@ export default function Lobby() {
         </p>
       ) : null}
     </Screen>
+  );
+}
+
+/**
+ * DirectInvite — o centro de convite do MODO DIRETO (WebRTC P2P, zero-servidor).
+ *
+ * Sem servidor de rendezvous, não existe link mágico que case os dois lados: o
+ * host abre UMA conexão por convidado e a troca de offer/answer viaja FORA de
+ * banda. Aqui isso vira um aperto de mão de dois QRs, um convidado por vez:
+ *
+ *   1. GERAR CONVITE → mostra o QR/hash da OFFER (o convidado lê no /direto)
+ *   2. o convidado devolve a RESPOSTA (QR/hash) → o host cola aqui → conecta
+ *
+ * Ao conectar, o canal abre, o convidado dá HELLO e ele aparece na lista de
+ * jogadores acima (tomando a vaga de um bot). O painel volta ao início, pronto
+ * para o próximo — até a sala encher. A `signaling` vem do createP2PHub via
+ * GameProvider; `full` esconde o gerador quando não há mais vaga.
+ */
+function DirectInvite({ signaling, full, onFlash }) {
+  const [invite, setInvite] = useState(null); // { peerId, text } | null
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState('');
+
+  async function generate() {
+    playSound('tap');
+    setErr('');
+    setBusy(true);
+    try {
+      const { peerId, invite: text } = await signaling.createInvite();
+      setInvite({ peerId, text });
+    } catch {
+      setErr('Não deu pra gerar o convite. Tente de novo.');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function accept(answerText) {
+    if (!invite) return;
+    setErr('');
+    try {
+      await signaling.acceptAnswer(invite.peerId, answerText);
+      onFlash('CONVIDADO CHEGANDO…');
+      setInvite(null); // volta ao início, pronto pro próximo convidado
+    } catch {
+      setErr('Resposta inválida — confira o QR/hash do convidado.');
+    }
+  }
+
+  return (
+    <div className="lobby__direct">
+      <p className="lobby__directHead u-label">CONEXÃO DIRETA · SEM SERVIDOR</p>
+
+      {full ? (
+        <p className="lobby__directFull">Sala cheia 🎉 — todo mundo conectado. Bora começar!</p>
+      ) : !signaling ? (
+        <p className="lobby__directHint">preparando o canal direto…</p>
+      ) : !invite ? (
+        <>
+          <p className="lobby__directHint">
+            Cada amigo entra por um <b>QR</b>, direto no seu aparelho — sem site, sem servidor.
+            Gere um convite por vez.
+          </p>
+          <Button variant="cyan" size="lg" icon="📡" disabled={busy} onClick={generate}>
+            {busy ? 'GERANDO…' : 'GERAR CONVITE'}
+          </Button>
+        </>
+      ) : (
+        <>
+          <p className="lobby__directStep u-label">1 · MOSTRE ESTE QR AO CONVIDADO</p>
+          <QrImage text={invite.text} />
+          <CopyHashRow text={invite.text} />
+          <p className="lobby__directHint">
+            No celular dele, na tela inicial, ele toca <b>entrar por QR — modo direto</b> e lê este
+            QR (ou cola o hash).
+          </p>
+
+          <hr className="lobby__directSep" />
+
+          <p className="lobby__directStep u-label">2 · COLE A RESPOSTA DELE</p>
+          <ImportPanel
+            cta="CONECTAR"
+            placeholder="cole aqui o hash de resposta do convidado…"
+            scanHint="Aponte para o QR de resposta"
+            onSubmit={accept}
+          />
+          <button
+            type="button"
+            className="lobby__directCancel"
+            onClick={() => {
+              setInvite(null);
+              setErr('');
+            }}
+          >
+            cancelar convite
+          </button>
+        </>
+      )}
+
+      {err ? (
+        <p className="lobby__directErr" role="alert">
+          {err}
+        </p>
+      ) : null}
+    </div>
   );
 }

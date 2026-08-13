@@ -1,27 +1,39 @@
 # 05 — FASE 2: MULTIPLAYER REAL
 
-> **Estado, 2026-08-11 — o cano de verdade está no ar.**
+> **Estado, 2026-08-13 — dois canos de verdade no ar: relay e P2P direto zero-servidor.**
 >
 > | Etapa | Status |
 > |---|---|
 > | **F7-A — protocolo + transporte + loopback** (`src/net/`) | ✅ **no código**, ver §8 |
 > | **F7-B — transporte real (relay WebSocket) + presença + companion** | ✅ **no código**, ver §9 |
+> | **F7-B-direto — transporte P2P zero-servidor (WebRTC, handshake de 2 QR)** | ✅ **no código**, ver §10 |
 > | **F7-C — cada celular joga o próprio slot (merge de scores no host)** | ⛔ **pendente** — o único marco que falta, ver §9 |
 >
-> A F7-B trocou a rota "sinalização + WebRTC" (§3) por um **relay WebSocket burro** — mais simples,
-> chega ao mesmo lugar para um jogo de sala e é exatamente a opção "recomendada" da tabela do §3,
-> só que roteando mensagens de jogo em vez de SDP/ICE. Continua **cumprida à risca** a regra que
-> importa: o relay **não guarda estado de jogo** e **não pontua** (§7). Tudo é **opt-in** por
-> `VITE_RELAY_URL` — sem a env, o CHAOS roda idêntico à Fase 1 (host + bots, um aparelho só).
+> Há **dois transportes reais**, os dois cumprindo o mesmo contrato do §8 (`connect/send/onMessage/
+> onPeer/…`), então telas e os 12 microjogos são cegos a qual cano está ligado:
 >
-> O que a F7-B entrega de real: transporte WebSocket, relay LAN, **presença** (o convidado entra no
-> lugar de um bot; se cair, a cadeira volta a ser bot) e **companion ao vivo** (`/live/:code` espelha
-> a partida no celular do convidado). O que **ainda não** é real: o convidado controlar o próprio
-> slot DENTRO do microjogo — os 12 microjogos são single-device e o host simula os outros slots. Esse
-> é o marco F7-C, honestamente separado em §9 (não dá para testar sem 2 aparelhos).
+> - **F7-B, relay WebSocket** (§9) — trocou a rota "sinalização + WebRTC" (§3) por um **relay burro**.
+>   **Opt-in** por `VITE_RELAY_URL`; precisa de um servidor `ws`/`wss` no ar.
+> - **F7-B-direto, WebRTC P2P** (§10) — **zero servidor**, nem relay. O host abre uma conexão por
+>   convidado e a troca de offer/answer sai **fora de banda** por um **aperto de mão de 2 QR**
+>   (convite → resposta), um convidado por vez, até 8 (topologia estrela). **Opt-in** pelo flag
+>   `settings.direct` da sala (CRIAR SALA ▸ CONEXÃO = CELULARES). Limitação honesta: só **STUN**
+>   do Google, **sem TURN** (TURN precisaria de servidor) — pares em NAT simétrico / CGNAT 4G duro
+>   podem não fechar o canal. Ver §10.
 >
-> Se você é a IA/pessoa que vai implementar a F7-C: leia `01-ARQUITETURA.md` §1 e §2, depois §8 e
-> §9 deste arquivo, e só então §2–§4.
+> Em ambos, a regra que importa continua **cumprida à risca**: o cano **não guarda estado de jogo**
+> e **não pontua** (§7). Sem `VITE_RELAY_URL` e sem o flag direto, o CHAOS roda idêntico à Fase 1
+> (host + bots, um aparelho só).
+>
+> O que os dois canos entregam de real: transporte, **presença** (o convidado entra no lugar de um
+> bot; se cair, a cadeira volta a ser bot) e **espelho ao vivo** (o celular do convidado espelha a
+> partida — `/live/:code` no relay, `/direct` no P2P). O que **ainda não** é real em nenhum dos dois:
+> o convidado controlar o próprio slot DENTRO do microjogo — os 12 microjogos são single-device e o
+> host simula os outros slots. Esse é o marco F7-C, honestamente separado em §9 (não dá para testar
+> sem 2 aparelhos).
+>
+> Se você é a IA/pessoa que vai implementar a F7-C: leia `01-ARQUITETURA.md` §1 e §2, depois §8, §9
+> e §10 deste arquivo, e só então §2–§4.
 
 ---
 
@@ -268,3 +280,94 @@ lugares só**, não nos microjogos:
 
 Não dá para testar sem 2 aparelhos de verdade, por isso está documentado como marco separado — não
 foi fingido em lugar nenhum do código.
+
+---
+
+## 10) F7-B-direto — o cano P2P, zero-servidor (`src/net/p2pTransport.js` + `screens/DirectGuest/` + `screens/Lobby/`)
+
+A F7-B-direto é o **mesmo contrato** da F7-A/F7-B ligado a um transporte que **não usa servidor
+nenhum** — nem relay, nem rendezvous. É a resposta ao pedido "quero conexão por QR compartilhando
+o IP, sem servidor externo nenhum". Tudo é **opt-in** pelo flag `settings.direct` da sala: sem ele,
+o CHAOS roda idêntico à Fase 1.
+
+### O que muda em relação ao relay (e o que NÃO muda)
+
+O que **não muda**: o host continua host-autoritário, o convidado entra no lugar de um bot
+(`roomManager.joinGuest`), o espelho ao vivo é o **mesmo componente** de apresentação
+(`LiveMirror`, extraído do `LiveGuest`), e os 12 microjogos seguem cegos ao cano.
+
+O que **muda**: sem um servidor no meio, **não existe link mágico** que case os dois lados. A troca
+de SDP/ICE (offer/answer) tem que viajar **fora de banda**. No CHAOS isso vira um **aperto de mão de
+dois QR**, um convidado por vez:
+
+```text
+  HOST (Lobby, CONEXÃO = CELULARES)                 CONVIDADO (/direct)
+  ┌───────────────────────────────┐                ┌───────────────────────────────┐
+  │ 1. GERAR CONVITE               │  QR do convite │ 1. LÊ o convite (câmera/colar) │
+  │    signaling.createInvite()    │ ─────────────► │    signaling.acceptInvite(txt) │
+  │    → abre slot g1/g2/… (offer) │                │    → gera a RESPOSTA (answer)  │
+  │                                │  QR da resposta │                               │
+  │ 2. COLA a resposta             │ ◄───────────── │ 2. MOSTRA o QR da resposta     │
+  │    signaling.acceptAnswer(id)  │                │                               │
+  │    → DataChannel abre → HELLO  │                │    onPeer('join') → hello()   │
+  └───────────────────────────────┘                └───────────────────────────────┘
+        repete por convidado, até 8 (topologia estrela: 1 conexão por convidado no host)
+```
+
+### O caminho completo, ponta a ponta
+
+| Etapa | Arquivo | Papel |
+|---|---|---|
+| Escolher o modo | `screens/CreateRoom/index.jsx` | CONEXÃO = **CELULARES** grava `settings.direct = true` na sala |
+| Ligar o cano no host | `state/GameProvider.jsx` (efeito P2P) | quando `directMode && !relayUrl && hostsThisRoom`, abre `createP2PHub()` como HOST e expõe `hub.signaling` ao Lobby via `directSignaling` |
+| Manivela do convite | `screens/Lobby/index.jsx` (`DirectInvite`) | `createInvite()` → QR da offer; `acceptAnswer(peerId, resposta)` → conecta. Um convite por vez; esconde o gerador quando a sala enche |
+| Entrada do convidado | `screens/Home/index.jsx` | botão **"entrar por QR — modo direto, sem servidor"** → `/direct` |
+| Handshake do convidado | `screens/DirectGuest/index.jsx` + `net/useDirectGuest.js` | lê o convite (`acceptInvite` → answer), mostra o QR da resposta; ao abrir o canal, dá `hello()` e vira espelho ao vivo |
+| Apresentação ao vivo | `screens/LiveGuest/LiveMirror.jsx` | **mesmo** componente do relay: sala, rodada, fase, resultado, placar. `code="DIRETO"` no header (o convidado direto nunca aprende o código da sala) |
+| O cano | `net/p2pTransport.js` (`createP2PHub`) | WebRTC `RTCPeerConnection` + `DataChannel` por par; `signaling.createInvite/acceptAnswer` (host) e `signaling.acceptInvite` (guest); emite `join`/`leave` no abrir/cair do canal |
+
+### Detalhes que não são óbvios (e por que são assim)
+
+- **HELLO tardio.** No relay, `session.hello()` dispara na conexão. No P2P o `DataChannel` só abre
+  **depois** que o host aceita a resposta — então o convidado manda `hello()` **dentro** do
+  `onPeer('join')` (antes disso, `transport.send` devolve `false`, a mensagem cairia no vazio).
+- **Retry limpo.** `acceptInvite` registra o par sob o id do host **antes** de validar a offer; um
+  convite ruim deixaria o slot preso ("já há um convite em andamento"). Por isso o `useDirectGuest`
+  tem um contador `gen` que **remonta um hub limpo** a cada erro de `submitInvite` e no `reset()`.
+- **Identidade antes do canal.** O `DirectGuest` mostra o `IdentityForm` durante o handshake, então
+  nome/avatar já estão setados quando o `hello()` sai; trocar a identidade depois re-emite o hello.
+- **Sem sendScore (paridade F7-C).** Igual ao `useGuestLink`, o `useDirectGuest` é **presença +
+  espelho**, não controle de jogo — o slot do convidado ainda é simulado no host (§9, F7-C).
+
+### A limitação honesta: STUN só, sem TURN
+
+O `createP2PHub` usa **apenas STUN do Google** (lista de TURN vazia). STUN resolve a maioria dos
+NATs domésticos (o par descobre o próprio IP público e fura o NAT). Mas **NAT simétrico** e **CGNAT
+de 4G duro** podem exigir um **relay TURN** para fechar o canal — e TURN **é um servidor**, então
+está **fora** por decisão de projeto ("zero servidor"). Consequência prática, sem rodeio:
+
+- **Mesma Wi-Fi / redes domésticas comuns:** conecta.
+- **4G ↔ Wi-Fi, operadora com CGNAT agressivo:** **pode não conectar** — não há como contornar sem
+  TURN. Nesse caso, o caminho é o relay (F7-B, `VITE_RELAY_URL`) ou a mesma rede.
+
+Isso **não é bug**: é o preço de não ter servidor. Está documentado aqui para ninguém "consertar"
+uma falha de conexão que é, na verdade, a física do NAT sem TURN.
+
+### Como testar (2 aparelhos de verdade)
+
+Não dá para provar isto com 2 abas no mesmo PC de forma significativa (o handshake é real, mas o
+interesse é justamente atravessar aparelhos). O teste de verdade, com celular:
+
+1. **Host** (PC/tela grande ou celular): **CRIAR SALA** ▸ CONEXÃO = **CELULARES** ▸ entra no Lobby.
+   O painel **CONEXÃO DIRETA · SEM SERVIDOR** aparece.
+2. Host toca **GERAR CONVITE** → surge o **QR do convite** (passo 1).
+3. **Convidado** (celular): na Home, toca **entrar por QR — modo direto, sem servidor** → cai em
+   `/direct`. Preenche nome/avatar, **lê o QR do convite** (câmera) ou **cola o hash**.
+4. Convidado gera a **resposta** → mostra o **QR da resposta** (passo 2).
+5. Host toca **2 · COLE A RESPOSTA DELE**, **lê o QR da resposta** (ou cola o hash) → **CONECTAR**.
+6. O canal abre: o convidado **aparece no Lobby do host** como jogador real ("AO VIVO", no lugar de
+   um bot) e a tela dele vira o **espelho ao vivo** (`LiveMirror`, header "SALA DIRETO").
+7. Repetir 2–6 para cada convidado, até 8. Cada um é uma conexão independente no host (estrela).
+
+Se o passo 6 nunca completa num par **4G ↔ Wi-Fi**, é a limitação STUN-sem-TURN acima — testar os
+dois na **mesma Wi-Fi** confirma que o handshake e o cano estão certos.

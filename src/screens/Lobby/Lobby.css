@@ -75,6 +75,73 @@
   min-width: 13rem;
 }
 
+/* ---------------------------------------------------- convite DIRETO (P2P) */
+
+/* Mesmo adesivo creme do convite por link, mas por dentro mora o aperto de mão
+   de QR (offer/answer). Os widgets .qr/.hash/.import vêm do handshake.css. */
+.lobby__direct {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-4);
+  margin-bottom: var(--space-6);
+  border: 5px solid var(--color-ink);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  box-shadow: 0 7px 0 var(--color-ink);
+}
+
+.lobby__directHead {
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.lobby__directStep {
+  color: var(--peri-600);
+  text-align: center;
+}
+
+.lobby__directHint {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: var(--lh-body);
+}
+
+.lobby__directFull {
+  text-align: center;
+  font-weight: var(--fw-semibold);
+  color: var(--color-text);
+  line-height: var(--lh-body);
+}
+
+.lobby__directSep {
+  border: none;
+  border-top: 2px dashed var(--violet-100);
+  margin: var(--space-1) 0;
+  width: 100%;
+}
+
+/* "cancelar convite" = escape discreto, sem competir com o CTA de conectar. */
+.lobby__directCancel {
+  align-self: center;
+  min-height: var(--tap-min);
+  padding: 0 var(--space-4);
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.lobby__directErr {
+  text-align: center;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--rose-500);
+}
+
 /* ------------------------------------------------------------------- seções */
 
 .lobby__section {

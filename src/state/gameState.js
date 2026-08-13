@@ -84,6 +84,7 @@ export function reducer(state, action) {
         mode: action.mode,
         picked: action.picked,
         soloGame: action.soloGame,
+        direct: action.direct,
       });
       return { ...state, room, match: null };
     }

@@ -6,6 +6,7 @@ import Home from './screens/Home';
 import CreateRoom from './screens/CreateRoom';
 import JoinRoom from './screens/JoinRoom';
 import LiveGuest from './screens/LiveGuest';
+import DirectGuest from './screens/DirectGuest';
 import Lobby from './screens/Lobby';
 import Game from './screens/Game';
 import FinalScore from './screens/FinalScore';
@@ -22,6 +23,7 @@ const DevGame = import.meta.env.DEV ? lazy(() => import('./screens/DevGame')) : 
  *   /create            criar sala (nome, avatar, rodadas, dificuldade)
  *   /join/:roomId      destino do QR Code / link compartilhado
  *   /live/:roomId      companion do convidado ao vivo (só com VITE_RELAY_URL)
+ *   /direct            convidado do MODO DIRETO (WebRTC P2P, zero-servidor, QR)
  *   /room/:roomId      lobby (QR, jogadores, configurações, START)
  *   /game/:roomId      partida (máquina de estados das rodadas)
  *   /results/:roomId   placar final + conquistas
@@ -54,6 +56,7 @@ export default function App() {
         <Route path="/create" element={<CreateRoom />} />
         <Route path="/join/:roomId" element={<JoinRoom />} />
         <Route path="/live/:roomId" element={<LiveGuest />} />
+        <Route path="/direct" element={<DirectGuest />} />
         <Route path="/room/:roomId" element={<Lobby />} />
         <Route path="/game/:roomId" element={<Game />} />
         <Route path="/results/:roomId" element={<FinalScore />} />

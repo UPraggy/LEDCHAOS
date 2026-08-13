@@ -1,0 +1,109 @@
+/* ============================================================
+   DIRECTGUEST — convidado entrando por modo direto (P2P, sem servidor).
+   Aperto de mão de dois QRs sobre o palco roxo: cartão creme com
+   contorno de tinta e sombra pop (mesma identidade adesivo do P2PLab).
+   Os widgets QR/hash/importar vêm do handshake.css (compartilhados).
+   Safe-area já vem do <Screen>.
+   ============================================================ */
+
+.dg {
+  gap: var(--space-4);
+}
+
+.dg__top {
+  display: grid;
+  grid-template-columns: var(--tap-min) 1fr var(--tap-min);
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.dg__title {
+  text-align: center;
+  font-size: var(--fs-lg);
+  color: var(--color-text-on-stage);
+  text-shadow: var(--shadow-pop-sm);
+}
+
+/* Texto sobre o palco roxo: cor clara de palco, nunca tinta. */
+.dg__lead {
+  color: var(--color-text-on-stage);
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
+  text-align: center;
+}
+.dg__lead b {
+  color: var(--amber-300);
+}
+
+/* Cartão creme = o palco do aperto de mão. Adesivo: contorno de tinta + sombra
+   pop sólida (sem blur, sem gradiente na face). Espelha .lab__stage. */
+.dg__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-4);
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding: var(--space-5);
+}
+
+.dg__step {
+  color: var(--peri-600);
+  text-align: center;
+}
+
+.dg__hint {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: var(--lh-body);
+}
+
+/* "recomeçar" = escape discreto, sem competir com o CTA do aperto de mão. */
+.dg__restart {
+  align-self: center;
+  min-height: var(--tap-min);
+  padding: 0 var(--space-4);
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.dg__err {
+  text-align: center;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--rose-500);
+}
+
+/* gerando a resposta: espera curta com giro (mesmo spinner do P2PLab). */
+.dg__wait {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-4);
+}
+.dg__spinner {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 5px solid var(--void-300);
+  border-top-color: var(--amber-400);
+  animation: dgSpin 0.8s linear infinite;
+}
+@keyframes dgSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dg__spinner {
+    animation: none;
+  }
+}

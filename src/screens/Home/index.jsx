@@ -93,9 +93,15 @@ export default function Home() {
           </Button>
         </form>
 
-        <button className="home__p2p" type="button" onClick={() => navigate('/p2p')}>
-          🔌 modo direto — 2 celulares na mesma rede, sem servidor →
+        <button className="home__p2p" type="button" onClick={() => navigate('/direct')}>
+          📲 entrar por QR — modo direto, sem servidor →
         </button>
+
+        {import.meta.env.DEV ? (
+          <button className="home__p2p home__p2p--dev" type="button" onClick={() => navigate('/p2p')}>
+            🔧 prova de conexão P2P (dev) →
+          </button>
+        ) : null}
       </div>
 
       {help ? <HowToPlay onClose={() => setHelp(false)} /> : null}

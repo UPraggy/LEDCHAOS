@@ -77,7 +77,7 @@ export function makeHostPlayer({ name, avatar }) {
 /* -------------------------------------------------------------------- sala */
 
 /**
- * @param {object} opts {id, name, avatar, rounds, difficulty, bots, mode, picked, soloGame}
+ * @param {object} opts {id, name, avatar, rounds, difficulty, bots, mode, picked, soloGame, direct}
  */
 export function createRoom(opts = {}) {
   const {
@@ -90,6 +90,7 @@ export function createRoom(opts = {}) {
     mode = DEFAULT_MODE,
     picked,
     soloGame,
+    direct = false,
   } = opts;
 
   const room = {
@@ -104,6 +105,9 @@ export function createRoom(opts = {}) {
       mode: MODES.includes(mode) ? mode : DEFAULT_MODE,
       picked: sanitizePicked(picked),
       soloGame: sanitizeSoloGame(soloGame),
+      // Modo direto (WebRTC P2P, zero-servidor): o host abre um cano por
+      // convidado via handshake de QR. Sem isto, a sala usa loopback/relay.
+      direct: direct === true,
     },
   };
 
@@ -276,6 +280,8 @@ export function loadRoom() {
     if (!MODES.includes(room.settings.mode)) room.settings.mode = DEFAULT_MODE;
     room.settings.picked = sanitizePicked(room.settings.picked);
     room.settings.soloGame = sanitizeSoloGame(room.settings.soloGame);
+    // Salas antigas não tinham modo direto: padrão desligado.
+    room.settings.direct = room.settings.direct === true;
     return room;
   } catch {
     return null;

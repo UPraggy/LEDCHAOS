@@ -16,7 +16,7 @@
 | F5 | Microjogos 7–12: aim, tictactoe, mash, race, grow, dodge | ✅ feito |
 | F6 | Verificação (`npm install`, build, navegador) + docs finais + README | ✅ feito |
 | — | **MVP FECHADO** | ✅ |
-| F7 | *(futuro)* Transporte WebRTC real — ver `05-FASE2-MULTIPLAYER.md` | ⛔ não iniciado |
+| F7 | *(futuro)* Transporte WebRTC real — ver `05-FASE2-MULTIPLAYER.md` | 🟡 relay + P2P direto no código · F7-C pendente |
 
 > ~~⚠️ **O projeto não builda antes de F5.**~~ *(resolvido em F5)* `engine/gameRegistry.js` importa
 > estaticamente os 12 microjogos, então até a última pasta existir o `npm run build` falhava na
@@ -307,3 +307,35 @@ F8, e o índice do §6 ganhou a linha do `08-`.
 **Segue pendente:** os assets de `04-PROMPT-DESIGN-CHAOS.md` (P1–P5) ainda são prompt, não
 arquivo — é exatamente o que abre agora; o `apple-touch-icon` PNG; e a F7-B, bloqueada por
 escopo.
+
+### 2026-08-13 · F7-B-direto — cano P2P zero-servidor por handshake de 2 QR
+
+Segundo transporte real, irmão do relay, **sem servidor nenhum** (nem relay, nem rendezvous) —
+resposta literal ao pedido do Rafael: *"conexão compartilhando IP via qrcode… deixei 0 servidor…
+sem precisar de site externo nenhum… até 8 (sala cheia)"*. Liga o `createP2PHub` (WebRTC
+DataChannel, já provado na F7 anterior) no **fluxo de jogo de verdade**, não numa prova solta. Tudo
+**opt-in** pelo flag `settings.direct`: sem ele (e sem `VITE_RELAY_URL`), o app roda idêntico à F1.
+
+- **`CreateRoom`** — CONEXÃO = CELULARES grava `settings.direct = true` (#57).
+- **`net/qr/handshake.jsx`** — widgets `QrImage`/`CopyHashRow`/`ImportPanel` compartilhados pelos
+  dois lados do aperto de mão, migrados da P2PLab (#58).
+- **`state/GameProvider.jsx`** — efeito P2P do host: `directMode && !relayUrl && hostsThisRoom` abre
+  `createP2PHub()` como HOST com o **mesmo** `netSession`/handlers do relay e expõe `hub.signaling`
+  ao Lobby via `directSignaling`; teardown restaura o loopback (#59).
+- **`screens/Lobby/` (`DirectInvite`)** — GERAR CONVITE (`createInvite` → QR da offer) → COLE A
+  RESPOSTA (`acceptAnswer` → conecta). Um convidado por vez, até encher (#60).
+- **`screens/Home` → `/direct`** — `screens/DirectGuest/` + `net/useDirectGuest.js`: lê o convite
+  (`acceptInvite` → answer), mostra o QR da resposta, dá `hello()` **dentro do `onPeer('join')`**
+  (o DataChannel P2P só abre depois do host aceitar). Extraí o `LiveMirror` do `LiveGuest` para os
+  dois canos usarem a **mesma** apresentação ao vivo; o `LiveGuest` virou wrapper fino do relay.
+  Retry limpo por contador `gen` (remonta hub a cada convite inválido) (#61).
+
+**Verificação:** `npm run build` OK (261 módulos); `npm test` verde (25/25 p2p-contract + 32/32
+scoremerge-contract). Igual ao `useGuestLink`, o convidado direto é **presença + espelho**, não roda
+o próprio slot — isso continua sendo a **F7-C** (pendente, honesta).
+
+**Limitação honesta (§10 do `05-FASE2-MULTIPLAYER.md`):** `createP2PHub` usa **só STUN, sem TURN**
+(TURN é servidor → fora por projeto). Mesma Wi-Fi conecta; **4G ↔ Wi-Fi com CGNAT duro pode não
+fechar** — não é bug, é a física do NAT sem TURN; alternativa é a mesma rede ou o relay (F7-B).
+
+**Pendente:** prova de 2 celulares de verdade (roteiro no §10); e a F7-C (runner do lado convidado).

@@ -1,0 +1,132 @@
+/* ============================================================
+   handshake — widgets do aperto de mão P2P por QR/hash.
+   Compartilhado entre a PROVA (/p2p) e o fluxo real (Lobby host /
+   convidado direto). Sem servidor: o convite (offer) e a resposta
+   (answer) viajam FORA de banda, como QR ou hash colável.
+   Estas regras já eram do P2PLab; migraram pra cá quando os widgets
+   viraram reutilizáveis. Palco creme, contorno de tinta, mobile-first.
+   ============================================================ */
+
+/* ── QR ──────────────────────────────────────────────────── */
+
+.qr {
+  align-self: center;
+  width: min(72vw, 260px);
+  height: min(72vw, 260px);
+  object-fit: contain;
+  background: #fff;
+  border: var(--border-ink);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-pop-md);
+  image-rendering: pixelated; /* QR nítido, sem borrar ao escalar */
+}
+.qr--msg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  padding: var(--space-4);
+  image-rendering: auto;
+}
+
+/* ── copiar hash ─────────────────────────────────────────── */
+
+.hash {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap; /* com ENVIAR + COPIAR juntos, os botões descem em telas estreitas em vez de vazar */
+  gap: var(--space-3);
+  background: var(--bone-300);
+  border: var(--border-ink);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-3);
+}
+.hash__preview {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--fs-xs);
+  color: var(--ink-soft);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* ── importar (colar / escanear) ─────────────────────────── */
+
+.import {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.import__box {
+  width: 100%;
+  resize: vertical;
+  min-height: 84px;
+  font-size: var(--fs-sm);
+  color: var(--ink);
+  background: var(--color-field);
+  border: var(--border-ink);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  line-height: var(--lh-body);
+  word-break: break-all;
+}
+.import__box:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+.import__actions {
+  display: flex;
+  flex-direction: column; /* empilha: rótulo nunca corta ("GERAR RESPOSTA") e cabe o 3º botão */
+  gap: var(--space-3);
+}
+.import__actions .btn {
+  flex: 1;
+}
+
+/* ── câmera / scanner ────────────────────────────────────── */
+
+.scan {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: stretch;
+}
+.scan__frame {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  overflow: hidden;
+  background: var(--void-900);
+  border: var(--border-ink);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-pop-md);
+}
+.scan__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.scan__reticle {
+  position: absolute;
+  inset: 16%;
+  border: 3px solid var(--cyan-400);
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 0 100vmax rgba(11, 6, 40, 0.45);
+  pointer-events: none;
+}
+.scan__hint {
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+.scan__err {
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--rose-500);
+  font-weight: var(--fw-semibold);
+}

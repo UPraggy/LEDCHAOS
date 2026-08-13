@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { createScanner } from '../../net/qr/qrScan.js';
+import { createScanner } from './qrScan.js';
 import Button from '../../components/Button';
+import './handshake.css';
 
 /**
  * QrScanner — abre a câmera e devolve o texto do primeiro QR lido.
