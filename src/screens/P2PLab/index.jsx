@@ -7,6 +7,8 @@ import { useP2P, STEP } from '../../net/useP2P.js';
 import { runP2PSelfCheck } from '../../net/p2pSelfCheck.js';
 import { runScoreMergeSelfCheck } from '../../net/scoreMergeSelfCheck.js';
 import { toDataUrl } from '../../net/qr/qrGen.js';
+import { decodeImageFile } from '../../net/qr/qrScan.js';
+import { canShare, copyText } from '../../room/roomLink.js';
 import QrScanner from './QrScanner.jsx';
 import './P2PLab.css';
 
@@ -69,6 +71,7 @@ export default function P2PLab() {
 /* ── corpo por passo ─────────────────────────────────────────────────────── */
 
 function Body({ p2p }) {
+  const navigate = useNavigate();
   const { step, offerText, answerText, status, log, messages, error } = p2p;
 
   switch (step) {
@@ -141,8 +144,21 @@ function Body({ p2p }) {
             <span className="lab__okDot" aria-hidden="true" />
             CONECTADO
           </div>
+          <p className="lab__hint">
+            Conexão direta pronta ✅ — os aparelhos se falam sem servidor. Para uma{' '}
+            <b>partida completa com placar</b>, crie uma sala de verdade.
+          </p>
           <Chat messages={messages} onSend={p2p.sendMessage} />
           <StatesPanel status={status} log={log} />
+          <Button
+            variant="energy"
+            onClick={() => {
+              p2p.reset();
+              navigate('/create');
+            }}
+          >
+            CRIAR SALA COM PLACAR
+          </Button>
           <Button variant="ghost" onClick={p2p.reset}>
             ENCERRAR CONEXÃO
           </Button>
@@ -176,8 +192,8 @@ function Idle({ onHost, onGuest }) {
   return (
     <div className="lab__intro">
       <p className="lab__lead">
-        Conecte dois celulares <b>direto</b>, sem servidor. Um cria a sala, o outro entra pelo QR ou
-        pelo hash.
+        <b>Modo direto:</b> dois celulares na <b>mesma rede</b>, sem servidor — uma prova de conexão
+        (chat). Para uma <b>partida com placar</b>, use <b>CRIAR SALA</b> na tela inicial.
       </p>
 
       <div className="lab__cards">
@@ -185,15 +201,15 @@ function Idle({ onHost, onGuest }) {
           <span className="pick__emoji" aria-hidden="true">
             📡
           </span>
-          <span className="pick__t u-display">CRIAR SALA</span>
-          <span className="pick__d">vira host e gera o convite</span>
+          <span className="pick__t u-display">SOU O HOST</span>
+          <span className="pick__d">gera o convite direto</span>
         </button>
 
         <button className="pick pick--guest" type="button" onClick={onGuest}>
           <span className="pick__emoji" aria-hidden="true">
             📲
           </span>
-          <span className="pick__t u-display">ENTRAR EM SALA</span>
+          <span className="pick__t u-display">SOU CONVIDADO</span>
           <span className="pick__d">escaneia ou cola o convite</span>
         </button>
       </div>
@@ -364,7 +380,7 @@ function QrImage({ text }) {
   return <img className="qr" src={src} alt="QR Code de conexão" />;
 }
 
-/** O "copiar hash" — atalho para mandar no WhatsApp quem não está do lado. */
+/** Copiar/compartilhar o convite — manda o hash pra quem não está do seu lado. */
 function CopyHashRow({ text }) {
   const [done, setDone] = useState(false);
 
@@ -374,22 +390,59 @@ function CopyHashRow({ text }) {
     if (ok) setTimeout(() => setDone(false), 1600);
   }
 
+  // COMPARTILHAR: no celular abre o menu nativo (WhatsApp, etc.); sem Web Share,
+  // cai no copiar. Reusa o copyText de roomLink (mesmo padrão do lobby real).
+  async function share() {
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: 'CHAOS — convite de conexão', text });
+        return;
+      }
+    } catch (err) {
+      if (err && err.name === 'AbortError') return; // usuário fechou o menu: tudo certo
+    }
+    const ok = await copyText(text);
+    setDone(ok);
+    if (ok) setTimeout(() => setDone(false), 1600);
+  }
+
   const preview = text.length > 34 ? `${text.slice(0, 24)}…${text.slice(-6)}` : text;
 
   return (
     <div className="hash">
       <code className="hash__preview u-mono">{preview}</code>
+      {canShare() ? (
+        <Button variant="energy" block={false} icon="📤" onClick={share}>
+          ENVIAR
+        </Button>
+      ) : null}
       <Button variant="cyan" block={false} onClick={copy}>
-        {done ? '✓ COPIADO' : 'COPIAR HASH'}
+        {done ? '✓ COPIADO' : 'COPIAR'}
       </Button>
     </div>
   );
 }
 
-/** Colar hash OU escanear QR — o mesmo painel serve host e convidado. */
+/** Colar hash, escanear QR ao vivo OU anexar uma foto do QR — serve host e convidado. */
 function ImportPanel({ cta, placeholder, scanHint, onSubmit }) {
   const [text, setText] = useState('');
   const [scanning, setScanning] = useState(false);
+  const [imgErr, setImgErr] = useState('');
+  const fileRef = useRef(null);
+
+  // ANEXAR IMAGEM: lê o QR de um print/foto — rede de segurança para quando a
+  // câmera não abre (LAN http://, permissão negada, aparelho sem câmera).
+  async function pickImage(e) {
+    const file = e.target.files && e.target.files[0];
+    e.target.value = ''; // permite reescolher a mesma imagem depois
+    if (!file) return;
+    setImgErr('');
+    try {
+      onSubmit(await decodeImageFile(file));
+    } catch (err) {
+      setImgErr(err.friendly || 'Não foi possível ler o QR dessa imagem.');
+    }
+  }
 
   if (scanning) {
     return (
@@ -422,9 +475,18 @@ function ImportPanel({ cta, placeholder, scanHint, onSubmit }) {
           {cta}
         </Button>
         <Button variant="ghost" block={false} icon="📷" onClick={() => setScanning(true)}>
-          ESCANEAR
+          ESCANEAR QR
         </Button>
+        <Button variant="ghost" block={false} icon="🖼️" onClick={() => fileRef.current?.click()}>
+          ANEXAR IMAGEM
+        </Button>
+        <input ref={fileRef} type="file" accept="image/*" hidden onChange={pickImage} />
       </div>
+      {imgErr ? (
+        <p className="scan__err" role="alert">
+          {imgErr}
+        </p>
+      ) : null}
     </div>
   );
 }

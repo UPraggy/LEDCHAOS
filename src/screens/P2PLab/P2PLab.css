@@ -197,6 +197,7 @@
 .hash {
   display: flex;
   align-items: center;
+  flex-wrap: wrap; /* com ENVIAR + COPIAR juntos, os botões descem em telas estreitas em vez de vazar */
   gap: var(--space-3);
   background: var(--bone-300);
   border: var(--border-ink);
@@ -239,6 +240,7 @@
 }
 .import__actions {
   display: flex;
+  flex-direction: column; /* empilha: rótulo nunca corta ("GERAR RESPOSTA") e cabe o 3º botão */
   gap: var(--space-3);
 }
 .import__actions .btn {

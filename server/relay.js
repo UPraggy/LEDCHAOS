@@ -28,6 +28,7 @@
  * Ver `docs/05-FASE2-MULTIPLAYER.md` §7.
  */
 
+import { createServer } from 'http';
 import { WebSocketServer } from 'ws';
 
 const PORT = Number(process.env.PORT) || 8787;
@@ -149,7 +150,15 @@ function handleLeave(ws) {
 
 /* -------------------------------------------------------------------- servidor */
 
-const wss = new WebSocketServer({ port: PORT, host: '0.0.0.0' });
+// HTTP mínimo só para o health check da hospedagem: o Render (e afins) faz um
+// GET / e espera uma resposta viva — WebSocket puro não responderia e o serviço
+// seria marcado "unhealthy". O upgrade para WS acontece no MESMO servidor/porta.
+const server = createServer((req, res) => {
+  res.writeHead(200, { 'content-type': 'text/plain; charset=utf-8' });
+  res.end('CHAOS relay ok');
+});
+
+const wss = new WebSocketServer({ server });
 
 wss.on('connection', (ws) => {
   ws.isAlive = true;
@@ -207,16 +216,18 @@ const heartbeat = setInterval(() => {
 
 wss.on('close', () => clearInterval(heartbeat));
 
-wss.on('listening', () => {
-  log(`CHAOS relay ouvindo em ws://0.0.0.0:${PORT}`);
-  log('Aponte o app com VITE_RELAY_URL=ws://IP-DA-SUA-LAN:' + PORT);
+server.listen(PORT, '0.0.0.0', () => {
+  log(`CHAOS relay ouvindo na porta ${PORT} (WebSocket + health HTTP em /)`);
+  log('Local: aponte o app com VITE_RELAY_URL=ws://IP-DA-SUA-LAN:' + PORT);
+  log('Produção: VITE_RELAY_URL=wss://SEU-SERVICO.onrender.com');
 });
 
 // Encerra limpo no Ctrl+C — sem deixar a porta presa.
 function shutdown() {
   log('encerrando relay…');
   clearInterval(heartbeat);
-  wss.close(() => process.exit(0));
+  wss.close();
+  server.close(() => process.exit(0));
   // se algum socket travar o close, força a saída
   setTimeout(() => process.exit(0), 1500).unref();
 }

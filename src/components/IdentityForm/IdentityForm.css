@@ -86,6 +86,7 @@
   border-color: var(--color-border-soft);
   border-radius: var(--radius-md);
   background: var(--color-field);
+  overflow: hidden; /* trava o sticker DENTRO da célula — igual ao preview grande; sem isso o personagem "vaza" pra fora */
   cursor: pointer;
   transition: transform var(--duration-fast) var(--ease-pop),
     border-color var(--duration-fast) var(--ease-out),

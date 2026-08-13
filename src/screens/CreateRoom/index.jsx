@@ -182,9 +182,8 @@ export default function CreateRoom() {
       </div>
 
       <p className="create__note">
-        Você joga como <b>Jogador 1</b>. Os outros são oponentes simulados até o
-        multiplayer em rede entrar (Fase 2) — dá pra convidar gente pelo QR Code do lobby
-        de qualquer forma.
+        Você joga como <b>Jogador 1</b>. Crie a sala e compartilhe o <b>QR Code</b> do lobby:
+        quem entrar vira jogador de verdade — os bots só preenchem as vagas que sobrarem.
       </p>
 
       <div className="screen__spacer" />

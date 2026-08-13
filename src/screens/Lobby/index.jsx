@@ -138,7 +138,13 @@ export default function Lobby() {
               position={index + 1}
               isHost={player.id === room.hostId}
               isYou={player.id === room.hostId}
-              meta={player.isBot ? SKILL_PRESETS[room.settings.difficulty]?.label : 'VOCÊ'}
+              meta={
+                player.isBot
+                  ? SKILL_PRESETS[room.settings.difficulty]?.label
+                  : player.id === room.hostId
+                    ? 'VOCÊ'
+                    : 'AO VIVO'
+              }
               onRemove={
                 player.id === room.hostId || atFloor
                   ? null

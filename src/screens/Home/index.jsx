@@ -94,7 +94,7 @@ export default function Home() {
         </form>
 
         <button className="home__p2p" type="button" onClick={() => navigate('/p2p')}>
-          📡 conectar 2 celulares direto (P2P) →
+          🔌 modo direto — 2 celulares na mesma rede, sem servidor →
         </button>
       </div>
 
@@ -130,8 +130,8 @@ function HowToPlay({ onClose }) {
           </li>
         </ol>
         <p className="home__note">
-          Nesta versão os outros jogadores são simulados no seu aparelho — o multiplayer em rede é a
-          próxima fase. O código, o link e o QR já são reais.
+          Quem entrar pelo QR (ou link) da sala vira jogador de verdade — os bots só preenchem as
+          vagas que sobrarem. O código, o link e o QR já são reais.
         </p>
         <Button variant="primary" onClick={onClose}>ENTENDI</Button>
       </div>

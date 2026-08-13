@@ -39,6 +39,9 @@ const MAX_LOG = 80;
 
 export function useP2P() {
   const peerRef = useRef(null);
+  // Trava anti-falso-positivo: uma vez CONECTADO, um erro transitório de ICE
+  // (ex.: 'disconnected' que se recupera sozinho) NÃO deve virar FALHOU.
+  const connectedRef = useRef(false);
   const idsRef = useRef(null);
   if (!idsRef.current) {
     idsRef.current = { playerId: anonId('p'), connectionId: anonId('c') };
@@ -70,13 +73,19 @@ export function useP2P() {
     ({ type, detail }) => {
       pushLog(type, detail);
       syncStatus();
-      if (type === PEER_EVENT.CHANNEL_OPEN) setStep(STEP.CONNECTED);
+      if (type === PEER_EVENT.CHANNEL_OPEN) {
+        connectedRef.current = true;
+        setError(null); // conectou: limpa qualquer aviso transitório (senão fica 🟢 CONECTADO com banner vermelho embaixo)
+        setStep(STEP.CONNECTED);
+      }
       if (type === PEER_EVENT.MESSAGE && detail?.data != null) {
         setMessages((m) => [...m, { from: 'peer', text: String(detail.data), at: m.length }]);
       }
       if (type === PEER_EVENT.ERROR) {
-        // erro de conexão não derruba a UI; só registra. Falha dura vira passo FAILED.
-        if (detail?.where === 'connection') {
+        // erro de conexão não derruba a UI; só registra. Falha dura vira FAILED —
+        // mas SÓ se ainda não conectou: depois de aberto, o ICE pode piscar
+        // 'disconnected' e se recuperar, e isso não é uma falha real.
+        if (detail?.where === 'connection' && !connectedRef.current) {
           setError({ code: 'P2P_FAILED', friendly: 'A conexão P2P não pôde ser estabelecida.' });
           setStep(STEP.FAILED);
         }
@@ -87,6 +96,7 @@ export function useP2P() {
 
   function freshPeer(role) {
     if (peerRef.current) peerRef.current.close();
+    connectedRef.current = false;
     setError(null);
     const p = createPeer({ role, onEvent: handleEvent });
     peerRef.current = p;
@@ -160,6 +170,7 @@ export function useP2P() {
   const reset = useCallback(() => {
     if (peerRef.current) peerRef.current.close();
     peerRef.current = null;
+    connectedRef.current = false;
     setStep(STEP.IDLE);
     setOfferText('');
     setAnswerText('');

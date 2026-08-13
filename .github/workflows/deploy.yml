@@ -16,6 +16,11 @@
 # Variaveis (Settings > Secrets and variables > Actions > Variables):
 #   VITE_BASE   caminho base do site. Default "/" (dominio proprio na raiz).
 #               So mudar para "/LEDCHAOS/" se um dia virar subpagina de projeto.
+#   VITE_RELAY_URL  endereco wss:// do relay online (Render) para o multiplayer
+#               real cruzar redes (4G <-> WiFi). SEM esta Variable o app roda em
+#               modo local (sala simulada) e o build NAO quebra. Como o site e'
+#               HTTPS, o relay TEM que ser wss:// (ws:// e' bloqueado por
+#               mixed-content). Ex.: wss://ledchaos-relay.onrender.com
 name: Deploy CHAOS to GitHub Pages
 
 on:
@@ -48,6 +53,9 @@ jobs:
       - name: Build (Vite)
         env:
           VITE_BASE: ${{ vars.VITE_BASE || '/' }}
+          # Injeta o relay online no bundle. Se a Variable nao existir, vira ''
+          # e o app cai no modo local sem quebrar o build.
+          VITE_RELAY_URL: ${{ vars.VITE_RELAY_URL }}
         run: npm run build
 
       - name: Publica dist/ no branch gh-pages
