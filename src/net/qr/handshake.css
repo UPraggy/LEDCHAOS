@@ -87,20 +87,35 @@
   flex: 1;
 }
 
-/* ── câmera / scanner ────────────────────────────────────── */
-
+/* ── câmera / scanner (overlay de tela cheia, via portal no <body>) ──────── */
+/* Overlay FIXO cobrindo a página inteira: o visor nunca disputa espaço no fluxo
+   nem se sobrepõe ao texto da tela por baixo, e nada vaza na horizontal no mobile.
+   Palco roxo por trás, visor em cartão de tinta — identidade adesivo. */
 .scan {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-  align-items: stretch;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: calc(var(--safe-top) + var(--space-5)) var(--space-5) calc(var(--safe-bottom) + var(--space-5));
+  background: var(--void-900);
+}
+.scan__hint {
+  max-width: min(92vw, 24rem);
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--color-text-on-stage);
+  overflow-wrap: anywhere;
 }
 .scan__frame {
   position: relative;
+  width: min(80vw, 320px);
   aspect-ratio: 1 / 1;
-  width: 100%;
   overflow: hidden;
-  background: var(--void-900);
+  background: #000;
   border: var(--border-ink);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-pop-md);
@@ -111,22 +126,24 @@
   object-fit: cover;
   display: block;
 }
+/* Reticle contido DENTRO do visor (borda cyan simples). Sem o
+   box-shadow: 0 0 0 100vmax de antes, que escapava do overflow:hidden em alguns
+   navegadores (Samsung Internet) e escurecia/empurrava a página inteira. */
 .scan__reticle {
   position: absolute;
-  inset: 16%;
+  inset: 14%;
   border: 3px solid var(--cyan-400);
-  border-radius: var(--radius-md);
-  box-shadow: 0 0 0 100vmax rgba(11, 6, 40, 0.45);
+  border-radius: var(--radius-sm);
   pointer-events: none;
 }
-.scan__hint {
-  text-align: center;
-  font-size: var(--fs-sm);
-  color: var(--color-text-muted);
+.scan__bar {
+  width: min(80vw, 320px);
 }
 .scan__err {
+  max-width: min(92vw, 24rem);
   text-align: center;
   font-size: var(--fs-sm);
-  color: var(--rose-500);
+  color: var(--rose-400);
   font-weight: var(--fw-semibold);
+  overflow-wrap: anywhere;
 }
